@@ -8,7 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class MessagesDAO extends HibernateDaoSupport implements
 		MessagesDAOInterface {
-	private static final Log log = LogFactory.getLog(MessagesDAO.class);
+	private static final Log LOG = LogFactory.getLog(MessagesDAO.class);
 	public static final String Msg_ID = "msg_id";
 	public static final String ACT_ID = "act_id";
 	public static final String GROUP_ID = "group_id";
@@ -26,38 +26,38 @@ public class MessagesDAO extends HibernateDaoSupport implements
 
 	// 获取所有的messages
 	public List findAll() {
-		log.debug("finding all Message instances");
+		LOG.debug("finding all Message instances");
 		try {
 			String queryString = "from Messages";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
-			log.error("find all failed", re);
+			LOG.error("find all failed", re);
 			throw re;
 		}
 	}
 
 	// 通过messagesId来获取特定的messages对象
 	public Messages findById(java.lang.Integer msg_id) {
-		log.debug("getting Message instance with id: " + msg_id);
+		LOG.debug("getting Message instance with id: " + msg_id);
 		try {
 			Messages instance = (Messages) getHibernateTemplate().get(
 					"messages.dao.Messages", msg_id);
 			return instance;
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			LOG.error("get failed", re);
 			throw re;
 		}
 	}
 
 	// 保存一个messages对象
 	public Integer save(Messages oneMessagesPO) {
-		log.debug("saving message instance");
+		LOG.debug("saving message instance");
 		try {
 			getHibernateTemplate().save(oneMessagesPO);
-			log.debug("save successful");
+			LOG.debug("save successful");
 			return oneMessagesPO.getMsgId();
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
+			LOG.error("save failed", re);
 			throw re;
 		}
 

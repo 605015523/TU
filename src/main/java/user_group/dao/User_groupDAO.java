@@ -8,7 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_groupDAO extends HibernateDaoSupport implements
 		User_groupDAOInterface {
-	private static final Log log = LogFactory.getLog(User_groupDAO.class);
+	private static final Log LOG = LogFactory.getLog(User_groupDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String GROUP_ID = "group_id";
 
@@ -18,12 +18,12 @@ public class User_groupDAO extends HibernateDaoSupport implements
 
 	// 保存一个User_group对象
 	public void save(User_group oneUser_groupPO) {
-		log.debug("saving User_group instance");
+		LOG.debug("saving User_group instance");
 		try {
 			getHibernateTemplate().save(oneUser_groupPO);
-			log.debug("save successful");
+			LOG.debug("save successful");
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
+			LOG.error("save failed", re);
 			throw re;
 		}
 	}
@@ -36,7 +36,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 					.find("from user_group.dao.User_group where user_id = ?",
 							user_id);
 		} catch (RuntimeException re) {
-			log.error("find by userId failed", re);
+			LOG.error("find by userId failed", re);
 			throw re;
 		}
 	}
@@ -49,7 +49,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 					"from user_group.dao.User_group where group_id = ?",
 					group_id);
 		} catch (RuntimeException re) {
-			log.error("find by groupId failed", re);
+			LOG.error("find by groupId failed", re);
 			throw re;
 		}
 	}
@@ -66,19 +66,19 @@ public class User_groupDAO extends HibernateDaoSupport implements
 
 			return user_group;
 		} catch (RuntimeException re) {
-			log.error("find by groupId and userId failed", re);
+			LOG.error("find by groupId and userId failed", re);
 			throw re;
 		}
 	}
 
 	// 删除某个user_group对象
 	public void delete(User_group persistentInstance) {
-		log.debug("deleting User_group instance");
+		LOG.debug("deleting User_group instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
-			log.debug("delete successful");
+			LOG.debug("delete successful");
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			LOG.error("delete failed", re);
 			throw re;
 		}
 	}

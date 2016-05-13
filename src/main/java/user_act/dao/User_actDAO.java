@@ -8,7 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_actDAO extends HibernateDaoSupport implements
 		User_actDAOInterface {
-	private static final Log log = LogFactory.getLog(User_actDAO.class);
+	private static final Log LOG = LogFactory.getLog(User_actDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String ACT_ID = "act_id";
 	public static final String PARTICIPATER_NO = "participater_number";
@@ -27,7 +27,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 			return getHibernateTemplate().find(
 					"from user_act.dao.User_act where user_id = ?", user_id);
 		} catch (RuntimeException re) {
-			log.error("find by userId failed", re);
+			LOG.error("find by userId failed", re);
 			throw re;
 		}
 	}
@@ -39,7 +39,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 			return getHibernateTemplate().find(
 					"from user_act.dao.User_act where act_id = ?", act_id);
 		} catch (RuntimeException re) {
-			log.error("find by userId failed", re);
+			LOG.error("find by userId failed", re);
 			throw re;
 		}
 	}
@@ -55,31 +55,31 @@ public class User_actDAO extends HibernateDaoSupport implements
 
 			return user_act;
 		} catch (RuntimeException re) {
-			log.error("find by actId and userId failed", re);
+			LOG.error("find by actId and userId failed", re);
 			throw re;
 		}
 	}
 
 	// 删除某个user_act对象
 	public void delete(User_act persistentInstance) {
-		log.debug("deleting User_act instance");
+		LOG.debug("deleting User_act instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
-			log.debug("delete successful");
+			LOG.debug("delete successful");
 		} catch (RuntimeException re) {
-			log.error("delete failed", re);
+			LOG.error("delete failed", re);
 			throw re;
 		}
 	}
 
 	// 保存某个user_act对象
 	public void save(User_act oneUser_actPO) {
-		log.debug("saving User_act instance");
+		LOG.debug("saving User_act instance");
 		try {
 			getHibernateTemplate().save(oneUser_actPO);
-			log.debug("save successful");
+			LOG.debug("save successful");
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
+			LOG.error("save failed", re);
 			throw re;
 		}
 
@@ -87,13 +87,13 @@ public class User_actDAO extends HibernateDaoSupport implements
 
 	// 更新某个user_act对象
 	public void merge(User_act detachedInstance) {
-		log.debug("merging User_act instance");
+		LOG.debug("merging User_act instance");
 		try {
 			User_act result = (User_act) getHibernateTemplate().merge(
 					detachedInstance);
-			log.debug("merge successful");
+			LOG.debug("merge successful");
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
+			LOG.error("merge failed", re);
 			throw re;
 		}
 	}

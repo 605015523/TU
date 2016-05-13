@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 public class ActivitiesDAO extends HibernateDaoSupport implements
 		ActivitiesDAOInterface {
 
-	private static final Log log = LogFactory.getLog(ActivitiesDAO.class);
+	private static final Log LOG = LogFactory.getLog(ActivitiesDAO.class);
 	public static final String ACT_ID = "act_id";
 	public static final String GROUP_ID = "group_id";
 	public static final String ACT_NAME = "act_name";
@@ -25,12 +25,12 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 	}
 
 	public List findAll() {
-		log.debug("finding all activities instances");
+		LOG.debug("finding all activities instances");
 		try {
 			String queryString = "from Activities";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
-			log.error("find all failed", re);
+			LOG.error("find all failed", re);
 			throw re;
 		}
 	}
@@ -42,13 +42,13 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 
 	// 通过actId找到并返回这个Activities对象
 	public Activities findById(java.lang.Integer act_id) {
-		log.debug("getting Activities instance with id: " + act_id);
+		LOG.debug("getting Activities instance with id: " + act_id);
 		try {
 			Activities instance = (Activities) getHibernateTemplate().get(
 					"activities.dao.Activities", act_id);
 			return instance;
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			LOG.error("get failed", re);
 			throw re;
 		}
 	}
@@ -60,20 +60,20 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 					"from activities.dao.Activities where group_id = ?",
 					group_id);
 		} catch (RuntimeException re) {
-			log.error("find by userId failed", re);
+			LOG.error("find by userId failed", re);
 			throw re;
 		}
 	}
 
 	// 保存一个Activities对象
 	public Integer save(Activities oneActivitiesPO) {
-		log.debug("saving Activities instance");
+		LOG.debug("saving Activities instance");
 		try {
 			getHibernateTemplate().save(oneActivitiesPO);
-			log.debug("save successful");
+			LOG.debug("save successful");
 			return oneActivitiesPO.getActId();
 		} catch (RuntimeException re) {
-			log.error("save failed", re);
+			LOG.error("save failed", re);
 			throw re;
 		}
 
@@ -81,14 +81,14 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 
 	// 更新一个Activities
 	public Activities merge(Activities detachedInstance) {
-		log.debug("merging activitiy instance");
+		LOG.debug("merging activitiy instance");
 		try {
 			Activities result = (Activities) getHibernateTemplate().merge(
 					detachedInstance);
-			log.debug("merge successful");
+			LOG.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
-			log.error("merge failed", re);
+			LOG.error("merge failed", re);
 			throw re;
 		}
 	}

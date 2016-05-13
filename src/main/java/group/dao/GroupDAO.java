@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 
-	private static final Log log = LogFactory.getLog(GroupDAO.class);
+	private static final Log LOG = LogFactory.getLog(GroupDAO.class);
 	// property constants
 	public static final String GROUP_ID = "group_id";
 	public static final String GROUP_NAME = "group_name";
@@ -22,39 +22,39 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 
 	// 获取所有 group对象
 	public List findAll() {
-		log.debug("finding all Group instances");
+		LOG.debug("finding all Group instances");
 		try {
 			String queryString = "from Group";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
-			log.error("find all failed", re);
+			LOG.error("find all failed", re);
 			throw re;
 		}
 	}
 
 	// 通过属性获取所有匹配的group对象
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding group instance with property: " + propertyName
+		LOG.debug("finding group instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
 			String queryString = "from Group as model where model."
 					+ propertyName + "= ?";
 			return getHibernateTemplate().find(queryString, value);
 		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
+			LOG.error("find by property name failed", re);
 			throw re;
 		}
 	}
 
 	// 通过groupId获取一个group对象
 	public Group findById(Integer groupId) {
-		log.debug("getting group instance with id: " + groupId);
+		LOG.debug("getting group instance with id: " + groupId);
 		try {
 			Group instance = (Group) getHibernateTemplate().get(
 					"group.dao.Group", groupId);
 			return instance;
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			LOG.error("get failed", re);
 			throw re;
 		}
 	}
@@ -68,7 +68,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 
 			return group;
 		} catch (RuntimeException re) {
-			log.error("find by group_leader_id failed", re);
+			LOG.error("find by group_leader_id failed", re);
 			throw re;
 		}
 	}
@@ -81,7 +81,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 					.get(0);
 			return group;
 		} catch (RuntimeException re) {
-			log.error("find by group_leader_id failed", re);
+			LOG.error("find by group_leader_id failed", re);
 			throw re;
 		}
 	}
