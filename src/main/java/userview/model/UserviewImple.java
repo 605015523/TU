@@ -38,7 +38,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private User_msgDAOInterface user_msgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
 
-	// ¹¹Ôì·½·¨
+	// æ„é€ æ–¹æ³•
 	public UserviewImple() {
 
 	}
@@ -99,7 +99,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return this.user_actDAO;
 	}
 
-	// »ñÈ¡Ö÷½çÃæËùÓĞÓÃ»§ĞÅÏ¢
+	// è·å–ä¸»ç•Œé¢æ‰€æœ‰ç”¨æˆ·ä¿¡æ¯
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
 		Userlogin oneuserloginPO = new Userlogin();
 		List<User_group> oneUser_groupPO = new ArrayList<User_group>();
@@ -130,93 +130,93 @@ public class UserviewImple extends Observable implements UserviewInterface {
 					- oneuserloginPO.getSpending());
 
 		} catch (Exception e) {
-			System.out.println("³öÏÖÈçÏÂµÄ´íÎó£º" + e);
+			System.out.println("å‡ºç°å¦‚ä¸‹çš„é”™è¯¯ï¼š" + e);
 		}
-		System.out.println("·şÎñ²ã´ÓÊı¾İ·ÃÎÊ²ã»ñµÃAuthorPO:"
+		System.out.println("æœåŠ¡å±‚ä»æ•°æ®è®¿é—®å±‚è·å¾—AuthorPO:"
 				+ oneuserloginPO.getUserName());
 
 		UserviewVO oneuserviewVO = new UserviewVO();
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(oneuserviewVO, oneuserviewPO);
-			System.out.println("·şÎñ²ã×¼±¸ºÃ´«¸ø¿ØÖÆ²ãµÄuserviewVO:"
+			System.out.println("æœåŠ¡å±‚å‡†å¤‡å¥½ä¼ ç»™æ§åˆ¶å±‚çš„userviewVO:"
 					+ oneuserviewVO.getUserId());
 		} catch (IllegalAccessException e) {
 			System.out
-					.println("ÔÚuserviewImpleÀàµÄdoGetOneUserviewInfoByUserId·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+					.println("åœ¨userviewImpleç±»çš„doGetOneUserviewInfoByUserIdæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("ÔÚuserviewImpleÀàµÄdoGetOneUserviewInfoByUserId·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+					.println("åœ¨userviewImpleç±»çš„doGetOneUserviewInfoByUserIdæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 		return oneuserviewVO;
 
 	}
 
-	// Í¨¹ıÓÃ»§Id»ñÈ¡ËùÓĞÓÃ»§Ëù²ÎÓëµÄ»î¶¯
+	// é€šè¿‡ç”¨æˆ·Idè·å–æ‰€æœ‰ç”¨æˆ·æ‰€å‚ä¸çš„æ´»åŠ¨
 	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year) {
-		System.out.println("·şÎñ²ã´Ó¿ØÖÆ²ã»ñµÃAuthorId:" + userId);
+		System.out.println("æœåŠ¡å±‚ä»æ§åˆ¶å±‚è·å¾—AuthorId:" + userId);
 
 		List<User_act> user_act = new ArrayList<User_act>();
 
 		List<UseractsVO> oneuseractsVO = new ArrayList<UseractsVO>();
 
-		user_act = user_actDAO.findByUserId(userId);// Í¨¹ıuserId±éÀúËùÓĞÓÃ»§²ÎÓë¹ıµÄ»î¶¯µÄactId
+		user_act = user_actDAO.findByUserId(userId);// é€šè¿‡userIdéå†æ‰€æœ‰ç”¨æˆ·å‚ä¸è¿‡çš„æ´»åŠ¨çš„actId
 
 		for (int i = 0; i < user_act.size(); i++) {
 			Activities actsPO = new Activities();
 			Group groupPO = new Group();
 
-			// ½¨Á¢Ò»¸öUseractsVOÊµÀı£¬ÀïÃæ°üº¬ÓÃ»§²ÎÓëµÄ»î¶¯µÄËùÓĞÊôĞÔ
-			// ºóĞø²½ÖèµÄÄ¿µÄ¾ÍÊÇÍ¨¹ıgroup¡¢user_act¡¢activitiesÕâ¼¸¸ö±í
-			// ¼äµÄ¹ØÁª£¬»ñÈ¡ËùÓĞUseractsVOÖĞÊôĞÔµÄÖµ
+			// å»ºç«‹ä¸€ä¸ªUseractsVOå®ä¾‹ï¼Œé‡Œé¢åŒ…å«ç”¨æˆ·å‚ä¸çš„æ´»åŠ¨çš„æ‰€æœ‰å±æ€§
+			// åç»­æ­¥éª¤çš„ç›®çš„å°±æ˜¯é€šè¿‡groupã€user_actã€activitiesè¿™å‡ ä¸ªè¡¨
+			// é—´çš„å…³è”ï¼Œè·å–æ‰€æœ‰UseractsVOä¸­å±æ€§çš„å€¼
 			UseractsVO UseractsPO = new UseractsVO();
 
 			actsPO = actsDAO.findById(user_act.get(i).getActId());
-			// Í¨¹ıuser_actÖĞµÄactId²éÕÒActsPOÊµÀı
+			// é€šè¿‡user_actä¸­çš„actIdæŸ¥æ‰¾ActsPOå®ä¾‹
 
 			groupPO = groupDAO.findById(actsPO.getGroupId());
-			// Í¨¹ıActsPOÖĞµÄGroupId²éÕÒgroupPOSÊµÀı
+			// é€šè¿‡ActsPOä¸­çš„GroupIdæŸ¥æ‰¾groupPOSå®ä¾‹
 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(actsPO.getActDate());
 
 			if (cal.get(Calendar.YEAR) == year) {
 				UseractsPO.setUserId(userId);
-				// ÉèÖÃUseractsVOÖĞµÄËùÓĞUserId
+				// è®¾ç½®UseractsVOä¸­çš„æ‰€æœ‰UserId
 
 				UseractsPO.setActId(user_act.get(i).getActId());
-				// Í¨¹ıuser_actÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄactId
+				// é€šè¿‡user_actä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„actId
 
 				UseractsPO.setParticipaterNO(user_act.get(i)
 						.getParticipatorNO());
-				// Í¨¹ıuser_actÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄParticipaterNO
+				// é€šè¿‡user_actä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„ParticipaterNO
 
 				UseractsPO.setConsumption(user_act.get(i).getConsumption());
-				// Í¨¹ıuser_actÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄconsumption
+				// é€šè¿‡user_actä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„consumption
 
 				UseractsPO.setRemark(user_act.get(i).getRemark());
-				// Í¨¹ıuser_actÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄRemark
+				// é€šè¿‡user_actä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„Remark
 
 				UseractsPO.setActName(actsPO.getActName());
-				// Í¨¹ıActsPOÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄactName
+				// é€šè¿‡ActsPOä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„actName
 
 				UseractsPO.setActMoney(actsPO.getActMoney());
-				// Í¨¹ıActsPOÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄactMoney
+				// é€šè¿‡ActsPOä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„actMoney
 
 				UseractsPO.setState(actsPO.getState());
-				// Í¨¹ıActsPOÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄactState
+				// é€šè¿‡ActsPOä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„actState
 
 				UseractsPO.setDescription(actsPO.getDescription());
-				// Í¨¹ıActsPOÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄdescription
+				// é€šè¿‡ActsPOä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„description
 
-				// DateFormat df1 = DateFormat.getDateInstance();//ÈÕÆÚ¸ñÊ½£¬¾«È·µ½ÈÕ
+				// DateFormat df1 = DateFormat.getDateInstance();//æ—¥æœŸæ ¼å¼ï¼Œç²¾ç¡®åˆ°æ—¥
 				// System.out.println(df1.format(actsPO.getActDate()));
 				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
 				UseractsPO.setActDate(formatter.format(actsPO.getActDate()));
-				// Í¨¹ıActsPOÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄactDate
+				// é€šè¿‡ActsPOä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„actDate
 
 				UseractsPO.setGroup(groupPO.getGroupName());
-				// Í¨¹ıgroupPOSÖĞµÄÊôĞÔ£¬ÉèÖÃUseractsVOÖĞµÄgroupName
+				// é€šè¿‡groupPOSä¸­çš„å±æ€§ï¼Œè®¾ç½®UseractsVOä¸­çš„groupName
 
 				oneuseractsVO.add(UseractsPO);
 			}
@@ -230,7 +230,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return InverseoneuseractsVO;
 	}
 
-	// »ñÈ¡ÓÃ»§µÄËùÓĞmessages
+	// è·å–ç”¨æˆ·çš„æ‰€æœ‰messages
 	public ArrayList<User_msgVO> dogetMessages(Integer userId) {
 		ArrayList<User_msgVO> user_msgsVO = new ArrayList<User_msgVO>();
 		ArrayList<User_msg> user_msg = new ArrayList<User_msg>();
@@ -239,7 +239,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			Integer oneMsgId = ((User_msg) user_msg.get(i)).getMsgId();
 			Messages oneMessage = msgDAO.findById(oneMsgId);
 			User_msgVO oneUser_msgVO = new User_msgVO();
-			try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+			try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 				BeanUtils.copyProperties(oneUser_msgVO, oneMessage);
 			} catch (IllegalAccessException e) {
 				System.out
@@ -269,23 +269,23 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	}
 
-	// ÓÃ»§ĞŞ¸ÄÃÜÂë
+	// ç”¨æˆ·ä¿®æ”¹å¯†ç 
 	public String doupdateOneuserInfo(UserloginVO userInfoVO) {
 		Userlogin userInfoPO = new Userlogin();
 		Integer userId = userInfoVO.getUserId();
 		System.out.println("the modified id is:" + userId);
 		userInfoPO = userloginDAO.findById(userId);
 		String OkOrNot = null;
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(userInfoPO, userInfoVO);
-			System.out.println("·şÎñ²ã:userInfoPO:" + userInfoPO.getUserId()
+			System.out.println("æœåŠ¡å±‚:userInfoPO:" + userInfoPO.getUserId()
 					+ userInfoPO.getUserName());
 		} catch (IllegalAccessException e) {
 			System.out
-					.println("ÔÚuserviewImpleÀàµÄdoupdateOneuserInfo·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+					.println("åœ¨userviewImpleç±»çš„doupdateOneuserInfoæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("ÔÚuserviewImpleÀàµÄdoupdateOneuserInfo·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+					.println("åœ¨userviewImpleç±»çš„doupdateOneuserInfoæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 		try {
 			userloginDAO.merge(userInfoPO);

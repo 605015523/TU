@@ -20,10 +20,10 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	public ActivitiesImple() {
-		// ¹¹Ôì·½·¨
+		// æ„é€ æ–¹æ³•
 	}
 
-	// »ñÈ¡ËùÓĞ»î¶¯
+	// è·å–æ‰€æœ‰æ´»åŠ¨
 	public ArrayList<ActivitiesVO> doGetAllActivity() {
 		ArrayList<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
 		ArrayList<Activities> activitiesPOs = new ArrayList<Activities>();
@@ -44,7 +44,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		return activitiesVOs;
 	}
 
-	// Í¨¹ıactId»ñÈ¡Ò»¸ö»î¶¯
+	// é€šè¿‡actIdè·å–ä¸€ä¸ªæ´»åŠ¨
 	public ActivitiesVO doGetOneActById(Integer actId) {
 		ActivitiesVO actVO = new ActivitiesVO();
 		Activities actPO = new Activities();
@@ -60,20 +60,20 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		return actVO;
 	}
 
-	// Ìí¼ÓÒ»¸ö»î¶¯
+	// æ·»åŠ ä¸€ä¸ªæ´»åŠ¨
 	public Integer doAddOneAct(ActivitiesVO oneActivitiesVO) {
 		Activities oneactsPO = new Activities();
 		Integer actId = null;
 		String addMessage = null;
 
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(oneactsPO, oneActivitiesVO);
 		} catch (IllegalAccessException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 		try {
 			actId = actsDAO.save(oneactsPO);
@@ -84,13 +84,13 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		return actId;
 	}
 
-	// ¸üĞÂÒ»¸ö»î¶¯
+	// æ›´æ–°ä¸€ä¸ªæ´»åŠ¨
 	public String doUpdateOneAct(ActivitiesVO oneActVO) {
 		Activities oneActPO = new Activities();
 		Integer actId = oneActVO.getActId();
 		oneActPO = actsDAO.findById(actId);
 		String OkOrNot = null;
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(oneActPO, oneActVO);
 		} catch (IllegalAccessException e) {
 			System.out
@@ -109,7 +109,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		return OkOrNot;
 	}
 
-	// É¾³ıÒ»¸ö»î¶¯
+	// åˆ é™¤ä¸€ä¸ªæ´»åŠ¨
 	public String doDeleteOneActivities(ActivitiesVO oneActivitiesVO) {
 		// TODO Auto-generated method stub
 		return null;

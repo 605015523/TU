@@ -40,7 +40,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		return null;
 	}
 
-	// Í¨¹ıactIdÕÒµ½²¢·µ»ØÕâ¸öActivities¶ÔÏó
+	// é€šè¿‡actIdæ‰¾åˆ°å¹¶è¿”å›è¿™ä¸ªActivitieså¯¹è±¡
 	public Activities findById(java.lang.Integer act_id) {
 		log.debug("getting Activities instance with id: " + act_id);
 		try {
@@ -53,7 +53,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ıgroupIdÕÒµ½²¢·µ»ØËùÓĞÊôÓÚÕâ¸ögroupµÄ¶ÔÏó
+	// é€šè¿‡groupIdæ‰¾åˆ°å¹¶è¿”å›æ‰€æœ‰å±äºè¿™ä¸ªgroupçš„å¯¹è±¡
 	public List findByGroupId(Integer group_id) {
 		try {
 			return getHibernateTemplate().find(
@@ -65,7 +65,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// ±£´æÒ»¸öActivities¶ÔÏó
+	// ä¿å­˜ä¸€ä¸ªActivitieså¯¹è±¡
 	public Integer save(Activities oneActivitiesPO) {
 		log.debug("saving Activities instance");
 		try {
@@ -79,7 +79,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 
 	}
 
-	// ¸üĞÂÒ»¸öActivities
+	// æ›´æ–°ä¸€ä¸ªActivities
 	public Activities merge(Activities detachedInstance) {
 		log.debug("merging activitiy instance");
 		try {
@@ -93,7 +93,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// É¾³ıÒ»¸öActivities¶ÔÏó
+	// åˆ é™¤ä¸€ä¸ªActivitieså¯¹è±¡
 	public void delete(Activities oneActivitiesPO) {
 		// TODO Auto-generated method stub
 

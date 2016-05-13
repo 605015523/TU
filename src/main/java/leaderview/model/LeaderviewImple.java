@@ -67,7 +67,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		this.user_actDAO = userActDAO;
 	}
 
-	// 通过groupId获取所有参加这个活动的user
+	// 閫氳繃groupId鑾峰彇鎵�鏈夊弬鍔犺繖涓椿鍔ㄧ殑user
 	public List<GroupActVO> doGetAllUserActsByGroupId(Integer groupId) {
 		List<Activities> acts = new ArrayList<Activities>();
 

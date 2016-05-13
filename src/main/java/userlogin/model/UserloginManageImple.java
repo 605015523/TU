@@ -14,14 +14,14 @@ public class UserloginManageImple extends Observable implements
 	private UserloginDAOInterface userloginDAO = null;
 
 	public UserloginManageImple() {
-		// ¹¹Ôì·½·¨
+		// æ„é€ æ–¹æ³•
 	}
 
 	public void setUserloginDAO(UserloginDAOInterface userloginDAO) {
 		this.userloginDAO = userloginDAO;
 	}
 
-	// »ñÈ¡ËùÓĞÓÃ»§µÄµÇÂ¼ĞÅÏ¢
+	// è·å–æ‰€æœ‰ç”¨æˆ·çš„ç™»å½•ä¿¡æ¯
 	public ArrayList<UserloginVO> doGetAllUserlogin() {
 		ArrayList<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		ArrayList<Userlogin> knowledgeadministratorPOs = new ArrayList<Userlogin>();
@@ -35,15 +35,15 @@ public class UserloginManageImple extends Observable implements
 						oneKnowledgeadministratorPO);
 				knowledgeadministratorVOs.add(oneKnowledgeadministratorVO);
 			} catch (IllegalAccessException e) {
-				System.out.println("³öÏÖÁËIllegalAccessExceptionÒì³£");
+				System.out.println("å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 			} catch (InvocationTargetException e) {
-				System.out.println("ÔÚ³öÏÖÁËInvocationTargetExceptionÒì³£");
+				System.out.println("åœ¨å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 			}
 		}
 		return knowledgeadministratorVOs;
 	}
 
-	// Í¨¹ıuserId»ñÈ¡¸ÃÓÃ»§
+	// é€šè¿‡userIdè·å–è¯¥ç”¨æˆ·
 	public UserloginVO dogetOneUserInfoByUserId(Integer userId) {
 		Userlogin userInfoPO = new Userlogin();
 		userInfoPO = userloginDAO.findById(userId);
@@ -51,21 +51,21 @@ public class UserloginManageImple extends Observable implements
 		try {
 			BeanUtils.copyProperties(userInfoVO, userInfoPO);
 		} catch (IllegalAccessException e) {
-			System.out.println("³öÏÖÁËIllegalAccessExceptionÒì³£");
+			System.out.println("å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
-			System.out.println("ÔÚ³öÏÖÁËInvocationTargetExceptionÒì³£");
+			System.out.println("åœ¨å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 		return userInfoVO;
 
 	}
 
-	// ¸üĞÂÓÃ»§spending
+	// æ›´æ–°ç”¨æˆ·spending
 	public void doUpdateOneUserInfo(UserloginVO oneUserVO) {
 		Userlogin oneUserPO = new Userlogin();
 		Integer userId = oneUserVO.getUserId();
 		oneUserPO = userloginDAO.findById(userId);
 
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(oneUserPO, oneUserVO);
 		} catch (IllegalAccessException e) {
 			System.out

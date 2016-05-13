@@ -16,7 +16,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// ±£´æÒ»¸öUser_group¶ÔÏó
+	// ä¿å­˜ä¸€ä¸ªUser_groupå¯¹è±¡
 	public void save(User_group oneUser_groupPO) {
 		log.debug("saving User_group instance");
 		try {
@@ -28,7 +28,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ýuserIdÕÒµ½ËùÓÐuser_group¶ÔÏó
+	// é€šè¿‡userIdæ‰¾åˆ°æ‰€æœ‰user_groupå¯¹è±¡
 	public List findByUserId(Integer user_id) {
 		try {
 
@@ -41,7 +41,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ýgroupIdÕÒµ½ËùÓÐuser_group¶ÔÏó
+	// é€šè¿‡groupIdæ‰¾åˆ°æ‰€æœ‰user_groupå¯¹è±¡
 	public List findByGroupId(Integer group_id) {
 		try {
 
@@ -54,7 +54,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ýgroupIdºÍuserIdÕÒµ½ÌØ¶¨user_group¶ÔÏó
+	// é€šè¿‡groupIdå’ŒuserIdæ‰¾åˆ°ç‰¹å®šuser_groupå¯¹è±¡
 	public User_group findByGroupIdAndUserId(Integer member_id, Integer group_id) {
 		try {
 			String hql = new String();
@@ -71,7 +71,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// É¾³ýÄ³¸öuser_group¶ÔÏó
+	// åˆ é™¤æŸä¸ªuser_groupå¯¹è±¡
 	public void delete(User_group persistentInstance) {
 		log.debug("deleting User_group instance");
 		try {

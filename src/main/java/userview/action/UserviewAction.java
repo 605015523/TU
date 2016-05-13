@@ -40,7 +40,7 @@ public class UserviewAction extends ActionSupport {
 	private User_msgInterface user_msgBean = null;
 	private ActivitiesInterface actsBean = null;
 
-	// ½ÓÊÕµ÷ÓÃÒ³µÄÏàÓ¦¿Ø¼şÖµ£¬Õı³£·µ»Øºó´«¸øsuccess¶ÔÓ¦Ò³ÃæµÄ²ÎÊı
+	// æ¥æ”¶è°ƒç”¨é¡µçš„ç›¸åº”æ§ä»¶å€¼ï¼Œæ­£å¸¸è¿”å›åä¼ ç»™successå¯¹åº”é¡µé¢çš„å‚æ•°
 	private Integer userId;
 	private String userName;
 	private List<String> groupName;
@@ -116,7 +116,7 @@ public class UserviewAction extends ActionSupport {
 		session = request.getSession();
 	}
 
-	// ÏÔÊ¾ËùÓĞ²ÎÓë¹ıµÄ»î¶¯
+	// æ˜¾ç¤ºæ‰€æœ‰å‚ä¸è¿‡çš„æ´»åŠ¨
 	public String doshowActs() {
 		initServletContextObject();
 		List<UseractsVO> useractsVO = new ArrayList<UseractsVO>();
@@ -128,7 +128,7 @@ public class UserviewAction extends ActionSupport {
 		return "showActs";
 	}
 
-	// ÏÔÊ¾Ñ¡¶¨µÄ²ÎÓë¹ıµÄ»î¶¯Ï¸½Ú
+	// æ˜¾ç¤ºé€‰å®šçš„å‚ä¸è¿‡çš„æ´»åŠ¨ç»†èŠ‚
 	public String doshowDetails() {
 		initServletContextObject();
 		ArrayList<UseractsVO> Useracts = (ArrayList<UseractsVO>) session
@@ -146,7 +146,7 @@ public class UserviewAction extends ActionSupport {
 		return "showDetails";
 	}
 
-	// ÏÔÊ¾ËùÓĞmessages
+	// æ˜¾ç¤ºæ‰€æœ‰messages
 	public String doshowMessages() {
 		initServletContextObject();
 		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
@@ -170,7 +170,7 @@ public class UserviewAction extends ActionSupport {
 		return "showMessages";
 	}
 
-	// ÏÔÊ¾ËùÓĞmessagesµÄÏ¸½Ú
+	// æ˜¾ç¤ºæ‰€æœ‰messagesçš„ç»†èŠ‚
 	public String doshowMsgDetails() {
 		initServletContextObject();
 		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
@@ -182,7 +182,7 @@ public class UserviewAction extends ActionSupport {
 			}
 		}
 
-		// ½«User_msgÖĞµÄ×´Ì¬ÉèÖÃÎªÒÑ¶Á
+		// å°†User_msgä¸­çš„çŠ¶æ€è®¾ç½®ä¸ºå·²è¯»
 		User_msg oneUser_Msg = new User_msg();
 		Integer userId = (Integer) session.getAttribute("userId");
 		oneUser_Msg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
@@ -209,7 +209,7 @@ public class UserviewAction extends ActionSupport {
 		return "showMsgDetails";
 	}
 
-	// Ìø×ªµ½²ÎÓëÄ³¸ö»î¶¯µÄ½çÃæ
+	// è·³è½¬åˆ°å‚ä¸æŸä¸ªæ´»åŠ¨çš„ç•Œé¢
 	public String doInAct() {
 		initServletContextObject();
 		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
@@ -224,7 +224,7 @@ public class UserviewAction extends ActionSupport {
 		return "doInAct";
 	}
 
-	// ÇëÇó²ÎÓëÄ³¸ö»î¶¯¾ßÌå²Ù×÷
+	// è¯·æ±‚å‚ä¸æŸä¸ªæ´»åŠ¨å…·ä½“æ“ä½œ
 	public String doActRequest() {
 		initServletContextObject();
 		String addMessage = null;
@@ -240,7 +240,7 @@ public class UserviewAction extends ActionSupport {
 		try {
 			addMessage = user_actBean.doAddOneUser_act(oneUser_actVO);
 		} catch (Exception e) {
-			addMessage = "there are something wrong with control layer£º"
+			addMessage = "there are something wrong with control layerï¼š"
 					+ e.toString();
 		}
 
@@ -261,7 +261,7 @@ public class UserviewAction extends ActionSupport {
 		return "showActs";
 	}
 
-	// ĞŞ¸ÄÃÜÂë
+	// ä¿®æ”¹å¯†ç 
 	public String doChangePwd() throws Exception {
 		String updateMessage = null;
 		initServletContextObject();
@@ -286,7 +286,7 @@ public class UserviewAction extends ActionSupport {
 
 	}
 
-	// É¾³ıÒ»¸öÏë²ÎÓëµÄ»î¶¯£¨ÌØ±ğµÄ£¬Èô¸Ã»î¶¯±¨ÃûÊ±¼ä½áÊøÔò²»ÄÜÔÙÉ¾³ı£©
+	// åˆ é™¤ä¸€ä¸ªæƒ³å‚ä¸çš„æ´»åŠ¨ï¼ˆç‰¹åˆ«çš„ï¼Œè‹¥è¯¥æ´»åŠ¨æŠ¥åæ—¶é—´ç»“æŸåˆ™ä¸èƒ½å†åˆ é™¤ï¼‰
 	public String doDeleteOneAct() throws Exception {
 		String actionReturnMessage = null;
 		initServletContextObject();

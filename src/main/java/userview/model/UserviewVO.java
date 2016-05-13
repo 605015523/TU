@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class UserviewVO implements java.io.Serializable {
-	// Filed
+	// Fields
 	private Integer userId;
 	private String userName;
 	private List<String> groupName;

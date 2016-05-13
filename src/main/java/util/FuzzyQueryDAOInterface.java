@@ -6,8 +6,8 @@ import java.util.Map;
 public interface FuzzyQueryDAOInterface {
 
 	/**
-	 * param obj ´«µİ²éÑ¯µÄJAVABEAN¶ÔÏó param map ±£´æÓÃ»§ÊäÈëµÄÄ£ºı²éÑ¯Ìõ¼ş
-	 * map.put("ÊôĞÔÃû³Æ",ActionForm.getXXX());
+	 * param obj ä¼ é€’æŸ¥è¯¢çš„JAVABEANå¯¹è±¡ param map ä¿å­˜ç”¨æˆ·è¾“å…¥çš„æ¨¡ç³ŠæŸ¥è¯¢æ¡ä»¶
+	 * map.put("å±æ€§åç§°",ActionForm.getXXX());
 	 */
 	public List findAllByCriteria(Object obj, Map map);
 }

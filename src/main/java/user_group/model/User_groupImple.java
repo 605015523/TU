@@ -25,7 +25,7 @@ public class User_groupImple extends Observable implements User_groupInterface {
 
 	}
 
-	// É¾³ıÒ»¸öuser_group¶ÔÏó
+	// åˆ é™¤ä¸€ä¸ªuser_groupå¯¹è±¡
 	public String doDeleteOneUser_group(Integer member_id, Integer group_id) {
 		String OkOrNot = null;
 		User_group user_groupPO = new User_group();
@@ -47,7 +47,7 @@ public class User_groupImple extends Observable implements User_groupInterface {
 
 	}
 
-	// Í¨¹ıgroupId»ñÈ¡Ä³Ğ¡×éËùÓĞµÄ³ÉÔ±µÄ¾ßÌåÊµÏÖ
+	// é€šè¿‡groupIdè·å–æŸå°ç»„æ‰€æœ‰çš„æˆå‘˜çš„å…·ä½“å®ç°
 	public List<User_groupVO> doGetAllMembersId(Integer groupId) {
 		List<User_group> oneUser_groupPOs = new ArrayList<User_group>();
 		List<User_groupVO> oneUser_groupVOs = new ArrayList<User_groupVO>();
@@ -56,15 +56,15 @@ public class User_groupImple extends Observable implements User_groupInterface {
 		for (int i = 0; i < oneUser_groupPOs.size(); i++) {
 			User_group oneUser_groupPO = oneUser_groupPOs.get(i);
 			User_groupVO oneUser_groupVO = new User_groupVO();
-			try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+			try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 				BeanUtils.copyProperties(oneUser_groupVO, oneUser_groupPO);
 				oneUser_groupVOs.add(oneUser_groupVO);
 			} catch (IllegalAccessException e) {
 				System.out
-						.println("ÔÚuserviewImpleÀàµÄdoGetOneUserviewInfoByUserId·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+						.println("åœ¨userviewImpleç±»çš„doGetOneUserviewInfoByUserIdæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 			} catch (InvocationTargetException e) {
 				System.out
-						.println("ÔÚuserviewImpleÀàµÄdoGetOneUserviewInfoByUserId·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+						.println("åœ¨userviewImpleç±»çš„doGetOneUserviewInfoByUserIdæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 			}
 
 		}

@@ -1,18 +1,18 @@
 package util;
 
 public class PageStateVO_Prototype {
-	private int totalNumberOfElements; // ×ÜµÄÊı¾İÌõÄ¿ÊıÁ¿£¬0±íÊ¾Ã»ÓĞÊı¾İ
-	private int pageSize; // Ã¿Ò»Ò³ÏÔÊ¾µÄÌõÄ¿Êı
-	private int lastPageNumber; // »ñÈ¡×îºóÒ»Ò³Ò³Âë£¬Ò²¾ÍÊÇ×ÜÒ³Êı
-	private int thisPageNumber; // µ±Ç°Ò³µÄÒ³Âë
-	private boolean isFirstPage; // ÊÇ·ñÊÇÊ×Ò³£¨µÚÒ»Ò³£©£¬µÚÒ»Ò³Ò³ÂëÎª1
-	private boolean isLastPage; // ÊÇ·ñÊÇ×îºóÒ»Ò³
-	private boolean hasNextPage; // ÊÇ·ñÓĞÏÂÒ»Ò³
-	private boolean hasPreviousPage; // ÊÇ·ñÓĞÉÏÒ»Ò³
-	private int thisPageFirstElementNumber; // »ñÈ¡µ±Ç°Ò³µÄÊ×ÌõÊı¾İµÄĞĞ±àÂë£¨´Ó0¿ªÊ¼¼ÆÊı£©
-	private int thisPageLastElementNumber; // »ñÈ¡µ±Ç°Ò³µÄÄ©ÌõÊı¾İµÄĞĞ±àÂë£¨´Ó0¿ªÊ¼¼ÆÊı£©
-	private int nextPageNumber; // »ñÈ¡ÏÂÒ»Ò³±àÂë
-	private int previousPageNumber; // »ñÈ¡ÉÏÒ»Ò³±àÂë
+	private int totalNumberOfElements; // æ€»çš„æ•°æ®æ¡ç›®æ•°é‡ï¼Œ0è¡¨ç¤ºæ²¡æœ‰æ•°æ®
+	private int pageSize; // æ¯ä¸€é¡µæ˜¾ç¤ºçš„æ¡ç›®æ•°
+	private int lastPageNumber; // è·å–æœ€åä¸€é¡µé¡µç ï¼Œä¹Ÿå°±æ˜¯æ€»é¡µæ•°
+	private int thisPageNumber; // å½“å‰é¡µçš„é¡µç 
+	private boolean isFirstPage; // æ˜¯å¦æ˜¯é¦–é¡µï¼ˆç¬¬ä¸€é¡µï¼‰ï¼Œç¬¬ä¸€é¡µé¡µç ä¸º1
+	private boolean isLastPage; // æ˜¯å¦æ˜¯æœ€åä¸€é¡µ
+	private boolean hasNextPage; // æ˜¯å¦æœ‰ä¸‹ä¸€é¡µ
+	private boolean hasPreviousPage; // æ˜¯å¦æœ‰ä¸Šä¸€é¡µ
+	private int thisPageFirstElementNumber; // è·å–å½“å‰é¡µçš„é¦–æ¡æ•°æ®çš„è¡Œç¼–ç ï¼ˆä»0å¼€å§‹è®¡æ•°ï¼‰
+	private int thisPageLastElementNumber; // è·å–å½“å‰é¡µçš„æœ«æ¡æ•°æ®çš„è¡Œç¼–ç ï¼ˆä»0å¼€å§‹è®¡æ•°ï¼‰
+	private int nextPageNumber; // è·å–ä¸‹ä¸€é¡µç¼–ç 
+	private int previousPageNumber; // è·å–ä¸Šä¸€é¡µç¼–ç 
 
 	public PageStateVO_Prototype() {
 		// TODO Auto-generated constructor stub
@@ -116,7 +116,7 @@ public class PageStateVO_Prototype {
 
 	public void setPageStateVOMemberProperty(int totalNumberOfElements,
 			int onePageSize, int currentPageNumber) {
-		setTotalNumberOfElements(totalNumberOfElements); // ÉèÖÃ×ÜµÄÊı¾İÌõÄ¿ÊıÁ¿£¬0±íÊ¾Ã»ÓĞÊı¾İ
+		setTotalNumberOfElements(totalNumberOfElements); // è®¾ç½®æ€»çš„æ•°æ®æ¡ç›®æ•°é‡ï¼Œ0è¡¨ç¤ºæ²¡æœ‰æ•°æ®
 		setPageSize(onePageSize);
 		setThisPageNumber(currentPageNumber);
 		if (totalNumberOfElements == 0) {
@@ -128,21 +128,21 @@ public class PageStateVO_Prototype {
 			int totalPageNumber = (totalNumberOfElements + onePageSize - 1)
 					/ onePageSize;
 
-			setLastPageNumber(totalPageNumber); // ÉèÖÃ×îºóÒ»Ò³Ò³Âë£¬Ò²¾ÍÊÇ×ÜÒ³Êı
-			setIsFirstPage((currentPageNumber == 1) ? true : false); // µ±Ç°Ò³ÊÇ·ñÊÇÊ×Ò³£¨µÚÒ»Ò³£©
+			setLastPageNumber(totalPageNumber); // è®¾ç½®æœ€åä¸€é¡µé¡µç ï¼Œä¹Ÿå°±æ˜¯æ€»é¡µæ•°
+			setIsFirstPage((currentPageNumber == 1) ? true : false); // å½“å‰é¡µæ˜¯å¦æ˜¯é¦–é¡µï¼ˆç¬¬ä¸€é¡µï¼‰
 			if (currentPageNumber != totalPageNumber) {
-				setIsLastPage(false); // Èç¹ûµ±Ç°Ò³Êı²»µÈÓÚ×ÜÒ³Êı£¬Ôò±íÃ÷µ±Ç°Ò³²»ÊÇ×îºóÒ»Ò³
+				setIsLastPage(false); // å¦‚æœå½“å‰é¡µæ•°ä¸ç­‰äºæ€»é¡µæ•°ï¼Œåˆ™è¡¨æ˜å½“å‰é¡µä¸æ˜¯æœ€åä¸€é¡µ
 			} else {
-				setIsLastPage(true); // Èç¹ûµ±Ç°Ò³ÊıµÈÓÚ×ÜÒ³Êı£¬Ôò±íÃ÷µ±Ç°Ò³ÊÇ×îºóÒ»Ò³
+				setIsLastPage(true); // å¦‚æœå½“å‰é¡µæ•°ç­‰äºæ€»é¡µæ•°ï¼Œåˆ™è¡¨æ˜å½“å‰é¡µæ˜¯æœ€åä¸€é¡µ
 			}
-			if (currentPageNumber < totalPageNumber) { // Èç¹ûµ±Ç°Ò³ÊıĞ¡ÓÚ×ÜÒ³Êı£¬Ôò±íÃ÷ÈÔÈ»ÓĞÏÂÒ»Ò³
+			if (currentPageNumber < totalPageNumber) { // å¦‚æœå½“å‰é¡µæ•°å°äºæ€»é¡µæ•°ï¼Œåˆ™è¡¨æ˜ä»ç„¶æœ‰ä¸‹ä¸€é¡µ
 				setHasNextPage(true);
 			} else {
-				setHasNextPage(false); // Èç¹ûµ±Ç°Ò³Êı´óÓÚ»òÕßµÈÓÚ×ÜÒ³Êı£¬Ôò±íÃ÷Ã»ÓĞÁËÏÂÒ»Ò³
+				setHasNextPage(false); // å¦‚æœå½“å‰é¡µæ•°å¤§äºæˆ–è€…ç­‰äºæ€»é¡µæ•°ï¼Œåˆ™è¡¨æ˜æ²¡æœ‰äº†ä¸‹ä¸€é¡µ
 			}
-			if (currentPageNumber == 1) { // Èç¹ûµ±Ç°Ò³ÊıµÈÓÚÊ×Ò³£¨µÚÒ»Ò³£©£¬Ôò±íÃ÷Ã»ÓĞÉÏÒ»Ò³
+			if (currentPageNumber == 1) { // å¦‚æœå½“å‰é¡µæ•°ç­‰äºé¦–é¡µï¼ˆç¬¬ä¸€é¡µï¼‰ï¼Œåˆ™è¡¨æ˜æ²¡æœ‰ä¸Šä¸€é¡µ
 				setHasPreviousPage(false);
-			} else { // Èç¹ûµ±Ç°Ò³Êı²»µÈÓÚÊ×Ò³£¨µÚÒ»Ò³£©£¬Ôò±íÃ÷ÓĞÉÏÒ»Ò³
+			} else { // å¦‚æœå½“å‰é¡µæ•°ä¸ç­‰äºé¦–é¡µï¼ˆç¬¬ä¸€é¡µï¼‰ï¼Œåˆ™è¡¨æ˜æœ‰ä¸Šä¸€é¡µ
 				setHasPreviousPage(true);
 			}
 
@@ -150,13 +150,13 @@ public class PageStateVO_Prototype {
 					* onePageSize;
 			int thisPageEndElementNumber = thisPageFirstElementNumber
 					+ (((currentPageNumber != totalPageNumber) || (totalNumberOfElements % getPageSize()) == 0) ? getPageSize()
-							: // µ±Ç°Ò³²»ÊÇ×îºóÒ»Ò³Ê±»òÕß×Ü¼ÇÂ¼ÎªÕûÒ³Êı£¬×îºó¼ÇÂ¼ºÅÓ¦¸ÃÎªÒ»Ò³µÄ´óĞ¡
-							(totalNumberOfElements % getPageSize())); // µ±Ç°Ò³ÊÇ×îºóÒ»Ò³Ê±
+							: // å½“å‰é¡µä¸æ˜¯æœ€åä¸€é¡µæ—¶æˆ–è€…æ€»è®°å½•ä¸ºæ•´é¡µæ•°ï¼Œæœ€åè®°å½•å·åº”è¯¥ä¸ºä¸€é¡µçš„å¤§å°
+							(totalNumberOfElements % getPageSize())); // å½“å‰é¡µæ˜¯æœ€åä¸€é¡µæ—¶
 
-			setThisPageFirstElementNumber(thisPageFirstElementNumber); // ÉèÖÃµ±Ç°Ò³µÄÊ×ÌõÊı¾İµÄĞĞ±àÂë£¬£¨´Ó0¿ªÊ¼¼ÆÊı£©
-			setThisPageLastElementNumber(thisPageEndElementNumber); // ÉèÖÃµ±Ç°Ò³µÄÄ©ÌõÊı¾İµÄĞĞ±àÂë£¨´Ó0¿ªÊ¼¼ÆÊı£©
-			setNextPageNumber(currentPageNumber + 1); // ÉèÖÃÏÂÒ»Ò³±àÂë
-			setPreviousPageNumber(currentPageNumber - 1); // ÉèÖÃÉÏÒ»Ò³±àÂë
+			setThisPageFirstElementNumber(thisPageFirstElementNumber); // è®¾ç½®å½“å‰é¡µçš„é¦–æ¡æ•°æ®çš„è¡Œç¼–ç ï¼Œï¼ˆä»0å¼€å§‹è®¡æ•°ï¼‰
+			setThisPageLastElementNumber(thisPageEndElementNumber); // è®¾ç½®å½“å‰é¡µçš„æœ«æ¡æ•°æ®çš„è¡Œç¼–ç ï¼ˆä»0å¼€å§‹è®¡æ•°ï¼‰
+			setNextPageNumber(currentPageNumber + 1); // è®¾ç½®ä¸‹ä¸€é¡µç¼–ç 
+			setPreviousPageNumber(currentPageNumber - 1); // è®¾ç½®ä¸Šä¸€é¡µç¼–ç 
 		}
 	}
 }

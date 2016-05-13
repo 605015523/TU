@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequestWrapper;
 
 public class TomcatFormFilter implements Filter {
 	/**
-	 * Request.java ¶Ô HttpServletRequestWrapper ½øĞĞÀ©³ä, ²»Ó°ÏìÔ­À´µÄ¹¦ÄÜ²¢ÄÜÌá¹©ËùÓĞµÄ
-	 * HttpServletRequest ½Ó¿ÚÖĞµÄ¹¦ÄÜ. Ëü¿ÉÒÔÍ³Ò»µÄ¶Ô Tomcat Ä¬ÈÏÉèÖÃÏÂµÄÖĞÎÄÎÊÌâ½øĞĞ½â¾ö¶øÖ»ĞèÒªÓÃĞÂµÄ Request
-	 * ¶ÔÏóÌæ»»Ò³ÃæÖĞµÄ request ¶ÔÏó¼´¿É.
+	 * Request.java å¯¹ HttpServletRequestWrapper è¿›è¡Œæ‰©å……, ä¸å½±å“åŸæ¥çš„åŠŸèƒ½å¹¶èƒ½æä¾›æ‰€æœ‰çš„
+	 * HttpServletRequest æ¥å£ä¸­çš„åŠŸèƒ½. å®ƒå¯ä»¥ç»Ÿä¸€çš„å¯¹ Tomcat é»˜è®¤è®¾ç½®ä¸‹çš„ä¸­æ–‡é—®é¢˜è¿›è¡Œè§£å†³è€Œåªéœ€è¦ç”¨æ–°çš„ Request
+	 * å¯¹è±¡æ›¿æ¢é¡µé¢ä¸­çš„ request å¯¹è±¡å³å¯.
 	 */
 
 	class Request extends HttpServletRequestWrapper {
@@ -24,7 +24,7 @@ public class TomcatFormFilter implements Filter {
 		}
 
 		/**
-		 * ×ª»»ÓÉ±íµ¥¶ÁÈ¡µÄÊı¾İµÄÄÚÂë. ´Ó ISO ×Ö·û×ªµ½ GBK.
+		 * è½¬æ¢ç”±è¡¨å•è¯»å–çš„æ•°æ®çš„å†…ç . ä» ISO å­—ç¬¦è½¬åˆ° GBK.
 		 */
 		public String toChi(String input) {
 			try {
@@ -43,14 +43,14 @@ public class TomcatFormFilter implements Filter {
 		}
 
 		/**
-		 * ¶ÁÈ¡²ÎÊı -- ĞŞÕıÁËÖĞÎÄÎÊÌâ.
+		 * è¯»å–å‚æ•° -- ä¿®æ­£äº†ä¸­æ–‡é—®é¢˜.
 		 */
 		public String getParameter(String name) {
 			return toChi(getHttpServletRequest().getParameter(name));
 		}
 
 		/**
-		 * ¶ÁÈ¡²ÎÊıÁĞ±í - ĞŞÕıÁËÖĞÎÄÎÊÌâ.
+		 * è¯»å–å‚æ•°åˆ—è¡¨ - ä¿®æ­£äº†ä¸­æ–‡é—®é¢˜.
 		 */
 		public String[] getParameterValues(String name) {
 			String values[] = getHttpServletRequest().getParameterValues(name);

@@ -61,14 +61,14 @@ public class AccountingviewImple extends Observable implements
 		this.groupDAO = groupDAO;
 	}
 
-	// Í¨¹ıÑ¡ÔñyearµÄ·½Ê½ÏÔÊ¾ËùÓĞÓÃ»§ÕâÒ»ÄêµÄ»î¶¯²ÎÓëÇé¿öµÄÊµÏÖÏ¸½Ú
+	// é€šè¿‡é€‰æ‹©yearçš„æ–¹å¼æ˜¾ç¤ºæ‰€æœ‰ç”¨æˆ·è¿™ä¸€å¹´çš„æ´»åŠ¨å‚ä¸æƒ…å†µçš„å®ç°ç»†èŠ‚
 	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
 		List<Activities> allacts = new ArrayList<Activities>();
 		allacts = actsDAO.findAll();
 		List<Activities> validateacts = new ArrayList<Activities>();
 
-		// »ñÈ¡ËùÓĞÒÔ¼°±»validateµÄ»î¶¯
+		// è·å–æ‰€æœ‰ä»¥åŠè¢«validateçš„æ´»åŠ¨
 		for (int i = 0; i < allacts.size(); i++) {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(allacts.get(i).getActDate());
@@ -80,7 +80,7 @@ public class AccountingviewImple extends Observable implements
 		ArrayList<Userlogin> allUser = new ArrayList<Userlogin>();
 		allUser = (ArrayList) userloginDAO.findAll();
 
-		// »ñÈ¡ËùÓĞÓÃ»§£¬²¢ÇÒ±éÀúËùÓĞÓÃ»§»î¶¯²ÎÓëÇé¿ö
+		// è·å–æ‰€æœ‰ç”¨æˆ·ï¼Œå¹¶ä¸”éå†æ‰€æœ‰ç”¨æˆ·æ´»åŠ¨å‚ä¸æƒ…å†µ
 		for (int i = 0; i < allUser.size(); i++) {
 			UserGroupCostVO oneUserGroupCostVO = new UserGroupCostVO();
 			Integer userId = allUser.get(i).getUserId();
@@ -131,7 +131,7 @@ public class AccountingviewImple extends Observable implements
 		return allUserGroupCostVO;
 	}
 
-	// Í¨¹ıÑ¡ÔñgroupµÄ·½Ê½ÏÔÊ¾ËùÓĞgroupÕâÒ»ÄêµÄ»î¶¯²ÎÓëÇé¿öµÄÊµÏÖÏ¸½Ú
+	// é€šè¿‡é€‰æ‹©groupçš„æ–¹å¼æ˜¾ç¤ºæ‰€æœ‰groupè¿™ä¸€å¹´çš„æ´»åŠ¨å‚ä¸æƒ…å†µçš„å®ç°ç»†èŠ‚
 	public List<GroupActVO> doGetAllActsByGroupId(Integer groupId) {
 		List<Activities> acts = new ArrayList<Activities>();
 		acts = actsDAO.findByGroupId(groupId);
@@ -187,7 +187,7 @@ public class AccountingviewImple extends Observable implements
 		return InverseactsVO;
 	}
 
-	// »ñÈ¡ËùÓĞvalidateµÄ»î¶¯µÄ»î¶¯Ï¸½ÚµÄ¾ßÌåÊµÏÖ
+	// è·å–æ‰€æœ‰validateçš„æ´»åŠ¨çš„æ´»åŠ¨ç»†èŠ‚çš„å…·ä½“å®ç°
 	public GroupActVO doGetAllValidateDetails(Integer actId) {
 		Activities acts = new Activities();
 		acts = actsDAO.findById(actId);
@@ -231,7 +231,7 @@ public class AccountingviewImple extends Observable implements
 		return actVO;
 	}
 
-	// »ñÈ¡ËùÓĞĞèÒª±»checkºÍvalidateµÄ»î¶¯
+	// è·å–æ‰€æœ‰éœ€è¦è¢«checkå’Œvalidateçš„æ´»åŠ¨
 	public List<GroupActVO> doGetAllCheckValidateActs() {
 		List<Activities> acts = new ArrayList<Activities>();
 		acts = actsDAO.findAll();

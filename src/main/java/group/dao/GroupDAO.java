@@ -20,7 +20,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		// do nothing
 	}
 
-	// »ñÈ¡ËùÓĞ group¶ÔÏó
+	// è·å–æ‰€æœ‰ groupå¯¹è±¡
 	public List findAll() {
 		log.debug("finding all Group instances");
 		try {
@@ -32,7 +32,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	// Í¨¹ıÊôĞÔ»ñÈ¡ËùÓĞÆ¥ÅäµÄgroup¶ÔÏó
+	// é€šè¿‡å±æ€§è·å–æ‰€æœ‰åŒ¹é…çš„groupå¯¹è±¡
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding group instance with property: " + propertyName
 				+ ", value: " + value);
@@ -46,7 +46,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	// Í¨¹ıgroupId»ñÈ¡Ò»¸ögroup¶ÔÏó
+	// é€šè¿‡groupIdè·å–ä¸€ä¸ªgroupå¯¹è±¡
 	public Group findById(Integer groupId) {
 		log.debug("getting group instance with id: " + groupId);
 		try {
@@ -59,7 +59,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	// Í¨¹ıleaderId»ñÈ¡Ò»¸ögroup¶ÔÏó
+	// é€šè¿‡leaderIdè·å–ä¸€ä¸ªgroupå¯¹è±¡
 	public Group findByUserId(Integer user_id) {
 		try {
 			Group group = (Group) getHibernateTemplate().find(
@@ -73,7 +73,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	// Í¨¹ıgroupname»ñÈ¡group¶ÔÏó
+	// é€šè¿‡groupnameè·å–groupå¯¹è±¡
 	public Group findByGroupName(String groupName) {
 		try {
 			Group group = (Group) getHibernateTemplate().find(

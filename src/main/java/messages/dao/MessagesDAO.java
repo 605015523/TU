@@ -24,7 +24,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// 获取所有的messages
+	// 鑾峰彇鎵�鏈夌殑messages
 	public List findAll() {
 		log.debug("finding all Message instances");
 		try {
@@ -36,7 +36,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 通过messagesId来获取特定的messages对象
+	// 閫氳繃messagesId鏉ヨ幏鍙栫壒瀹氱殑messages瀵硅薄
 	public Messages findById(java.lang.Integer msg_id) {
 		log.debug("getting Message instance with id: " + msg_id);
 		try {
@@ -49,7 +49,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 保存一个messages对象
+	// 淇濆瓨涓�涓猰essages瀵硅薄
 	public Integer save(Messages oneMessagesPO) {
 		log.debug("saving message instance");
 		try {

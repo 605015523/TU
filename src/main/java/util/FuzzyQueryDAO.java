@@ -16,29 +16,29 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		FuzzyQueryDAOInterface {
 
 	/**
-	 * param obj ´«µİ²éÑ¯µÄJAVABEAN¶ÔÏó param map ±£´æÓÃ»§ÊäÈëµÄÄ£ºı²éÑ¯Ìõ¼ş
-	 * map.put("ÊôĞÔÃû³Æ",ActionForm.getXXX());
+	 * param obj ä¼ é€’æŸ¥è¯¢çš„JAVABEANå¯¹è±¡ param map ä¿å­˜ç”¨æˆ·è¾“å…¥çš„æ¨¡ç³ŠæŸ¥è¯¢æ¡ä»¶
+	 * map.put("å±æ€§åç§°",ActionForm.getXXX());
 	 */
 	public List findAllByCriteria(Object obj, Map map) {
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(obj
 				.getClass());
 		Class classType = obj.getClass();
-		Field[] fields = classType.getDeclaredFields(); // ÀûÓÃ·´ÉäµÃµ½´«µİ½øÀ´javabeanµÄËùÓĞÊôĞÔ
+		Field[] fields = classType.getDeclaredFields(); // åˆ©ç”¨åå°„å¾—åˆ°ä¼ é€’è¿›æ¥javabeançš„æ‰€æœ‰å±æ€§
 		for (int i = 0; i < fields.length; i++) {
 			for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				String key = (String) iter.next();
-				System.out.println("MapÖĞµÄkeyÖµ£º" + key);
-				System.out.println("ÊôĞÔÃû³Æ£º" + fields[i].getName());
-				if (fields[i].getName().equals(key)) { // ÅĞ¶ÏÊôĞÔÃû³ÆÊÇ·ñµÈÓÚMapÖĞµÄkeyÖµ
-					System.out.println("ÊôĞÔÃû³ÆÊÇ·ñµÈÓÚMapÖĞµÄkeyÖµ£º"
+				System.out.println("Mapä¸­çš„keyå€¼ï¼š" + key);
+				System.out.println("å±æ€§åç§°ï¼š" + fields[i].getName());
+				if (fields[i].getName().equals(key)) { // åˆ¤æ–­å±æ€§åç§°æ˜¯å¦ç­‰äºMapä¸­çš„keyå€¼
+					System.out.println("å±æ€§åç§°æ˜¯å¦ç­‰äºMapä¸­çš„keyå€¼ï¼š"
 							+ fields[i].getName().equals(key));
 					if (!"".equals(map.get(key).toString())
 							&& null != map.get(key).toString()) {
-						System.out.println("DAOÀûÓÃ·´ÉäµÃµ½´«µİ½øÀ´javabeanµÄÊôĞÔ£º"
+						System.out.println("DAOåˆ©ç”¨åå°„å¾—åˆ°ä¼ é€’è¿›æ¥javabeançš„å±æ€§ï¼š"
 								+ fields[i].getName());
-						System.out.println("DAOÀûÓÃmapµÃµ½´«µİ½øÀ´javabeanµÄÊôĞÔ£º" + key
+						System.out.println("DAOåˆ©ç”¨mapå¾—åˆ°ä¼ é€’è¿›æ¥javabeançš„å±æ€§ï¼š" + key
 								+ "  " + map.get(key));
-						// ÅĞ¶Ï´«µİµÄÊôĞÔÊÇÊ²Ã´ÀàĞÍ£¬ÏîÄ¿ÖĞ²éÑ¯µÄÊÇÁ½¸öÊ±¼ä¶ÎÖ®¼ä
+						// åˆ¤æ–­ä¼ é€’çš„å±æ€§æ˜¯ä»€ä¹ˆç±»å‹ï¼Œé¡¹ç›®ä¸­æŸ¥è¯¢çš„æ˜¯ä¸¤ä¸ªæ—¶é—´æ®µä¹‹é—´
 						if (map.get(key) instanceof Date[]) {
 							Date[] dates = (Date[]) map.get(key);
 							try {
@@ -56,18 +56,18 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 								e.printStackTrace();
 							}
 						}
-						// Èç¹ûÊÇ×Ö·û´®ÀàĞÍ
+						// å¦‚æœæ˜¯å­—ç¬¦ä¸²ç±»å‹
 						else if (map.get(key) instanceof String) {
 							detachedCriteria.add(Restrictions.ilike(fields[i]
 									.getName().toString(), map.get(key)
 									.toString(), MatchMode.ANYWHERE));
 						}
-						// Èç¹ûÊÇÕûĞÍ
+						// å¦‚æœæ˜¯æ•´å‹
 						else if (map.get(key) instanceof Integer) {
 							detachedCriteria.add(Restrictions.eq(fields[i]
 									.getName().toString(), map.get(key)));
 						}
-						// Èç¹ûÊÇÊµÌå¶ÔÏó
+						// å¦‚æœæ˜¯å®ä½“å¯¹è±¡
 						else {
 							detachedCriteria.add(Restrictions.eq(fields[i]
 									.getName().toString(), map.get(key)));
@@ -79,7 +79,7 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		detachedCriteria.setProjection(null);
 		List currpagedatas = getHibernateTemplate().findByCriteria(
 				detachedCriteria);
-		System.out.println("DAOÍ¨ÓÃÄ£ºı²éÑ¯µÃµ½µÄ¼ÇÂ¼¸öÊı£º" + currpagedatas.size());
+		System.out.println("DAOé€šç”¨æ¨¡ç³ŠæŸ¥è¯¢å¾—åˆ°çš„è®°å½•ä¸ªæ•°ï¼š" + currpagedatas.size());
 		return currpagedatas;
 	}
 

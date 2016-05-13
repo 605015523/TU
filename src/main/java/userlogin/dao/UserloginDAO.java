@@ -24,7 +24,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// ±£´æÒ»¸öuser
+	// ä¿å­˜ä¸€ä¸ªuser
 	public void save(Userlogin transientInstance) {
 		log.debug("saving Userlogin instance");
 		try {
@@ -36,7 +36,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// É¾³ıÒ»¸öÓÃ»§
+	// åˆ é™¤ä¸€ä¸ªç”¨æˆ·
 	public void delete(Userlogin persistentInstance) {
 		log.debug("deleting Userlogin instance");
 		try {
@@ -48,7 +48,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ıuserId»ñÈ¡Ò»¸öuser¶ÔÏó
+	// é€šè¿‡userIdè·å–ä¸€ä¸ªuserå¯¹è±¡
 	public Userlogin findById(java.lang.Integer user_id) {
 		log.debug("getting Userlogin instance with id: " + user_id);
 		try {

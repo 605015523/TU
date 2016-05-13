@@ -20,10 +20,10 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	}
 
 	public MessagesImple() {
-		// ¹¹Ôì·½·¨
+		// æ„é€ æ–¹æ³•
 	}
 
-	// Í¨¹ımessagesId»ñÈ¡¸Ãmessages¶ÔÏó
+	// é€šè¿‡messagesIdè·å–è¯¥messageså¯¹è±¡
 	public MessagesVO doGetOneMsgById(Integer msgId) {
 		MessagesVO oneMessagesVO = new MessagesVO();
 		Messages oneMessagesPO = new Messages();
@@ -38,20 +38,20 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		return oneMessagesVO;
 	}
 
-	// Ìí¼ÓÒ»¸ömessages
+	// æ·»åŠ ä¸€ä¸ªmessages
 	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
 		Messages onemsgPO = new Messages();
 		String addMessage = null;
 		Integer msgId = null;
 
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®ç°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(onemsgPO, oneMessagesVO);
 		} catch (IllegalAccessException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖĞÀûÓÃBeanUtilsÀà½øĞĞ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºç°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 
 		try {

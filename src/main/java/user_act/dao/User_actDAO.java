@@ -20,7 +20,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// Í¨¹ıÓÃ»§Id»ñÈ¡ËùÓĞuser_act¶ÔÏó£¬ÕâÑù¿ÉÒÔ»ñÈ¡ËùÓĞÓÃ»§²ÎÓëµÄ»î¶¯
+	// é€šè¿‡ç”¨æˆ·Idè·å–æ‰€æœ‰user_actå¯¹è±¡ï¼Œè¿™æ ·å¯ä»¥è·å–æ‰€æœ‰ç”¨æˆ·å‚ä¸çš„æ´»åŠ¨
 	public List findByUserId(java.lang.Integer user_id) {
 		try {
 
@@ -32,7 +32,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ıactId»ñÈ¡ËùÓĞuser_act¶ÔÏó£¬ÕâÑù¿ÉÒÔ»ñÈ¡ËùÓĞ²ÎÓë¸Ã»î¶¯µÄÓÃ»§
+	// é€šè¿‡actIdè·å–æ‰€æœ‰user_actå¯¹è±¡ï¼Œè¿™æ ·å¯ä»¥è·å–æ‰€æœ‰å‚ä¸è¯¥æ´»åŠ¨çš„ç”¨æˆ·
 	public List findByActId(java.lang.Integer act_id) {
 		try {
 
@@ -44,7 +44,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ıuserIdºÍactId¿ÉÒÔ»ñÈ¡µ½ÌØ¶¨user_act¶ÔÏó
+	// é€šè¿‡userIdå’ŒactIdå¯ä»¥è·å–åˆ°ç‰¹å®šuser_actå¯¹è±¡
 	public User_act findByUserIdAndActId(Integer user_id, Integer act_id) {
 		try {
 			String hql = new String();
@@ -60,7 +60,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// É¾³ıÄ³¸öuser_act¶ÔÏó
+	// åˆ é™¤æŸä¸ªuser_actå¯¹è±¡
 	public void delete(User_act persistentInstance) {
 		log.debug("deleting User_act instance");
 		try {
@@ -72,7 +72,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// ±£´æÄ³¸öuser_act¶ÔÏó
+	// ä¿å­˜æŸä¸ªuser_actå¯¹è±¡
 	public void save(User_act oneUser_actPO) {
 		log.debug("saving User_act instance");
 		try {
@@ -85,7 +85,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 
 	}
 
-	// ¸üĞÂÄ³¸öuser_act¶ÔÏó
+	// æ›´æ–°æŸä¸ªuser_actå¯¹è±¡
 	public void merge(User_act detachedInstance) {
 		log.debug("merging User_act instance");
 		try {

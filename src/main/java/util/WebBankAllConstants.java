@@ -13,9 +13,9 @@ public class WebBankAllConstants {
 	public static final int systemManage_pageSize = 12;
 	public static final int webServiceManage_pageSize = 4;
 
-	public static final int objectCounterPerPageDigit = 5; // Ã¿Ò³ÏÔÊ¾µÄ¶ÔÏóÊıÄ¿
-	public static final int hotBBSCounterPerPageDigit = 10; // Ã¿Ò³ÏÔÊ¾µÄ¶ÔÏóÊıÄ¿
+	public static final int objectCounterPerPageDigit = 5; // æ¯é¡µæ˜¾ç¤ºçš„å¯¹è±¡æ•°ç›®
+	public static final int hotBBSCounterPerPageDigit = 10; // æ¯é¡µæ˜¾ç¤ºçš„å¯¹è±¡æ•°ç›®
 
-	public static final int homepageWebcolumnObjectCounterDigit = 9; // Ö÷Ò³Ã¿À¸Ä¿ÏÔÊ¾µÄ¶ÔÏóÊıÄ¿
-	public static final int middlepageWebcolumnObjectCounterPerPageDigit = 20; // Ä¿Â¼Ò³Ã¿Ò³ÏÔÊ¾µÄ¶ÔÏóÊıÄ¿
+	public static final int homepageWebcolumnObjectCounterDigit = 9; // ä¸»é¡µæ¯æ ç›®æ˜¾ç¤ºçš„å¯¹è±¡æ•°ç›®
+	public static final int middlepageWebcolumnObjectCounterPerPageDigit = 20; // ç›®å½•é¡µæ¯é¡µæ˜¾ç¤ºçš„å¯¹è±¡æ•°ç›®
 }

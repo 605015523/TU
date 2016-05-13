@@ -26,7 +26,7 @@ public class User_msgImple extends Observable implements User_msgInterface {
 		this.user_msgDAO = user_msgDAO;
 	}
 
-	// É¾³ýÒ»¸öuser_msg¶ÔÏó
+	// åˆ é™¤ä¸€ä¸ªuser_msgå¯¹è±¡
 	public String doDeleteOneUser_msg(Integer user_id, Integer msg_id) {
 		String OkOrNot = null;
 		User_msg user_msgPO = new User_msg();
@@ -45,7 +45,7 @@ public class User_msgImple extends Observable implements User_msgInterface {
 
 	}
 
-	// ·¢ËÍÒ»¸ömsg
+	// å‘é€ä¸€ä¸ªmsg
 	public String doSendMsg(Integer msgId, ArrayList<Integer> alluserId) {
 		User_msg onemsgPO = new User_msg();
 		String sendMessage = null;
@@ -60,28 +60,28 @@ public class User_msgImple extends Observable implements User_msgInterface {
 		return null;
 	}
 
-	// »ñÈ¡ËùÓÐÓÃ»§µÄmsg
+	// èŽ·å–æ‰€æœ‰ç”¨æˆ·çš„msg
 	public List doGetUserMsg(Integer userId) {
 		List user_msgVO = new ArrayList<User_msg>();
 		user_msgVO = user_msgDAO.findMsgByUserId(userId);
 		return user_msgVO;
 	}
 
-	// Í¨¹ýuserIdºÍmsgId»ñÈ¡Ò»¸öUser_msg¶ÔÏó
+	// é€šè¿‡userIdå’ŒmsgIdèŽ·å–ä¸€ä¸ªUser_msgå¯¹è±¡
 	public User_msg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId) {
 		User_msg oneUser_msg = new User_msg();
 		oneUser_msg = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
 		return oneUser_msg;
 	}
 
-	// ¸üÐÂÒ»¸öuser_msg¶ÔÏó
+	// æ›´æ–°ä¸€ä¸ªuser_msgå¯¹è±¡
 	public void doUpdateOneUser_msg(User_msg oneUser_msgVO) {
 		User_msg oneUser_msgPO = new User_msg();
 		Integer userId = oneUser_msgVO.getUserId();
 		Integer msgId = oneUser_msgVO.getMsgId();
 		oneUser_msgPO = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
 		String OkOrNot = null;
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®žçŽ°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(oneUser_msgPO, oneUser_msgVO);
 		} catch (IllegalAccessException e) {
 			System.out

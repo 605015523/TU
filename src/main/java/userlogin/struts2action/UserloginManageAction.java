@@ -143,10 +143,10 @@ public class UserloginManageAction extends ActionSupport {
 		return "logout";
 	}
 
-	// ÓÃ»§µÇÂ¼µ÷ÓÃaction
+	// ç”¨æˆ·ç™»å½•è°ƒç”¨action
 	public String doLogin() throws ParseException {
 
-		// ÓÃ»§µÇÂ¼ÑéÖ¤Ä£¿é
+		// ç”¨æˆ·ç™»å½•éªŒè¯æ¨¡å—
 		initServletContextObject();
 		ArrayList<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
@@ -168,10 +168,10 @@ public class UserloginManageAction extends ActionSupport {
 			}
 		}
 		if (flag == true) {
-			// µÇÂ¼³É¹¦£¬Êä³öµ½¿ØÖÆÌ¨
+			// ç™»å½•æˆåŠŸï¼Œè¾“å‡ºåˆ°æ§åˆ¶å°
 			System.out.println("login sucess");
 
-			// µÇÂ¼³É¹¦£¬»ñÈ¡ËùÓĞÊı¾İ¿âÖĞ´æ·ÅµÄ»î¶¯ÄêÏŞ£¬ÒÔ±ãµÇÂ¼ºóÊ×Ò³µÄ»î¶¯ÏÂÀ­²Ëµ¥Ñ¡È¡ÄêÏŞ
+			// ç™»å½•æˆåŠŸï¼Œè·å–æ‰€æœ‰æ•°æ®åº“ä¸­å­˜æ”¾çš„æ´»åŠ¨å¹´é™ï¼Œä»¥ä¾¿ç™»å½•åé¦–é¡µçš„æ´»åŠ¨ä¸‹æ‹‰èœå•é€‰å–å¹´é™
 			initServletContextObject();
 			ArrayList<ActivitiesVO> actVOs = new ArrayList<ActivitiesVO>();
 			actVOs = actsBean.doGetAllActivity();
@@ -196,11 +196,11 @@ public class UserloginManageAction extends ActionSupport {
 					}
 				}
 			}
-			// µÇÂ¼³É¹¦£¬ÅĞ¶ÏÔ¤ËãÊÇ·ñ¸ÃĞŞ¸Ä£¬ÈôÎªµ±ÄêµÄ7ÔÂ1ºÅ£¬Ô¤ËãÔÚÔ­»ù´¡ÉÏ¼Ó1000
+			// ç™»å½•æˆåŠŸï¼Œåˆ¤æ–­é¢„ç®—æ˜¯å¦è¯¥ä¿®æ”¹ï¼Œè‹¥ä¸ºå½“å¹´çš„7æœˆ1å·ï¼Œé¢„ç®—åœ¨åŸåŸºç¡€ä¸ŠåŠ 1000
 			initServletContextObject();
 			UserloginVO thisuser = UserloginManageBean
 					.dogetOneUserInfoByUserId(userId);
-			Date date = new Date();// È¡µ±Ç°Ê±¼ä
+			Date date = new Date();// å–å½“å‰æ—¶é—´
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(date);
 			String year = Integer.toString(cal.get(Calendar.YEAR));
@@ -217,16 +217,16 @@ public class UserloginManageAction extends ActionSupport {
 
 			}
 
-			// µÇÂ¼³É¹¦£¬Ê¶±ğ¹ıÆÚÏûÏ¢£¬²¢»ñÈ¡ĞÂÏûÏ¢ÌõÊı
+			// ç™»å½•æˆåŠŸï¼Œè¯†åˆ«è¿‡æœŸæ¶ˆæ¯ï¼Œå¹¶è·å–æ–°æ¶ˆæ¯æ¡æ•°
 			for (int i = 0; i < actVOs.size(); i++) {
 				ActivitiesVO oneAct = new ActivitiesVO();
 				oneAct = actVOs.get(i);
 				if (oneAct.getState().equals("publish")) {
 					Calendar calendar = new GregorianCalendar();
 					calendar.setTime(date);
-					calendar.add(calendar.DATE, -1);// ÒòÎªactdateÖĞ¼ÇÂ¼µÄÊ±¼äÊÇµ±ÌìµÄÁãµã
-													// ËùÒÔ¶Ô±È¹ıÆÚÊ±¼äÊ±½«½ñÌìµÄÈÕÆÚÍùºóÍÆÒ»Ìì
-					date = calendar.getTime(); // Õâ¸öÊ±¼ä¾ÍÊÇÈÕÆÚÍùºóÍÆÒ»ÌìµÄ½á¹û
+					calendar.add(calendar.DATE, -1);// å› ä¸ºactdateä¸­è®°å½•çš„æ—¶é—´æ˜¯å½“å¤©çš„é›¶ç‚¹
+													// æ‰€ä»¥å¯¹æ¯”è¿‡æœŸæ—¶é—´æ—¶å°†ä»Šå¤©çš„æ—¥æœŸå¾€åæ¨ä¸€å¤©
+					date = calendar.getTime(); // è¿™ä¸ªæ—¶é—´å°±æ˜¯æ—¥æœŸå¾€åæ¨ä¸€å¤©çš„ç»“æœ
 					if (oneAct.getActDate().before(date)) {
 						oneAct.setState("pending");
 						actsBean.doUpdateOneAct(oneAct);
@@ -257,28 +257,28 @@ public class UserloginManageAction extends ActionSupport {
 
 			}
 
-			// µÇÂ¼³É¹¦£¬»ñÈ¡ÓÃ»§¸öÈËĞÅÏ¢bean
+			// ç™»å½•æˆåŠŸï¼Œè·å–ç”¨æˆ·ä¸ªäººä¿¡æ¯bean
 			initServletContextObject();
 			UserviewVO userviewVO = new UserviewVO();
 			userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
 					.getUserId());
 
-			// µÇÂ½ºó£¬½«ÓÃ»§Ò»Ö±ĞèÒªÓÃµ½µÄÕâĞ©ĞÅÏ¢´æµ½session£¬ÒÔ±ãºóÃæÒ³ÃæµÄÊ¹ÓÃ
+			// ç™»é™†åï¼Œå°†ç”¨æˆ·ä¸€ç›´éœ€è¦ç”¨åˆ°çš„è¿™äº›ä¿¡æ¯å­˜åˆ°sessionï¼Œä»¥ä¾¿åé¢é¡µé¢çš„ä½¿ç”¨
 			session.setAttribute("userId", userId);
 			session.setAttribute("userRole", userRole);
 			session.setAttribute("userview", userviewVO);
 			session.setAttribute("years", years);
 			session.setAttribute("newMsg", newMsg);
 
-			// µÇÂ½³É¹¦£¬ÈôÎª×é³¤Ö´ĞĞÒÔÏÂ»î¶¯
+			// ç™»é™†æˆåŠŸï¼Œè‹¥ä¸ºç»„é•¿æ‰§è¡Œä»¥ä¸‹æ´»åŠ¨
 			if (userRole.equals(1)) {
 
-				// »ñÈ¡ËùÊôĞ¡×éĞÅÏ¢£¬ÒÔ±ãºóÃæµÄÊ¹ÓÃ
+				// è·å–æ‰€å±å°ç»„ä¿¡æ¯ï¼Œä»¥ä¾¿åé¢çš„ä½¿ç”¨
 				initServletContextObject();
 				GroupVO group = new GroupVO();
 				group = groupBean.dogetOneGroup(userId);
 
-				// »ñÈ¡ËùÓĞÓÃ»§Id£¬ÒÔ±ãÌí¼Ó»î¶¯Ê±·¢ËÍÏûÏ¢¸øÓÃ»§
+				// è·å–æ‰€æœ‰ç”¨æˆ·Idï¼Œä»¥ä¾¿æ·»åŠ æ´»åŠ¨æ—¶å‘é€æ¶ˆæ¯ç»™ç”¨æˆ·
 				initServletContextObject();
 				ArrayList<Integer> allMemberId = new ArrayList<Integer>();
 				for (int m = 0; m < knowledgeadministratorVOs.size(); m++) {
@@ -287,12 +287,12 @@ public class UserloginManageAction extends ActionSupport {
 					allMemberId.add(userId);
 				}
 
-				// ½«¸Õ¸Õ»ñÈ¡µ½µÄÄÚÈİ´æµ½sessionÖĞ
+				// å°†åˆšåˆšè·å–åˆ°çš„å†…å®¹å­˜åˆ°sessionä¸­
 				session.setAttribute("group", group);
 				session.setAttribute("allMemberId", allMemberId);
 			}
 
-			// ÈôÎªÉóÅúĞ¡×é³ÉÔ±£¬Ö´ĞĞÒÔÏÂ²Ù×÷
+			// è‹¥ä¸ºå®¡æ‰¹å°ç»„æˆå‘˜ï¼Œæ‰§è¡Œä»¥ä¸‹æ“ä½œ
 			if (userRole.equals(2)) {
 				initServletContextObject();
 				int newCheck = 0;
@@ -321,7 +321,7 @@ public class UserloginManageAction extends ActionSupport {
 
 		} else {
 
-			// µÇÂ¼²»³É¹¦ËùÖ´ĞĞµÄ²Ù×÷
+			// ç™»å½•ä¸æˆåŠŸæ‰€æ‰§è¡Œçš„æ“ä½œ
 			System.out.println("login fail");
 			loginMessage = "Incorrect ID or password. Please re-enter.";
 			session.setAttribute("userName", userName);

@@ -22,7 +22,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	public User_actImple() {
 	}
 
-	// Í¨¹ýuserIdºÍActIdÀ´»ñÈ¡ÌØ¶¨user_act¶ÔÏó
+	// é€šè¿‡userIdå’ŒActIdæ¥èŽ·å–ç‰¹å®šuser_actå¯¹è±¡
 	public User_actVO doGetOneActById(Integer userId, Integer actId) {
 		User_actVO user_actVO = new User_actVO();
 		User_act user_actPO = new User_act();
@@ -39,19 +39,19 @@ public class User_actImple extends Observable implements User_actInterface {
 		return user_actVO;
 	}
 
-	// Ìí¼ÓÒ»¸öuser_act¶ÔÏó
+	// æ·»åŠ ä¸€ä¸ªuser_actå¯¹è±¡
 	public String doAddOneUser_act(User_actVO oneUserActVO) {
 		String addMessage = null;
 		User_act user_actPO = new User_act();
 
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®žçŽ°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(user_actPO, oneUserActVO);
 		} catch (IllegalAccessException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖÐÀûÓÃBeanUtilsÀà½øÐÐ¶ÔÏó¿½±´Ê±³öÏÖÁËIllegalAccessExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºçŽ°äº†IllegalAccessExceptionå¼‚å¸¸");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("ÔÚMaterialImpleÀàµÄdoAddOneMaterial·½·¨ÖÐÀûÓÃBeanUtilsÀà½øÐÐ¶ÔÏó¿½±´Ê±³öÏÖÁËInvocationTargetExceptionÒì³£");
+					.println("åœ¨MaterialImpleç±»çš„doAddOneMaterialæ–¹æ³•ä¸­åˆ©ç”¨BeanUtilsç±»è¿›è¡Œå¯¹è±¡æ‹·è´æ—¶å‡ºçŽ°äº†InvocationTargetExceptionå¼‚å¸¸");
 		}
 		try {
 			user_actDAO.save(user_actPO);
@@ -63,7 +63,7 @@ public class User_actImple extends Observable implements User_actInterface {
 		return addMessage;
 	}
 
-	// É¾³ýÒ»¸öuser_act¶ÔÏó
+	// åˆ é™¤ä¸€ä¸ªuser_actå¯¹è±¡
 	public String doDeleteOneUser_act(Integer user_id, Integer act_id) {
 		String OkOrNot = null;
 		User_act user_actPO = new User_act();
@@ -83,14 +83,14 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	}
 
-	// ¸üÐÂÒ»¸öuser_act¶ÔÏó
+	// æ›´æ–°ä¸€ä¸ªuser_actå¯¹è±¡
 	public void doUpdateOneUser_act(User_actVO user_actVO) {
 		User_act user_actPO = new User_act();
 		Integer actId = user_actVO.getActId();
 		Integer userId = user_actVO.getUserId();
 		user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		String OkOrNot = null;
-		try { // ÀûÓÃBean¿½±´ÀàÊµÏÖ¼òµ¥µØ¿½±´
+		try { // åˆ©ç”¨Beanæ‹·è´ç±»å®žçŽ°ç®€å•åœ°æ‹·è´
 			BeanUtils.copyProperties(user_actPO, user_actVO);
 
 		} catch (IllegalAccessException e) {

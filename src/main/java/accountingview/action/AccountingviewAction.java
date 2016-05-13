@@ -34,7 +34,7 @@ public class AccountingviewAction extends ActionSupport {
 	private GroupInterface groupBean = null;
 	UserloginManageInterface UserloginManageBean = null;
 
-	// ½ÓÊÕµ÷ÓÃÒ³µÄÏàÓ¦¿Ø¼şÖµ£¬Õı³£·µ»Øºó´«¸øsuccess¶ÔÓ¦Ò³ÃæµÄ²ÎÊı
+	// æ¥æ”¶è°ƒç”¨é¡µçš„ç›¸åº”æ§ä»¶å€¼ï¼Œæ­£å¸¸è¿”å›åä¼ ç»™successå¯¹åº”é¡µé¢çš„å‚æ•°
 	private Integer msgId;
 	private Integer userId;
 	private String userName;
@@ -100,7 +100,7 @@ public class AccountingviewAction extends ActionSupport {
 		session = request.getSession();
 	}
 
-	// »ñÈ¡ËùÓĞĞèÒª±»ÉóÅúµÄ»î¶¯
+	// è·å–æ‰€æœ‰éœ€è¦è¢«å®¡æ‰¹çš„æ´»åŠ¨
 	public String doGetAllCheckAct() {
 		initServletContextObject();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
@@ -111,7 +111,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "doGetAllAct";
 	}
 
-	// »ñÈ¡Ä³¸öĞèÒª±»check»î¶¯µÄËùÓĞÏ¸½Ú
+	// è·å–æŸä¸ªéœ€è¦è¢«checkæ´»åŠ¨çš„æ‰€æœ‰ç»†èŠ‚
 	public String doshowCheckDetails() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -128,7 +128,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "ShowCheckDetails";
 	}
 
-	// »ñÈ¡ËùÓĞĞèÒª±»validateµÄ»î¶¯µÄÏ¸½Ú
+	// è·å–æ‰€æœ‰éœ€è¦è¢«validateçš„æ´»åŠ¨çš„ç»†èŠ‚
 	public String doshowValidateDetails() {
 		initServletContextObject();
 		GroupActVO groupactVO = new GroupActVO();
@@ -140,7 +140,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "ShowValidateDetails";
 	}
 
-	// checkµ±Ç°»î¶¯£¬ĞŞ¸Ä»î¶¯µÄstate£¨approved»òÕßdisapproved£©
+	// checkå½“å‰æ´»åŠ¨ï¼Œä¿®æ”¹æ´»åŠ¨çš„stateï¼ˆapprovedæˆ–è€…disapprovedï¼‰
 	public String doCheckAct() {
 		String updateMessage = null;
 		initServletContextObject();
@@ -152,7 +152,7 @@ public class AccountingviewAction extends ActionSupport {
 		checkAct.setComment(getComment());
 		updateMessage = actsBean.doUpdateOneAct(checkAct);
 
-		// ¸üĞÂËùÓĞĞèÒª±»checkºÍvalidateµÄĞÂÏûÏ¢µÄÌõÊı
+		// æ›´æ–°æ‰€æœ‰éœ€è¦è¢«checkå’Œvalidateçš„æ–°æ¶ˆæ¯çš„æ¡æ•°
 		int newCheck = 0;
 		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
@@ -163,7 +163,7 @@ public class AccountingviewAction extends ActionSupport {
 		}
 		session.setAttribute("newCheck", newCheck);
 
-		// ½«ÏÔÊ¾ËùÓĞ»î¶¯µÄÒ³Ãæ¸üĞÂ
+		// å°†æ˜¾ç¤ºæ‰€æœ‰æ´»åŠ¨çš„é¡µé¢æ›´æ–°
 		initServletContextObject();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 		actsVO = accountingviewBean.doGetAllCheckValidateActs();
@@ -172,8 +172,8 @@ public class AccountingviewAction extends ActionSupport {
 
 	}
 
-	// validateµ±Ç°»î¶¯£¬½«×´Ì¬´ÓtobevalidateĞŞ¸Ä³Évalidate
-	// ²¢ÇÒ½«ËùÓĞÓÃ»§µÄspending¸üĞÂ
+	// validateå½“å‰æ´»åŠ¨ï¼Œå°†çŠ¶æ€ä»tobevalidateä¿®æ”¹æˆvalidate
+	// å¹¶ä¸”å°†æ‰€æœ‰ç”¨æˆ·çš„spendingæ›´æ–°
 	public String doValidateAct() {
 		String updateMessage = null;
 		initServletContextObject();
@@ -185,7 +185,7 @@ public class AccountingviewAction extends ActionSupport {
 		validateAct.setComment(getComment());
 		updateMessage = actsBean.doUpdateOneAct(validateAct);
 
-		// ¸üĞÂspending
+		// æ›´æ–°spending
 		GroupActVO groupactVO = new GroupActVO();
 		groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
 		for (int i = 0; i < groupactVO.getMemberInVO().size(); i++) {
@@ -197,7 +197,7 @@ public class AccountingviewAction extends ActionSupport {
 			UserloginManageBean.doUpdateOneUserInfo(oneUserVO);
 		}
 
-		// ¸üĞÂËùÓĞĞèÒª±»checkºÍvalidateµÄĞÂÏûÏ¢µÄÌõÊı
+		// æ›´æ–°æ‰€æœ‰éœ€è¦è¢«checkå’Œvalidateçš„æ–°æ¶ˆæ¯çš„æ¡æ•°
 		int newCheck = 0;
 		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
@@ -208,7 +208,7 @@ public class AccountingviewAction extends ActionSupport {
 		}
 		session.setAttribute("newCheck", newCheck);
 
-		// ½«ÏÔÊ¾ËùÓĞ»î¶¯µÄÒ³Ãæ¸üĞÂ
+		// å°†æ˜¾ç¤ºæ‰€æœ‰æ´»åŠ¨çš„é¡µé¢æ›´æ–°
 		initServletContextObject();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 		actsVO = accountingviewBean.doGetAllCheckValidateActs();
@@ -216,7 +216,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "doGetAllAct";
 	}
 
-	// Í¨¹ıÑ¡ÔñyearµÄ·½Ê½ÏÔÊ¾ËùÓĞÓÃ»§ÕâÒ»ÄêµÄ»î¶¯²ÎÓëÇé¿ö£¨½öÏÔÊ¾ÒÑ¾­±»validateµÄ»î¶¯£©
+	// é€šè¿‡é€‰æ‹©yearçš„æ–¹å¼æ˜¾ç¤ºæ‰€æœ‰ç”¨æˆ·è¿™ä¸€å¹´çš„æ´»åŠ¨å‚ä¸æƒ…å†µï¼ˆä»…æ˜¾ç¤ºå·²ç»è¢«validateçš„æ´»åŠ¨ï¼‰
 	public String doshowAllActsByYear() {
 		initServletContextObject();
 		Integer year = Integer.parseInt(request.getParameter("year"));
@@ -227,7 +227,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "doShowActByYear";
 	}
 
-	// Í¨¹ıÑ¡ÔñgroupµÄ·½Ê½ÏÔÊ¾ËùÓĞgroupÕâÒ»ÄêµÄ»î¶¯²ÎÓëÇé¿ö£¨½öÏÔÊ¾ÒÑ¾­±»validateµÄ»î¶¯£©
+	// é€šè¿‡é€‰æ‹©groupçš„æ–¹å¼æ˜¾ç¤ºæ‰€æœ‰groupè¿™ä¸€å¹´çš„æ´»åŠ¨å‚ä¸æƒ…å†µï¼ˆä»…æ˜¾ç¤ºå·²ç»è¢«validateçš„æ´»åŠ¨ï¼‰
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -241,7 +241,7 @@ public class AccountingviewAction extends ActionSupport {
 
 	}
 
-	// ÏÔÊ¾groupÖĞ»î¶¯µÄÏ¸½Ú
+	// æ˜¾ç¤ºgroupä¸­æ´»åŠ¨çš„ç»†èŠ‚
 	public String doshowActDetailsInGroup() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -258,7 +258,7 @@ public class AccountingviewAction extends ActionSupport {
 		return "doShowActByGroupDetails";
 	}
 
-	// ËùÓĞÊôĞÔµÄget¡¢set·½·¨
+	// æ‰€æœ‰å±æ€§çš„getã€setæ–¹æ³•
 	public Integer getUserId() {
 		return this.userId;
 	}

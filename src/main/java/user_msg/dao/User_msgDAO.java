@@ -18,7 +18,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// ±£´æÒ»¸öuser_msg¶ÔÏó
+	// ä¿å­˜ä¸€ä¸ªuser_msgå¯¹è±¡
 	public void save(User_msg oneUser_msgPO) {
 		log.debug("saving User_msg instance");
 		try {
@@ -30,7 +30,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ýuserIdºÍmsgId²éÕÒÒ»¸öuser_msg¶ÔÏó
+	// é€šè¿‡userIdå’ŒmsgIdæŸ¥æ‰¾ä¸€ä¸ªuser_msgå¯¹è±¡
 	public User_msg findByUserIdAndMsgId(Integer user_id, Integer msg_id) {
 		try {
 			String hql = new String();
@@ -46,7 +46,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// Í¨¹ýuserId²éÕÒËùÓÐ¸ÃÓÃ»§µÄmessagesÏûÏ¢
+	// é€šè¿‡userIdæŸ¥æ‰¾æ‰€æœ‰è¯¥ç”¨æˆ·çš„messagesæ¶ˆæ¯
 	public List findMsgByUserId(java.lang.Integer user_id) {
 		log.debug("find all User_msg instance by userId");
 		try {
@@ -61,7 +61,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// É¾³ýÒ»¸öuser_msg¶ÔÏó
+	// åˆ é™¤ä¸€ä¸ªuser_msgå¯¹è±¡
 	public void delete(User_msg persistentInstance) {
 		log.debug("deleting User_msg instance");
 		try {
@@ -73,7 +73,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// ÐÞ¸ÄÒ»¸öuser_msg¶ÔÏó
+	// ä¿®æ”¹ä¸€ä¸ªuser_msgå¯¹è±¡
 	public User_msg merge(User_msg detachedInstance) {
 		log.debug("merging User_msg instance");
 		try {

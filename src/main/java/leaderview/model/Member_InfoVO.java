@@ -1,7 +1,7 @@
 package leaderview.model;
 
 public class Member_InfoVO implements java.io.Serializable {
-	// Filed
+	// Fields
 	private Integer userId;
 	private String userName;
 	private String userDept;
