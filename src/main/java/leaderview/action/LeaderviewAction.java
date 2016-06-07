@@ -42,7 +42,7 @@ public class LeaderviewAction extends ActionSupport {
 	private User_msgInterface user_msgBean = null;
 	private User_actInterface user_actBean = null;
 
-	// æ¥æ”¶è°ƒç”¨é¡µçš„ç›¸åº”æ§ä»¶å€¼ï¼Œæ­£å¸¸è¿”å›åä¼ ç»™successå¯¹åº”é¡µé¢çš„å‚æ•°
+	// ½ÓÊÕµ÷ÓÃÒ³µÄÏàÓ¦¿Ø¼şÖµ£¬Õı³£·µ»Øºó´«¸øsuccess¶ÔÓ¦Ò³ÃæµÄ²ÎÊı
 	private Integer msgId;
 	private Integer userId;
 	private String userName;
@@ -115,14 +115,14 @@ public class LeaderviewAction extends ActionSupport {
 		session = request.getSession();
 	}
 
-	// æ·»åŠ ä¸€ä¸ªæ´»åŠ¨ï¼Œå°†è¿™ä¸ªæ´»åŠ¨å­˜å…¥æ•°æ®åº“ï¼Œå¹¶å‘é€ç»™å®¡æ‰¹å°ç»„è¿›è¡Œå®¡æ‰¹
+	// Ìí¼ÓÒ»¸ö»î¶¯£¬½«Õâ¸ö»î¶¯´æÈëÊı¾İ¿â£¬²¢·¢ËÍ¸øÉóÅúĞ¡×é½øĞĞÉóÅú
 	public String doAddAct() throws ParseException {
 		initServletContextObject();
 		String addMessage = null;
 		String sendMessage = null;
 		String addActMsg = null;
 
-		// å°†é¡µé¢ä¸Šè¾“å…¥çš„å€¼å­˜å…¥å¯¹è±¡oneActVOä¸­
+		// ½«Ò³ÃæÉÏÊäÈëµÄÖµ´æÈë¶ÔÏóoneActVOÖĞ
 		ActivitiesVO oneActVO = new ActivitiesVO();
 		oneActVO.setActName(getActName());
 		oneActVO.setActMoney(getActMoney());
@@ -132,7 +132,7 @@ public class LeaderviewAction extends ActionSupport {
 		group = (GroupVO) session.getAttribute("group");
 		oneActVO.setGroupId(group.getGroupId());
 
-		// ç”±äºæŠ¥åå¼€å§‹æ—¥æœŸå’Œç»“æŸæ—¥æœŸå­˜åœ¨äº†ä¸€ä¸ªstringï¼ˆdaterangeï¼‰ä¸­ï¼Œæ‰€ä»¥è¿™é‡Œè¦è¿›è¡Œæ ¼å¼è½¬æ¢
+		// ÓÉÓÚ±¨Ãû¿ªÊ¼ÈÕÆÚºÍ½áÊøÈÕÆÚ´æÔÚÁËÒ»¸östring£¨daterange£©ÖĞ£¬ËùÒÔÕâÀïÒª½øĞĞ¸ñÊ½×ª»»
 		SimpleDateFormat act = new SimpleDateFormat("MM/dd/yyyy");
 		Date startDate = act.parse(daterange.substring(0, 10));
 		Date endDate = act.parse(daterange.substring(13, 23));
@@ -140,12 +140,12 @@ public class LeaderviewAction extends ActionSupport {
 		oneActVO.setEnrollEndDate(endDate);
 		oneActVO.setState("draft");
 
-		// æ·»åŠ ä¸€ä¸ªæ´»åŠ¨åˆ°æ•°æ®åº“å¹¶è¿”å›æ´»åŠ¨çš„Id
+		// Ìí¼ÓÒ»¸ö»î¶¯µ½Êı¾İ¿â²¢·µ»Ø»î¶¯µÄId
 		try {
 			actId = actsBean.doAddOneAct(oneActVO);
 			addMessage = "add act success";
 		} catch (Exception e) {
-			addMessage = "there are something wrong with control layerï¼š"
+			addMessage = "there are something wrong with control layer: "
 					+ e.toString();
 		}
 
@@ -159,7 +159,7 @@ public class LeaderviewAction extends ActionSupport {
 		return "ShowAllGroupAct";
 	}
 
-	// æ˜¾ç¤ºè¯¥å°ç»„æ‰€æœ‰æ´»åŠ¨ï¼Œå°†æ´»åŠ¨ä¸­çš„æ‰€æœ‰å€¼ä¼ å…¥åˆ°view_act.jspç•Œé¢
+	// ÏÔÊ¾¸ÃĞ¡×éËùÓĞ»î¶¯£¬½«»î¶¯ÖĞµÄËùÓĞÖµ´«Èëµ½view_act.jsp½çÃæ
 	public String doGetAllGroupAct() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -172,7 +172,7 @@ public class LeaderviewAction extends ActionSupport {
 		return "ShowAllGroupAct";
 	}
 
-	// è°ƒç”¨æ—¶è·³è½¬åˆ°é€‰å®šæ´»åŠ¨çš„ç»†èŠ‚é¡µé¢ï¼Œå°†è¯¥æ´»åŠ¨ä¸­çš„æ‰€æœ‰å€¼ä¼ å…¥view_act_details.jspé¡µé¢
+	// µ÷ÓÃÊ±Ìø×ªµ½Ñ¡¶¨»î¶¯µÄÏ¸½ÚÒ³Ãæ£¬½«¸Ã»î¶¯ÖĞµÄËùÓĞÖµ´«Èëview_act_details.jspÒ³Ãæ
 	public String doshowActDetails() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -190,7 +190,7 @@ public class LeaderviewAction extends ActionSupport {
 
 	}
 
-	// è¿›å…¥æ´»åŠ¨ä¿®æ”¹ç•Œé¢
+	// ½øÈë»î¶¯ĞŞ¸Ä½çÃæ
 	public String doEditAct() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -207,7 +207,7 @@ public class LeaderviewAction extends ActionSupport {
 
 	}
 
-	// æ´»åŠ¨ç»“æŸæ—¶ï¼Œç¼–è¾‘è¿™ä¸ªæ´»åŠ¨
+	// »î¶¯½áÊøÊ±£¬±à¼­Õâ¸ö»î¶¯
 	public String doEditActDetails() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -224,7 +224,7 @@ public class LeaderviewAction extends ActionSupport {
 
 	}
 
-	// æ›´æ–°ä¸€ä¸ªæ´»åŠ¨çš„ç»†èŠ‚
+	// ¸üĞÂÒ»¸ö»î¶¯µÄÏ¸½Ú
 	public String doUpdateActDetails() {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
@@ -262,7 +262,7 @@ public class LeaderviewAction extends ActionSupport {
 					oneuser_act.setParticipatorNO(participatorNO);
 					oneMemberInVO.setParticipatorNO(participatorNO);
 					MemberInVO.add(oneMemberInVO);
-					// å°†è¯¥æ´»åŠ¨åœ¨æ•°æ®åº“ä¸­çš„æ•°æ®æ›´æ–°ï¼Œè°ƒç”¨activitiesImpleä¸­çš„doUpdateOneAct
+					// ½«¸Ã»î¶¯ÔÚÊı¾İ¿âÖĞµÄÊı¾İ¸üĞÂ£¬µ÷ÓÃactivitiesImpleÖĞµÄdoUpdateOneAct
 					try {
 						user_actBean.doUpdateOneUser_act(oneuser_act);
 					} catch (Exception e) {
@@ -277,13 +277,13 @@ public class LeaderviewAction extends ActionSupport {
 		return "ShowActDetails";
 	}
 
-	// æ›´æ–°æ´»åŠ¨åˆ°æ•°æ®åº“ï¼Œå¹¶å‘é€æ›´æ–°æ¶ˆæ¯ç»™æ‰€æœ‰æˆå‘˜
+	// ¸üĞÂ»î¶¯µ½Êı¾İ¿â£¬²¢·¢ËÍ¸üĞÂÏûÏ¢¸øËùÓĞ³ÉÔ±
 	public String doUpdateAct() throws Exception {
 		String updateMessage = null;
 		String sendMessage = null;
 		String addMessage = null;
 
-		// å°†æ‰€æœ‰æ›´æ–°çš„æ´»åŠ¨æ¶ˆæ¯å­˜å…¥åˆ°oneActVOä¸­
+		// ½«ËùÓĞ¸üĞÂµÄ»î¶¯ÏûÏ¢´æÈëµ½oneActVOÖĞ
 		initServletContextObject();
 		ActivitiesVO oneActVO = new ActivitiesVO();
 		Integer updateActId = (Integer) session.getAttribute("updateActId");
@@ -302,13 +302,13 @@ public class LeaderviewAction extends ActionSupport {
 		oneActVO.setEnrollEndDate(endDate);
 		oneActVO.setState("draft");
 
-		// å°†è¯¥æ´»åŠ¨åœ¨æ•°æ®åº“ä¸­çš„æ•°æ®æ›´æ–°ï¼Œè°ƒç”¨activitiesImpleä¸­çš„doUpdateOneAct
+		// ½«¸Ã»î¶¯ÔÚÊı¾İ¿âÖĞµÄÊı¾İ¸üĞÂ£¬µ÷ÓÃactivitiesImpleÖĞµÄdoUpdateOneAct
 		try {
 			updateMessage = actsBean.doUpdateOneAct(oneActVO);
 			System.out.println("updateMessage" + updateMessage);
 
 		} catch (Exception e) {
-			updateMessage = "there are something wrong with control layerï¼š"
+			updateMessage = "there are something wrong with control layer: "
 					+ e.toString();
 		}
 
@@ -322,7 +322,7 @@ public class LeaderviewAction extends ActionSupport {
 		return "ShowAllGroupAct";
 	}
 
-	// publishè¿™ä¸ªæ´»åŠ¨ï¼Œæ‰€æœ‰äººå°†æ”¶åˆ°è¿™ä¸ªæ´»åŠ¨å‘èµ·çš„ä¸€ä¸ªmessages
+	// publishÕâ¸ö»î¶¯£¬ËùÓĞÈË½«ÊÕµ½Õâ¸ö»î¶¯·¢ÆğµÄÒ»¸ömessages
 	public String doPublishAct() {
 		initServletContextObject();
 		String sendMessage = null;
@@ -334,16 +334,16 @@ public class LeaderviewAction extends ActionSupport {
 		oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("publish");
 
-		// å°†è¯¥æ´»åŠ¨åœ¨æ•°æ®åº“ä¸­çš„æ•°æ®æ›´æ–°ï¼Œè°ƒç”¨activitiesImpleä¸­çš„doUpdateOneAct
+		// ½«¸Ã»î¶¯ÔÚÊı¾İ¿âÖĞµÄÊı¾İ¸üĞÂ£¬µ÷ÓÃactivitiesImpleÖĞµÄdoUpdateOneAct
 		try {
 			updateMessage = actsBean.doUpdateOneAct(oneActVO);
 
 		} catch (Exception e) {
-			updateMessage = "there are something wrong with control layerï¼š"
+			updateMessage = "there are something wrong with control layer: "
 					+ e.toString();
 		}
 
-		// å°†activityä¸­æ‰€æœ‰å±æ€§çš„å€¼copyåˆ°messageä¸­
+		// ½«activityÖĞËùÓĞÊôĞÔµÄÖµcopyµ½messageÖĞ
 		MessagesVO oneMsgVO = new MessagesVO();
 		try {
 			BeanUtils.copyProperties(oneMsgVO, oneActVO);
@@ -353,7 +353,7 @@ public class LeaderviewAction extends ActionSupport {
 			System.out.println("there is a InvocationTargetException");
 		}
 
-		// å°†è¿™ä¸ªmessageå­˜åˆ°æ•°æ®åº“ï¼Œå¹¶ä¸”å‘é€ç»™æ‰€æœ‰ç”¨æˆ·
+		// ½«Õâ¸ömessage´æµ½Êı¾İ¿â£¬²¢ÇÒ·¢ËÍ¸øËùÓĞÓÃ»§
 		initServletContextObject();
 		ArrayList<Integer> allMemberId = new ArrayList<Integer>();
 		allMemberId = (ArrayList<Integer>) session.getAttribute("allMemberId");
@@ -362,10 +362,10 @@ public class LeaderviewAction extends ActionSupport {
 			sendMessage = user_msgBean.doSendMsg(msgId, allMemberId);
 
 		} catch (Exception e) {
-			addMessage = "there are something wrong with control layerï¼š"
+			addMessage = "there are something wrong with control layer: "
 					+ e.toString();
 		}
-		// æ›´æ–°sessionä¸­çš„yearï¼Œè‹¥å·²å­˜åœ¨è¿™ä¸ªyearï¼Œåˆ™ä¸æ‰§è¡Œæ“ä½œï¼Œå¦åˆ™å°†è¿™ä¸ªyearæ·»åŠ åˆ°yearsä¸­
+		// ¸üĞÂsessionÖĞµÄyear£¬ÈôÒÑ´æÔÚÕâ¸öyear£¬Ôò²»Ö´ĞĞ²Ù×÷£¬·ñÔò½«Õâ¸öyearÌí¼Óµ½yearsÖĞ
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(oneActVO.getActDate());
@@ -390,7 +390,7 @@ public class LeaderviewAction extends ActionSupport {
 		return "ShowAllGroupAct";
 	}
 
-	// å°†è¿™ä¸ªå®Œæˆçš„æ´»åŠ¨æäº¤åˆ°ç”³è¯·å°ç»„å»validate
+	// ½«Õâ¸öÍê³ÉµÄ»î¶¯Ìá½»µ½ÉêÇëĞ¡×éÈ¥validate
 	public String doToValidateAct() {
 		initServletContextObject();
 		ActivitiesVO oneActVO = new ActivitiesVO();
@@ -403,7 +403,7 @@ public class LeaderviewAction extends ActionSupport {
 			validateMessage = actsBean.doUpdateOneAct(oneActVO);
 
 		} catch (Exception e) {
-			validateMessage = "there are something wrong with control layerï¼š"
+			validateMessage = "there are something wrong with control layer: "
 					+ e.toString();
 		}
 		initServletContextObject();
