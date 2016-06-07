@@ -26,80 +26,80 @@
 		<link href="normalUser/css/bootstrap.min.css" rel="stylesheet">
 		<link href="normalUser/css/signin.css" rel="stylesheet">
 		<script src="normalUser/js/bootstrap.min.js"></script>
-</head>
-		<body>
+	</head>
+	<body>
 
 
-			<div class="container">
-				<div class="signin-head">
-					<img src="normalUser/images/test/head.png" alt="">
+		<div class="container">
+			<div class="signin-head">
+				<img src="normalUser/images/test/head.png" alt="">
+			</div>
+			<jsp:include page="menu.jsp">
+		        <jsp:param name="active" value="activities"/>
+		    </jsp:include>
+			<hr class="invisible" />
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Acts in ${thisyear}
+					</h3>
+
 				</div>
-				<jsp:include page="menu.jsp">
-			        <jsp:param name="active" value="activities"/>
-			    </jsp:include>
-				<hr class="invisible" />
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						<h3 class="panel-title">
-							Acts in ${thisyear}
-						</h3>
-
-					</div>
 
 
-					<div class="panel-body">
+				<div class="panel-body">
 
-					<table class="table table-hover ">
+				<table class="table table-hover ">
+					<tr>
+						<td>
+							ACTNAME
+						</td>
+						<td>
+							GROUP
+						</td>
+						<td>
+							CONSUMPTION
+						</td>
+						<td>
+							Date
+						</td>
+						<td>
+							Details
+						</td>
+					</tr>
+					<c:forEach var="act" items="${acts}">
 						<tr>
 							<td>
-								ACTNAME
+								${act.actName}
 							</td>
 							<td>
-								GROUP
+								${act.group}
+							</td>
+							    
+							<td>
+							<c:if test="${act.state=='validate'}">
+								${act.consumption}
+							</c:if>
 							</td>
 							<td>
-								CONSUMPTION
+								${act.actDate}
 							</td>
 							<td>
-								Date
-							</td>
-							<td>
-								Details
+								<a
+									href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
 							</td>
 						</tr>
-						<c:forEach var="act" items="${acts}">
-							<tr>
-								<td>
-									${act.actName}
-								</td>
-								<td>
-									${act.group}
-								</td>
-								    
-								<td>
-								<c:if test="${act.state=='validate'}">
-									${act.consumption}
-								</c:if>
-								</td>
-								<td>
-									${act.actDate}
-								</td>
-								<td>
-									<a
-										href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
-								</td>
-							</tr>
 
 
-						</c:forEach>
+					</c:forEach>
 
-					</table>
+				</table>
 
-
-				</div>
-				</div>
 
 			</div>
+			</div>
 
-		</body>
+		</div>
+
+	</body>
 </html>
