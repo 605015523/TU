@@ -4,16 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import leaderview.model.memberInVO;
-
 import activities.dao.Activities;
+import activities.dao.ActivitiesConstant;
 import activities.dao.ActivitiesDAOInterface;
-
 import user_act.dao.User_act;
 import user_act.dao.User_actDAOInterface;
-
 import userlogin.dao.Userlogin;
 import userlogin.dao.UserloginDAOInterface;
-
 import group.dao.Group;
 import group.dao.GroupDAOInterface;
 
@@ -72,7 +69,7 @@ public class AccountingviewImple extends Observable implements
 		for (int i = 0; i < allacts.size(); i++) {
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(allacts.get(i).getActDate());
-			if (allacts.get(i).getState().equals("validate")
+			if (allacts.get(i).getState().equals(ActivitiesConstant.STATE_VALIDATE)
 					&& year.equals(cal.get(Calendar.YEAR))) {
 				validateacts.add(allacts.get(i));
 			}

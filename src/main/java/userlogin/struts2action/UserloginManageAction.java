@@ -9,25 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 
 import group.model.GroupVO;
 import group.model.GroupInterface;
-
+import activities.dao.ActivitiesConstant;
 import activities.model.ActivitiesVO;
 import activities.model.ActivitiesInterface;
-
 import leaderview.model.LeaderviewInterface;
 import messages.model.MessagesInterface;
 import messages.model.MessagesVO;
-
 import user_group.model.User_groupInterface;
 import user_msg.dao.User_msg;
 import user_msg.model.User_msgInterface;
-
 import userlogin.model.UserloginVO;
 import userlogin.model.UserloginManageInterface;
-
 import userview.model.UserviewVO;
 import userview.model.UserviewInterface;
 
@@ -150,7 +147,7 @@ public class UserloginManageAction extends ActionSupport {
 		initServletContextObject();
 		ArrayList<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
-		boolean flag = true;
+		boolean loginSuccess = true;
 		for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
 			if (userName.equals(knowledgeadministratorVOs.get(i).getUserName())
 					&& userPassword.equals(knowledgeadministratorVOs.get(i)
@@ -161,15 +158,15 @@ public class UserloginManageAction extends ActionSupport {
 				userName = knowledgeadministratorVOs.get(i).getUserName();
 				userId = knowledgeadministratorVOs.get(i).getUserId();
 				userRole = knowledgeadministratorVOs.get(i).getUserRole();
-				flag = true;
+				loginSuccess = true;
 				break;
 			} else {
-				flag = false;
+				loginSuccess = false;
 			}
 		}
-		if (flag == true) {
+		if (loginSuccess) {
 			// 登录成功，输出到控制台
-			System.out.println("login sucess");
+			System.out.println("login success");
 
 			// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
 			initServletContextObject();
@@ -221,7 +218,7 @@ public class UserloginManageAction extends ActionSupport {
 			for (int i = 0; i < actVOs.size(); i++) {
 				ActivitiesVO oneAct = new ActivitiesVO();
 				oneAct = actVOs.get(i);
-				if (oneAct.getState().equals("publish")) {
+				if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 					Calendar calendar = new GregorianCalendar();
 					calendar.setTime(date);
 					calendar.add(calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
@@ -244,9 +241,9 @@ public class UserloginManageAction extends ActionSupport {
 						.getMsgId());
 				ActivitiesVO oneAct = new ActivitiesVO();
 				oneAct = actsBean.doGetOneActById(oneMsg.getActId());
-				if (oneAct.getState().equals("pending")
-						|| oneAct.getState().equals("tobevalidate")
-						|| oneAct.getState().equals("validate")) {
+				if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
+						|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
+						|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
 					user_msgVOs.get(i).setReadState("read");
 					user_msgBean.doUpdateOneUser_msg(user_msgVOs.get(i));
 
@@ -297,8 +294,8 @@ public class UserloginManageAction extends ActionSupport {
 				initServletContextObject();
 				int newCheck = 0;
 				for (int k = 0; k < actVOs.size(); k++) {
-					if (actVOs.get(k).getState().equals("draft")
-							|| actVOs.get(k).getState().equals("tobevalidate")) {
+					if (actVOs.get(k).getState().equals(ActivitiesConstant.STATE_DRAFT)
+							|| actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 						newCheck += 1;
 					}
 				}

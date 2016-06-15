@@ -1,24 +1,23 @@
 package accountingview.action;
 
 import java.util.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionSupport;
 
+import activities.dao.ActivitiesConstant;
 import activities.model.ActivitiesInterface;
 import activities.model.ActivitiesVO;
-
 import group.model.GroupInterface;
 import group.model.GroupVO;
-
 import user_group.model.User_groupInterface;
-
 import userlogin.model.UserloginManageInterface;
 import userlogin.model.UserloginVO;
-
 import accountingview.model.AccountingviewInterface;
 import accountingview.model.GroupActVO;
 import accountingview.model.UserGroupCostVO;
@@ -156,8 +155,8 @@ public class AccountingviewAction extends ActionSupport {
 		int newCheck = 0;
 		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
-			if (allActs.get(i).getState().equals("draft")
-					|| allActs.get(i).getState().equals("tobevalidate")) {
+			if (allActs.get(i).getState().equals(ActivitiesConstant.STATE_DRAFT)
+					|| allActs.get(i).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 				newCheck += 1;
 			}
 		}
@@ -201,8 +200,8 @@ public class AccountingviewAction extends ActionSupport {
 		int newCheck = 0;
 		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
-			if (allActs.get(i).getState().equals("draft")
-					|| allActs.get(i).getState().equals("tobevalidate")) {
+			if (allActs.get(i).getState().equals(ActivitiesConstant.STATE_DRAFT)
+					|| allActs.get(i).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 				newCheck += 1;
 			}
 		}
