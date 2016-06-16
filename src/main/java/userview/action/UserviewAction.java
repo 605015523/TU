@@ -30,6 +30,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UserviewAction extends ActionSupport {
 
+	private static final long serialVersionUID = -6352178618288011965L;
+	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
 	private HttpSession session = null;

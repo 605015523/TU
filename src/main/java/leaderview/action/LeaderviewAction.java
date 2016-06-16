@@ -31,6 +31,8 @@ import activities.model.ActivitiesVO;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LeaderviewAction extends ActionSupport {
+	private static final long serialVersionUID = -1552527472504308094L;
+	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
 	private HttpSession session = null;

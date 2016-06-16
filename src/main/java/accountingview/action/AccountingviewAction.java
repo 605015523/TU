@@ -23,6 +23,8 @@ import accountingview.model.GroupActVO;
 import accountingview.model.UserGroupCostVO;
 
 public class AccountingviewAction extends ActionSupport {
+	private static final long serialVersionUID = 5474650091305219468L;
+	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
 	private HttpSession session = null;

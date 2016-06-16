@@ -29,6 +29,8 @@ import userview.model.UserviewVO;
 import userview.model.UserviewInterface;
 
 public class UserloginManageAction extends ActionSupport {
+	private static final long serialVersionUID = -5768511845633999130L;
+	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
 	private HttpSession session = null;
