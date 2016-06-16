@@ -49,7 +49,7 @@
 
 		<div class="container">
 			<div class="signin-head">
-				<img src="normalUser/images/test/head.png" alt="">
+				<img src="images/test/head.png" alt="">
 			</div>
 			<jsp:include page="menu.jsp"/>
 			<hr class="invisible" />
