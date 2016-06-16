@@ -22,10 +22,10 @@
 		<meta http-equiv="description" content="This is my page">
 		<title>View activities by year</title>
 
-		<script src="normalUser/js/jquery-2.2.0.min.js"></script>
-		<link href="normalUser/css/bootstrap.min.css" rel="stylesheet">
-		<link href="normalUser/css/signin.css" rel="stylesheet">
-		<script src="normalUser/js/bootstrap.min.js"></script>
+		<script src="js/jquery-2.2.0.min.js"></script>
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/signin.css" rel="stylesheet">
+		<script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
 

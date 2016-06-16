@@ -49,12 +49,12 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId获取一个user对象
+	@Override		
 	public Userlogin findById(java.lang.Integer user_id) {
 		LOG.debug("getting Userlogin instance with id: " + user_id);
 		try {
-			Userlogin instance = (Userlogin) getHibernateTemplate().get(
+			return (Userlogin) getHibernateTemplate().get(
 					"userlogin.dao.Userlogin", user_id);
-			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
 			throw re;
