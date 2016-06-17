@@ -13,7 +13,7 @@
 		</a>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 				<li><a href="groupLeader/add_act.jsp">Add Act</a></li>
-				<li><a href="groupLeader/view_act.jsp">View Act</a></li>
+				<li><a href="doGetAllGroupActLeaderviewAction.action">View Act</a></li>
 			</ul></li>
 	</c:if>
 	<c:if test="${userRole==2}">
