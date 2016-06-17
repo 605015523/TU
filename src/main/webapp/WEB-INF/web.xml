@@ -46,7 +46,7 @@
  <!-- struts1字符过滤器的配置 -->
  <filter>
   <filter-name>TomcatFormFilter</filter-name>
-  <filter-class>util.TomcatFormFilter</filter-class>
+  <filter-class>com.tu.util.TomcatFormFilter</filter-class>
  </filter>
  
   <filter-mapping>
