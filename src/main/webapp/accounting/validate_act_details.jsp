@@ -35,7 +35,9 @@
 			<div class="signin-head">
 				<img src="images/test/head.png" alt="">
 			</div>
-			<jsp:include page="menu.jsp"/>
+			<jsp:include page="../normalUser/menu.jsp">
+		        <jsp:param name="active" value="act"/>
+		    </jsp:include>
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">

@@ -68,13 +68,10 @@
                 length = 1;
             }
             el.innerText = length;
-            if(el.innerText>=49){
-         
-            input.value=value;
-               
-                 }
             
-            
+            if (el.innerText>=49){
+            	input.value=value;
+            }
         }
     }
     
