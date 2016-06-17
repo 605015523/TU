@@ -54,7 +54,7 @@
 
 	<li role="presentation" class="dropdown <c:if test="${param.active=='activities'}">active</c:if>"><a id="dLabel"
 		data-target="#" href="#" data-toggle="dropdown" role="button"
-		aria-haspopup="true" aria-expanded="false"> activities <span
+		aria-haspopup="true" aria-expanded="false">Activities <span
 			class="caret"></span>
 		</a>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
@@ -66,5 +66,5 @@
 		</ul>
 	</li>
 	<li role="presentation" class="navbar-right"><a role="button"
-		href="dologoutUserloginManageAction.action">Exit Login</a></li>
+		href="dologoutUserloginManageAction.action">Log out</a></li>
 </ul>
