@@ -5,15 +5,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Field;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.MatchMode;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Transactional;
 
+
 @Transactional
 public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		FuzzyQueryDAOInterface {
+	private static final Log LOG = LogFactory.getLog(FuzzyQueryDAO.class);
 
 	/**
 	 * param obj 传递查询的JAVABEAN对象 param map 保存用户输入的模糊查询条件
@@ -27,16 +32,16 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		for (int i = 0; i < fields.length; i++) {
 			for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				String key = (String) iter.next();
-				System.out.println("Map中的key值: " + key);
-				System.out.println("属性名称: " + fields[i].getName());
+				LOG.info("Map中的key值: " + key);
+				LOG.info("属性名称: " + fields[i].getName());
 				if (fields[i].getName().equals(key)) { // 判断属性名称是否等于Map中的key值
-					System.out.println("属性名称是否等于Map中的key值: "
+					LOG.info("属性名称是否等于Map中的key值: "
 							+ fields[i].getName().equals(key));
 					if (!"".equals(map.get(key).toString())
 							&& null != map.get(key).toString()) {
-						System.out.println("DAO利用反射得到传递进来javabean的属性: "
+						LOG.info("DAO利用反射得到传递进来javabean的属性: "
 								+ fields[i].getName());
-						System.out.println("DAO利用map得到传递进来javabean的属性: " + key
+						LOG.info("DAO利用map得到传递进来javabean的属性: " + key
 								+ "  " + map.get(key));
 						// 判断传递的属性是什么类型，项目中查询的是两个时间段之间
 						if (map.get(key) instanceof Date[]) {
@@ -79,7 +84,7 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		detachedCriteria.setProjection(null);
 		List currpagedatas = getHibernateTemplate().findByCriteria(
 				detachedCriteria);
-		System.out.println("DAO通用模糊查询得到的记录个数: " + currpagedatas.size());
+		LOG.info("DAO通用模糊查询得到的记录个数: " + currpagedatas.size());
 		return currpagedatas;
 	}
 

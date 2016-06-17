@@ -18,6 +18,8 @@ import messages.model.MessagesInterface;
 import messages.model.MessagesVO;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import user_act.model.User_actInterface;
@@ -32,6 +34,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class LeaderviewAction extends ActionSupport {
 	private static final long serialVersionUID = -1552527472504308094L;
+	
+	private static final Log LOG = LogFactory.getLog(LeaderviewAction.class);
 	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
@@ -155,7 +159,7 @@ public class LeaderviewAction extends ActionSupport {
 		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
 				.getGroupId());
-		System.out.println("the doGetAllGroupAct get success");
+		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 
 		return "ShowAllGroupAct";
@@ -168,7 +172,7 @@ public class LeaderviewAction extends ActionSupport {
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		System.out.println("the doGetAllGroupAct get success");
+		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 
 		return "ShowAllGroupAct";
@@ -307,7 +311,7 @@ public class LeaderviewAction extends ActionSupport {
 		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 		try {
 			updateMessage = actsBean.doUpdateOneAct(oneActVO);
-			System.out.println("updateMessage" + updateMessage);
+			LOG.info("updateMessage" + updateMessage);
 
 		} catch (Exception e) {
 			updateMessage = "there are something wrong with control layer: "
@@ -319,7 +323,7 @@ public class LeaderviewAction extends ActionSupport {
 		// GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		System.out.println("the doGetAllGroupAct get success");
+		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
@@ -350,9 +354,9 @@ public class LeaderviewAction extends ActionSupport {
 		try {
 			BeanUtils.copyProperties(oneMsgVO, oneActVO);
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 
 		// 将这个message存到数据库，并且发送给所有用户
@@ -387,7 +391,7 @@ public class LeaderviewAction extends ActionSupport {
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		System.out.println("the doGetAllGroupAct get success");
+		LOG.error("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}

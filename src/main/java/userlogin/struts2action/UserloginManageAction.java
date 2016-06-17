@@ -168,7 +168,7 @@ public class UserloginManageAction extends ActionSupport {
 		}
 		if (loginSuccess) {
 			// 登录成功，输出到控制台
-			System.out.println("login success");
+			LOG.info("login success");
 
 			// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
 			initServletContextObject();
@@ -190,7 +190,7 @@ public class UserloginManageAction extends ActionSupport {
 					}
 					if (j.equals(years.size()) == true) {
 						years.add(cal.get(Calendar.YEAR));
-						System.out.println("the year" + cal.get(Calendar.YEAR)
+						LOG.info("the year" + cal.get(Calendar.YEAR)
 								+ "get success");
 					}
 				}
@@ -321,7 +321,7 @@ public class UserloginManageAction extends ActionSupport {
 		} else {
 
 			// 登录不成功所执行的操作
-			System.out.println("login fail");
+			LOG.info("login fail");
 			loginMessage = "Incorrect ID or password. Please re-enter.";
 			session.setAttribute("userName", userName);
 			request.setAttribute("loginMessage", loginMessage);

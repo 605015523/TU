@@ -2,15 +2,18 @@ package userlogin.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-
 import java.util.Observable;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import userlogin.dao.Userlogin;
 import userlogin.dao.UserloginDAOInterface;
 
 public class UserloginManageImple extends Observable implements
 		UserloginManageInterface {
+	private static final Log LOG = LogFactory.getLog(UserloginManageImple.class);
 	private UserloginDAOInterface userloginDAO = null;
 
 	public UserloginManageImple() {
@@ -35,9 +38,9 @@ public class UserloginManageImple extends Observable implements
 						oneKnowledgeadministratorPO);
 				knowledgeadministratorVOs.add(oneKnowledgeadministratorVO);
 			} catch (IllegalAccessException e) {
-				System.out.println("出现了IllegalAccessException异常");
+				LOG.error("出现了IllegalAccessException异常");
 			} catch (InvocationTargetException e) {
-				System.out.println("在出现了InvocationTargetException异常");
+				LOG.error("在出现了InvocationTargetException异常");
 			}
 		}
 		return knowledgeadministratorVOs;
@@ -51,9 +54,9 @@ public class UserloginManageImple extends Observable implements
 		try {
 			BeanUtils.copyProperties(userInfoVO, userInfoPO);
 		} catch (IllegalAccessException e) {
-			System.out.println("出现了IllegalAccessException异常");
+			LOG.error("出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out.println("在出现了InvocationTargetException异常");
+			LOG.error("在出现了InvocationTargetException异常");
 		}
 		return userInfoVO;
 
@@ -68,11 +71,9 @@ public class UserloginManageImple extends Observable implements
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneUserPO, oneUserVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("there is a IllegalAccessException while copy act in doUpdateOneact.");
+			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("there is a InvocationTargetException while copy act in doUpdateOneact.");
+			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
 		try {
 			userloginDAO.merge(oneUserPO);

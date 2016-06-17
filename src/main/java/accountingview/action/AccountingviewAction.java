@@ -6,11 +6,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 import activities.dao.ActivitiesConstant;
+import activities.dao.ActivitiesDAO;
 import activities.model.ActivitiesInterface;
 import activities.model.ActivitiesVO;
 import group.model.GroupInterface;
@@ -24,6 +27,7 @@ import accountingview.model.UserGroupCostVO;
 
 public class AccountingviewAction extends ActionSupport {
 	private static final long serialVersionUID = 5474650091305219468L;
+	private static final Log LOG = LogFactory.getLog(AccountingviewAction.class);
 	
 	private HttpServletRequest request = null;
 	private HttpServletResponse response = null;
@@ -106,7 +110,7 @@ public class AccountingviewAction extends ActionSupport {
 		initServletContextObject();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 		actsVO = accountingviewBean.doGetAllCheckValidateActs();
-		System.out.println("the doGetAllGroupAct get success");
+		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("acts", actsVO);
 
 		return "doGetAllAct";

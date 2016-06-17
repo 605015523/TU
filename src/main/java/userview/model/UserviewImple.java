@@ -14,10 +14,11 @@ import messages.dao.Messages;
 import messages.dao.MessagesDAOInterface;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import activities.dao.Activities;
 import activities.dao.ActivitiesDAOInterface;
-
 import userlogin.dao.Userlogin;
 import userlogin.dao.UserloginDAOInterface;
 import userlogin.model.UserloginVO;
@@ -30,6 +31,7 @@ import user_msg.dao.User_msgDAOInterface;
 
 public class UserviewImple extends Observable implements UserviewInterface {
 
+	private static final Log LOG = LogFactory.getLog(UserviewImple.class);
 	private User_groupDAOInterface user_groupDAO = null;
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
@@ -108,7 +110,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 		try {
 			oneuserloginPO = userloginDAO.findById(userId);
-			System.out.println("oneuserloginPO ID get success"
+			LOG.info("oneuserloginPO ID get success"
 					+ oneuserloginPO.getUserId());
 			oneUser_groupPO = user_groupDAO.findByUserId(userId);
 
@@ -130,22 +132,20 @@ public class UserviewImple extends Observable implements UserviewInterface {
 					- oneuserloginPO.getSpending());
 
 		} catch (Exception e) {
-			System.out.println("出现如下的错误：" + e);
+			LOG.error("出现如下的错误：" + e);
 		}
-		System.out.println("服务层从数据访问层获得AuthorPO:"
+		LOG.info("服务层从数据访问层获得AuthorPO:"
 				+ oneuserloginPO.getUserName());
 
 		UserviewVO oneuserviewVO = new UserviewVO();
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneuserviewVO, oneuserviewPO);
-			System.out.println("服务层准备好传给控制层的userviewVO:"
+			LOG.info("服务层准备好传给控制层的userviewVO:"
 					+ oneuserviewVO.getUserId());
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		return oneuserviewVO;
 
@@ -154,7 +154,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	// 通过用户Id获取所有用户所参与的活动
 	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year) {
-		System.out.println("服务层从控制层获得AuthorId:" + userId);
+		LOG.info("服务层从控制层获得AuthorId:" + userId);
 
 		List<User_act> user_act = new ArrayList<User_act>();
 
@@ -210,7 +210,6 @@ public class UserviewImple extends Observable implements UserviewInterface {
 				// 通过ActsPO中的属性，设置UseractsVO中的description
 
 				// DateFormat df1 = DateFormat.getDateInstance();//日期格式，精确到日
-				// System.out.println(df1.format(actsPO.getActDate()));
 				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
 				UseractsPO.setActDate(formatter.format(actsPO.getActDate()));
 				// 通过ActsPO中的属性，设置UseractsVO中的actDate
@@ -242,11 +241,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			try { // 利用Bean拷贝类实现简单地拷贝
 				BeanUtils.copyProperties(oneUser_msgVO, oneMessage);
 			} catch (IllegalAccessException e) {
-				System.out
-						.println("there is a IllegalAccessException while copy oneMessage to oneUser_msgVO.");
+				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUser_msgVO.");
 			} catch (InvocationTargetException e) {
-				System.out
-						.println("there is a InvocationTargetException while copy oneMessage to oneUser_msgVO.");
+				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUser_msgVO.");
 			}
 			oneUser_msgVO.setReadState(((User_msg) user_msg.get(i))
 					.getReadState());
@@ -273,19 +270,17 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	public String doupdateOneuserInfo(UserloginVO userInfoVO) {
 		Userlogin userInfoPO = new Userlogin();
 		Integer userId = userInfoVO.getUserId();
-		System.out.println("the modified id is:" + userId);
+		LOG.info("the modified id is:" + userId);
 		userInfoPO = userloginDAO.findById(userId);
 		String OkOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userInfoPO, userInfoVO);
-			System.out.println("服务层:userInfoPO:" + userInfoPO.getUserId()
+			LOG.info("服务层:userInfoPO:" + userInfoPO.getUserId()
 					+ userInfoPO.getUserName());
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("在userviewImple类的doupdateOneuserInfo方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOG.error("在userviewImple类的doupdateOneuserInfo方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("在userviewImple类的doupdateOneuserInfo方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOG.error("在userviewImple类的doupdateOneuserInfo方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		try {
 			userloginDAO.merge(userInfoPO);

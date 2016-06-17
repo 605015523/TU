@@ -4,11 +4,15 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import user_act.dao.User_act;
 import user_act.dao.User_actDAOInterface;
 
 public class User_actImple extends Observable implements User_actInterface {
+	
+	private static final Log LOG = LogFactory.getLog(User_actImple.class);
 	private User_actDAOInterface user_actDAO = null;
 
 	public User_actDAOInterface getUser_actDAO() {
@@ -31,9 +35,9 @@ public class User_actImple extends Observable implements User_actInterface {
 			BeanUtils.copyProperties(user_actVO, user_actPO);
 
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 
 		return user_actVO;
@@ -47,11 +51,9 @@ public class User_actImple extends Observable implements User_actInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(user_actPO, oneUserActVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		try {
 			user_actDAO.save(user_actPO);
@@ -94,11 +96,9 @@ public class User_actImple extends Observable implements User_actInterface {
 			BeanUtils.copyProperties(user_actPO, user_actVO);
 
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("there is a IllegalAccessException while copy act in doUpdateOneact.");
+			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("there is a InvocationTargetException while copy act in doUpdateOneact.");
+			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
 		try {
 			user_actDAO.merge(user_actPO);
@@ -106,7 +106,6 @@ public class User_actImple extends Observable implements User_actInterface {
 		} catch (Exception e) {
 			OkOrNot = e.toString();
 		}
-
 	}
 
 }

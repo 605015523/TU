@@ -10,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import messages.model.MessagesInterface;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import userlogin.model.UserloginManageInterface;
@@ -30,6 +32,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class UserviewAction extends ActionSupport {
 
+	private static final Log LOG = LogFactory.getLog(UserviewAction.class);
 	private static final long serialVersionUID = -6352178618288011965L;
 	
 	private HttpServletRequest request = null;
@@ -140,8 +143,8 @@ public class UserviewAction extends ActionSupport {
 		int year = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < Useracts.size(); i++) {
 			int actId = Useracts.get(i).getActId();
-			System.out.println("the actId is" + actId);
-			System.out.println("the actName is" + Useracts.get(i).getActName());
+			LOG.info("the actId is" + actId);
+			LOG.info("the actName is" + Useracts.get(i).getActName());
 			if (oneactId == actId) {
 				request.setAttribute("act", Useracts.get(i));
 			}
@@ -233,7 +236,7 @@ public class UserviewAction extends ActionSupport {
 		String addMessage = null;
 		User_actVO oneUser_actVO = new User_actVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
-		System.out.println("the inActid is:" + actId);
+		LOG.info("the inActid is:" + actId);
 		Integer userId = (Integer) session.getAttribute("userId");
 		oneUser_actVO.setActId(actId);
 		oneUser_actVO.setUserId(userId);
@@ -251,12 +254,12 @@ public class UserviewAction extends ActionSupport {
 		List<UseractsVO> useractsVO = new ArrayList<UseractsVO>();
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
-		System.out.println("the year in action is:" + year);
-		System.out.println("the userId in action is:" + userId);
+		LOG.info("the year in action is:" + year);
+		LOG.info("the userId in action is:" + userId);
 		useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 
 		for (int i = 0; i < useractsVO.size(); i++) {
-			System.out.println("the act" + useractsVO.get(i).getActName()
+			LOG.info("the act" + useractsVO.get(i).getActName()
 					+ "get success");
 		}
 		session.setAttribute("acts", useractsVO);
@@ -272,7 +275,7 @@ public class UserviewAction extends ActionSupport {
 		String oldpassword = (String) request.getParameter("oldpassword");
 		String newpassword = (String) request.getParameter("newpassword");
 		Integer userId = (Integer) session.getAttribute("userId");
-		System.out.println("the userId is:" + userId);
+		LOG.info("the userId is:" + userId);
 		userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		String orgpassword = userInfo.getUserPassword();
 		userInfo.setUserPassword(newpassword);
@@ -295,16 +298,14 @@ public class UserviewAction extends ActionSupport {
 		initServletContextObject();
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer actId = Integer.valueOf(request.getParameter("actId"));
-		// System.out.println("the delete member Id is:"+memberId);
-		// System.out.println("the delete group Id is:"+groupId);
 		try {
 			actionReturnMessage = user_actBean.doDeleteOneUser_act(userId,
 					actId);
-			System.out.println(actionReturnMessage);
+			LOG.info(actionReturnMessage);
 
 		} catch (Exception e) {
 			actionReturnMessage = e.toString();
-			System.out.println(actionReturnMessage);
+			LOG.error(actionReturnMessage);
 		}
 
 		initServletContextObject();

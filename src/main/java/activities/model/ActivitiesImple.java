@@ -3,12 +3,17 @@ package activities.model;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Observable;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import activities.dao.Activities;
 import activities.dao.ActivitiesDAOInterface;
 
 public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
+	private static final Log LOG = LogFactory.getLog(ActivitiesImple.class);
 	private ActivitiesDAOInterface actsDAO = null;
 
 	public ActivitiesDAOInterface getActsDAO() {
@@ -36,9 +41,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 				BeanUtils.copyProperties(oneactivitiesVO, oneactivitiesPO);
 				activitiesVOs.add(oneactivitiesVO);
 			} catch (IllegalAccessException e) {
-				System.out.println(" there is a IllegalAccessException");
+				LOG.error(" there is a IllegalAccessException");
 			} catch (InvocationTargetException e) {
-				System.out.println("there is a InvocationTargetException");
+				LOG.error("there is a InvocationTargetException");
 			}
 		}
 		return activitiesVOs;
@@ -53,9 +58,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 			BeanUtils.copyProperties(actVO, actPO);
 
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 		return actVO;
 	}
@@ -69,11 +74,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneactsPO, oneActivitiesVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		try {
 			actId = actsDAO.save(oneactsPO);
@@ -93,11 +96,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneActPO, oneActVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("there is a IllegalAccessException while copy act in doUpdateOneact.");
+			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("there is a InvocationTargetException while copy act in doUpdateOneact.");
+			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
 		try {
 			actsDAO.merge(oneActPO);

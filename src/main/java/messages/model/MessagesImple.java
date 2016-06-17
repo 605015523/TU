@@ -2,13 +2,17 @@ package messages.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
+
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import messages.dao.Messages;
 import messages.dao.MessagesDAOInterface;
 
 public class MessagesImple extends Observable implements MessagesInterface {
 
+	private static final Log LOG = LogFactory.getLog(MessagesImple.class);
 	private MessagesDAOInterface msgDAO = null;
 
 	public MessagesDAOInterface getMsgDAO() {
@@ -31,9 +35,9 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		try {
 			BeanUtils.copyProperties(oneMessagesVO, oneMessagesPO);
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 		return oneMessagesVO;
 	}
@@ -47,16 +51,13 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(onemsgPO, oneMessagesVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 
 		try {
 			msgId = (Integer) msgDAO.save(onemsgPO);
-
 		} catch (Exception e) {
 			addMessage = e.toString();
 		}

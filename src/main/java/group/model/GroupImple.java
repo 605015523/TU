@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class GroupImple extends Observable implements GroupInterface {
 
+	private static final Log LOG = LogFactory.getLog(GroupImple.class);
 	private GroupDAOInterface groupDAO = null;
 
 	public GroupImple() {
@@ -33,9 +36,9 @@ public class GroupImple extends Observable implements GroupInterface {
 			BeanUtils.copyProperties(groupVO, groupPO);
 
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 
 		return groupVO;
@@ -49,9 +52,9 @@ public class GroupImple extends Observable implements GroupInterface {
 			BeanUtils.copyProperties(groupVO, groupPO);
 
 		} catch (IllegalAccessException e) {
-			System.out.println(" there is a IllegalAccessException");
+			LOG.error(" there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
-			System.out.println("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException");
 		}
 
 		return groupVO;
@@ -69,9 +72,9 @@ public class GroupImple extends Observable implements GroupInterface {
 				allGroupVO.add(oneGroupVO);
 
 			} catch (IllegalAccessException e) {
-				System.out.println(" there is a IllegalAccessException");
+				LOG.error(" there is a IllegalAccessException");
 			} catch (InvocationTargetException e) {
-				System.out.println("there is a InvocationTargetException");
+				LOG.error("there is a InvocationTargetException");
 			}
 		}
 
