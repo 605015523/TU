@@ -4,11 +4,11 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-	<!-- 取消默认的表格布局	 -->
+	<!-- 取消默认的表格布局 -->
 	<constant name="struts.ui.theme" value="simple" />
-	<!-- 设置字符集	 -->
+	<!-- 设置字符集 -->
 	<constant name="struts.i18n.encoding" value="utf-8" />
-	<!-- 设置struts2的对象工厂为spring	 -->
+	<!-- 设置struts2的对象工厂为spring -->
 	<constant name="struts.objectFactory" value="spring" />
 
 	<package name="default" extends="struts-default">
@@ -27,33 +27,34 @@
 			method="{1}">
 			<result name="showActs">/normalUser/view_acts.jsp</result>
 			<result name="showMessages">/normalUser/view_messages.jsp</result>
-			<result name="showMsgDetails">/normalUser/view_msg_details.jsp</result>	
-			<result name="doInAct">/normalUser/in_act.jsp</result>						
+			<result name="showMsgDetails">/normalUser/view_msg_details.jsp</result>
+			<result name="doInAct">/normalUser/in_act.jsp</result>
 			<result name="showDetails">/normalUser/view_details.jsp</result>
 			<result name="pwdUpdateSuccess">/normalUser/pwdUpdateState.jsp</result>
 			<result name="pwdUpdateFail">/normalUser/change_pwd.jsp</result>
-			
+
 
 		</action>
 
 		<action name="*LeaderviewAction" class="LeaderviewActionBean"
 			method="{1}">
-			<result name="ShowAllMember">/groupLeader/members_manage.jsp</result>	          
-	        <result name="ShowAllGroupAct">/groupLeader/view_act.jsp</result>	        
-	         <result name="ShowActDetails">/groupLeader/view_act_details.jsp</result>
-	         <result name="EditAct">/groupLeader/edit_act.jsp</result>
-	         <result name="EditActDetails">/groupLeader/edit_act_details.jsp</result>
-	         
+			<result name="ShowAllMember">/groupLeader/members_manage.jsp</result>
+			<result name="ShowAllGroupAct">/groupLeader/view_act.jsp</result>
+			<result name="ShowActDetails">/groupLeader/view_act_details.jsp</result>
+			<result name="EditAct">/groupLeader/edit_act.jsp</result>
+			<result name="EditActDetails">/groupLeader/edit_act_details.jsp</result>
+
 		</action>
-		
+
 		<action name="*AccountingviewAction" class="AccountingviewActionBean"
-			method="{1}">        
-	         <result name="ShowCheckDetails">/accounting/check_act_details.jsp</result>
-	         <result name="ShowValidateDetails">/accounting/validate_act_details.jsp</result>
-	         <result name="doGetAllAct">/accounting/check_validate.jsp</result>
-	         <result name="doShowActByYear">/accounting/view_act_by_year.jsp</result>
-	         <result name="doShowActByGroup">/accounting/view_act_by_group.jsp</result>
-	         <result name="doShowActByGroupDetails">/accounting/view_act_by_group_details.jsp</result>
+			method="{1}">
+			<result name="ShowCheckDetails">/accounting/check_act_details.jsp</result>
+			<result name="ShowValidateDetails">/accounting/validate_act_details.jsp</result>
+			<result name="doGetAllAct">/accounting/check_validate.jsp</result>
+			<result name="doShowActByYear">/accounting/view_act_by_year.jsp</result>
+			<result name="doShowActByGroup">/accounting/view_act_by_group.jsp</result>
+			<result name="doShowActByGroupDetails">/accounting/view_act_by_group_details.jsp
+			</result>
 		</action>
 
 
