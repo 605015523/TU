@@ -34,7 +34,7 @@
 			<div class="signin-head">
 				<img src="images/test/head.png" alt="">
 			</div>
-			<jsp:include page="menu.jsp">
+			<jsp:include page="../menu.jsp">
 		        <jsp:param name="active" value="activities"/>
 		    </jsp:include>
 			<hr class="invisible" />
@@ -90,11 +90,9 @@
 							</td>
 						</tr>
 
-
 					</c:forEach>
 
 				</table>
-
 
 			</div>
 			</div>

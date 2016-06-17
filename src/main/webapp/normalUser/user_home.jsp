@@ -33,7 +33,7 @@
 				<img src="images/test/head.png" alt="">
 			</div>
 
-			<jsp:include page="menu.jsp">
+			<jsp:include page="../menu.jsp">
 		        <jsp:param name="active" value="home"/>
 		    </jsp:include>
 			<hr class="invisible" />
