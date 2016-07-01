@@ -72,5 +72,4 @@
 	
 		</div>
 	</body>
-	</body>
 </html>
