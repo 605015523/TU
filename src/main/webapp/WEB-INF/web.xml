@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <web-app version="2.5" 
 	xmlns="http://java.sun.com/xml/ns/javaee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
@@ -30,18 +30,7 @@
         <param-name> flushMode </param-name> 
    <param-value>AUTO </param-value>         
         </init-param> 
-</filter> 
-
-   <!-- struts2字符过滤器的配置 -->
- <filter>
-  <filter-name>struts-cleanup</filter-name>
-  <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
- </filter>
- 
-   <filter-mapping>
-  <filter-name>struts-cleanup</filter-name>
-  <url-pattern>/*</url-pattern>
- </filter-mapping>
+</filter>
  
  <!-- struts1字符过滤器的配置 -->
  <filter>
@@ -55,18 +44,16 @@
  </filter-mapping>
  
  
- 
    <!--struts2 过滤器配置-->
  <filter>
   <filter-name>struts2</filter-name>
-  <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+  <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
  </filter>
  <filter-mapping>
   <filter-name>struts2</filter-name>
   <url-pattern>/*</url-pattern>
  </filter-mapping>
  
- <!-- 启动 Spring Bean 工厂的监听器 -->
  <listener>
   <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
  </listener>
