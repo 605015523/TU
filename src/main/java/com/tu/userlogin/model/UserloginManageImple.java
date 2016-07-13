@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,17 +31,18 @@ public class UserloginManageImple extends Observable implements
 		ArrayList<Userlogin> knowledgeadministratorPOs = new ArrayList<Userlogin>();
 		knowledgeadministratorPOs = (ArrayList) userloginDAO.findAll();
 		for (int i = 0; i < knowledgeadministratorPOs.size(); i++) {
-			Userlogin oneKnowledgeadministratorPO = new Userlogin();
-			oneKnowledgeadministratorPO = knowledgeadministratorPOs.get(i);
+			Userlogin oneKnowledgeadministratorPO = knowledgeadministratorPOs.get(i);
 			UserloginVO oneKnowledgeadministratorVO = new UserloginVO();
 			try {
-				BeanUtils.copyProperties(oneKnowledgeadministratorVO,
+				PropertyUtils.copyProperties(oneKnowledgeadministratorVO,
 						oneKnowledgeadministratorPO);
 				knowledgeadministratorVOs.add(oneKnowledgeadministratorVO);
 			} catch (IllegalAccessException e) {
 				LOG.error("出现了IllegalAccessException异常");
 			} catch (InvocationTargetException e) {
 				LOG.error("在出现了InvocationTargetException异常");
+			} catch (NoSuchMethodException e) {
+				LOG.error("Method not found" + e.getMessage());
 			}
 		}
 		return knowledgeadministratorVOs;
@@ -52,14 +54,16 @@ public class UserloginManageImple extends Observable implements
 		userInfoPO = userloginDAO.findById(userId);
 		UserloginVO userInfoVO = new UserloginVO();
 		try {
-			BeanUtils.copyProperties(userInfoVO, userInfoPO);
+			PropertyUtils.copyProperties(userInfoVO, userInfoPO);
 		} catch (IllegalAccessException e) {
 			LOG.error("出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
 			LOG.error("在出现了InvocationTargetException异常");
+		} catch (NoSuchMethodException e) {
+			LOG.error("Method not found" + e.getMessage());
 		}
+		
 		return userInfoVO;
-
 	}
 
 	// 更新用户spending
