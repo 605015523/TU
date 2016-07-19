@@ -11,7 +11,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	private static final Log LOG = LogFactory.getLog(UserloginDAO.class);
 	// property constants
 	public static final String USER_ID = "user_id";
-	public static final String USER_NAME = "user_name";
+	public static final String USER_NAME = "userName";
 	public static final String USER_PASSWORD = "user_password";
 	public static final String USER_ROLE = "user_role";
 	public static final String USER_DEPT = "user_dept";
@@ -61,7 +61,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public List findByProperty(String propertyName, Object value) {
+	public List<Userlogin> findByProperty(String propertyName, Object value) {
 		LOG.debug("finding Userlogin instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
@@ -74,23 +74,24 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public List findByUserName(Object userName) {
-		return findByProperty(USER_NAME, userName);
+	public Userlogin findByUserName(Object userName) {
+		List<Userlogin> users = findByProperty(USER_NAME, userName);
+		if (users.size() > 0) {
+			return users.get(0);
+		} else {
+			return null;
+		}
 	}
-
-	public List findByUserPassword(Object userPassword) {
-		return findByProperty(USER_PASSWORD, userPassword);
-	}
-
-	public List findByUserRole(Object userRole) {
+	
+	public List<Userlogin> findByUserRole(Object userRole) {
 		return findByProperty(USER_ROLE, userRole);
 	}
 
-	public List findByUserDept(Object userDept) {
+	public List<Userlogin> findByUserDept(Object userDept) {
 		return findByProperty(USER_DEPT, userDept);
 	}
 
-	public List findAll() {
+	public List<Userlogin> findAll() {
 		LOG.debug("finding all Userlogin instances");
 		try {
 			String queryString = "from Userlogin";

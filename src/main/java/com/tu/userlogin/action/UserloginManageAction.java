@@ -1,4 +1,4 @@
-package com.tu.userlogin.struts2action;
+package com.tu.userlogin.action;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.tu.activities.dao.ActivitiesConstant;
@@ -45,7 +47,6 @@ public class UserloginManageAction extends ActionSupport {
 
 	private Integer userId;
 	private String userName;
-	private String userPassword;
 	private Integer userRole;
 	private List<String> groupName;
 	private String userDept;
@@ -62,7 +63,6 @@ public class UserloginManageAction extends ActionSupport {
 	public void initUserlogin() {
 		userId = null;
 		userName = null;
-		userPassword = null;
 		userRole = null;
 		userDept = null;
 		in_date = null;
@@ -149,13 +149,10 @@ public class UserloginManageAction extends ActionSupport {
 		ArrayList<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
 		boolean loginSuccess = true;
+		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
 		for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
-			if (userName.equals(knowledgeadministratorVOs.get(i).getUserName())
-					&& userPassword.equals(knowledgeadministratorVOs.get(i)
-							.getUserPassword())) {
-
-				userPassword = knowledgeadministratorVOs.get(i)
-						.getUserPassword();
+			if (user.getUsername().equals(knowledgeadministratorVOs.get(i).getUserName())) {
 				userName = knowledgeadministratorVOs.get(i).getUserName();
 				userId = knowledgeadministratorVOs.get(i).getUserId();
 				userRole = knowledgeadministratorVOs.get(i).getUserRole();
@@ -222,7 +219,7 @@ public class UserloginManageAction extends ActionSupport {
 				if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 					Calendar calendar = new GregorianCalendar();
 					calendar.setTime(date);
-					calendar.add(calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
+					calendar.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
 													// 所以对比过期时间时将今天的日期往后推一天
 					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
 					if (oneAct.getActDate().before(date)) {
@@ -343,14 +340,6 @@ public class UserloginManageAction extends ActionSupport {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-
-	public String getUserPassword() {
-		return this.userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
 	}
 
 	public Integer getUserRole() {

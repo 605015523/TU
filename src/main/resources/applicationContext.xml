@@ -53,104 +53,50 @@
 	<!-- 声明一个 Hibernate 3 的 事务管理器供代理类自动管理事务用 -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<!-- 控制层Bean定义 -->
 	<bean id="UserloginManageActionBean" scope="prototype"
-		class="com.tu.userlogin.struts2action.UserloginManageAction">
-		<property name="userloginManageBean">
-			<ref bean="UserloginManageBean"></ref>
-		</property>
-		<property name="userviewBean">
-			<ref bean="UserviewBean"></ref>
-		</property>
-		<property name="leaderviewBean">
-			<ref bean="LeaderviewBean"></ref>
-		</property>
-		<property name="actsBean">
-			<ref bean="ActsBean"></ref>
-		</property>
-		<property name="groupBean">
-			<ref bean="GroupBean"></ref>
-		</property>
-		<property name="msgBean">
-			<ref bean="MsgBean"></ref>
-		</property>	
-		<property name="user_msgBean">
-			<ref bean="User_msgBean"></ref>
-		</property>
-		<property name="user_groupBean">
-			<ref bean="User_groupBean"></ref>
-		</property>
-
+		class="com.tu.userlogin.action.UserloginManageAction">
+		<property name="userloginManageBean" ref="UserloginManageBean"/>
+		<property name="userviewBean" ref="UserviewBean"/>
+		<property name="leaderviewBean" ref="LeaderviewBean"/>
+		<property name="actsBean" ref="ActsBean"/>
+		<property name="groupBean" ref="GroupBean"/>
+		<property name="msgBean" ref="MsgBean"/>
+		<property name="user_msgBean" ref="User_msgBean"/>
+		<property name="user_groupBean" ref="User_groupBean"/>
 	</bean>
 
 	<bean id="UserviewActionBean" scope="prototype"
 		class="com.tu.userview.action.UserviewAction">
-		<property name="userviewBean">
-			<ref bean="UserviewBean"></ref>
-		</property>
-		<property name="userloginManageBean">
-			<ref bean="UserloginManageBean"></ref>
-		</property>
-		<property name="user_actBean">
-			<ref bean="User_actBean"></ref>
-		</property>
-		<property name="actsBean">
-			<ref bean="ActsBean"></ref>
-		</property>
-		<property name="msgBean">
-			<ref bean="MsgBean"></ref>
-		</property>		
-		<property name="user_msgBean">
-			<ref bean="User_msgBean"></ref>
-		</property>
+		<property name="userviewBean" ref="UserviewBean"/>
+		<property name="userloginManageBean" ref="UserloginManageBean"/>
+		<property name="user_actBean" ref="User_actBean"/>
+		<property name="actsBean" ref="ActsBean"/>
+		<property name="msgBean" ref="MsgBean"/>
+		<property name="user_msgBean" ref="User_msgBean"/>
 	</bean>
 
 	<bean id="LeaderviewActionBean" scope="prototype"
 		class="com.tu.leaderview.action.LeaderviewAction">
-		<property name="leaderviewBean">
-			<ref bean="LeaderviewBean"></ref>
-		</property>
-		<property name="user_groupBean">
-			<ref bean="User_groupBean"></ref>
-		</property>
+		<property name="leaderviewBean" ref="LeaderviewBean"/>
+		<property name="user_groupBean" ref="User_groupBean"/>
 		
-		<property name="actsBean">
-			<ref bean="ActsBean"></ref>
-		</property>
-		<property name="msgBean">
-			<ref bean="MsgBean"></ref>
-		</property>
-		<property name="user_msgBean">
-			<ref bean="User_msgBean"></ref>
-		</property>
-		<property name="user_actBean">
-			<ref bean="User_actBean"></ref>
-		</property>
+		<property name="actsBean" ref="ActsBean"/>
+		<property name="msgBean" ref="MsgBean"/>
+		<property name="user_msgBean" ref="User_msgBean"/>
+		<property name="user_actBean" ref="User_actBean"/>
 	</bean>
 	
 	<bean id="AccountingviewActionBean" scope="prototype"
 		class="com.tu.accountingview.action.AccountingviewAction">
-		<property name="accountingviewBean">
-			<ref bean="AccountingviewBean"></ref>
-		</property>
-		<property name="userloginManageBean">
-			<ref bean="UserloginManageBean"></ref>
-		</property>
-		<property name="groupBean">
-			<ref bean="GroupBean"></ref>
-		</property>
-		<property name="user_groupBean">
-			<ref bean="User_groupBean"></ref>
-		</property>
-		<property name="actsBean">
-			<ref bean="ActsBean"></ref>
-		</property>
-		
+		<property name="accountingviewBean" ref="AccountingviewBean"/>
+		<property name="userloginManageBean" ref="UserloginManageBean"/>
+		<property name="groupBean" ref="GroupBean"/>
+		<property name="user_groupBean" ref="User_groupBean"/>
+		<property name="actsBean" ref="ActsBean"/>
 	</bean>
 
 	<!-- 服务层Bean定义 -->
@@ -158,102 +104,56 @@
 
 
 	<bean id="UserloginManageBean" class="com.tu.userlogin.model.UserloginManageImple">
-		<property name="userloginDAO">
-			<ref bean="UserloginDAO"></ref>
-		</property>
+		<property name="userloginDAO" ref="UserloginDAO"/>
 	</bean>
 
 	<bean id="UserviewBean" class="com.tu.userview.model.UserviewImple">
-		<property name="userloginDAO">
-			<ref bean="UserloginDAO"></ref>
-		</property>
-		<property name="groupDAO">
-			<ref bean="GroupDAO"></ref>
-		</property>
-		<property name="user_groupDAO">
-			<ref bean="User_groupDAO"></ref>
-		</property>
-		<property name="user_actDAO">
-			<ref bean="User_actDAO"></ref>
-		</property>
-		<property name="actsDAO">
-			<ref bean="ActsDAO"></ref>
-		</property>
-		<property name="msgDAO">
-			<ref bean="MsgDAO"></ref>
-		</property>
-		<property name="user_msgDAO">
-			<ref bean="User_msgDAO"></ref>
-		</property>
+		<property name="userloginDAO" ref="UserloginDAO"/>
+		<property name="groupDAO" ref="GroupDAO"/>
+		<property name="user_groupDAO" ref="User_groupDAO"/>
+		<property name="user_actDAO" ref="User_actDAO"/>
+		<property name="actsDAO" ref="ActsDAO"/>
+		<property name="msgDAO" ref="MsgDAO"/>
+		<property name="user_msgDAO" ref="User_msgDAO"/>
 	</bean>
 
 	<bean id="ActsBean" class="com.tu.activities.model.ActivitiesImple">
-		<property name="actsDAO">
-			<ref bean="ActsDAO"></ref>
-		</property>
+		<property name="actsDAO" ref="ActsDAO"/>
 	</bean>
 
 	<bean id="GroupBean" class="com.tu.group.model.GroupImple">
-		<property name="groupDAO">
-			<ref bean="GroupDAO"></ref>
-		</property>
+		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
 	<bean id="User_groupBean" class="com.tu.user_group.model.User_groupImple">
-		<property name="user_groupDAO">
-			<ref bean="User_groupDAO"></ref>
-		</property>
+		<property name="user_groupDAO" ref="User_groupDAO"/>
 	</bean>
 	
 	<bean id="User_actBean" class="com.tu.user_act.model.User_actImple">
-		<property name="user_actDAO">
-			<ref bean="User_actDAO"></ref>
-		</property>
+		<property name="user_actDAO" ref="User_actDAO"/>
 	</bean>
 
 	<bean id="LeaderviewBean" class="com.tu.leaderview.model.LeaderviewImple">
-		<property name="userloginDAO">
-			<ref bean="UserloginDAO"></ref>
-		</property>
-		<property name="groupDAO">
-			<ref bean="GroupDAO"></ref>
-		</property>
-		<property name="user_groupDAO">
-			<ref bean="User_groupDAO"></ref>
-		</property>
-		<property name="actsDAO">
-			<ref bean="ActsDAO"></ref>
-		</property>
-		<property name="user_actDAO">
-			<ref bean="User_actDAO"></ref>
-		</property>
+		<property name="userloginDAO" ref="UserloginDAO"/>
+		<property name="groupDAO" ref="GroupDAO"/>
+		<property name="user_groupDAO" ref="User_groupDAO"/>
+		<property name="actsDAO" ref="ActsDAO"/>
+		<property name="user_actDAO" ref="User_actDAO"/>
 	</bean>
 	
 	<bean id="AccountingviewBean" class="com.tu.accountingview.model.AccountingviewImple">
-		<property name="userloginDAO">
-			<ref bean="UserloginDAO"></ref>
-		</property>
-		<property name="actsDAO">
-			<ref bean="ActsDAO"></ref>
-		</property>
-		<property name="user_actDAO">
-			<ref bean="User_actDAO"></ref>
-		</property>
-		<property name="groupDAO">
-			<ref bean="GroupDAO"></ref>
-		</property>
+		<property name="userloginDAO" ref="UserloginDAO"/>
+		<property name="actsDAO" ref="ActsDAO"/>
+		<property name="user_actDAO" ref="User_actDAO"/>
+		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
 	<bean id="MsgBean" class="com.tu.messages.model.MessagesImple">
-		<property name="msgDAO">
-			<ref bean="MsgDAO"></ref>
-		</property>
+		<property name="msgDAO" ref="MsgDAO"/>
 	</bean>
 	
 	<bean id="User_msgBean" class="com.tu.user_msg.model.User_msgImple">
-		<property name="user_msgDAO">
-			<ref bean="User_msgDAO"></ref>
-		</property>
+		<property name="user_msgDAO" ref="User_msgDAO"/>
 	</bean>
 
 
@@ -262,51 +162,40 @@
 
 
 	<bean id="UserloginDAO" class="com.tu.userlogin.dao.UserloginDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<bean id="User_groupDAO" class="com.tu.user_group.dao.User_groupDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<bean id="GroupDAO" class="com.tu.group.dao.GroupDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<bean id="ActsDAO" class="com.tu.activities.dao.ActivitiesDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<bean id="User_actDAO" class="com.tu.user_act.dao.User_actDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
 	<bean id="MsgDAO" class="com.tu.messages.dao.MessagesDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
 	<bean id="User_msgDAO" class="com.tu.user_msg.dao.User_msgDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
 	<bean class="com.tu.util.FuzzyQueryDAO">
-		<property name="sessionFactory">
-			<ref bean="sessionFactory" />
-		</property>
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+	
+	
+	<bean id="myUserDetailsService" class="com.tu.userlogin.MyUserDetailsService">
+		<property name="userLoginDAO" ref="UserloginDAO"/>
 	</bean>
 
 
