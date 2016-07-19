@@ -310,10 +310,9 @@ public class LeaderviewAction extends ActionSupport {
 		}
 
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		// GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";

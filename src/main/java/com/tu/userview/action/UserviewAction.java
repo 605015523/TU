@@ -123,10 +123,9 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有参与过的活动
 	public String doshowActs() {
 		initServletContextObject();
-		List<UseractsVO> useractsVO = new ArrayList<UseractsVO>();
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer year = Integer.valueOf(request.getParameter("year"));
-		useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
 		session.setAttribute("thisyear", year);
 		return "showActs";
@@ -153,9 +152,8 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有messages
 	public String doshowMessages() {
 		initServletContextObject();
-		List<User_msgVO> messages = new ArrayList<User_msgVO>();
 		Integer userId = (Integer) session.getAttribute("userId");
-		messages = userviewBean.dogetMessages(userId);
+		List<User_msgVO> messages = userviewBean.dogetMessages(userId);
 		List<User_msgVO> overmessages = new ArrayList<User_msgVO>();
 		List<User_msgVO> inmessages = new ArrayList<User_msgVO>();
 
@@ -177,8 +175,7 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有messages的细节
 	public String doshowMsgDetails() {
 		initServletContextObject();
-		List<User_msgVO> messages = new ArrayList<User_msgVO>();
-		messages = (List<User_msgVO>) session.getAttribute("inmessages");
+		List<User_msgVO> messages = (List<User_msgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
@@ -216,8 +213,7 @@ public class UserviewAction extends ActionSupport {
 	// 跳转到参与某个活动的界面
 	public String doInAct() {
 		initServletContextObject();
-		List<User_msgVO> messages = new ArrayList<User_msgVO>();
-		messages = (List<User_msgVO>) session.getAttribute("inmessages");
+		List<User_msgVO> messages = (List<User_msgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
@@ -249,12 +245,11 @@ public class UserviewAction extends ActionSupport {
 		}
 
 		initServletContextObject();
-		List<UseractsVO> useractsVO = new ArrayList<UseractsVO>();
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
 		LOG.info("the year in action is:" + year);
 		LOG.info("the userId in action is:" + userId);
-		useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 
 		for (int i = 0; i < useractsVO.size(); i++) {
 			LOG.info("the act" + useractsVO.get(i).getActName()
@@ -307,10 +302,9 @@ public class UserviewAction extends ActionSupport {
 		}
 
 		initServletContextObject();
-		List<UseractsVO> useractsVO = new ArrayList<UseractsVO>();
 		UserviewVO userview = (UserviewVO) session.getAttribute("userview");
 		Integer year = (Integer) session.getAttribute("thisyear");
-		useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
 		return "showActs";
 	}

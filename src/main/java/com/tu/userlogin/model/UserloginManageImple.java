@@ -29,8 +29,7 @@ public class UserloginManageImple extends Observable implements
 	// 获取所有用户的登录信息
 	public List<UserloginVO> doGetAllUserlogin() {
 		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
-		List<Userlogin> knowledgeadministratorPOs = new ArrayList<Userlogin>();
-		knowledgeadministratorPOs = userloginDAO.findAll();
+		List<Userlogin> knowledgeadministratorPOs = userloginDAO.findAll();
 		for (int i = 0; i < knowledgeadministratorPOs.size(); i++) {
 			Userlogin oneKnowledgeadministratorPO = knowledgeadministratorPOs.get(i);
 			UserloginVO oneKnowledgeadministratorVO = new UserloginVO();

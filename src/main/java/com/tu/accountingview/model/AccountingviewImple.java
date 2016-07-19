@@ -61,8 +61,7 @@ public class AccountingviewImple extends Observable implements
 	// 通过选择year的方式显示所有用户这一年的活动参与情况的实现细节
 	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
-		List<Activity> allacts = new ArrayList<Activity>();
-		allacts = actsDAO.findAll();
+		List<Activity> allacts = actsDAO.findAll();
 		List<Activity> validateacts = new ArrayList<Activity>();
 
 		// 获取所有以及被validate的活动
@@ -78,12 +77,11 @@ public class AccountingviewImple extends Observable implements
 		List<Group> groups = groupDAO.findAll();
 
 		// 获取所有用户，并且遍历所有用户活动参与情况
-		for (int i = 0; i < allUser.size(); i++) {
+		for (Userlogin oneuser : allUser) {
 			UserGroupCostVO oneUserGroupCostVO = new UserGroupCostVO();
-			Integer userId = allUser.get(i).getUserId();
-			Userlogin oneuser = userloginDAO.findById(userId);
+			Integer userId = oneuser.getUserId();
 			oneUserGroupCostVO.setUserId(userId);
-			oneUserGroupCostVO.setUserName(allUser.get(i).getUserName());
+			oneUserGroupCostVO.setUserName(oneuser.getUserName());
 			List<GroupCostVO> allGroupCost = new ArrayList<GroupCostVO>();
 			
 			for (int j = 0; j < groups.size(); j++) {

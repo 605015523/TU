@@ -41,7 +41,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 				BeanUtils.copyProperties(oneactivitiesVO, oneactivitiesPO);
 				activitiesVOs.add(oneactivitiesVO);
 			} catch (IllegalAccessException e) {
-				LOG.error(" there is a IllegalAccessException");
+				LOG.error("there is a IllegalAccessException");
 			} catch (InvocationTargetException e) {
 				LOG.error("there is a InvocationTargetException");
 			}

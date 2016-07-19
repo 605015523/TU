@@ -146,8 +146,7 @@ public class UserloginManageAction extends ActionSupport {
 
 		// 用户登录验证模块
 		initServletContextObject();
-		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
-		knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
+		List<UserloginVO> knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
 		boolean loginSuccess = true;
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
@@ -168,8 +167,7 @@ public class UserloginManageAction extends ActionSupport {
 
 			// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
 			initServletContextObject();
-			List<ActivitiesVO> actVOs = new ArrayList<ActivitiesVO>();
-			actVOs = actsBean.doGetAllActivity();
+			List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
 			List<Integer> years = new ArrayList<Integer>();
 			for (int i = 0; i < actVOs.size(); i++) {
 				Calendar cal = Calendar.getInstance();
@@ -231,8 +229,7 @@ public class UserloginManageAction extends ActionSupport {
 			}
 
 			int newMsg = 0;
-			List<User_msg> user_msgVOs = new ArrayList<User_msg>();
-			user_msgVOs = user_msgBean.doGetUserMsg(userId);
+			List<User_msg> user_msgVOs = user_msgBean.doGetUserMsg(userId);
 			for (int i = 0; i < user_msgVOs.size(); i++) {
 				MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVOs.get(i)
 						.getMsgId());

@@ -1,7 +1,6 @@
 package com.tu.user_msg.model;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -61,9 +60,7 @@ public class User_msgImple extends Observable implements User_msgInterface {
 
 	// 获取所有用户的msg
 	public List<User_msg> doGetUserMsg(Integer userId) {
-		List<User_msg> user_msgVO = new ArrayList<User_msg>();
-		user_msgVO = user_msgDAO.findMsgByUserId(userId);
-		return user_msgVO;
+		return user_msgDAO.findMsgByUserId(userId);
 	}
 
 	// 通过userId和msgId获取一个User_msg对象

@@ -106,8 +106,7 @@ public class AccountingviewAction extends ActionSupport {
 	// 获取所有需要被审批的活动
 	public String doGetAllCheckAct() {
 		initServletContextObject();
-		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
-		actsVO = accountingviewBean.doGetAllCheckValidateActs();
+		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
 		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("acts", actsVO);
 
@@ -167,8 +166,7 @@ public class AccountingviewAction extends ActionSupport {
 
 		// 将显示所有活动的页面更新
 		initServletContextObject();
-		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
-		actsVO = accountingviewBean.doGetAllCheckValidateActs();
+		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
 		session.setAttribute("acts", actsVO);
 		return "doGetAllAct";
 
@@ -212,8 +210,7 @@ public class AccountingviewAction extends ActionSupport {
 
 		// 将显示所有活动的页面更新
 		initServletContextObject();
-		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
-		actsVO = accountingviewBean.doGetAllCheckValidateActs();
+		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
 		session.setAttribute("acts", actsVO);
 		return "doGetAllAct";
 	}

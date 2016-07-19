@@ -101,7 +101,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	// 获取主界面所有用户信息
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
-		Userlogin oneuserloginPO = new Userlogin();
+		Userlogin oneuserloginPO = null;
 		List<User_group> oneUser_groupPO = new ArrayList<User_group>();
 		List<String> onegroupPO = new ArrayList<String>();
 		UserviewVO oneuserviewPO = new UserviewVO();
@@ -230,8 +230,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	// 获取用户的所有messages
 	public List<User_msgVO> dogetMessages(Integer userId) {
 		List<User_msgVO> user_msgsVO = new ArrayList<User_msgVO>();
-		List<User_msg> user_msg = new ArrayList<User_msg>();
-		user_msg = (ArrayList<User_msg>) user_msgDAO.findMsgByUserId(userId);
+		List<User_msg> user_msg = user_msgDAO.findMsgByUserId(userId);
+		
 		for (int i = 0; i < user_msg.size(); i++) {
 			Integer oneMsgId = ((User_msg) user_msg.get(i)).getMsgId();
 			Messages oneMessage = msgDAO.findById(oneMsgId);
