@@ -3,7 +3,6 @@ package com.tu.user_act.dao;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_actDAO extends HibernateDaoSupport implements
