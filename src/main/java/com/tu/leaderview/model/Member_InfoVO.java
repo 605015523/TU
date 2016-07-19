@@ -1,17 +1,17 @@
 package com.tu.leaderview.model;
 
 public class Member_InfoVO implements java.io.Serializable {
+	private static final long serialVersionUID = 827937561865560546L;
+	
 	// Fields
 	private Integer userId;
 	private String userName;
 	private String userDept;
 
 	public Member_InfoVO() {
-
 		userId = null;
 		userName = null;
 		userDept = null;
-
 	}
 
 	public Integer getUserId() {

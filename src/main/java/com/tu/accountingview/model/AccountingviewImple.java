@@ -212,8 +212,7 @@ public class AccountingviewImple extends Observable implements
 			oneMemberIn.setRemark(useractPO.get(j).getRemark());
 			sum += useractPO.get(j).getConsumption();
 			participatorNO += useractPO.get(j).getParticipatorNO();
-			Userlogin userPO = new Userlogin();
-			userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
 			oneMemberIn.setUserName(userPO.getUserName());
 			oneMemberIn.setUserDept(userPO.getUserDept());
 			memberInVO.add(oneMemberIn);

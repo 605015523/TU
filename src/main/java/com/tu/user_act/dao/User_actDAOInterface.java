@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface User_actDAOInterface {
 
-	List findByUserId(Integer userId);
+	List<User_act> findByUserId(Integer userId);
 
 	List<User_act> findByActId(Integer actId);
 

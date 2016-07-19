@@ -2,7 +2,9 @@ package com.tu.user_group.dao;
 
 public class User_group implements java.io.Serializable {
 
-	// Filed
+	private static final long serialVersionUID = 5624706764022407140L;
+	
+	// Fields
 	private Integer userId;
 	private Integer groupId;
 

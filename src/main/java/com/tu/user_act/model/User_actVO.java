@@ -2,7 +2,9 @@ package com.tu.user_act.model;
 
 public class User_actVO implements java.io.Serializable {
 
-	// Filed
+	private static final long serialVersionUID = 983685594099729166L;
+	
+	// Fields
 	private Integer actId;
 	private Integer userId;
 	private Integer participatorNO;

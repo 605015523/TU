@@ -2,7 +2,9 @@ package com.tu.user_group.model;
 
 public class User_groupVO implements java.io.Serializable {
 
-	// Filed
+	private static final long serialVersionUID = -6214972815023614321L;
+	
+	// Fields
 	private Integer userId;
 	private Integer groupId;
 

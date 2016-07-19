@@ -6,7 +6,7 @@ public interface User_groupDAOInterface {
 
 	public void save(User_group oneUser_groupPO);
 
-	public List findByUserId(Integer user_id);
+	public List<User_group> findByUserId(Integer user_id);
 
 	public List<User_group> findByGroupId(Integer groupId);
 

@@ -117,8 +117,7 @@ public class AccountingviewAction extends ActionSupport {
 	// 获取某个需要被check活动的所有细节
 	public String doshowCheckDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = (List<GroupActVO>) session.getAttribute("acts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();
@@ -223,8 +222,7 @@ public class AccountingviewAction extends ActionSupport {
 	public String doshowAllActsByYear() {
 		initServletContextObject();
 		Integer year = Integer.parseInt(request.getParameter("year"));
-		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
-		allUserGroupCostVO = accountingviewBean.doGetAllActsByYear(year);
+		List<UserGroupCostVO> allUserGroupCostVO = accountingviewBean.doGetAllActsByYear(year);
 		session.setAttribute("allUserGroupCost", allUserGroupCostVO);
 
 		return "doShowActByYear";
@@ -233,10 +231,9 @@ public class AccountingviewAction extends ActionSupport {
 	// 通过选择group的方式显示所有group这一年的活动参与情况（仅显示已经被validate的活动）
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		String groupName = request.getParameter("groupname");
 		GroupVO group = groupBean.dogetOneGroupByName(groupName);
-		groupactsVO = accountingviewBean.doGetAllActsByGroupId(group
+		List<GroupActVO> groupactsVO = accountingviewBean.doGetAllActsByGroupId(group
 				.getGroupId());
 		session.setAttribute("groupacts", groupactsVO);
 
@@ -247,8 +244,7 @@ public class AccountingviewAction extends ActionSupport {
 	// 显示group中活动的细节
 	public String doshowActDetailsInGroup() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();

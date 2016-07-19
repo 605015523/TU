@@ -2,6 +2,8 @@ package com.tu.user_msg.dao;
 
 public class User_msg implements java.io.Serializable {
 
+	private static final long serialVersionUID = 2496672216523471838L;
+	
 	private Integer userId;
 	private Integer msgId;
 	private String readState;

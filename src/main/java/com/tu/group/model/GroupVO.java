@@ -2,6 +2,8 @@ package com.tu.group.model;
 
 public class GroupVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = 785678325425265139L;
+	
 	private Integer groupId;
 	private String groupName;
 	private Integer groupLeaderId;

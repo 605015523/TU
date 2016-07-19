@@ -32,11 +32,10 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	// 获取所有活动
 	public List<ActivitiesVO> doGetAllActivity() {
 		List<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
-		List<Activity> activitiesPOs = new ArrayList<Activity>();
-		activitiesPOs = actsDAO.findAll();
+		List<Activity> activitiesPOs = actsDAO.findAll();
+		
 		for (int i = 0; i < activitiesPOs.size(); i++) {
-			Activity oneactivitiesPO = new Activity();
-			oneactivitiesPO = activitiesPOs.get(i);
+			Activity oneactivitiesPO = activitiesPOs.get(i);
 			ActivitiesVO oneactivitiesVO = new ActivitiesVO();
 			try {
 				BeanUtils.copyProperties(oneactivitiesVO, oneactivitiesPO);
@@ -53,13 +52,12 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	// 通过actId获取一个活动
 	public ActivitiesVO doGetOneActById(Integer actId) {
 		ActivitiesVO actVO = new ActivitiesVO();
-		Activity actPO = new Activity();
-		actPO = actsDAO.findById(actId);
+		Activity actPO = actsDAO.findById(actId);
 		try {
 			BeanUtils.copyProperties(actVO, actPO);
 
 		} catch (IllegalAccessException e) {
-			LOG.error(" there is a IllegalAccessException");
+			LOG.error("there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
 			LOG.error("there is a InvocationTargetException");
 		}
@@ -90,9 +88,8 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 更新一个活动
 	public String doUpdateOneAct(ActivitiesVO oneActVO) {
-		Activity oneActPO = new Activity();
 		Integer actId = oneActVO.getActId();
-		oneActPO = actsDAO.findById(actId);
+		Activity oneActPO = actsDAO.findById(actId);
 		String OkOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneActPO, oneActVO);

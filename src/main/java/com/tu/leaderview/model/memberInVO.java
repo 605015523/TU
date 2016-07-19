@@ -2,6 +2,8 @@ package com.tu.leaderview.model;
 
 public class memberInVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = -3138622175864772428L;
+	
 	private Integer userId;
 	private String userName;
 	private String userDept;

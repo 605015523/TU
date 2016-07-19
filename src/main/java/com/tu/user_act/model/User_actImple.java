@@ -29,8 +29,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	// 通过userId和ActId来获取特定user_act对象
 	public User_actVO doGetOneActById(Integer userId, Integer actId) {
 		User_actVO user_actVO = new User_actVO();
-		User_act user_actPO = new User_act();
-		user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		User_act user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		try {
 			BeanUtils.copyProperties(user_actVO, user_actPO);
 
@@ -68,8 +67,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	// 删除一个user_act对象
 	public String doDeleteOneUser_act(Integer user_id, Integer act_id) {
 		String OkOrNot = null;
-		User_act user_actPO = new User_act();
-		user_actPO = user_actDAO.findByUserIdAndActId(user_id, act_id);
+		User_act user_actPO = user_actDAO.findByUserIdAndActId(user_id, act_id);
 		try {
 			if (user_actDAO.findByUserIdAndActId(user_id, act_id) != null) {
 				user_actDAO.delete(user_actPO);
@@ -87,10 +85,9 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	// 更新一个user_act对象
 	public void doUpdateOneUser_act(User_actVO user_actVO) {
-		User_act user_actPO = new User_act();
 		Integer actId = user_actVO.getActId();
 		Integer userId = user_actVO.getUserId();
-		user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		User_act user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		String OkOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(user_actPO, user_actVO);

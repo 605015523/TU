@@ -3,7 +3,6 @@ package com.tu.user_group.dao;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_groupDAO extends HibernateDaoSupport implements
@@ -29,7 +28,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId找到所有user_group对象
-	public List findByUserId(Integer user_id) {
+	public List<User_group> findByUserId(Integer user_id) {
 		try {
 
 			return getHibernateTemplate()
@@ -42,7 +41,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId找到所有user_group对象
-	public List findByGroupId(Integer group_id) {
+	public List<User_group> findByGroupId(Integer group_id) {
 		try {
 
 			return getHibernateTemplate().find(

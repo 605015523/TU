@@ -1,6 +1,9 @@
 package com.tu.userview.model;
 
 public class User_msgVO implements java.io.Serializable {
+	
+	private static final long serialVersionUID = -5706659091511226929L;
+	
 	// Fields
 	private Integer msgId;
 	private Integer actId;

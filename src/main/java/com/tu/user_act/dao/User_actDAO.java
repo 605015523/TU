@@ -21,7 +21,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过用户Id获取所有user_act对象，这样可以获取所有用户参与的活动
-	public List findByUserId(java.lang.Integer user_id) {
+	public List<User_act> findByUserId(java.lang.Integer user_id) {
 		try {
 
 			return getHibernateTemplate().find(
@@ -33,7 +33,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过actId获取所有user_act对象，这样可以获取所有参与该活动的用户
-	public List findByActId(java.lang.Integer act_id) {
+	public List<User_act> findByActId(java.lang.Integer act_id) {
 		try {
 
 			return getHibernateTemplate().find(

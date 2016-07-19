@@ -31,8 +31,7 @@ public class GroupImple extends Observable implements GroupInterface {
 
 	public GroupVO dogetOneGroup(Integer userId) {
 		GroupVO groupVO = new GroupVO();
-		Group groupPO = new Group();
-		groupPO = groupDAO.findByUserId(userId);
+		Group groupPO = groupDAO.findByUserId(userId);
 		try {
 			BeanUtils.copyProperties(groupVO, groupPO);
 
@@ -47,8 +46,7 @@ public class GroupImple extends Observable implements GroupInterface {
 
 	public GroupVO dogetOneGroupByName(String groupName) {
 		GroupVO groupVO = new GroupVO();
-		Group groupPO = new Group();
-		groupPO = groupDAO.findByGroupName(groupName);
+		Group groupPO = groupDAO.findByGroupName(groupName);
 		try {
 			BeanUtils.copyProperties(groupVO, groupPO);
 

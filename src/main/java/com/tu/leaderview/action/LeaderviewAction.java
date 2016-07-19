@@ -153,8 +153,7 @@ public class LeaderviewAction extends ActionSupport {
 		}
 
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
 				.getGroupId());
 		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
@@ -165,10 +164,9 @@ public class LeaderviewAction extends ActionSupport {
 	// 显示该小组所有活动，将活动中的所有值传入到view_act.jsp界面
 	public String doGetAllGroupAct() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 
@@ -178,8 +176,7 @@ public class LeaderviewAction extends ActionSupport {
 	// 调用时跳转到选定活动的细节页面，将该活动中的所有值传入view_act_details.jsp页面
 	public String doshowActDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();
@@ -196,8 +193,7 @@ public class LeaderviewAction extends ActionSupport {
 	// 进入活动修改界面
 	public String doEditAct() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();
@@ -213,8 +209,7 @@ public class LeaderviewAction extends ActionSupport {
 	// 活动结束时，编辑这个活动
 	public String doEditActDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
-		groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();
@@ -230,9 +225,8 @@ public class LeaderviewAction extends ActionSupport {
 	// 更新一个活动的细节
 	public String doUpdateActDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		Integer updateActId = (Integer) session.getAttribute("updateActId");
-		groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
+		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		for (int i = 0; i < groupactsVO.size(); i++) {
 			int actId = groupactsVO.get(i).getActId();
 			if (updateActId == actId) {
@@ -358,8 +352,7 @@ public class LeaderviewAction extends ActionSupport {
 
 		// 将这个message存到数据库，并且发送给所有用户
 		initServletContextObject();
-		List<Integer> allMemberId = new ArrayList<Integer>();
-		allMemberId = (List<Integer>) session.getAttribute("allMemberId");
+		List<Integer> allMemberId = (List<Integer>) session.getAttribute("allMemberId");
 		try {
 			msgId = msgBean.doAddOneMsg(oneMsgVO);
 			sendMessage = user_msgBean.doSendMsg(msgId, allMemberId);
@@ -384,10 +377,9 @@ public class LeaderviewAction extends ActionSupport {
 		session.setAttribute("newMsg", newMsg);
 
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOG.error("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
@@ -410,10 +402,9 @@ public class LeaderviewAction extends ActionSupport {
 					+ e.toString();
 		}
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = new ArrayList<GroupActVO>();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}

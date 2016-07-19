@@ -66,9 +66,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 
 	// 通过groupId获取所有参加这个活动的user
 	public List<GroupActVO> doGetAllUserActsByGroupId(Integer groupId) {
-		List<Activity> acts = new ArrayList<Activity>();
-
-		acts = actsDAO.findByGroupId(groupId);
+		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
 		for (int i = 0; i < acts.size(); i++) {
@@ -103,8 +101,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 				oneMemberIn.setRemark(useractPO.get(j).getRemark());
 				sum += useractPO.get(j).getConsumption();
 				participatorNO += useractPO.get(j).getParticipatorNO();
-				Userlogin userPO = new Userlogin();
-				userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+				Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
 				oneMemberIn.setUserName(userPO.getUserName());
 				oneMemberIn.setUserDept(userPO.getUserDept());
 				memberInVO.add(oneMemberIn);

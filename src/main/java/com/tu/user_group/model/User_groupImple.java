@@ -6,12 +6,15 @@ import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.tu.user_group.dao.User_group;
 import com.tu.user_group.dao.User_groupDAOInterface;
 
 public class User_groupImple extends Observable implements User_groupInterface {
 
+	private static final Log LOG = LogFactory.getLog(User_groupImple.class);
 	private User_groupDAOInterface user_groupDAO = null;
 
 	public User_groupDAOInterface getUser_groupDAO() {
@@ -29,8 +32,7 @@ public class User_groupImple extends Observable implements User_groupInterface {
 	// 删除一个user_group对象
 	public String doDeleteOneUser_group(Integer member_id, Integer group_id) {
 		String OkOrNot = null;
-		User_group user_groupPO = new User_group();
-		user_groupPO = user_groupDAO
+		User_group user_groupPO = user_groupDAO
 				.findByGroupIdAndUserId(member_id, group_id);
 
 		try {
@@ -50,10 +52,9 @@ public class User_groupImple extends Observable implements User_groupInterface {
 
 	// 通过groupId获取某小组所有的成员的具体实现
 	public List<User_groupVO> doGetAllMembersId(Integer groupId) {
-		List<User_group> oneUser_groupPOs = new ArrayList<User_group>();
 		List<User_groupVO> oneUser_groupVOs = new ArrayList<User_groupVO>();
-
-		oneUser_groupPOs = user_groupDAO.findByGroupId(groupId);
+		List<User_group> oneUser_groupPOs = user_groupDAO.findByGroupId(groupId);
+		
 		for (int i = 0; i < oneUser_groupPOs.size(); i++) {
 			User_group oneUser_groupPO = oneUser_groupPOs.get(i);
 			User_groupVO oneUser_groupVO = new User_groupVO();
@@ -61,11 +62,9 @@ public class User_groupImple extends Observable implements User_groupInterface {
 				BeanUtils.copyProperties(oneUser_groupVO, oneUser_groupPO);
 				oneUser_groupVOs.add(oneUser_groupVO);
 			} catch (IllegalAccessException e) {
-				System.out
-						.println("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+				LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 			} catch (InvocationTargetException e) {
-				System.out
-						.println("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+				LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 			}
 
 		}

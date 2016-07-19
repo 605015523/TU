@@ -30,8 +30,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	// 通过messagesId获取该messages对象
 	public MessagesVO doGetOneMsgById(Integer msgId) {
 		MessagesVO oneMessagesVO = new MessagesVO();
-		Messages oneMessagesPO = new Messages();
-		oneMessagesPO = msgDAO.findById(msgId);
+		Messages oneMessagesPO = msgDAO.findById(msgId);
 		try {
 			BeanUtils.copyProperties(oneMessagesVO, oneMessagesPO);
 		} catch (IllegalAccessException e) {
