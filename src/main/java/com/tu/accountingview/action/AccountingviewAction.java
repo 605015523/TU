@@ -157,7 +157,7 @@ public class AccountingviewAction extends ActionSupport {
 
 		// 更新所有需要被check和validate的新消息的条数
 		int newCheck = 0;
-		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
+		List<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
 			if (allActs.get(i).getState().equals(ActivitiesConstant.STATE_DRAFT)
 					|| allActs.get(i).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
@@ -202,7 +202,7 @@ public class AccountingviewAction extends ActionSupport {
 
 		// 更新所有需要被check和validate的新消息的条数
 		int newCheck = 0;
-		ArrayList<ActivitiesVO> allActs = actsBean.doGetAllActivity();
+		List<ActivitiesVO> allActs = actsBean.doGetAllActivity();
 		for (int i = 0; i < allActs.size(); i++) {
 			if (allActs.get(i).getState().equals(ActivitiesConstant.STATE_DRAFT)
 					|| allActs.get(i).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {

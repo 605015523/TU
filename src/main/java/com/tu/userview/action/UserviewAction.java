@@ -135,7 +135,7 @@ public class UserviewAction extends ActionSupport {
 	// 显示选定的参与过的活动细节
 	public String doshowDetails() {
 		initServletContextObject();
-		ArrayList<UseractsVO> Useracts = (ArrayList<UseractsVO>) session
+		List<UseractsVO> Useracts = (List<UseractsVO>) session
 				.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		int year = Integer.parseInt(request.getParameter("actId"));
@@ -153,11 +153,11 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有messages
 	public String doshowMessages() {
 		initServletContextObject();
-		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
+		List<User_msgVO> messages = new ArrayList<User_msgVO>();
 		Integer userId = (Integer) session.getAttribute("userId");
 		messages = userviewBean.dogetMessages(userId);
-		ArrayList<User_msgVO> overmessages = new ArrayList<User_msgVO>();
-		ArrayList<User_msgVO> inmessages = new ArrayList<User_msgVO>();
+		List<User_msgVO> overmessages = new ArrayList<User_msgVO>();
+		List<User_msgVO> inmessages = new ArrayList<User_msgVO>();
 
 		for (int i = 0; i < messages.size(); i++) {
 			ActivitiesVO oneAct = new ActivitiesVO();
@@ -177,8 +177,8 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有messages的细节
 	public String doshowMsgDetails() {
 		initServletContextObject();
-		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
-		messages = (ArrayList<User_msgVO>) session.getAttribute("inmessages");
+		List<User_msgVO> messages = new ArrayList<User_msgVO>();
+		messages = (List<User_msgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
@@ -196,8 +196,8 @@ public class UserviewAction extends ActionSupport {
 			oneUser_Msg.setReadState("read");
 			user_msgBean.doUpdateOneUser_msg(oneUser_Msg);
 			int newMsg = 0;
-			ArrayList<User_msg> user_msgVOs = new ArrayList<User_msg>();
-			user_msgVOs = (ArrayList<User_msg>) user_msgBean
+			List<User_msg> user_msgVOs = new ArrayList<User_msg>();
+			user_msgVOs = (List<User_msg>) user_msgBean
 					.doGetUserMsg(userId);
 			for (int i = 0; i < user_msgVOs.size(); i++) {
 
@@ -216,8 +216,8 @@ public class UserviewAction extends ActionSupport {
 	// 跳转到参与某个活动的界面
 	public String doInAct() {
 		initServletContextObject();
-		ArrayList<User_msgVO> messages = new ArrayList<User_msgVO>();
-		messages = (ArrayList<User_msgVO>) session.getAttribute("inmessages");
+		List<User_msgVO> messages = new ArrayList<User_msgVO>();
+		messages = (List<User_msgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {

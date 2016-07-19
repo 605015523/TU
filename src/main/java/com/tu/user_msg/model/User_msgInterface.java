@@ -1,15 +1,14 @@
 package com.tu.user_msg.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.tu.user_msg.dao.User_msg;
 
 public interface User_msgInterface {
 
-	String doSendMsg(Integer msgId, ArrayList<Integer> alluserId);
+	String doSendMsg(Integer msgId, List<Integer> alluserId);
 
-	List doGetUserMsg(Integer userId);
+	List<User_msg> doGetUserMsg(Integer userId);
 
 	User_msg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId);
 

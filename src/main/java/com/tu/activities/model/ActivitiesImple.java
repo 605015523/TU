@@ -2,6 +2,7 @@ package com.tu.activities.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -29,10 +30,10 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 获取所有活动
-	public ArrayList<ActivitiesVO> doGetAllActivity() {
-		ArrayList<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
-		ArrayList<Activity> activitiesPOs = new ArrayList<Activity>();
-		activitiesPOs = (ArrayList) actsDAO.findAll();
+	public List<ActivitiesVO> doGetAllActivity() {
+		List<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
+		List<Activity> activitiesPOs = new ArrayList<Activity>();
+		activitiesPOs = actsDAO.findAll();
 		for (int i = 0; i < activitiesPOs.size(); i++) {
 			Activity oneactivitiesPO = new Activity();
 			oneactivitiesPO = activitiesPOs.get(i);

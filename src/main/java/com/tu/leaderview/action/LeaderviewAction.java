@@ -248,7 +248,7 @@ public class LeaderviewAction extends ActionSupport {
 					actsBean.doUpdateOneAct(oneActVO);
 				} catch (Exception e) {
 				}
-				ArrayList<memberInVO> MemberInVO = new ArrayList<memberInVO>();
+				List<memberInVO> MemberInVO = new ArrayList<memberInVO>();
 
 				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
 					memberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
@@ -358,8 +358,8 @@ public class LeaderviewAction extends ActionSupport {
 
 		// 将这个message存到数据库，并且发送给所有用户
 		initServletContextObject();
-		ArrayList<Integer> allMemberId = new ArrayList<Integer>();
-		allMemberId = (ArrayList<Integer>) session.getAttribute("allMemberId");
+		List<Integer> allMemberId = new ArrayList<Integer>();
+		allMemberId = (List<Integer>) session.getAttribute("allMemberId");
 		try {
 			msgId = msgBean.doAddOneMsg(oneMsgVO);
 			sendMessage = user_msgBean.doSendMsg(msgId, allMemberId);

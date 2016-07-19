@@ -46,10 +46,9 @@ public class User_msgImple extends Observable implements User_msgInterface {
 	}
 
 	// 发送一个msg
-	public String doSendMsg(Integer msgId, ArrayList<Integer> alluserId) {
+	public String doSendMsg(Integer msgId, List<Integer> alluserId) {
 		User_msg onemsgPO = new User_msg();
 		String sendMessage = null;
-		ArrayList<User_msg> user_msgVO = new ArrayList<User_msg>();
 		for (int i = 0; i < alluserId.size(); i++) {
 			User_msg oneUser_magVO = new User_msg();
 			oneUser_magVO.setUserId((Integer) alluserId.get(i));
@@ -61,8 +60,8 @@ public class User_msgImple extends Observable implements User_msgInterface {
 	}
 
 	// 获取所有用户的msg
-	public List doGetUserMsg(Integer userId) {
-		List user_msgVO = new ArrayList<User_msg>();
+	public List<User_msg> doGetUserMsg(Integer userId) {
+		List<User_msg> user_msgVO = new ArrayList<User_msg>();
 		user_msgVO = user_msgDAO.findMsgByUserId(userId);
 		return user_msgVO;
 	}
@@ -88,7 +87,7 @@ public class User_msgImple extends Observable implements User_msgInterface {
 					.println("there is a IllegalAccessException while copy user_msg in doUpdateOneUser_msg.");
 		} catch (InvocationTargetException e) {
 			System.out
-					.println("there is a InvocationTargetException while copy user_msg in doUpdateOneUser_msg");
+					.println("there is a InvocationTargetException while copy user_msg in doUpdateOneUser_msg.");
 		}
 		try {
 			user_msgDAO.merge(oneUser_msgPO);

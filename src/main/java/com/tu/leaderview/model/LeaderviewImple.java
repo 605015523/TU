@@ -91,7 +91,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsPO.setComment(acts.get(i).getComment());
 			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
 					.getActId());
-			ArrayList<memberInVO> memberInVO = new ArrayList<memberInVO>();
+			List<memberInVO> memberInVO = new ArrayList<memberInVO>();
 			float sum = 0;
 			Integer participatorNO = 0;
 			for (int j = 0; j < useractPO.size(); j++) {

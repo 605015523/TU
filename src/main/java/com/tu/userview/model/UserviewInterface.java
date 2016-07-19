@@ -1,6 +1,5 @@
 package com.tu.userview.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.tu.userlogin.model.UserloginVO;
@@ -12,7 +11,7 @@ public interface UserviewInterface {
 	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year);
 
-	public ArrayList<User_msgVO> dogetMessages(Integer userId);
+	public List<User_msgVO> dogetMessages(Integer userId);
 
 	public String doupdateOneuserInfo(UserloginVO userInfo);
 

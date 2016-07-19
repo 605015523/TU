@@ -6,6 +6,8 @@ import com.tu.leaderview.model.memberInVO;
 
 public class GroupActVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = -8307943479646017000L;
+	
 	private Integer actId;
 	private Integer groupId;
 	private String actName;
@@ -16,7 +18,7 @@ public class GroupActVO implements java.io.Serializable {
 	private String state;
 	private Float sum;
 	private Integer participatorNO;
-	private ArrayList<memberInVO> memberInVO;
+	private List<memberInVO> memberInVO;
 	private String comment;
 
 	// Constructors
@@ -108,11 +110,11 @@ public class GroupActVO implements java.io.Serializable {
 		this.daterange = daterange;
 	}
 
-	public ArrayList<memberInVO> getMemberInVO() {
+	public List<memberInVO> getMemberInVO() {
 		return memberInVO;
 	}
 
-	public void setMemberInVO(ArrayList<memberInVO> memberInVO) {
+	public void setMemberInVO(List<memberInVO> memberInVO) {
 		this.memberInVO = memberInVO;
 	}
 

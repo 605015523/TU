@@ -1,6 +1,6 @@
 package com.tu.activities.model;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ActivitiesInterface {
 
@@ -10,7 +10,7 @@ public interface ActivitiesInterface {
 
 	public ActivitiesVO doGetOneActById(Integer actId);
 
-	public ArrayList<ActivitiesVO> doGetAllActivity();
+	public List<ActivitiesVO> doGetAllActivity();
 
 	public String doUpdateOneAct(ActivitiesVO oneActVO);
 

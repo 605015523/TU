@@ -74,8 +74,8 @@ public class AccountingviewImple extends Observable implements
 				validateacts.add(allacts.get(i));
 			}
 		}
-		ArrayList<Userlogin> allUser = new ArrayList<Userlogin>();
-		allUser = (ArrayList) userloginDAO.findAll();
+		List<Userlogin> allUser = userloginDAO.findAll();
+		List<Group> groups = groupDAO.findAll();
 
 		// 获取所有用户，并且遍历所有用户活动参与情况
 		for (int i = 0; i < allUser.size(); i++) {
@@ -84,8 +84,8 @@ public class AccountingviewImple extends Observable implements
 			Userlogin oneuser = userloginDAO.findById(userId);
 			oneUserGroupCostVO.setUserId(userId);
 			oneUserGroupCostVO.setUserName(allUser.get(i).getUserName());
-			ArrayList<GroupCostVO> allGroupCost = new ArrayList<GroupCostVO>();
-			List<Group> groups = groupDAO.findAll();
+			List<GroupCostVO> allGroupCost = new ArrayList<GroupCostVO>();
+			
 			for (int j = 0; j < groups.size(); j++) {
 				GroupCostVO onegroupCostVO = new GroupCostVO();
 				onegroupCostVO.setGroupId(((Group) groups.get(j)).getGroupId());
@@ -129,8 +129,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 通过选择group的方式显示所有group这一年的活动参与情况的实现细节
 	public List<GroupActVO> doGetAllActsByGroupId(Integer groupId) {
-		List<Activity> acts = new ArrayList<Activity>();
-		acts = actsDAO.findByGroupId(groupId);
+		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
 		for (int i = 0; i < acts.size(); i++) {
@@ -152,7 +151,7 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setComment(acts.get(i).getComment());
 			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
 					.getActId());
-			ArrayList<memberInVO> memberInVO = new ArrayList<memberInVO>();
+			List<memberInVO> memberInVO = new ArrayList<memberInVO>();
 			float sum = 0;
 			Integer participatorNO = 0;
 			for (int j = 0; j < useractPO.size(); j++) {
@@ -185,8 +184,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 获取所有validate的活动的活动细节的具体实现
 	public GroupActVO doGetAllValidateDetails(Integer actId) {
-		Activity acts = new Activity();
-		acts = actsDAO.findById(actId);
+		Activity acts = actsDAO.findById(actId);
 		GroupActVO actVO = new GroupActVO();
 
 		actVO.setActId(acts.getActId());
@@ -203,7 +201,7 @@ public class AccountingviewImple extends Observable implements
 		actVO.setActDate(formatter.format(acts.getActDate()));
 		actVO.setComment(acts.getComment());
 		List<User_act> useractPO = user_actDAO.findByActId(acts.getActId());
-		ArrayList<memberInVO> memberInVO = new ArrayList<memberInVO>();
+		List<memberInVO> memberInVO = new ArrayList<memberInVO>();
 		float sum = 0;
 		Integer participatorNO = 0;
 		for (int j = 0; j < useractPO.size(); j++) {
@@ -229,8 +227,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 获取所有需要被check和validate的活动
 	public List<GroupActVO> doGetAllCheckValidateActs() {
-		List<Activity> acts = new ArrayList<Activity>();
-		acts = actsDAO.findAll();
+		List<Activity> acts = actsDAO.findAll();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
 		for (int i = 0; i < acts.size(); i++) {

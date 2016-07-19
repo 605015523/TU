@@ -4,12 +4,14 @@ import java.util.*;
 
 public class UserGroupCostVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = -2829103382200994409L;
+	
 	private Integer userId;
 	private String userName;
 	private Float sum;
 	private Float different;
 	private Float quota;
-	private ArrayList<GroupCostVO> groupCostVO;
+	private List<GroupCostVO> groupCostVO;
 
 	// Constructors
 	/** default constructor */
@@ -54,11 +56,11 @@ public class UserGroupCostVO implements java.io.Serializable {
 		this.different = different;
 	}
 
-	public ArrayList<GroupCostVO> getGroupCostVO() {
+	public List<GroupCostVO> getGroupCostVO() {
 		return groupCostVO;
 	}
 
-	public void setGroupCostVO(ArrayList<GroupCostVO> groupCostVO) {
+	public void setGroupCostVO(List<GroupCostVO> groupCostVO) {
 		this.groupCostVO = groupCostVO;
 	}
 

@@ -2,6 +2,7 @@ package com.tu.userlogin.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -26,10 +27,10 @@ public class UserloginManageImple extends Observable implements
 	}
 
 	// 获取所有用户的登录信息
-	public ArrayList<UserloginVO> doGetAllUserlogin() {
-		ArrayList<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
-		ArrayList<Userlogin> knowledgeadministratorPOs = new ArrayList<Userlogin>();
-		knowledgeadministratorPOs = (ArrayList) userloginDAO.findAll();
+	public List<UserloginVO> doGetAllUserlogin() {
+		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
+		List<Userlogin> knowledgeadministratorPOs = new ArrayList<Userlogin>();
+		knowledgeadministratorPOs = userloginDAO.findAll();
 		for (int i = 0; i < knowledgeadministratorPOs.size(); i++) {
 			Userlogin oneKnowledgeadministratorPO = knowledgeadministratorPOs.get(i);
 			UserloginVO oneKnowledgeadministratorVO = new UserloginVO();

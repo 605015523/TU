@@ -2,6 +2,7 @@ package com.tu.group.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
@@ -36,7 +37,7 @@ public class GroupImple extends Observable implements GroupInterface {
 			BeanUtils.copyProperties(groupVO, groupPO);
 
 		} catch (IllegalAccessException e) {
-			LOG.error(" there is a IllegalAccessException");
+			LOG.error("there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
 			LOG.error("there is a InvocationTargetException");
 		}
@@ -60,10 +61,9 @@ public class GroupImple extends Observable implements GroupInterface {
 		return groupVO;
 	}
 
-	public ArrayList<GroupVO> dogetAllGroup() {
-		ArrayList<GroupVO> allGroupVO = new ArrayList<GroupVO>();
-		ArrayList<Group> allGroupPO = new ArrayList<Group>();
-		allGroupPO = (ArrayList<Group>) groupDAO.findAll();
+	public List<GroupVO> dogetAllGroup() {
+		List<GroupVO> allGroupVO = new ArrayList<GroupVO>();
+		List<Group> allGroupPO = groupDAO.findAll();
 		for (int i = 0; i < allGroupPO.size(); i++) {
 			GroupVO oneGroupVO = new GroupVO();
 			Group oneGroupPO = allGroupPO.get(i);

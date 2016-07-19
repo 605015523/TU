@@ -103,7 +103,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
 		Userlogin oneuserloginPO = new Userlogin();
 		List<User_group> oneUser_groupPO = new ArrayList<User_group>();
-		ArrayList onegroupPO = new ArrayList();
+		List<String> onegroupPO = new ArrayList<String>();
 		UserviewVO oneuserviewPO = new UserviewVO();
 
 		try {
@@ -228,9 +228,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	}
 
 	// 获取用户的所有messages
-	public ArrayList<User_msgVO> dogetMessages(Integer userId) {
-		ArrayList<User_msgVO> user_msgsVO = new ArrayList<User_msgVO>();
-		ArrayList<User_msg> user_msg = new ArrayList<User_msg>();
+	public List<User_msgVO> dogetMessages(Integer userId) {
+		List<User_msgVO> user_msgsVO = new ArrayList<User_msgVO>();
+		List<User_msg> user_msg = new ArrayList<User_msg>();
 		user_msg = (ArrayList<User_msg>) user_msgDAO.findMsgByUserId(userId);
 		for (int i = 0; i < user_msg.size(); i++) {
 			Integer oneMsgId = ((User_msg) user_msg.get(i)).getMsgId();
@@ -256,7 +256,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			oneUser_msgVO.setActDate(formatter.format(oneMessage.getActDate()));
 			user_msgsVO.add(oneUser_msgVO);
 		}
-		ArrayList<User_msgVO> Inverseuser_msgsVO = new ArrayList<User_msgVO>();
+		List<User_msgVO> Inverseuser_msgsVO = new ArrayList<User_msgVO>();
 		for (int j = 0; j < user_msgsVO.size(); j++) {
 			Inverseuser_msgsVO.add(user_msgsVO.get(user_msgsVO.size() - j - 1));
 		}

@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class ActivitiesVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = 8705985126638462768L;
+	
 	private Integer actId;
 	private Integer groupId;
 	private String actName;
