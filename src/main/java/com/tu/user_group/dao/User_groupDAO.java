@@ -83,8 +83,4 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public static User_groupDAO getFromApplicationContext(ApplicationContext AIM) {
-		return (User_groupDAO) AIM.getBean("User_groupDAO");
-	}
-
 }

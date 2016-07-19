@@ -86,8 +86,4 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	public static GroupDAO getFromApplicationContext(ApplicationContext AIM) {
-		return (GroupDAO) AIM.getBean("GroupDAO");
-	}
-
 }

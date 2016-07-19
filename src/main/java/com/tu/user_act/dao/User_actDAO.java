@@ -98,8 +98,4 @@ public class User_actDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public static User_actDAO getFromApplicationContext(ApplicationContext AIM) {
-		return (User_actDAO) AIM.getBean("User_actDAO");
-	}
-
 }

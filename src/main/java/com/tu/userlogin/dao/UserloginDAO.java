@@ -115,7 +115,4 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public static UserloginDAO getFromApplicationContext(ApplicationContext aim) {
-		return (UserloginDAO) aim.getBean("UserloginDAO");
-	}
 }

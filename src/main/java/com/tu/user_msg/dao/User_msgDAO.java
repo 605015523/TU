@@ -87,8 +87,4 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public static User_msgDAO getFromApplicationContext(ApplicationContext AIM) {
-		return (User_msgDAO) AIM.getBean("User_msgDAO");
-	}
-
 }
