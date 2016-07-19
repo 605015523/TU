@@ -10,15 +10,15 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		UserloginDAOInterface {
 	private static final Log LOG = LogFactory.getLog(UserloginDAO.class);
 	// property constants
-	public static final String USER_ID = "user_id";
-	public static final String USER_NAME = "userName";
-	public static final String USER_PASSWORD = "user_password";
-	public static final String USER_ROLE = "user_role";
-	public static final String USER_DEPT = "user_dept";
-	public static final String IN_DATE = "in_date";
-	public static final String OUT_DATE = "out_date";
-	public static final String OLD_BALANCE = "old_balance";
-	public static final String QUOTA = "quota";
+	private static final String USER_ID = "user_id";
+	private static final String USER_NAME = "userName";
+	private static final String USER_PASSWORD = "user_password";
+	private static final String USER_ROLE = "user_role";
+	private static final String USER_DEPT = "user_dept";
+	private static final String IN_DATE = "in_date";
+	private static final String OUT_DATE = "out_date";
+	private static final String OLD_BALANCE = "old_balance";
+	private static final String QUOTA = "quota";
 
 	protected void initDao() {
 		// do nothing

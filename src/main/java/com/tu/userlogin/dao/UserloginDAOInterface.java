@@ -10,9 +10,9 @@ public interface UserloginDAOInterface {
 
 	public Userlogin findById(java.lang.Integer id);
 
-	public List findByProperty(String propertyName, Object value);
+	public List<Userlogin> findByProperty(String propertyName, Object value);
 
-	public List findAll();
+	public List<Userlogin> findAll();
 
 	public Userlogin merge(Userlogin detachedInstance);
 

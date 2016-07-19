@@ -3,6 +3,8 @@ package com.tu.messages.dao;
 import java.util.Date;
 
 public class Messages implements java.io.Serializable {
+	private static final long serialVersionUID = -2301807989217269139L;
+	
 	// Fields
 	private Integer msgId;
 	private Integer actId;

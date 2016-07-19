@@ -2,6 +2,8 @@ package com.tu.group.dao;
 
 public class Group implements java.io.Serializable {
 
+	private static final long serialVersionUID = -2016298182510150987L;
+	
 	// Fields
 	private Integer groupId;
 	private String groupName;

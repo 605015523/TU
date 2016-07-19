@@ -10,8 +10,9 @@ import java.util.Date;
 
 public class Userlogin implements java.io.Serializable {
 
+	private static final long serialVersionUID = -4693396900142694692L;
+	
 	// Fields
-
 	private Integer userId;
 	private String userName;
 	private String userPassword;

@@ -85,7 +85,7 @@ public class AccountingviewImple extends Observable implements
 			oneUserGroupCostVO.setUserId(userId);
 			oneUserGroupCostVO.setUserName(allUser.get(i).getUserName());
 			ArrayList<GroupCostVO> allGroupCost = new ArrayList<GroupCostVO>();
-			List groups = groupDAO.findAll();
+			List<Group> groups = groupDAO.findAll();
 			for (int j = 0; j < groups.size(); j++) {
 				GroupCostVO onegroupCostVO = new GroupCostVO();
 				onegroupCostVO.setGroupId(((Group) groups.get(j)).getGroupId());
@@ -95,7 +95,6 @@ public class AccountingviewImple extends Observable implements
 			}
 			for (int j = 0; j < validateacts.size(); j++) {
 				User_act oneuser_act = new User_act();
-				GroupCostVO oneGroupCost = new GroupCostVO();
 				Integer actId = validateacts.get(j).getActId();
 				Integer groupId = validateacts.get(j).getGroupId();
 				try {

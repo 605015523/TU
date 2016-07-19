@@ -8,11 +8,11 @@ public interface ActivitiesDAOInterface {
 
 	public void delete(Activities oneActivitiesPO);
 
-	public List findAll();
+	public List<Activities> findAll();
 
 	public Activities findById(Integer actId);
 
-	public List findByGroupId(Integer groupId);
+	public List<Activities> findByGroupId(Integer groupId);
 
 	public Activities merge(Activities oneActPO);
 }

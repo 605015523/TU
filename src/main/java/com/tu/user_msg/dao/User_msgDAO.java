@@ -47,10 +47,10 @@ public class User_msgDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId查找所有该用户的messages消息
-	public List findMsgByUserId(java.lang.Integer user_id) {
+	public List<User_msg> findMsgByUserId(java.lang.Integer user_id) {
 		LOG.debug("find all User_msg instance by userId");
 		try {
-			List user_msg = new ArrayList<User_msg>();
+			List<User_msg> user_msg = new ArrayList<User_msg>();
 			user_msg = getHibernateTemplate().find(
 					"from com.tu.user_msg.dao.User_msg where user_id = ?", user_id);
 			LOG.debug("find successful");

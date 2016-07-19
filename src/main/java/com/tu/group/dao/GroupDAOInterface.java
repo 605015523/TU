@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface GroupDAOInterface {
 
-	public List findByProperty(String propertyName, Object value);
+	public List<Group> findByProperty(String propertyName, Object value);
 
 	public Group findById(Integer onegroupId);
 
-	public List findAll();
+	public List<Group> findAll();
 
 	public Group findByUserId(Integer userId);
 

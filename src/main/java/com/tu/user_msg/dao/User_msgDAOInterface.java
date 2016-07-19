@@ -10,7 +10,7 @@ public interface User_msgDAOInterface {
 
 	public void delete(User_msg userGroupPO);
 
-	public List findMsgByUserId(Integer userId);
+	public List<User_msg> findMsgByUserId(Integer userId);
 
 	public User_msg findByUserIdAndMsgId(Integer userId, Integer msgId);
 

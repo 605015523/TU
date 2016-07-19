@@ -21,7 +21,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	}
 
 	// 获取所有 group对象
-	public List findAll() {
+	public List<Group> findAll() {
 		LOG.debug("finding all Group instances");
 		try {
 			String queryString = "from Group";
@@ -33,7 +33,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	}
 
 	// 通过属性获取所有匹配的group对象
-	public List findByProperty(String propertyName, Object value) {
+	public List<Group> findByProperty(String propertyName, Object value) {
 		LOG.debug("finding group instance with property: " + propertyName
 				+ ", value: " + value);
 		try {

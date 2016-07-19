@@ -4,6 +4,8 @@ import java.util.Date;
 
 public class MessagesVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = -3582074631065605747L;
+	
 	private Integer msgId;
 	private Integer actId;
 	private Integer groupId;

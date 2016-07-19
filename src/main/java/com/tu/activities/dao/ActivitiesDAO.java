@@ -24,7 +24,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	public List findAll() {
+	public List<Activities> findAll() {
 		LOG.debug("finding all activities instances");
 		try {
 			String queryString = "from Activities";
@@ -35,7 +35,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public List findByProperty(String propertyName, Object value) {
+	public List<Activities> findByProperty(String propertyName, Object value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
