@@ -8,6 +8,7 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/login.jsp*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		<intercept-url pattern="/displayLoginFailedUserloginManageAction.action" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/css/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/fonts/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<intercept-url pattern="/js/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
@@ -16,7 +17,8 @@
 		<form-login 
 		    login-page="/login.jsp"
 		    default-target-url="/doLoginUserloginManageAction.action" 
-			authentication-failure-url="/login?error" 
+			authentication-failure-url="/displayLoginFailedUserloginManageAction.action"
+			always-use-default-target="true"
 			username-parameter="userName"
 			password-parameter="userPassword" />
 	</http>

@@ -14,6 +14,11 @@
 		</param-value>
 	</context-param>
 	
+	<!--首页进入地址-->
+	<welcome-file-list>
+		<welcome-file>/login.jsp</welcome-file>
+	</welcome-file-list>
+	
 	<!-- Spring Security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -73,12 +78,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
  
-	<!--首页进入地址-->
-	<welcome-file-list>
-		<welcome-file>/login.jsp</welcome-file>
-	</welcome-file-list>
-
-	<login-config>
+	<!-- <login-config>
 		<auth-method>BASIC</auth-method>
-	</login-config>
+	</login-config> -->
 </web-app>

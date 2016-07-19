@@ -39,9 +39,7 @@
 			<hr />
 			<form class="form-signin" role="form" name="form" method="post"
 				action="<c:url value='j_spring_security_check' />">
-				<!-- action="doLoginUserloginManageAction.action" -->
-
-				<c:if test="${loginMessage!=null}">${loginMessage }</c:if>
+				<c:if test="${loginMessage!=null}">${loginMessage}</c:if>
 				<!-- <s:textfield  name="userName"  cssClass="form-control1"   ></s:textfield>
         <s:password   name="userPassword" cssClass="form-control2" ></s:password>
         <s:submit cssClass="btn btn-lg btn-warning btn-block">µÇÂ¼</s:submit>  -->

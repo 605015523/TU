@@ -147,7 +147,6 @@ public class UserloginManageAction extends ActionSupport {
 		// 用户登录验证模块
 		initServletContextObject();
 		List<UserloginVO> knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
-		boolean loginSuccess = true;
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
@@ -155,171 +154,168 @@ public class UserloginManageAction extends ActionSupport {
 				userName = knowledgeadministratorVOs.get(i).getUserName();
 				userId = knowledgeadministratorVOs.get(i).getUserId();
 				userRole = knowledgeadministratorVOs.get(i).getUserRole();
-				loginSuccess = true;
 				break;
-			} else {
-				loginSuccess = false;
 			}
 		}
-		if (loginSuccess) {
-			// 登录成功，输出到控制台
-			LOG.info("login success");
 
-			// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
-			initServletContextObject();
-			List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
-			List<Integer> years = new ArrayList<Integer>();
-			for (int i = 0; i < actVOs.size(); i++) {
-				Calendar cal = Calendar.getInstance();
-				cal.setTime(actsBean.doGetAllActivity().get(i).getActDate());
-				if (years.size() == 0) {
-					years.add(cal.get(Calendar.YEAR));
-				} else {
-					Integer j;
-					for (j = 0; j < years.size();) {
-						if (cal.get(Calendar.YEAR) == years.get(j)) {
-							break;
-						}
-						j++;
-					}
-					if (j.equals(years.size()) == true) {
-						years.add(cal.get(Calendar.YEAR));
-						LOG.info("the year" + cal.get(Calendar.YEAR)
-								+ "get success");
-					}
-				}
-			}
-			// 登录成功，判断预算是否该修改，若为当年的7月1号，预算在原基础上加1000
-			initServletContextObject();
-			UserloginVO thisuser = UserloginManageBean
-					.dogetOneUserInfoByUserId(userId);
-			Date date = new Date();// 取当前时间
+		// 登录成功，输出到控制台
+		LOG.info("login success");
+
+		// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
+		initServletContextObject();
+		List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
+		List<Integer> years = new ArrayList<Integer>();
+		for (int i = 0; i < actVOs.size(); i++) {
 			Calendar cal = Calendar.getInstance();
-			cal.setTime(date);
-			String year = Integer.toString(cal.get(Calendar.YEAR));
-			Date updatedate = new SimpleDateFormat("yyyy-MM-dd").parse(year
-					+ "-02-25");
-			try {
-				if ((thisuser.getIn_date().getTime() - updatedate.getTime() < 0)
-						&& updatedate.before(date)
-						&& thisuser.getQuota() == 1000) {
-					thisuser.setQuota(thisuser.getQuota() + 1000);
-					UserloginManageBean.doUpdateOneUserInfo(thisuser);
-				}
-			} catch (Exception e) {
-
-			}
-
-			// 登录成功，识别过期消息，并获取新消息条数
-			for (int i = 0; i < actVOs.size(); i++) {
-				ActivitiesVO oneAct = new ActivitiesVO();
-				oneAct = actVOs.get(i);
-				if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
-					Calendar calendar = new GregorianCalendar();
-					calendar.setTime(date);
-					calendar.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
-													// 所以对比过期时间时将今天的日期往后推一天
-					date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
-					if (oneAct.getActDate().before(date)) {
-						oneAct.setState("pending");
-						actsBean.doUpdateOneAct(oneAct);
+			cal.setTime(actsBean.doGetAllActivity().get(i).getActDate());
+			if (years.size() == 0) {
+				years.add(cal.get(Calendar.YEAR));
+			} else {
+				Integer j;
+				for (j = 0; j < years.size();) {
+					if (cal.get(Calendar.YEAR) == years.get(j)) {
+						break;
 					}
+					j++;
 				}
-
+				if (j.equals(years.size()) == true) {
+					years.add(cal.get(Calendar.YEAR));
+					LOG.info("the year" + cal.get(Calendar.YEAR)
+							+ "get success");
+				}
 			}
-
-			int newMsg = 0;
-			List<User_msg> user_msgVOs = user_msgBean.doGetUserMsg(userId);
-			for (int i = 0; i < user_msgVOs.size(); i++) {
-				MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVOs.get(i)
-						.getMsgId());
-				ActivitiesVO oneAct = new ActivitiesVO();
-				oneAct = actsBean.doGetOneActById(oneMsg.getActId());
-				if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
-						|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
-						|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
-					user_msgVOs.get(i).setReadState("read");
-					user_msgBean.doUpdateOneUser_msg(user_msgVOs.get(i));
-
-				}
-				if (user_msgVOs.get(i).getReadState().equals("new")) {
-					newMsg += 1;
-				}
-
-			}
-
-			// 登录成功，获取用户个人信息bean
-			initServletContextObject();
-			UserviewVO userviewVO = new UserviewVO();
-			userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
-					.getUserId());
-
-			// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用
-			session.setAttribute("userId", userId);
-			session.setAttribute("userRole", userRole);
-			session.setAttribute("userview", userviewVO);
-			session.setAttribute("years", years);
-			session.setAttribute("newMsg", newMsg);
-
-			// 登陆成功，若为组长执行以下活动
-			if (userRole.equals(1)) {
-
-				// 获取所属小组信息，以便后面的使用
-				initServletContextObject();
-				GroupVO group = new GroupVO();
-				group = groupBean.dogetOneGroup(userId);
-
-				// 获取所有用户Id，以便添加活动时发送消息给用户
-				initServletContextObject();
-				List<Integer> allMemberId = new ArrayList<Integer>();
-				for (int m = 0; m < knowledgeadministratorVOs.size(); m++) {
-					Integer userId = knowledgeadministratorVOs.get(m)
-							.getUserId();
-					allMemberId.add(userId);
-				}
-
-				// 将刚刚获取到的内容存到session中
-				session.setAttribute("group", group);
-				session.setAttribute("allMemberId", allMemberId);
-			}
-
-			// 若为审批小组成员，执行以下操作
-			if (userRole.equals(2)) {
-				initServletContextObject();
-				int newCheck = 0;
-				for (int k = 0; k < actVOs.size(); k++) {
-					if (actVOs.get(k).getState().equals(ActivitiesConstant.STATE_DRAFT)
-							|| actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
-						newCheck += 1;
-					}
-				}
-				List<Integer> allUserId = new ArrayList<Integer>();
-				for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
-					allUserId.add(knowledgeadministratorVOs.get(i).getUserId());
-				}
-
-				List<String> groupsName = new ArrayList<String>();
-				List<GroupVO> allgroup = groupBean.dogetAllGroup();
-				for (int i = 0; i < allgroup.size(); i++) {
-					groupsName.add(allgroup.get(i).getGroupName());
-				}
-				session.setAttribute("allserId", allUserId);
-				session.setAttribute("newCheck", newCheck);
-				session.setAttribute("groupsName", groupsName);
-			}
-
-			return "userloginSuccess";
-
-		} else {
-
-			// 登录不成功所执行的操作
-			LOG.info("login fail");
-			loginMessage = "Incorrect ID or password. Please re-enter.";
-			session.setAttribute("userName", userName);
-			request.setAttribute("loginMessage", loginMessage);
-			return "loginFail";
 		}
+		// 登录成功，判断预算是否该修改，若为当年的7月1号，预算在原基础上加1000
+		initServletContextObject();
+		UserloginVO thisuser = UserloginManageBean
+				.dogetOneUserInfoByUserId(userId);
+		Date date = new Date();// 取当前时间
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		String year = Integer.toString(cal.get(Calendar.YEAR));
+		Date updatedate = new SimpleDateFormat("yyyy-MM-dd").parse(year
+				+ "-02-25");
+		try {
+			if ((thisuser.getIn_date().getTime() - updatedate.getTime() < 0)
+					&& updatedate.before(date)
+					&& thisuser.getQuota() == 1000) {
+				thisuser.setQuota(thisuser.getQuota() + 1000);
+				UserloginManageBean.doUpdateOneUserInfo(thisuser);
+			}
+		} catch (Exception e) {
+
+		}
+
+		// 登录成功，识别过期消息，并获取新消息条数
+		for (int i = 0; i < actVOs.size(); i++) {
+			ActivitiesVO oneAct = new ActivitiesVO();
+			oneAct = actVOs.get(i);
+			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
+				Calendar calendar = new GregorianCalendar();
+				calendar.setTime(date);
+				calendar.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
+												// 所以对比过期时间时将今天的日期往后推一天
+				date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+				if (oneAct.getActDate().before(date)) {
+					oneAct.setState("pending");
+					actsBean.doUpdateOneAct(oneAct);
+				}
+			}
+
+		}
+
+		int newMsg = 0;
+		List<User_msg> user_msgVOs = user_msgBean.doGetUserMsg(userId);
+		for (int i = 0; i < user_msgVOs.size(); i++) {
+			MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVOs.get(i)
+					.getMsgId());
+			ActivitiesVO oneAct = new ActivitiesVO();
+			oneAct = actsBean.doGetOneActById(oneMsg.getActId());
+			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
+					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
+					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
+				user_msgVOs.get(i).setReadState("read");
+				user_msgBean.doUpdateOneUser_msg(user_msgVOs.get(i));
+
+			}
+			if (user_msgVOs.get(i).getReadState().equals("new")) {
+				newMsg += 1;
+			}
+
+		}
+
+		// 登录成功，获取用户个人信息bean
+		initServletContextObject();
+		UserviewVO userviewVO = new UserviewVO();
+		userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
+				.getUserId());
+
+		// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用
+		session.setAttribute("userId", userId);
+		session.setAttribute("userRole", userRole);
+		session.setAttribute("userview", userviewVO);
+		session.setAttribute("years", years);
+		session.setAttribute("newMsg", newMsg);
+
+		// 登陆成功，若为组长执行以下活动
+		if (userRole.equals(1)) {
+
+			// 获取所属小组信息，以便后面的使用
+			initServletContextObject();
+			GroupVO group = new GroupVO();
+			group = groupBean.dogetOneGroup(userId);
+
+			// 获取所有用户Id，以便添加活动时发送消息给用户
+			initServletContextObject();
+			List<Integer> allMemberId = new ArrayList<Integer>();
+			for (int m = 0; m < knowledgeadministratorVOs.size(); m++) {
+				Integer userId = knowledgeadministratorVOs.get(m)
+						.getUserId();
+				allMemberId.add(userId);
+			}
+
+			// 将刚刚获取到的内容存到session中
+			session.setAttribute("group", group);
+			session.setAttribute("allMemberId", allMemberId);
+		}
+
+		// 若为审批小组成员，执行以下操作
+		if (userRole.equals(2)) {
+			initServletContextObject();
+			int newCheck = 0;
+			for (int k = 0; k < actVOs.size(); k++) {
+				if (actVOs.get(k).getState().equals(ActivitiesConstant.STATE_DRAFT)
+						|| actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
+					newCheck += 1;
+				}
+			}
+			List<Integer> allUserId = new ArrayList<Integer>();
+			for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
+				allUserId.add(knowledgeadministratorVOs.get(i).getUserId());
+			}
+
+			List<String> groupsName = new ArrayList<String>();
+			List<GroupVO> allgroup = groupBean.dogetAllGroup();
+			for (int i = 0; i < allgroup.size(); i++) {
+				groupsName.add(allgroup.get(i).getGroupName());
+			}
+			session.setAttribute("allserId", allUserId);
+			session.setAttribute("newCheck", newCheck);
+			session.setAttribute("groupsName", groupsName);
+		}
+
+		return "userloginSuccess";
 	}
+	
+	public String displayLoginFailed() {
+		// 登录不成功所执行的操作
+		initServletContextObject();
+		LOG.info("login fail");
+		loginMessage = "Incorrect ID or password. Please re-enter.";
+		request.setAttribute("loginMessage", loginMessage);
+		return "loginFail";
+	}
+	
 
 	// getter, setters
 	public Integer getUserId() {

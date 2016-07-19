@@ -20,15 +20,19 @@ public class MyUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
-
+		UserDetails res = null;
 		Userlogin userLogin = userLoginDAO.findByUserName(username);
 		
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(1);
-		authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		if (userLogin != null) {
+			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>(1);
+			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+			
+			res = new User(userLogin.getUserName(), 
+					userLogin.getUserPassword(), true, 
+	                true, true, true, authorities);
+		}
 		
-		return new User(userLogin.getUserName(), 
-				userLogin.getUserPassword(), true, 
-                true, true, true, authorities);
+		return res;
 	}
 
 	public void setUserLoginDAO(UserloginDAO userLoginDAO) {

@@ -26,7 +26,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	public List<Activity> findAll() {
 		LOG.debug("finding all activities instances");
 		try {
-			String queryString = "from Activities";
+			String queryString = "from Activity";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			LOG.error("find all failed", re);
