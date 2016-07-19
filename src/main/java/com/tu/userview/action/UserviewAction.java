@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.activities.dao.ActivitiesConstant;
+import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.messages.model.MessagesInterface;

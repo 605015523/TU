@@ -2,8 +2,10 @@ package com.tu.activities.dao;
 
 import java.util.Date;
 
-public class Activities implements java.io.Serializable {
+public class Activity implements java.io.Serializable {
 
+	private static final long serialVersionUID = -3372723516310169493L;
+	
 	// Fields
 	private Integer actId;
 	private Integer groupId;
@@ -18,11 +20,11 @@ public class Activities implements java.io.Serializable {
 
 	// Constructors
 	/** default constructor */
-	public Activities() {
+	public Activity() {
 	}
 
 	/** full constructor */
-	public Activities(Integer actId, Integer groupId, String actName,
+	public Activity(Integer actId, Integer groupId, String actName,
 			Float actMoney, String description, Date enrollStartDate,
 			Date enrollEndDate, Date actDate, String state, String comment) {
 		this.actId = actId;

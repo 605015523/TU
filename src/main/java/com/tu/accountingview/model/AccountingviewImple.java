@@ -3,9 +3,9 @@ package com.tu.accountingview.model;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.tu.activities.dao.Activities;
-import com.tu.activities.dao.ActivitiesConstant;
-import com.tu.activities.dao.ActivitiesDAOInterface;
+import com.tu.activities.dao.Activity;
+import com.tu.activities.dao.ActivityDAOInterface;
+import com.tu.activities.model.ActivitiesConstant;
 import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.leaderview.model.memberInVO;
@@ -18,7 +18,7 @@ public class AccountingviewImple extends Observable implements
 		AccountingviewInterface {
 
 	private UserloginDAOInterface userloginDAO = null;
-	private ActivitiesDAOInterface actsDAO = null;
+	private ActivityDAOInterface actsDAO = null;
 	private User_actDAOInterface user_actDAO = null;
 	private GroupDAOInterface groupDAO = null;
 
@@ -34,11 +34,11 @@ public class AccountingviewImple extends Observable implements
 		this.userloginDAO = userloginDAO;
 	}
 
-	public ActivitiesDAOInterface getActsDAO() {
+	public ActivityDAOInterface getActsDAO() {
 		return this.actsDAO;
 	}
 
-	public void setActsDAO(ActivitiesDAOInterface actsDAO) {
+	public void setActsDAO(ActivityDAOInterface actsDAO) {
 		this.actsDAO = actsDAO;
 	}
 
@@ -61,9 +61,9 @@ public class AccountingviewImple extends Observable implements
 	// 通过选择year的方式显示所有用户这一年的活动参与情况的实现细节
 	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
-		List<Activities> allacts = new ArrayList<Activities>();
+		List<Activity> allacts = new ArrayList<Activity>();
 		allacts = actsDAO.findAll();
-		List<Activities> validateacts = new ArrayList<Activities>();
+		List<Activity> validateacts = new ArrayList<Activity>();
 
 		// 获取所有以及被validate的活动
 		for (int i = 0; i < allacts.size(); i++) {
@@ -103,10 +103,10 @@ public class AccountingviewImple extends Observable implements
 				} catch (Exception e) {
 				}
 				if (oneuser_act.getConsumption() != null) {
-					for (int m = 0; m < allGroupCost.size(); m++) {
-						if (groupId.equals(allGroupCost.get(m).getGroupId())) {
-							float sum = (allGroupCost.get(m).getCost());
-							allGroupCost.get(m).setCost(
+					for (GroupCostVO groupCostVO : allGroupCost) {
+						if (groupId.equals(groupCostVO.getGroupId())) {
+							float sum = (groupCostVO.getCost());
+							groupCostVO.setCost(
 									sum + oneuser_act.getConsumption());
 						}
 					}
@@ -129,7 +129,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 通过选择group的方式显示所有group这一年的活动参与情况的实现细节
 	public List<GroupActVO> doGetAllActsByGroupId(Integer groupId) {
-		List<Activities> acts = new ArrayList<Activities>();
+		List<Activity> acts = new ArrayList<Activity>();
 		acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
@@ -185,7 +185,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 获取所有validate的活动的活动细节的具体实现
 	public GroupActVO doGetAllValidateDetails(Integer actId) {
-		Activities acts = new Activities();
+		Activity acts = new Activity();
 		acts = actsDAO.findById(actId);
 		GroupActVO actVO = new GroupActVO();
 
@@ -229,7 +229,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 获取所有需要被check和validate的活动
 	public List<GroupActVO> doGetAllCheckValidateActs() {
-		List<Activities> acts = new ArrayList<Activities>();
+		List<Activity> acts = new ArrayList<Activity>();
 		acts = actsDAO.findAll();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 

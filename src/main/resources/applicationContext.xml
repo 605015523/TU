@@ -173,7 +173,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="ActsDAO" class="com.tu.activities.dao.ActivitiesDAO">
+	<bean id="ActsDAO" class="com.tu.activities.dao.ActivityDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 

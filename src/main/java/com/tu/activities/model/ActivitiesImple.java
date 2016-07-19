@@ -8,19 +8,19 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.activities.dao.Activities;
-import com.tu.activities.dao.ActivitiesDAOInterface;
+import com.tu.activities.dao.Activity;
+import com.tu.activities.dao.ActivityDAOInterface;
 
 public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	private static final Log LOG = LogFactory.getLog(ActivitiesImple.class);
-	private ActivitiesDAOInterface actsDAO = null;
+	private ActivityDAOInterface actsDAO = null;
 
-	public ActivitiesDAOInterface getActsDAO() {
+	public ActivityDAOInterface getActsDAO() {
 		return this.actsDAO;
 	}
 
-	public void setActsDAO(ActivitiesDAOInterface actsDAO) {
+	public void setActsDAO(ActivityDAOInterface actsDAO) {
 		this.actsDAO = actsDAO;
 	}
 
@@ -31,10 +31,10 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	// 获取所有活动
 	public ArrayList<ActivitiesVO> doGetAllActivity() {
 		ArrayList<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
-		ArrayList<Activities> activitiesPOs = new ArrayList<Activities>();
+		ArrayList<Activity> activitiesPOs = new ArrayList<Activity>();
 		activitiesPOs = (ArrayList) actsDAO.findAll();
 		for (int i = 0; i < activitiesPOs.size(); i++) {
-			Activities oneactivitiesPO = new Activities();
+			Activity oneactivitiesPO = new Activity();
 			oneactivitiesPO = activitiesPOs.get(i);
 			ActivitiesVO oneactivitiesVO = new ActivitiesVO();
 			try {
@@ -52,7 +52,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	// 通过actId获取一个活动
 	public ActivitiesVO doGetOneActById(Integer actId) {
 		ActivitiesVO actVO = new ActivitiesVO();
-		Activities actPO = new Activities();
+		Activity actPO = new Activity();
 		actPO = actsDAO.findById(actId);
 		try {
 			BeanUtils.copyProperties(actVO, actPO);
@@ -67,7 +67,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 添加一个活动
 	public Integer doAddOneAct(ActivitiesVO oneActivitiesVO) {
-		Activities oneactsPO = new Activities();
+		Activity oneactsPO = new Activity();
 		Integer actId = null;
 		String addMessage = null;
 
@@ -89,7 +89,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 更新一个活动
 	public String doUpdateOneAct(ActivitiesVO oneActVO) {
-		Activities oneActPO = new Activities();
+		Activity oneActPO = new Activity();
 		Integer actId = oneActVO.getActId();
 		oneActPO = actsDAO.findById(actId);
 		String OkOrNot = null;

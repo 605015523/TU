@@ -13,7 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.activities.dao.ActivitiesConstant;
+import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupInterface;

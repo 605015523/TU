@@ -11,8 +11,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.activities.dao.Activities;
-import com.tu.activities.dao.ActivitiesDAOInterface;
+import com.tu.activities.dao.Activity;
+import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.messages.dao.Messages;
@@ -33,7 +33,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private User_groupDAOInterface user_groupDAO = null;
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
-	private ActivitiesDAOInterface actsDAO = null;
+	private ActivityDAOInterface actsDAO = null;
 	private User_actDAOInterface user_actDAO = null;
 	private User_msgDAOInterface user_msgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
@@ -55,7 +55,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		this.groupDAO = groupDAO;
 	}
 
-	public void setActsDAO(ActivitiesDAOInterface actsDAO) {
+	public void setActsDAO(ActivityDAOInterface actsDAO) {
 		this.actsDAO = actsDAO;
 	}
 
@@ -91,7 +91,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return this.groupDAO;
 	}
 
-	public ActivitiesDAOInterface getActsDAO() {
+	public ActivityDAOInterface getActsDAO() {
 		return this.actsDAO;
 	}
 
@@ -161,7 +161,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		user_act = user_actDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
 
 		for (int i = 0; i < user_act.size(); i++) {
-			Activities actsPO = new Activities();
+			Activity actsPO = new Activity();
 			Group groupPO = new Group();
 
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性

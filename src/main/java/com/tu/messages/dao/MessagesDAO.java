@@ -25,7 +25,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	}
 
 	// 获取所有的messages
-	public List findAll() {
+	public List<Messages> findAll() {
 		LOG.debug("finding all Message instances");
 		try {
 			String queryString = "from Messages";
@@ -50,21 +50,16 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个messages对象
-	public Integer save(Messages oneMessagesPO) {
+	public Integer save(Messages oneMessagePO) {
 		LOG.debug("saving message instance");
 		try {
-			getHibernateTemplate().save(oneMessagesPO);
+			getHibernateTemplate().save(oneMessagePO);
 			LOG.debug("save successful");
-			return oneMessagesPO.getMsgId();
+			return oneMessagePO.getMsgId();
 		} catch (RuntimeException re) {
 			LOG.error("save failed", re);
 			throw re;
 		}
-
-	}
-
-	public static MessagesDAO getFromApplicationContext(ApplicationContext aim) {
-		return (MessagesDAO) aim.getBean("MessagesDAO");
 	}
 
 }

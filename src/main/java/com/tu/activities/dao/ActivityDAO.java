@@ -6,10 +6,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class ActivitiesDAO extends HibernateDaoSupport implements
-		ActivitiesDAOInterface {
+public class ActivityDAO extends HibernateDaoSupport implements
+		ActivityDAOInterface {
 
-	private static final Log LOG = LogFactory.getLog(ActivitiesDAO.class);
+	private static final Log LOG = LogFactory.getLog(ActivityDAO.class);
 	public static final String ACT_ID = "act_id";
 	public static final String GROUP_ID = "group_id";
 	public static final String ACT_NAME = "act_name";
@@ -24,7 +24,7 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	public List<Activities> findAll() {
+	public List<Activity> findAll() {
 		LOG.debug("finding all activities instances");
 		try {
 			String queryString = "from Activities";
@@ -35,17 +35,17 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public List<Activities> findByProperty(String propertyName, Object value) {
+	public List<Activity> findByProperty(String propertyName, Object value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	// 通过actId找到并返回这个Activities对象
-	public Activities findById(java.lang.Integer act_id) {
+	public Activity findById(java.lang.Integer act_id) {
 		LOG.debug("getting Activities instance with id: " + act_id);
 		try {
-			Activities instance = (Activities) getHibernateTemplate().get(
-					"com.tu.activities.dao.Activities", act_id);
+			Activity instance = (Activity) getHibernateTemplate().get(
+					"com.tu.activities.dao.Activity", act_id);
 			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
@@ -54,10 +54,10 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId找到并返回所有属于这个group的对象
-	public List findByGroupId(Integer group_id) {
+	public List<Activity> findByGroupId(Integer group_id) {
 		try {
 			return getHibernateTemplate().find(
-					"from com.tu.activities.dao.Activities where group_id = ?",
+					"from com.tu.activities.dao.Activity where group_id = ?",
 					group_id);
 		} catch (RuntimeException re) {
 			LOG.error("find by userId failed", re);
@@ -66,12 +66,12 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个Activities对象
-	public Integer save(Activities oneActivitiesPO) {
+	public Integer save(Activity oneActivityPO) {
 		LOG.debug("saving Activities instance");
 		try {
-			getHibernateTemplate().save(oneActivitiesPO);
+			getHibernateTemplate().save(oneActivityPO);
 			LOG.debug("save successful");
-			return oneActivitiesPO.getActId();
+			return oneActivityPO.getActId();
 		} catch (RuntimeException re) {
 			LOG.error("save failed", re);
 			throw re;
@@ -80,10 +80,10 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 	}
 
 	// 更新一个Activities
-	public Activities merge(Activities detachedInstance) {
+	public Activity merge(Activity detachedInstance) {
 		LOG.debug("merging activitiy instance");
 		try {
-			Activities result = (Activities) getHibernateTemplate().merge(
+			Activity result = (Activity) getHibernateTemplate().merge(
 					detachedInstance);
 			LOG.debug("merge successful");
 			return result;
@@ -94,12 +94,8 @@ public class ActivitiesDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除一个Activities对象
-	public void delete(Activities oneActivitiesPO) {
+	public void delete(Activity oneActivityPO) {
 		// TODO Auto-generated method stub
 
-	}
-
-	public static ActivitiesDAO getFromApplicationContext(ApplicationContext aim) {
-		return (ActivitiesDAO) aim.getBean("ActivitiesDAO");
 	}
 }

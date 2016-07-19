@@ -14,7 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.tu.accountingview.model.AccountingviewInterface;
 import com.tu.accountingview.model.GroupActVO;
 import com.tu.accountingview.model.UserGroupCostVO;
-import com.tu.activities.dao.ActivitiesConstant;
+import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupInterface;

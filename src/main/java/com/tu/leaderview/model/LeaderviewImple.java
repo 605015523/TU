@@ -3,8 +3,8 @@ package com.tu.leaderview.model;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.tu.activities.dao.Activities;
-import com.tu.activities.dao.ActivitiesDAOInterface;
+import com.tu.activities.dao.Activity;
+import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.user_act.dao.User_act;
 import com.tu.user_act.dao.User_actDAOInterface;
@@ -17,7 +17,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
 	private User_groupDAOInterface user_groupDAO = null;
-	private ActivitiesDAOInterface actsDAO = null;
+	private ActivityDAOInterface actsDAO = null;
 	private User_actDAOInterface user_actDAO = null;
 
 	public LeaderviewImple() {
@@ -48,11 +48,11 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		user_groupDAO = userGroupDAO;
 	}
 
-	public ActivitiesDAOInterface getActsDAO() {
+	public ActivityDAOInterface getActsDAO() {
 		return this.actsDAO;
 	}
 
-	public void setActsDAO(ActivitiesDAOInterface actsDAO) {
+	public void setActsDAO(ActivityDAOInterface actsDAO) {
 		this.actsDAO = actsDAO;
 	}
 
@@ -66,7 +66,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 
 	// 通过groupId获取所有参加这个活动的user
 	public List<GroupActVO> doGetAllUserActsByGroupId(Integer groupId) {
-		List<Activities> acts = new ArrayList<Activities>();
+		List<Activity> acts = new ArrayList<Activity>();
 
 		acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();

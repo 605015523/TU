@@ -6,7 +6,7 @@ public interface MessagesDAOInterface {
 
 	public Object save(Messages oneActivitiesPO);
 
-	public List findAll();
+	public List<Messages> findAll();
 
 	public Messages findById(Integer actId);
 
