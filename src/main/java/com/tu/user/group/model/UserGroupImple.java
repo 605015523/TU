@@ -26,10 +26,11 @@ public class UserGroupImple extends Observable implements UserGroupInterface {
 	}
 
 	public UserGroupImple() {
-
+		// Do nothing
 	}
 
 	// 删除一个userGroup对象
+	@Override
 	public String doDeleteOneUserGroup(Integer memberId, Integer groupId) {
 		String okOrNot = null;
 		UserGroup userGroupPO = userGroupDAO
@@ -50,6 +51,7 @@ public class UserGroupImple extends Observable implements UserGroupInterface {
 	}
 
 	// 通过groupId获取某小组所有的成员的具体实现
+	@Override
 	public List<UserGroupVO> doGetAllMembersId(Integer groupId) {
 		List<UserGroupVO> oneUserGroupVOs = new ArrayList<UserGroupVO>();
 		List<UserGroup> oneUserGroupPOs = userGroupDAO.findByGroupId(groupId);

@@ -19,11 +19,13 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	public static final String ACT_DATE = "act_date";
 	public static final String STATE = "state";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
 	// 获取所有的messages
+	@Override
 	public List<Messages> findAll() {
 		LOG.debug("finding all Message instances");
 		try {
@@ -36,6 +38,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过messagesId来获取特定的messages对象
+	@Override
 	public Messages findById(java.lang.Integer msgId) {
 		LOG.debug("getting Message instance with id: " + msgId);
 		try {
@@ -49,6 +52,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个messages对象
+	@Override
 	public Integer save(Messages oneMessagePO) {
 		LOG.debug("saving message instance");
 		try {

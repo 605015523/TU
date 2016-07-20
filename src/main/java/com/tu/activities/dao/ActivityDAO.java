@@ -46,9 +46,8 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	public Activity findById(java.lang.Integer actId) {
 		LOG.debug("getting Activities instance with id: " + actId);
 		try {
-			Activity instance = (Activity) getHibernateTemplate().get(
+			return (Activity) getHibernateTemplate().get(
 					"com.tu.activities.dao.Activity", actId);
-			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
 			throw re;
@@ -88,7 +87,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	public Activity merge(Activity detachedInstance) {
 		LOG.debug("merging activitiy instance");
 		try {
-			Activity result = (Activity) getHibernateTemplate().merge(
+			Activity result = getHibernateTemplate().merge(
 					detachedInstance);
 			LOG.debug("merge successful");
 			return result;

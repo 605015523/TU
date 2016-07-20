@@ -4,27 +4,28 @@ import java.util.Date;
 
 
 public class UserloginVO implements java.io.Serializable {
+	private static final long serialVersionUID = 4969190418097520154L;
+	
 	private Integer userId;
 	private String userName;
 	private String userPassword;
 	private Integer userRole;
 	private String userDept;
-	private Date in_date;
-	private Date out_date;
+	private Date inDate;
+	private Date outDate;
 	private Float spending;
 	private Float quota;
 
 	public UserloginVO() {
 		userId = 0;
-		userName = "";
-		userPassword = "";
+		userName = null;
+		userPassword = null;
 		userRole = 0;
-		userDept = "";
-		in_date = null;
-		out_date = null;
+		userDept = null;
+		inDate = null;
+		outDate = null;
 		spending = null;
 		quota = null;
-
 	}
 
 	public Integer getUserId() {
@@ -68,19 +69,19 @@ public class UserloginVO implements java.io.Serializable {
 	}
 
 	public Date getIn_date() {
-		return this.in_date;
+		return this.inDate;
 	}
 
 	public void setIn_date(Date inDate) {
-		this.in_date = inDate;
+		this.inDate = inDate;
 	}
 
 	public Date getOut_date() {
-		return this.out_date;
+		return this.outDate;
 	}
 
 	public void setOut_date(Date outDate) {
-		this.out_date = outDate;
+		this.outDate = outDate;
 	}
 
 	public Float getSpending() {

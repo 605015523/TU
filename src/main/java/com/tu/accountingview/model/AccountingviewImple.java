@@ -24,7 +24,7 @@ public class AccountingviewImple extends Observable implements
 
 	private UserloginDAOInterface userloginDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private User_actDAOInterface user_actDAO = null;
+	private User_actDAOInterface userActDAO = null;
 	private GroupDAOInterface groupDAO = null;
 
 	public AccountingviewImple() {
@@ -48,11 +48,11 @@ public class AccountingviewImple extends Observable implements
 	}
 
 	public User_actDAOInterface getUser_actDAO() {
-		return this.user_actDAO;
+		return this.userActDAO;
 	}
 
 	public void setUser_actDAO(User_actDAOInterface userActDAO) {
-		this.user_actDAO = userActDAO;
+		this.userActDAO = userActDAO;
 	}
 
 	public GroupDAOInterface getGroupDAO() {
@@ -102,7 +102,7 @@ public class AccountingviewImple extends Observable implements
 				Integer groupId = validateacts.get(j).getGroupId();
 				
 				try {
-					User_act oneuserAct = user_actDAO.findByUserIdAndActId(userId,
+					User_act oneuserAct = userActDAO.findByUserIdAndActId(userId,
 							actId);
 					
 					if (oneuserAct.getConsumption() != null) {
@@ -154,7 +154,7 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setDaterange(daterange);
 			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
 			actsPO.setComment(acts.get(i).getComment());
-			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
+			List<User_act> useractPO = userActDAO.findByActId(acts.get(i)
 					.getActId());
 			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
@@ -205,7 +205,7 @@ public class AccountingviewImple extends Observable implements
 		actVO.setDaterange(daterange);
 		actVO.setActDate(formatter.format(acts.getActDate()));
 		actVO.setComment(acts.getComment());
-		List<User_act> useractPO = user_actDAO.findByActId(acts.getActId());
+		List<User_act> useractPO = userActDAO.findByActId(acts.getActId());
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 		float sum = 0;
 		Integer participatorNO = 0;

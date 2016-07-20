@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		FuzzyQueryDAOInterface {
-	private static final Log LOG = LogFactory.getLog(FuzzyQueryDAO.class);
+	private static final Log LOGGER = LogFactory.getLog(FuzzyQueryDAO.class);
 
 	/**
 	 * param obj 传递查询的JAVABEAN对象 param map 保存用户输入的模糊查询条件
@@ -33,16 +33,16 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		for (int i = 0; i < fields.length; i++) {
 			for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				String key = (String) iter.next();
-				LOG.info("Map中的key值: " + key);
-				LOG.info("属性名称: " + fields[i].getName());
+				LOGGER.info("Map中的key值: " + key);
+				LOGGER.info("属性名称: " + fields[i].getName());
 				if (fields[i].getName().equals(key)) { // 判断属性名称是否等于Map中的key值
-					LOG.info("属性名称是否等于Map中的key值: "
+					LOGGER.info("属性名称是否等于Map中的key值: "
 							+ fields[i].getName().equals(key));
 					if (!"".equals(map.get(key).toString())
 							&& null != map.get(key).toString()) {
-						LOG.info("DAO利用反射得到传递进来javabean的属性: "
+						LOGGER.info("DAO利用反射得到传递进来javabean的属性: "
 								+ fields[i].getName());
-						LOG.info("DAO利用map得到传递进来javabean的属性: " + key
+						LOGGER.info("DAO利用map得到传递进来javabean的属性: " + key
 								+ "  " + map.get(key));
 						// 判断传递的属性是什么类型，项目中查询的是两个时间段之间
 						if (map.get(key) instanceof Date[]) {
@@ -59,7 +59,7 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 											dates[1]));
 								}
 							} catch (Exception e) {
-								e.printStackTrace();
+								LOGGER.error(e.toString());
 							}
 						}
 						// 如果是字符串类型
@@ -85,7 +85,7 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		detachedCriteria.setProjection(null);
 		List currpagedatas = getHibernateTemplate().findByCriteria(
 				detachedCriteria);
-		LOG.info("DAO通用模糊查询得到的记录个数: " + currpagedatas.size());
+		LOGGER.info("DAO通用模糊查询得到的记录个数: " + currpagedatas.size());
 		return currpagedatas;
 	}
 

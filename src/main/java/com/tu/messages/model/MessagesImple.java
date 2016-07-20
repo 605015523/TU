@@ -28,6 +28,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	}
 
 	// 通过messagesId获取该messages对象
+	@Override
 	public MessagesVO doGetOneMsgById(Integer msgId) {
 		MessagesVO oneMessagesVO = new MessagesVO();
 		Messages oneMessagesPO = msgDAO.findById(msgId);
@@ -42,6 +43,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	}
 
 	// 添加一个messages
+	@Override
 	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
 		Messages onemsgPO = new Messages();
 		String addMessage = null;

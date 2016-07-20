@@ -12,11 +12,13 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 	public static final String MSG_ID = "group_id";
 	public static final String READ_STATE = "read_state";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
 	// 保存一个userMsg对象
+	@Override
 	public void save(UserMsg oneUserMsgPO) {
 		LOGGER.debug("saving UserMsg instance");
 		try {
@@ -29,6 +31,7 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId和msgId查找一个userMsg对象
+	@Override
 	public UserMsg findByUserIdAndMsgId(Integer userId, Integer msgId) {
 		try {
 			String hql = " from com.tu.user.msg.dao.UserMsg where user_id="
@@ -44,6 +47,7 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId查找所有该用户的messages消息
+	@Override
 	public List<UserMsg> findMsgByUserId(java.lang.Integer userId) {
 		LOGGER.debug("find all UserMsg instance by userId");
 		try {
@@ -58,6 +62,7 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除一个userMsg对象
+	@Override
 	public void delete(UserMsg persistentInstance) {
 		LOGGER.debug("deleting UserMsg instance");
 		try {
@@ -70,6 +75,7 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 	}
 
 	// 修改一个userMsg对象
+	@Override
 	public UserMsg merge(UserMsg detachedInstance) {
 		LOGGER.debug("merging UserMsg instance");
 		try {

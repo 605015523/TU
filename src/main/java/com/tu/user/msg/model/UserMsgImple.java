@@ -48,6 +48,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	}
 
 	// 发送一个msg
+	@Override
 	public String doSendMsg(Integer msgId, List<Integer> alluserId) {
 		UserMsg onemsgPO = new UserMsg();
 		String sendMessage = null;
@@ -62,11 +63,13 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	}
 
 	// 获取所有用户的msg
+	@Override
 	public List<UserMsg> doGetUserMsg(Integer userId) {
 		return userMsgDAO.findMsgByUserId(userId);
 	}
 
 	// 通过userId和msgId获取一个UserMsg对象
+	@Override
 	public UserMsg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId) {
 		UserMsg oneUserMsg = new UserMsg();
 		oneUserMsg = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
@@ -74,6 +77,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	}
 
 	// 更新一个userMsg对象
+	@Override
 	public void doUpdateOneUserMsg(UserMsg oneUserMsgVO) {
 		Integer userId = oneUserMsgVO.getUserId();
 		Integer msgId = oneUserMsgVO.getMsgId();

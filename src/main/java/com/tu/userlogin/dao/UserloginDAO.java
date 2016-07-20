@@ -19,11 +19,13 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	private static final String OLD_BALANCE = "old_balance";
 	private static final String QUOTA = "quota";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
 	// 保存一个user
+	@Override
 	public void save(Userlogin transientInstance) {
 		LOG.debug("saving Userlogin instance");
 		try {
@@ -36,6 +38,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除一个用户
+	@Override
 	public void delete(Userlogin persistentInstance) {
 		LOG.debug("deleting Userlogin instance");
 		try {
@@ -60,6 +63,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
+	@Override
 	public List<Userlogin> findByProperty(String propertyName, Object value) {
 		LOG.debug("finding Userlogin instance with property: " + propertyName
 				+ ", value: " + value);
@@ -90,6 +94,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		return findByProperty(USER_DEPT, userDept);
 	}
 
+	@Override
 	public List<Userlogin> findAll() {
 		LOG.debug("finding all Userlogin instances");
 		try {
@@ -101,6 +106,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
+	@Override
 	public Userlogin merge(Userlogin detachedInstance) {
 		LOG.debug("merging Userlogin instance");
 		try {

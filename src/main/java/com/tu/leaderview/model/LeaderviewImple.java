@@ -65,6 +65,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 	}
 
 	// 通过groupId获取所有参加这个活动的user
+	@Override
 	public List<GroupActVO> doGetAllUserActsByGroupId(Integer groupId) {
 		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();

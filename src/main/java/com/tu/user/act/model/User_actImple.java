@@ -27,6 +27,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 通过userId和ActId来获取特定user_act对象
+	@Override
 	public User_actVO doGetOneActById(Integer userId, Integer actId) {
 		User_actVO userActVO = new User_actVO();
 		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
@@ -43,6 +44,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 添加一个user_act对象
+	@Override
 	public String doAddOneUser_act(User_actVO oneUserActVO) {
 		String addMessage = null;
 		User_act userActPO = new User_act();
@@ -65,6 +67,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 删除一个user_act对象
+	@Override
 	public String doDeleteOneUser_act(Integer userId, Integer actId) {
 		String okOrNot = null;
 		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
@@ -84,6 +87,7 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 更新一个user_act对象
+	@Override
 	public void doUpdateOneUser_act(User_actVO userActVO) {
 		Integer actId = userActVO.getActId();
 		Integer userId = userActVO.getUserId();

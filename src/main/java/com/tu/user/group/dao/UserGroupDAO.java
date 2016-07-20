@@ -11,11 +11,13 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	public static final String USER_ID = "user_id";
 	public static final String GROUP_ID = "group_id";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
 	// 保存一个UserGroup对象
+	@Override
 	public void save(UserGroup oneUserGroupPO) {
 		LOGGER.debug("saving UserGroup instance");
 		try {
@@ -28,6 +30,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId找到所有userGroup对象
+	@Override
 	public List<UserGroup> findByUserId(Integer userId) {
 		try {
 
@@ -41,6 +44,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId找到所有userGroup对象
+	@Override
 	public List<UserGroup> findByGroupId(Integer groupId) {
 		try {
 
@@ -54,6 +58,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId和userId找到特定userGroup对象
+	@Override
 	public UserGroup findByGroupIdAndUserId(Integer memberId, Integer groupId) {
 		try {
 			String hql = " from com.tu.user.group.dao.UserGroup where user_id ="
@@ -70,6 +75,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除某个userGroup对象
+	@Override
 	public void delete(UserGroup persistentInstance) {
 		LOGGER.debug("deleting UserGroup instance");
 		try {

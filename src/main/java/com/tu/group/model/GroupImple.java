@@ -29,6 +29,7 @@ public class GroupImple extends Observable implements GroupInterface {
 		this.groupDAO = groupDAO;
 	}
 
+	@Override
 	public GroupVO dogetOneGroup(Integer userId) {
 		GroupVO groupVO = new GroupVO();
 		Group groupPO = groupDAO.findByUserId(userId);
@@ -44,6 +45,7 @@ public class GroupImple extends Observable implements GroupInterface {
 		return groupVO;
 	}
 
+	@Override
 	public GroupVO dogetOneGroupByName(String groupName) {
 		GroupVO groupVO = new GroupVO();
 		Group groupPO = groupDAO.findByGroupName(groupName);
@@ -59,6 +61,7 @@ public class GroupImple extends Observable implements GroupInterface {
 		return groupVO;
 	}
 
+	@Override
 	public List<GroupVO> dogetAllGroup() {
 		List<GroupVO> allGroupVO = new ArrayList<GroupVO>();
 		List<Group> allGroupPO = groupDAO.findAll();

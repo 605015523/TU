@@ -27,6 +27,7 @@ public class UserloginManageImple extends Observable implements
 	}
 
 	// 获取所有用户的登录信息
+	@Override
 	public List<UserloginVO> doGetAllUserlogin() {
 		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		List<Userlogin> knowledgeadministratorPOs = userloginDAO.findAll();
@@ -49,6 +50,7 @@ public class UserloginManageImple extends Observable implements
 	}
 
 	// 通过userId获取该用户
+	@Override
 	public UserloginVO dogetOneUserInfoByUserId(Integer userId) {
 		Userlogin userInfoPO = new Userlogin();
 		userInfoPO = userloginDAO.findById(userId);
@@ -67,6 +69,7 @@ public class UserloginManageImple extends Observable implements
 	}
 
 	// 更新用户spending
+	@Override
 	public void doUpdateOneUserInfo(UserloginVO oneUserVO) {
 		Userlogin oneUserPO = new Userlogin();
 		Integer userId = oneUserVO.getUserId();

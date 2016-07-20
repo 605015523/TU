@@ -15,11 +15,13 @@ public class User_actDAO extends HibernateDaoSupport implements
 	public static final String STATE = "state";
 	public static final String REMARK = "remark";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
 	// 通过用户Id获取所有user_act对象，这样可以获取所有用户参与的活动
+	@Override
 	public List<User_act> findByUserId(java.lang.Integer userId) {
 		try {
 
@@ -32,6 +34,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过actId获取所有user_act对象，这样可以获取所有参与该活动的用户
+	@Override
 	public List<User_act> findByActId(java.lang.Integer actId) {
 		try {
 
@@ -44,6 +47,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过userId和actId可以获取到特定user_act对象
+	@Override
 	public User_act findByUserIdAndActId(Integer userId, Integer actId) {
 		try {
 			String hql = " from com.tu.user.act.dao.User_act where user_id ="
@@ -59,6 +63,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除某个user_act对象
+	@Override
 	public void delete(User_act persistentInstance) {
 		LOGGER.debug("deleting User_act instance");
 		try {
@@ -71,6 +76,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存某个user_act对象
+	@Override
 	public void save(User_act oneUserActPO) {
 		LOGGER.debug("saving User_act instance");
 		try {
@@ -84,6 +90,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	}
 
 	// 更新某个user_act对象
+	@Override
 	public void merge(User_act detachedInstance) {
 		LOGGER.debug("merging User_act instance");
 		try {
