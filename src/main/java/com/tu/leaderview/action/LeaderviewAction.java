@@ -61,7 +61,7 @@ public class LeaderviewAction extends ActionSupport {
 	private Float sum;
 
 	public LeaderviewAction() {
-
+		// do nothing
 	}
 
 	public ActivitiesInterface getActsBean() {
@@ -149,7 +149,7 @@ public class LeaderviewAction extends ActionSupport {
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
 				.getGroupId());
-		LOGGER.info("the doGetAllGroupAct get success");
+		LOGGER.info("the doAddAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 
 		return "ShowAllGroupAct";
@@ -160,7 +160,7 @@ public class LeaderviewAction extends ActionSupport {
 		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group.getGroupId());
 		LOGGER.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 
@@ -298,7 +298,7 @@ public class LeaderviewAction extends ActionSupport {
 		// GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		LOGGER.info("the doGetAllGroupAct get success");
+		LOGGER.info("the doUpdateAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
@@ -328,9 +328,9 @@ public class LeaderviewAction extends ActionSupport {
 		try {
 			BeanUtils.copyProperties(oneMsgVO, oneActVO);
 		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException");
+			LOGGER.error("there is a IllegalAccessException: " + e.toString());
 		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException");
+			LOGGER.error("there is a InvocationTargetException: " + e.toString());
 		}
 
 		// 将这个message存到数据库，并且发送给所有用户
@@ -363,7 +363,7 @@ public class LeaderviewAction extends ActionSupport {
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		LOGGER.info("the doGetAllGroupAct get success");
+		LOGGER.info("the doPublishAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
