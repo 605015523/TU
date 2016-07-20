@@ -11,7 +11,6 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	// property constants
 	private static final String USER_ID = "user_id";
 	private static final String USER_NAME = "userName";
-	private static final String USER_PASSWORD = "user_password";
 	private static final String USER_ROLE = "user_role";
 	private static final String USER_DEPT = "user_dept";
 	private static final String IN_DATE = "in_date";

@@ -36,14 +36,14 @@ public class UserloginManageAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	private UserloginManageInterface userloginManageBean = null;
-	private UserviewInterface userviewBean = null;
-	private LeaderviewInterface leaderviewBean = null;
-	private ActivitiesInterface actsBean = null;
-	private GroupInterface groupBean = null;
-	private MessagesInterface msgBean = null;
-	private UserMsgInterface userMsgBean = null;
-	private UserGroupInterface userGroupBean = null;
+	private transient UserloginManageInterface userloginManageBean = null;
+	private transient UserviewInterface userviewBean = null;
+	private transient LeaderviewInterface leaderviewBean = null;
+	private transient ActivitiesInterface actsBean = null;
+	private transient GroupInterface groupBean = null;
+	private transient MessagesInterface msgBean = null;
+	private transient UserMsgInterface userMsgBean = null;
+	private transient UserGroupInterface userGroupBean = null;
 
 	private Integer userId;
 	private String userName;

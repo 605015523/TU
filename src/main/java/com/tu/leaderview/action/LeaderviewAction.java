@@ -38,12 +38,12 @@ public class LeaderviewAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	private LeaderviewInterface leaderviewBean = null;
-	private UserGroupInterface userGroupBean = null;
-	private ActivitiesInterface actsBean = null;
-	private MessagesInterface msgBean = null;
-	private UserMsgInterface userMsgBean = null;
-	private UserActInterface userActBean = null;
+	private transient LeaderviewInterface leaderviewBean = null;
+	private transient UserGroupInterface userGroupBean = null;
+	private transient ActivitiesInterface actsBean = null;
+	private transient MessagesInterface msgBean = null;
+	private transient UserMsgInterface userMsgBean = null;
+	private transient UserActInterface userActBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer msgId;
@@ -267,7 +267,7 @@ public class LeaderviewAction extends ActionSupport {
 	}
 
 	// 更新活动到数据库，并发送更新消息给所有成员
-	public String doUpdateAct() throws Exception {
+	public String doUpdateAct() throws ParseException {
 		String updateMessage = null;
 		String sendMessage = null;
 		String addMessage = null;

@@ -36,12 +36,12 @@ public class UserviewAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	private UserloginManageInterface userloginManageBean = null;
-	private UserviewInterface userviewBean = null;
-	private UserActInterface userActBean = null;
-	private MessagesInterface msgBean = null;
-	private UserMsgInterface userMsgBean = null;
-	private ActivitiesInterface actsBean = null;
+	private transient UserloginManageInterface userloginManageBean = null;
+	private transient UserviewInterface userviewBean = null;
+	private transient UserActInterface userActBean = null;
+	private transient MessagesInterface msgBean = null;
+	private transient UserMsgInterface userMsgBean = null;
+	private transient ActivitiesInterface actsBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer userId;
@@ -250,7 +250,7 @@ public class UserviewAction extends ActionSupport {
 	}
 
 	// 修改密码
-	public String doChangePwd() throws Exception {
+	public String doChangePwd() {
 		String updateMessage = null;
 		initServletContextObject();
 		UserloginVO userInfo = new UserloginVO();
@@ -261,8 +261,8 @@ public class UserviewAction extends ActionSupport {
 		userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		String orgpassword = userInfo.getUserPassword();
 		userInfo.setUserPassword(newpassword);
-		boolean a = (orgpassword.equals(oldpassword));
-		if (a == true) {
+		
+		if (orgpassword.equals(oldpassword)) {
 			updateMessage = userviewBean.doupdateOneuserInfo(userInfo);
 			request.setAttribute("updateMessage", updateMessage);
 			return "pwdUpdateSuccess";
@@ -275,7 +275,7 @@ public class UserviewAction extends ActionSupport {
 	}
 
 	// 删除一个想参与的活动（特别的，若该活动报名时间结束则不能再删除）
-	public String doDeleteOneAct() throws Exception {
+	public String doDeleteOneAct() {
 		String actionReturnMessage = null;
 		initServletContextObject();
 		Integer userId = (Integer) session.getAttribute("userId");

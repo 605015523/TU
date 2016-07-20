@@ -31,11 +31,11 @@ public class AccountingviewAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	private AccountingviewInterface accountingviewBean = null;
-	private UserGroupInterface userGroupBean = null;
-	private ActivitiesInterface actsBean = null;
-	private GroupInterface groupBean = null;
-	private UserloginManageInterface userloginManageBean = null;
+	private transient AccountingviewInterface accountingviewBean = null;
+	private transient UserGroupInterface userGroupBean = null;
+	private transient ActivitiesInterface actsBean = null;
+	private transient GroupInterface groupBean = null;
+	private transient UserloginManageInterface userloginManageBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer msgId;
