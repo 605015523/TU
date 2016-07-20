@@ -79,11 +79,11 @@
         var remaining = document.getElementById('remaining').innerHTML;
     
         if (nbParticipants=="") {
-            alert("the participator number can not empty!");
+            alert("the number of participants cannot be empty!");
             return false;
         }
  
-        var truthBeTold = window.confirm("Be careful, the consumption may over the remaining!");
+        var truthBeTold = window.confirm("Be careful, the consumption may be over the remaining!");
 	    if (truthBeTold){
             return true;
         }
@@ -172,7 +172,7 @@
 
 						<div class="form-group ">
 							<h5>
-								<strong>Warning:</strong>the consumption should not over the
+								<strong>Warning:</strong>the consumption should not be over the
 								Remaining.
 							</h5>
 						</div>
