@@ -1,4 +1,4 @@
-package com.tu.user_group.model;
+package com.tu.user.group.model;
 
 import java.util.List;
 

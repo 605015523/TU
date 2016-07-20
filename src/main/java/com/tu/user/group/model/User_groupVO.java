@@ -1,19 +1,16 @@
-package com.tu.user_group.dao;
+package com.tu.user.group.model;
 
-public class User_group implements java.io.Serializable {
+public class User_groupVO implements java.io.Serializable {
 
-	private static final long serialVersionUID = 5624706764022407140L;
+	private static final long serialVersionUID = -6214972815023614321L;
 	
 	// Fields
 	private Integer userId;
 	private Integer groupId;
 
-	public User_group() {
-	}
-
-	public User_group(Integer userId, Integer groupId) {
-		this.groupId = groupId;
-		this.userId = userId;
+	public User_groupVO() {
+		userId = null;
+		groupId = null;
 	}
 
 	public Integer getUserId() {

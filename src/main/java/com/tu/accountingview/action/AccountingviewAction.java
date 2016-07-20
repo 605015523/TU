@@ -19,7 +19,7 @@ import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupInterface;
 import com.tu.group.model.GroupVO;
-import com.tu.user_group.model.User_groupInterface;
+import com.tu.user.group.model.User_groupInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
 

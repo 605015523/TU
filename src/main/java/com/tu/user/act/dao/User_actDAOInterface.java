@@ -1,4 +1,4 @@
-package com.tu.user_act.dao;
+package com.tu.user.act.dao;
 
 import java.util.List;
 

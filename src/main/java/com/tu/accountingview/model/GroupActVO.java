@@ -2,7 +2,7 @@ package com.tu.accountingview.model;
 
 import java.util.*;
 
-import com.tu.leaderview.model.memberInVO;
+import com.tu.leaderview.model.MemberInVO;
 
 public class GroupActVO implements java.io.Serializable {
 
@@ -18,7 +18,7 @@ public class GroupActVO implements java.io.Serializable {
 	private String state;
 	private Float sum;
 	private Integer participatorNO;
-	private List<memberInVO> memberInVO;
+	private List<MemberInVO> memberInVO;
 	private String comment;
 
 	// Constructors
@@ -110,11 +110,11 @@ public class GroupActVO implements java.io.Serializable {
 		this.daterange = daterange;
 	}
 
-	public List<memberInVO> getMemberInVO() {
+	public List<MemberInVO> getMemberInVO() {
 		return memberInVO;
 	}
 
-	public void setMemberInVO(List<memberInVO> memberInVO) {
+	public void setMemberInVO(List<MemberInVO> memberInVO) {
 		this.memberInVO = memberInVO;
 	}
 

@@ -1,6 +1,6 @@
 package com.tu.leaderview.model;
 
-public class memberInVO implements java.io.Serializable {
+public class MemberInVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3138622175864772428L;
 	
@@ -11,10 +11,10 @@ public class memberInVO implements java.io.Serializable {
 	private Float consumption;
 	private String remark;
 
-	public memberInVO() {
+	public MemberInVO() {
 	}
 
-	public memberInVO(Integer userId, String userName, String userDept,
+	public MemberInVO(Integer userId, String userName, String userDept,
 			Integer participatorNO, Float consumption, String remark) {
 		this.userId = userId;
 		this.userName = userName;

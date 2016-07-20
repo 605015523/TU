@@ -1,4 +1,4 @@
-package com.tu.user_act.model;
+package com.tu.user.act.model;
 
 public interface User_actInterface {
 

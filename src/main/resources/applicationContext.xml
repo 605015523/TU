@@ -125,11 +125,11 @@
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
-	<bean id="User_groupBean" class="com.tu.user_group.model.User_groupImple">
+	<bean id="User_groupBean" class="com.tu.user.group.model.User_groupImple">
 		<property name="user_groupDAO" ref="User_groupDAO"/>
 	</bean>
 	
-	<bean id="User_actBean" class="com.tu.user_act.model.User_actImple">
+	<bean id="User_actBean" class="com.tu.user.act.model.User_actImple">
 		<property name="user_actDAO" ref="User_actDAO"/>
 	</bean>
 
@@ -152,7 +152,7 @@
 		<property name="msgDAO" ref="MsgDAO"/>
 	</bean>
 	
-	<bean id="User_msgBean" class="com.tu.user_msg.model.User_msgImple">
+	<bean id="User_msgBean" class="com.tu.user.msg.model.User_msgImple">
 		<property name="user_msgDAO" ref="User_msgDAO"/>
 	</bean>
 
@@ -165,7 +165,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="User_groupDAO" class="com.tu.user_group.dao.User_groupDAO">
+	<bean id="User_groupDAO" class="com.tu.user.group.dao.User_groupDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
@@ -177,7 +177,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="User_actDAO" class="com.tu.user_act.dao.User_actDAO">
+	<bean id="User_actDAO" class="com.tu.user.act.dao.User_actDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
@@ -185,7 +185,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<bean id="User_msgDAO" class="com.tu.user_msg.dao.User_msgDAO">
+	<bean id="User_msgDAO" class="com.tu.user.msg.dao.User_msgDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 

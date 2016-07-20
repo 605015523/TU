@@ -11,9 +11,9 @@ import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.activities.model.ActivitiesConstant;
 import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
-import com.tu.leaderview.model.memberInVO;
-import com.tu.user_act.dao.User_act;
-import com.tu.user_act.dao.User_actDAOInterface;
+import com.tu.leaderview.model.MemberInVO;
+import com.tu.user.act.dao.User_act;
+import com.tu.user.act.dao.User_actDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 
@@ -155,11 +155,11 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setComment(acts.get(i).getComment());
 			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
 					.getActId());
-			List<memberInVO> memberInVO = new ArrayList<memberInVO>();
+			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
 			Integer participatorNO = 0;
 			for (int j = 0; j < useractPO.size(); j++) {
-				memberInVO oneMemberIn = new memberInVO();
+				MemberInVO oneMemberIn = new MemberInVO();
 				oneMemberIn.setUserId(useractPO.get(j).getUserId());
 				oneMemberIn.setParticipatorNO(useractPO.get(j)
 						.getParticipatorNO());
@@ -178,8 +178,8 @@ public class AccountingviewImple extends Observable implements
 			actsVO.add(actsPO);
 		}
 		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = 0; j < actsVO.size(); j++) {
-			inverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
+		for (int j = actsVO.size()-1; j >= 0; j--) {
+			inverseactsVO.add(actsVO.get(j));
 		}
 
 		return inverseactsVO;
@@ -204,11 +204,11 @@ public class AccountingviewImple extends Observable implements
 		actVO.setActDate(formatter.format(acts.getActDate()));
 		actVO.setComment(acts.getComment());
 		List<User_act> useractPO = user_actDAO.findByActId(acts.getActId());
-		List<memberInVO> memberInVO = new ArrayList<memberInVO>();
+		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 		float sum = 0;
 		Integer participatorNO = 0;
 		for (int j = 0; j < useractPO.size(); j++) {
-			memberInVO oneMemberIn = new memberInVO();
+			MemberInVO oneMemberIn = new MemberInVO();
 			oneMemberIn.setUserId(useractPO.get(j).getUserId());
 			oneMemberIn.setParticipatorNO(useractPO.get(j).getParticipatorNO());
 			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
@@ -251,8 +251,8 @@ public class AccountingviewImple extends Observable implements
 
 		}
 		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = 0; j < actsVO.size(); j++) {
-			inverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
+		for (int j = actsVO.size()-1; j >= 0; j--) {
+			inverseactsVO.add(actsVO.get(j));
 		}
 		return inverseactsVO;
 

@@ -1,4 +1,4 @@
-package com.tu.user_msg.dao;
+package com.tu.user.msg.dao;
 
 public class User_msg implements java.io.Serializable {
 

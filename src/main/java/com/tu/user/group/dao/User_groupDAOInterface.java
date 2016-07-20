@@ -1,12 +1,12 @@
-package com.tu.user_group.dao;
+package com.tu.user.group.dao;
 
 import java.util.List;
 
 public interface User_groupDAOInterface {
 
-	public void save(User_group oneUser_groupPO);
+	public void save(User_group oneUserGroupPO);
 
-	public List<User_group> findByUserId(Integer user_id);
+	public List<User_group> findByUserId(Integer userId);
 
 	public List<User_group> findByGroupId(Integer groupId);
 

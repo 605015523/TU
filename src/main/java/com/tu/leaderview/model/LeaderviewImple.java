@@ -6,9 +6,9 @@ import java.util.*;
 import com.tu.activities.dao.Activity;
 import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.GroupDAOInterface;
-import com.tu.user_act.dao.User_act;
-import com.tu.user_act.dao.User_actDAOInterface;
-import com.tu.user_group.dao.User_groupDAOInterface;
+import com.tu.user.act.dao.User_act;
+import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.group.dao.User_groupDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 
@@ -89,11 +89,11 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsPO.setComment(acts.get(i).getComment());
 			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
 					.getActId());
-			List<memberInVO> memberInVO = new ArrayList<memberInVO>();
+			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
 			Integer participatorNO = 0;
 			for (int j = 0; j < useractPO.size(); j++) {
-				memberInVO oneMemberIn = new memberInVO();
+				MemberInVO oneMemberIn = new MemberInVO();
 				oneMemberIn.setUserId(useractPO.get(j).getUserId());
 				oneMemberIn.setParticipatorNO(useractPO.get(j)
 						.getParticipatorNO());
@@ -113,11 +113,11 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsVO.add(actsPO);
 
 		}
-		List<GroupActVO> InverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = 0; j < actsVO.size(); j++) {
-			InverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
+		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
+		for (int j = actsVO.size()-1; j >= 0; j--) {
+			inverseactsVO.add(actsVO.get(j));
 		}
-		return InverseactsVO;
+		return inverseactsVO;
 
 	}
 

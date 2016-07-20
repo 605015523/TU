@@ -17,10 +17,10 @@ import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.messages.model.MessagesInterface;
-import com.tu.user_act.model.User_actInterface;
-import com.tu.user_act.model.User_actVO;
-import com.tu.user_msg.dao.User_msg;
-import com.tu.user_msg.model.User_msgInterface;
+import com.tu.user.act.model.User_actInterface;
+import com.tu.user.act.model.User_actVO;
+import com.tu.user.msg.dao.User_msg;
+import com.tu.user.msg.model.User_msgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
 import com.tu.userview.model.User_msgVO;
@@ -33,9 +33,9 @@ public class UserviewAction extends ActionSupport {
 	private static final Log LOG = LogFactory.getLog(UserviewAction.class);
 	private static final long serialVersionUID = -6352178618288011965L;
 	
-	private HttpServletRequest request = null;
-	private HttpServletResponse response = null;
-	private HttpSession session = null;
+	private transient HttpServletRequest request = null;
+	private transient HttpServletResponse response = null;
+	private transient HttpSession session = null;
 
 	private UserloginManageInterface userloginManageBean = null;
 	private UserviewInterface userviewBean = null;
@@ -66,8 +66,8 @@ public class UserviewAction extends ActionSupport {
 	}
 
 	public void setUserloginManageBean(
-			UserloginManageInterface UserloginManageBean) {
-		this.userloginManageBean = UserloginManageBean;
+			UserloginManageInterface userloginManageBean) {
+		this.userloginManageBean = userloginManageBean;
 	}
 
 	public UserviewInterface getUserviewBean() {
@@ -102,8 +102,8 @@ public class UserviewAction extends ActionSupport {
 		return this.user_msgBean;
 	}
 
-	public void setUser_msgBean(User_msgInterface user_msgBean) {
-		this.user_msgBean = user_msgBean;
+	public void setUser_msgBean(User_msgInterface userMsgBean) {
+		this.user_msgBean = userMsgBean;
 	}
 
 	public ActivitiesInterface getActsBean() {
@@ -183,18 +183,18 @@ public class UserviewAction extends ActionSupport {
 
 		// 将User_msg中的状态设置为已读
 		Integer userId = (Integer) session.getAttribute("userId");
-		User_msg oneUser_Msg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
+		User_msg oneUserMsg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
-		if (oneUser_Msg.getReadState().equals("new")) {
+		if (oneUserMsg.getReadState().equals("new")) {
 
-			oneUser_Msg.setReadState("read");
-			user_msgBean.doUpdateOneUser_msg(oneUser_Msg);
+			oneUserMsg.setReadState("read");
+			user_msgBean.doUpdateOneUser_msg(oneUserMsg);
 			int newMsg = 0;
-			List<User_msg> user_msgVOs = (List<User_msg>) user_msgBean
+			List<User_msg> userMsgVOs = (List<User_msg>) user_msgBean
 					.doGetUserMsg(userId);
-			for (int i = 0; i < user_msgVOs.size(); i++) {
+			for (int i = 0; i < userMsgVOs.size(); i++) {
 
-				if (user_msgVOs.get(i).getReadState().equals("new")) {
+				if (userMsgVOs.get(i).getReadState().equals("new")) {
 					newMsg += 1;
 				}
 
@@ -224,17 +224,17 @@ public class UserviewAction extends ActionSupport {
 	public String doActRequest() {
 		initServletContextObject();
 		String addMessage = null;
-		User_actVO oneUser_actVO = new User_actVO();
+		User_actVO oneUserActVO = new User_actVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
 		LOG.info("the inActid is:" + actId);
 		Integer userId = (Integer) session.getAttribute("userId");
-		oneUser_actVO.setActId(actId);
-		oneUser_actVO.setUserId(userId);
-		oneUser_actVO.setParticipatorNO(getParticipatorNO());
-		oneUser_actVO.setConsumption(getConsumption());
-		oneUser_actVO.setRemark(getRemark());
+		oneUserActVO.setActId(actId);
+		oneUserActVO.setUserId(userId);
+		oneUserActVO.setParticipatorNO(getParticipatorNO());
+		oneUserActVO.setConsumption(getConsumption());
+		oneUserActVO.setRemark(getRemark());
 		try {
-			addMessage = user_actBean.doAddOneUser_act(oneUser_actVO);
+			addMessage = user_actBean.doAddOneUser_act(oneUserActVO);
 		} catch (Exception e) {
 			addMessage = "there are something wrong with control layer: "
 					+ e.toString();
@@ -273,7 +273,7 @@ public class UserviewAction extends ActionSupport {
 			request.setAttribute("updateMessage", updateMessage);
 			return "pwdUpdateSuccess";
 		} else {
-			updateMessage = "Incorrect old password,please re-enter!";
+			updateMessage = "Incorrect old password, please re-enter!";
 			request.setAttribute("updateMessage", updateMessage);
 			return "pwdUpdateFail";
 		}

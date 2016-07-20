@@ -1,4 +1,4 @@
-package com.tu.user_group.dao;
+package com.tu.user.group.dao;
 
 import java.util.List;
 import org.apache.commons.logging.Log;
@@ -32,7 +32,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate()
-					.find("from com.tu.user_group.dao.User_group where user_id = ?",
+					.find("from com.tu.user.group.dao.User_group where user_id = ?",
 							userId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
@@ -45,7 +45,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user_group.dao.User_group where group_id = ?",
+					"from com.tu.user.group.dao.User_group where group_id = ?",
 					groupId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by groupId failed", re);
@@ -56,13 +56,13 @@ public class User_groupDAO extends HibernateDaoSupport implements
 	// 通过groupId和userId找到特定user_group对象
 	public User_group findByGroupIdAndUserId(Integer memberId, Integer groupId) {
 		try {
-			String hql = " from com.tu.user_group.dao.User_group where user_id ="
+			String hql = " from com.tu.user.group.dao.User_group where user_id ="
 					+ memberId.toString() + " and group_id="
 					+ groupId.toString();
-			User_group user_group = (User_group) this.getHibernateTemplate()
+			User_group userGroup = (User_group) this.getHibernateTemplate()
 					.find(hql).get(0);
 
-			return user_group;
+			return userGroup;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by groupId and userId failed", re);
 			throw re;

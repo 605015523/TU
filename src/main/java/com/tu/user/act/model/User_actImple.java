@@ -1,4 +1,4 @@
-package com.tu.user_act.model;
+package com.tu.user.act.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Observable;
@@ -7,8 +7,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user_act.dao.User_act;
-import com.tu.user_act.dao.User_actDAOInterface;
+import com.tu.user.act.dao.User_act;
+import com.tu.user.act.dao.User_actDAOInterface;
 
 public class User_actImple extends Observable implements User_actInterface {
 	
@@ -66,20 +66,20 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	// 删除一个user_act对象
 	public String doDeleteOneUser_act(Integer userId, Integer actId) {
-		String OkOrNot = null;
+		String okOrNot = null;
 		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		try {
 			if (userActPO != null) {
 				user_actDAO.delete(userActPO);
-				OkOrNot = "delete success!";
+				okOrNot = "delete success!";
 			} else {
-				OkOrNot = "delete fail!";
+				okOrNot = "delete fail!";
 			}
 
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
-		return OkOrNot;
+		return okOrNot;
 
 	}
 

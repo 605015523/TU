@@ -1,4 +1,4 @@
-package com.tu.user_msg.dao;
+package com.tu.user.msg.dao;
 
 import java.util.List;
 

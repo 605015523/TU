@@ -1,4 +1,4 @@
-package com.tu.user_msg.model;
+package com.tu.user.msg.model;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user_msg.dao.User_msg;
-import com.tu.user_msg.dao.User_msgDAOInterface;
+import com.tu.user.msg.dao.User_msg;
+import com.tu.user.msg.dao.User_msgDAOInterface;
 
 public class User_msgImple extends Observable implements User_msgInterface {
 
@@ -31,19 +31,19 @@ public class User_msgImple extends Observable implements User_msgInterface {
 
 	// 删除一个user_msg对象
 	public String doDeleteOneUser_msg(Integer userId, Integer msgId) {
-		String OkOrNot = null;
+		String okOrNot = null;
 		User_msg userMsgPO = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
 		try {
 			if (userMsgPO != null) {
 				user_msgDAO.delete(userMsgPO);
-				OkOrNot = "delete success!";
+				okOrNot = "delete success!";
 			} else {
-				OkOrNot = "delete fail!";
+				okOrNot = "delete fail!";
 			}
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
-		return OkOrNot;
+		return okOrNot;
 
 	}
 

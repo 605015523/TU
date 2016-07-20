@@ -36,11 +36,11 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过messagesId来获取特定的messages对象
-	public Messages findById(java.lang.Integer msg_id) {
-		LOG.debug("getting Message instance with id: " + msg_id);
+	public Messages findById(java.lang.Integer msgId) {
+		LOG.debug("getting Message instance with id: " + msgId);
 		try {
 			Messages instance = (Messages) getHibernateTemplate().get(
-					"com.tu.messages.dao.Messages", msg_id);
+					"com.tu.messages.dao.Messages", msgId);
 			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);

@@ -21,13 +21,13 @@ import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupVO;
 import com.tu.leaderview.model.GroupActVO;
 import com.tu.leaderview.model.LeaderviewInterface;
-import com.tu.leaderview.model.memberInVO;
+import com.tu.leaderview.model.MemberInVO;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
-import com.tu.user_act.model.User_actInterface;
-import com.tu.user_act.model.User_actVO;
-import com.tu.user_group.model.User_groupInterface;
-import com.tu.user_msg.model.User_msgInterface;
+import com.tu.user.act.model.User_actInterface;
+import com.tu.user.act.model.User_actVO;
+import com.tu.user.group.model.User_groupInterface;
+import com.tu.user.msg.model.User_msgInterface;
 
 public class LeaderviewAction extends ActionSupport {
 	private static final long serialVersionUID = -1552527472504308094L;
@@ -100,8 +100,8 @@ public class LeaderviewAction extends ActionSupport {
 		return this.user_msgBean;
 	}
 
-	public void setUser_msgBean(User_msgInterface user_MsgBean) {
-		this.user_msgBean = user_MsgBean;
+	public void setUser_msgBean(User_msgInterface userMsgBean) {
+		this.user_msgBean = userMsgBean;
 	}
 
 	public User_actInterface getUser_actBean() {
@@ -131,8 +131,7 @@ public class LeaderviewAction extends ActionSupport {
 		oneActVO.setActMoney(getActMoney());
 		oneActVO.setDescription(getDescription());
 		oneActVO.setActDate(getActDate());
-		GroupVO group = new GroupVO();
-		group = (GroupVO) session.getAttribute("group");
+		GroupVO group = (GroupVO) session.getAttribute("group");
 		oneActVO.setGroupId(group.getGroupId());
 
 		// 由于报名开始日期和结束日期存在了一个string（daterange）中，所以这里要进行格式转换
@@ -141,7 +140,7 @@ public class LeaderviewAction extends ActionSupport {
 		Date endDate = act.parse(daterange.substring(13, 23));
 		oneActVO.setEnrollStartDate(startDate);
 		oneActVO.setEnrollEndDate(endDate);
-		oneActVO.setState("draft");
+		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
 
 		// 添加一个活动到数据库并返回活动的Id
 		try {
@@ -241,30 +240,30 @@ public class LeaderviewAction extends ActionSupport {
 					actsBean.doUpdateOneAct(oneActVO);
 				} catch (Exception e) {
 				}
-				List<memberInVO> MemberInVO = new ArrayList<memberInVO>();
+				List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 
 				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
-					memberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
+					MemberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
 							.get(j - 1);
-					User_actVO oneuser_act = user_actBean.doGetOneActById(
+					User_actVO oneuserAct = user_actBean.doGetOneActById(
 							oneMemberInVO.getUserId(), updateActId);
 					Float consumption = Float.parseFloat(request
 							.getParameter("perconsumption_" + j));
-					oneuser_act.setConsumption(consumption);
+					oneuserAct.setConsumption(consumption);
 					oneMemberInVO.setConsumption(consumption);
 					Integer participatorNO = Integer.parseInt(request
 							.getParameter("perparticipatorNO_" + j));
-					oneuser_act.setParticipatorNO(participatorNO);
+					oneuserAct.setParticipatorNO(participatorNO);
 					oneMemberInVO.setParticipatorNO(participatorNO);
-					MemberInVO.add(oneMemberInVO);
+					memberInVO.add(oneMemberInVO);
 					// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 					try {
-						user_actBean.doUpdateOneUser_act(oneuser_act);
+						user_actBean.doUpdateOneUser_act(oneuserAct);
 					} catch (Exception e) {
 					}
 
 				}
-				onegroupactVO.setMemberInVO(MemberInVO);
+				onegroupactVO.setMemberInVO(memberInVO);
 				request.setAttribute("act", onegroupactVO);
 			}
 		}

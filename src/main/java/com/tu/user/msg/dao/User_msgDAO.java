@@ -1,4 +1,4 @@
-package com.tu.user_msg.dao;
+package com.tu.user.msg.dao;
 
 import java.util.List;
 import org.apache.commons.logging.Log;
@@ -17,10 +17,10 @@ public class User_msgDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个user_msg对象
-	public void save(User_msg oneUser_msgPO) {
+	public void save(User_msg oneUserMsgPO) {
 		LOGGER.debug("saving User_msg instance");
 		try {
-			getHibernateTemplate().save(oneUser_msgPO);
+			getHibernateTemplate().save(oneUserMsgPO);
 			LOGGER.debug("save successful");
 		} catch (RuntimeException re) {
 			LOGGER.error("save failed", re);
@@ -31,7 +31,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 	// 通过userId和msgId查找一个user_msg对象
 	public User_msg findByUserIdAndMsgId(Integer userId, Integer msgId) {
 		try {
-			String hql = " from com.tu.user_msg.dao.User_msg where user_id="
+			String hql = " from com.tu.user.msg.dao.User_msg where user_id="
 					+ userId.toString() + " and msg_id =" + msgId.toString();
 			User_msg userMsg = (User_msg) this.getHibernateTemplate()
 					.find(hql).get(0);
@@ -48,7 +48,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 		LOGGER.debug("find all User_msg instance by userId");
 		try {
 			List<User_msg> userMsg = getHibernateTemplate().find(
-					"from com.tu.user_msg.dao.User_msg where user_id = ?", userId);
+					"from com.tu.user.msg.dao.User_msg where user_id = ?", userId);
 			LOGGER.debug("find successful");
 			return userMsg;
 		} catch (RuntimeException re) {

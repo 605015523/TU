@@ -21,9 +21,9 @@ import com.tu.group.model.GroupVO;
 import com.tu.leaderview.model.LeaderviewInterface;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
-import com.tu.user_group.model.User_groupInterface;
-import com.tu.user_msg.dao.User_msg;
-import com.tu.user_msg.model.User_msgInterface;
+import com.tu.user.group.model.User_groupInterface;
+import com.tu.user.msg.dao.User_msg;
+import com.tu.user.msg.model.User_msgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
 import com.tu.userview.model.UserviewInterface;
@@ -36,8 +36,8 @@ public class UserloginManageAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	UserloginManageInterface UserloginManageBean = null;
-	UserviewInterface UserviewBean = null;
+	UserloginManageInterface userloginManageBean = null;
+	UserviewInterface userviewBean = null;
 	LeaderviewInterface leaderviewBean = null;
 	ActivitiesInterface actsBean = null;
 	GroupInterface groupBean = null;
@@ -79,16 +79,16 @@ public class UserloginManageAction extends ActionSupport {
 	}
 
 	public void setUserloginManageBean(
-			UserloginManageInterface UserloginManageBean) {
-		this.UserloginManageBean = UserloginManageBean;
+			UserloginManageInterface userloginManageBean) {
+		this.userloginManageBean = userloginManageBean;
 	}
 
 	public UserviewInterface getUserviewBean() {
-		return this.UserviewBean;
+		return this.userviewBean;
 	}
 
-	public void setUserviewBean(UserviewInterface UserviewBean) {
-		this.UserviewBean = UserviewBean;
+	public void setUserviewBean(UserviewInterface userviewBean) {
+		this.userviewBean = userviewBean;
 	}
 
 	public LeaderviewInterface getLeaderviewBean() {
@@ -146,7 +146,7 @@ public class UserloginManageAction extends ActionSupport {
 
 		// 用户登录验证模块
 		initServletContextObject();
-		List<UserloginVO> knowledgeadministratorVOs = UserloginManageBean.doGetAllUserlogin();
+		List<UserloginVO> knowledgeadministratorVOs = userloginManageBean.doGetAllUserlogin();
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
@@ -177,7 +177,7 @@ public class UserloginManageAction extends ActionSupport {
 		}
 		
 		// 登录成功，判断预算是否该修改，若为当年的7月1号，预算在原基础上加1000
-		UserloginVO thisuser = UserloginManageBean
+		UserloginVO thisuser = userloginManageBean
 				.dogetOneUserInfoByUserId(userId);
 		Date date = new Date();// 取当前时间
 		cal.setTime(date);
@@ -189,7 +189,7 @@ public class UserloginManageAction extends ActionSupport {
 					&& updatedate.before(date)
 					&& thisuser.getQuota() == 1000) {
 				thisuser.setQuota(thisuser.getQuota() + 1000);
-				UserloginManageBean.doUpdateOneUserInfo(thisuser);
+				userloginManageBean.doUpdateOneUserInfo(thisuser);
 			}
 		} catch (Exception e) {
 
@@ -210,26 +210,26 @@ public class UserloginManageAction extends ActionSupport {
 		}
 
 		int newMsg = 0;
-		List<User_msg> user_msgVOs = user_msgBean.doGetUserMsg(userId);
-		for (User_msg user_msgVO : user_msgVOs) {
-			MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVO
+		List<User_msg> userMsgVOs = user_msgBean.doGetUserMsg(userId);
+		for (User_msg userMsgVO : userMsgVOs) {
+			MessagesVO oneMsg = msgBean.doGetOneMsgById(userMsgVO
 					.getMsgId());
 			ActivitiesVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
 			
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
-				user_msgVO.setReadState("read");
-				user_msgBean.doUpdateOneUser_msg(user_msgVO);
+				userMsgVO.setReadState("read");
+				user_msgBean.doUpdateOneUser_msg(userMsgVO);
 
 			}
-			if (user_msgVO.getReadState().equals("new")) {
+			if (userMsgVO.getReadState().equals("new")) {
 				newMsg += 1;
 			}
 		}
 
 		// 登录成功，获取用户个人信息bean
-		UserviewVO userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
+		UserviewVO userviewVO = userviewBean.doGetOneUserviewInfoByUserId(this
 				.getUserId());
 
 		// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用

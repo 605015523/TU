@@ -17,12 +17,12 @@ import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.messages.dao.Messages;
 import com.tu.messages.dao.MessagesDAOInterface;
-import com.tu.user_act.dao.User_act;
-import com.tu.user_act.dao.User_actDAOInterface;
-import com.tu.user_group.dao.User_group;
-import com.tu.user_group.dao.User_groupDAOInterface;
-import com.tu.user_msg.dao.User_msg;
-import com.tu.user_msg.dao.User_msgDAOInterface;
+import com.tu.user.act.dao.User_act;
+import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.group.dao.User_group;
+import com.tu.user.group.dao.User_groupDAOInterface;
+import com.tu.user.msg.dao.User_msg;
+import com.tu.user.msg.dao.User_msgDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 import com.tu.userlogin.model.UserloginVO;
@@ -43,8 +43,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	}
 
-	public void setUser_groupDAO(User_groupDAOInterface user_groupDAO) {
-		this.user_groupDAO = user_groupDAO;
+	public void setUser_groupDAO(User_groupDAOInterface userGroupDAO) {
+		this.user_groupDAO = userGroupDAO;
 	}
 
 	public void setUserloginDAO(UserloginDAOInterface userloginDAO) {
@@ -108,11 +108,11 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
 			LOG.info("oneuserloginPO ID get success"
 					+ oneuserloginPO.getUserId());
-			List<User_group> oneUser_groupPO = user_groupDAO.findByUserId(userId);
+			List<User_group> oneUserGroupPO = user_groupDAO.findByUserId(userId);
 
-			for (int i = 0; i < oneUser_groupPO.size(); i++) {
+			for (int i = 0; i < oneUserGroupPO.size(); i++) {
 				onegroupPO.add(groupDAO.findById(
-						oneUser_groupPO.get(i).getGroupId()).getGroupName());
+						oneUserGroupPO.get(i).getGroupId()).getGroupName());
 
 			}
 
@@ -161,7 +161,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性
 			// 后续步骤的目的就是通过group、user_act、activities这几个表
 			// 间的关联，获取所有UseractsVO中属性的值
-			UseractsVO UseractsPO = new UseractsVO();
+			UseractsVO useractsPO = new UseractsVO();
 
 			Activity actsPO = actsDAO.findById(userActs.get(i).getActId());
 			// 通过user_act中的actId查找ActsPO实例
@@ -173,88 +173,87 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			cal.setTime(actsPO.getActDate());
 
 			if (cal.get(Calendar.YEAR) == year) {
-				UseractsPO.setUserId(userId);
+				useractsPO.setUserId(userId);
 				// 设置UseractsVO中的所有UserId
 
-				UseractsPO.setActId(userActs.get(i).getActId());
+				useractsPO.setActId(userActs.get(i).getActId());
 				// 通过user_act中的属性，设置UseractsVO中的actId
 
-				UseractsPO.setParticipaterNO(userActs.get(i)
+				useractsPO.setParticipaterNO(userActs.get(i)
 						.getParticipatorNO());
 				// 通过user_act中的属性，设置UseractsVO中的ParticipaterNO
 
-				UseractsPO.setConsumption(userActs.get(i).getConsumption());
+				useractsPO.setConsumption(userActs.get(i).getConsumption());
 				// 通过user_act中的属性，设置UseractsVO中的consumption
 
-				UseractsPO.setRemark(userActs.get(i).getRemark());
+				useractsPO.setRemark(userActs.get(i).getRemark());
 				// 通过user_act中的属性，设置UseractsVO中的Remark
 
-				UseractsPO.setActName(actsPO.getActName());
+				useractsPO.setActName(actsPO.getActName());
 				// 通过ActsPO中的属性，设置UseractsVO中的actName
 
-				UseractsPO.setActMoney(actsPO.getActMoney());
+				useractsPO.setActMoney(actsPO.getActMoney());
 				// 通过ActsPO中的属性，设置UseractsVO中的actMoney
 
-				UseractsPO.setState(actsPO.getState());
+				useractsPO.setState(actsPO.getState());
 				// 通过ActsPO中的属性，设置UseractsVO中的actState
 
-				UseractsPO.setDescription(actsPO.getDescription());
+				useractsPO.setDescription(actsPO.getDescription());
 				// 通过ActsPO中的属性，设置UseractsVO中的description
 
 				// DateFormat df1 = DateFormat.getDateInstance();//日期格式，精确到日
 				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
-				UseractsPO.setActDate(formatter.format(actsPO.getActDate()));
+				useractsPO.setActDate(formatter.format(actsPO.getActDate()));
 				// 通过ActsPO中的属性，设置UseractsVO中的actDate
 
-				UseractsPO.setGroup(groupPO.getGroupName());
+				useractsPO.setGroup(groupPO.getGroupName());
 				// 通过groupPOS中的属性，设置UseractsVO中的groupName
 
-				oneuseractsVO.add(UseractsPO);
+				oneuseractsVO.add(useractsPO);
 			}
 
 		}
-		List<UseractsVO> InverseoneuseractsVO = new ArrayList<UseractsVO>();
-		for (int j = 0; j < oneuseractsVO.size(); j++) {
-			InverseoneuseractsVO.add(oneuseractsVO.get(oneuseractsVO.size() - j
-					- 1));
+		List<UseractsVO> inverseoneUseractsVO = new ArrayList<UseractsVO>();
+		for (int j = oneuseractsVO.size()-1; j >=0 ; j--) {
+			inverseoneUseractsVO.add(oneuseractsVO.get(j));
 		}
-		return InverseoneuseractsVO;
+		return inverseoneUseractsVO;
 	}
 
 	// 获取用户的所有messages
 	public List<User_msgVO> dogetMessages(Integer userId) {
-		List<User_msgVO> user_msgsVO = new ArrayList<User_msgVO>();
-		List<User_msg> user_msg = user_msgDAO.findMsgByUserId(userId);
+		List<User_msgVO> userMsgsVO = new ArrayList<User_msgVO>();
+		List<User_msg> userMsgs = user_msgDAO.findMsgByUserId(userId);
 		
-		for (int i = 0; i < user_msg.size(); i++) {
-			Integer oneMsgId = ((User_msg) user_msg.get(i)).getMsgId();
+		for (int i = 0; i < userMsgs.size(); i++) {
+			Integer oneMsgId = ((User_msg) userMsgs.get(i)).getMsgId();
 			Messages oneMessage = msgDAO.findById(oneMsgId);
-			User_msgVO oneUser_msgVO = new User_msgVO();
+			User_msgVO oneUserMsgVO = new User_msgVO();
 			try { // 利用Bean拷贝类实现简单地拷贝
-				BeanUtils.copyProperties(oneUser_msgVO, oneMessage);
+				BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
 			} catch (IllegalAccessException e) {
 				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUser_msgVO.");
 			} catch (InvocationTargetException e) {
 				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUser_msgVO.");
 			}
-			oneUser_msgVO.setReadState(((User_msg) user_msg.get(i))
+			oneUserMsgVO.setReadState(((User_msg) userMsgs.get(i))
 					.getReadState());
 			Group group = groupDAO.findById(oneMessage.getGroupId());
-			oneUser_msgVO.setGroupName(group.getGroupName());
+			oneUserMsgVO.setGroupName(group.getGroupName());
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 			String daterange = formatter
 					.format(oneMessage.getEnrollStartDate())
 					+ " - "
 					+ formatter.format(oneMessage.getEnrollEndDate());
-			oneUser_msgVO.setDateRange(daterange);
-			oneUser_msgVO.setActDate(formatter.format(oneMessage.getActDate()));
-			user_msgsVO.add(oneUser_msgVO);
+			oneUserMsgVO.setDateRange(daterange);
+			oneUserMsgVO.setActDate(formatter.format(oneMessage.getActDate()));
+			userMsgsVO.add(oneUserMsgVO);
 		}
-		List<User_msgVO> Inverseuser_msgsVO = new ArrayList<User_msgVO>();
-		for (int j = 0; j < user_msgsVO.size(); j++) {
-			Inverseuser_msgsVO.add(user_msgsVO.get(user_msgsVO.size() - j - 1));
+		List<User_msgVO> inverseuserMsgsVO = new ArrayList<User_msgVO>();
+		for (int j = userMsgsVO.size()-1; j >= 0; j--) {
+			inverseuserMsgsVO.add(userMsgsVO.get(j));
 		}
-		return Inverseuser_msgsVO;
+		return inverseuserMsgsVO;
 
 	}
 
@@ -263,7 +262,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		Integer userId = userInfoVO.getUserId();
 		LOG.info("the modified id is:" + userId);
 		Userlogin userInfoPO = userloginDAO.findById(userId);
-		String OkOrNot = null;
+		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userInfoPO, userInfoVO);
 			LOG.info("服务层:userInfoPO:" + userInfoPO.getUserId()
@@ -275,12 +274,12 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		}
 		try {
 			userloginDAO.merge(userInfoPO);
-			OkOrNot = "modify success!";
+			okOrNot = "modify success!";
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
 
-		return OkOrNot;
+		return okOrNot;
 	}
 
 }

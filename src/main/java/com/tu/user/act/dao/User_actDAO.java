@@ -1,4 +1,4 @@
-package com.tu.user_act.dao;
+package com.tu.user.act.dao;
 
 import java.util.List;
 import org.apache.commons.logging.Log;
@@ -24,7 +24,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user_act.dao.User_act where user_id = ?", userId);
+					"from com.tu.user.act.dao.User_act where user_id = ?", userId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
 			throw re;
@@ -36,7 +36,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user_act.dao.User_act where act_id = ?", actId);
+					"from com.tu.user.act.dao.User_act where act_id = ?", actId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
 			throw re;
@@ -46,12 +46,12 @@ public class User_actDAO extends HibernateDaoSupport implements
 	// 通过userId和actId可以获取到特定user_act对象
 	public User_act findByUserIdAndActId(Integer userId, Integer actId) {
 		try {
-			String hql = " from com.tu.user_act.dao.User_act where user_id ="
+			String hql = " from com.tu.user.act.dao.User_act where user_id ="
 					+ userId.toString() + " and act_id=" + actId.toString();
-			User_act user_act = (User_act) this.getHibernateTemplate()
+			User_act userAct = (User_act) this.getHibernateTemplate()
 					.find(hql).get(0);
 
-			return user_act;
+			return userAct;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by actId and userId failed", re);
 			throw re;
