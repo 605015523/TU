@@ -2,6 +2,8 @@ package com.tu.accountingview.model;
 
 import java.util.List;
 
+import com.tu.leaderview.model.GroupActVO;
+
 public interface AccountingviewInterface {
 
 	List<GroupActVO> doGetAllCheckValidateActs();

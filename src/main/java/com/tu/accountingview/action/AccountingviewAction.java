@@ -12,13 +12,13 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.tu.accountingview.model.AccountingviewInterface;
-import com.tu.accountingview.model.GroupActVO;
 import com.tu.accountingview.model.UserGroupCostVO;
 import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupInterface;
 import com.tu.group.model.GroupVO;
+import com.tu.leaderview.model.GroupActVO;
 import com.tu.user.group.model.UserGroupInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
@@ -53,7 +53,7 @@ public class AccountingviewAction extends ActionSupport {
 	private String comment;
 
 	public AccountingviewAction() {
-
+		// do nothing
 	}
 
 	public ActivitiesInterface getActsBean() {
@@ -176,8 +176,7 @@ public class AccountingviewAction extends ActionSupport {
 		String updateMessage = null;
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("validateActId");
-		ActivitiesVO validateAct = new ActivitiesVO();
-		validateAct = actsBean.doGetOneActById(oneactId);
+		ActivitiesVO validateAct = actsBean.doGetOneActById(oneactId);
 		validateAct.setState(ActivitiesConstant.STATE_VALIDATE);
 		validateAct.setComment(getComment());
 		updateMessage = actsBean.doUpdateOneAct(validateAct);

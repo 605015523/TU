@@ -11,6 +11,7 @@ import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.activities.model.ActivitiesConstant;
 import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
+import com.tu.leaderview.model.GroupActVO;
 import com.tu.leaderview.model.MemberInVO;
 import com.tu.user.act.dao.User_act;
 import com.tu.user.act.dao.UseActDAOInterface;
