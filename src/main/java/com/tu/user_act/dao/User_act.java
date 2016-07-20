@@ -2,6 +2,8 @@ package com.tu.user_act.dao;
 
 public class User_act implements java.io.Serializable {
 
+	private static final long serialVersionUID = -3072989564300722466L;
+	
 	// Filed
 	private Integer actId;
 	private Integer userId;

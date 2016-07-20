@@ -25,17 +25,17 @@ import com.tu.userlogin.model.UserloginVO;
 
 public class AccountingviewAction extends ActionSupport {
 	private static final long serialVersionUID = 5474650091305219468L;
-	private static final Log LOG = LogFactory.getLog(AccountingviewAction.class);
+	private static final Log LOGGER = LogFactory.getLog(AccountingviewAction.class);
 	
-	private HttpServletRequest request = null;
-	private HttpServletResponse response = null;
-	private HttpSession session = null;
+	private transient HttpServletRequest request = null;
+	private transient HttpServletResponse response = null;
+	private transient HttpSession session = null;
 
 	private AccountingviewInterface accountingviewBean = null;
 	private User_groupInterface user_groupBean = null;
 	private ActivitiesInterface actsBean = null;
 	private GroupInterface groupBean = null;
-	UserloginManageInterface UserloginManageBean = null;
+	private UserloginManageInterface userloginManageBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer msgId;
@@ -89,12 +89,12 @@ public class AccountingviewAction extends ActionSupport {
 	}
 
 	public UserloginManageInterface getUserloginManageBean() {
-		return this.UserloginManageBean;
+		return this.userloginManageBean;
 	}
 
 	public void setUserloginManageBean(
 			UserloginManageInterface userloginManageBean) {
-		this.UserloginManageBean = userloginManageBean;
+		this.userloginManageBean = userloginManageBean;
 	}
 
 	public void initServletContextObject() {
@@ -107,7 +107,7 @@ public class AccountingviewAction extends ActionSupport {
 	public String doGetAllCheckAct() {
 		initServletContextObject();
 		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
-		LOG.info("the doGetAllGroupAct get success");
+		LOGGER.info("the doGetAllGroupAct get success");
 		session.setAttribute("acts", actsVO);
 
 		return "doGetAllAct";
@@ -119,8 +119,8 @@ public class AccountingviewAction extends ActionSupport {
 		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-			if (oneactId == actId) {
+			int groupActId = groupactsVO.get(i).getActId();
+			if (oneactId == groupActId) {
 				request.setAttribute("act", groupactsVO.get(i));
 			}
 		}
@@ -132,9 +132,8 @@ public class AccountingviewAction extends ActionSupport {
 	// 获取所有需要被validate的活动的细节
 	public String doshowValidateDetails() {
 		initServletContextObject();
-		GroupActVO groupactVO = new GroupActVO();
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
+		GroupActVO groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
 		request.setAttribute("act", groupactVO);
 		request.setAttribute("actId", oneactId);
 
@@ -191,9 +190,9 @@ public class AccountingviewAction extends ActionSupport {
 			Integer userId = groupactVO.getMemberInVO().get(i).getUserId();
 			Float spending = groupactVO.getMemberInVO().get(i).getConsumption();
 			UserloginVO oneUserVO = new UserloginVO();
-			oneUserVO = UserloginManageBean.dogetOneUserInfoByUserId(userId);
+			oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
 			oneUserVO.setSpending(oneUserVO.getSpending() + spending);
-			UserloginManageBean.doUpdateOneUserInfo(oneUserVO);
+			userloginManageBean.doUpdateOneUserInfo(oneUserVO);
 		}
 
 		// 更新所有需要被check和validate的新消息的条数

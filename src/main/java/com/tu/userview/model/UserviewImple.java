@@ -101,16 +101,14 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	// 获取主界面所有用户信息
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
-		Userlogin oneuserloginPO = null;
-		List<User_group> oneUser_groupPO = new ArrayList<User_group>();
 		List<String> onegroupPO = new ArrayList<String>();
 		UserviewVO oneuserviewPO = new UserviewVO();
 
 		try {
-			oneuserloginPO = userloginDAO.findById(userId);
+			Userlogin oneuserloginPO = userloginDAO.findById(userId);
 			LOG.info("oneuserloginPO ID get success"
 					+ oneuserloginPO.getUserId());
-			oneUser_groupPO = user_groupDAO.findByUserId(userId);
+			List<User_group> oneUser_groupPO = user_groupDAO.findByUserId(userId);
 
 			for (int i = 0; i < oneUser_groupPO.size(); i++) {
 				onegroupPO.add(groupDAO.findById(
@@ -128,12 +126,14 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			oneuserviewPO.setQuota(oneuserloginPO.getQuota());
 			oneuserviewPO.setRemaining(oneuserloginPO.getQuota()
 					- oneuserloginPO.getSpending());
+			
+			LOG.info("服务层从数据访问层获得AuthorPO:"
+					+ oneuserloginPO.getUserName());
 
 		} catch (Exception e) {
 			LOG.error("出现如下的错误：" + e);
 		}
-		LOG.info("服务层从数据访问层获得AuthorPO:"
-				+ oneuserloginPO.getUserName());
+		
 
 		UserviewVO oneuserviewVO = new UserviewVO();
 		try { // 利用Bean拷贝类实现简单地拷贝
