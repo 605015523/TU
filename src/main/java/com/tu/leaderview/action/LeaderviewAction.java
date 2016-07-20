@@ -57,7 +57,7 @@ public class LeaderviewAction extends ActionSupport {
 	private String description;
 	private Date actDate;
 	private String daterange;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private Float sum;
 
 	public LeaderviewAction() {
@@ -227,7 +227,7 @@ public class LeaderviewAction extends ActionSupport {
 				GroupActVO onegroupactVO = groupactsVO.get(i);
 				onegroupactVO.setActMoney(getActMoney());
 				onegroupactVO.setSum(getSum());
-				onegroupactVO.setParticipatorNO(getParticipatorNO());
+				onegroupactVO.setNbParticipants(getNbParticipants());
 
 				ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
 				oneActVO.setActMoney(getActMoney());
@@ -246,10 +246,10 @@ public class LeaderviewAction extends ActionSupport {
 							.getParameter("perconsumption_" + j));
 					oneuserAct.setConsumption(consumption);
 					oneMemberInVO.setConsumption(consumption);
-					Integer participatorNO = Integer.parseInt(request
-							.getParameter("perparticipatorNO_" + j));
-					oneuserAct.setParticipatorNO(participatorNO);
-					oneMemberInVO.setParticipatorNO(participatorNO);
+					Integer nbParticipants = Integer.parseInt(request
+							.getParameter("perNbParticipants_" + j));
+					oneuserAct.setNbParticipants(nbParticipants);
+					oneMemberInVO.setNbParticipants(nbParticipants);
 					memberInVO.add(oneMemberInVO);
 					// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 					try {
@@ -479,12 +479,12 @@ public class LeaderviewAction extends ActionSupport {
 		this.msgId = msgId;
 	}
 
-	public Integer getParticipatorNO() {
-		return participatorNO;
+	public Integer getNbParticipants() {
+		return nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Float getSum() {

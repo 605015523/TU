@@ -71,7 +71,7 @@
 						<div class="col-xs-3 col-md-3">
 							<strong>NUMBER OF PARTICIPATER:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.participatorNO}</div>
+						<div class="col-xs-3 col-md-3">${act.nbParticipants}</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>CONSUMPTION:</strong>
 						</div>
@@ -103,7 +103,7 @@
 									<tr>
 										<td>${member.userName}</td>
 										<td>${member.userDept}</td>
-										<td>${member.participatorNO}</td>
+										<td>${member.nbParticipants}</td>
 										<td>${member.consumption}</td>
 										<td>${member.remark}</td>
 									</tr>

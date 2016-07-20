@@ -182,7 +182,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 				// 通过userAct中的属性，设置UseractsVO中的actId
 
 				useractsPO.setParticipaterNO(userActs.get(i)
-						.getParticipatorNO());
+						.getNbParticipants());
 				// 通过userAct中的属性，设置UseractsVO中的ParticipaterNO
 
 				useractsPO.setConsumption(userActs.get(i).getConsumption());

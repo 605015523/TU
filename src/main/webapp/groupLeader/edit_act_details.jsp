@@ -30,28 +30,19 @@
 
 
         function autoGenerate() {
-        var sum;
-        var participatorNO;
-        var actMoney;  
+            var sum = document.getElementById("sum").value;
+            var nbParticipants = document.getElementById("nbParticipants").value;
+            var actMoney = Number(sum)/Number(nbParticipants);
+            document.getElementById("actMoney").value=actMoney;
        
-        sum=document.getElementById("sum").value;
-        participatorNO=document.getElementById("participatorNO").value;
-        actMoney=Number(sum)/Number(participatorNO);
-        document.getElementById("actMoney").value=actMoney;
+            var tbodyObj = document.getElementById("MyTable"); 
        
-        var tbodyObj = document.getElementById("MyTable"); 
-       
-        for(var i=1;i<tbodyObj.rows.length;i++){
-          var perparticipatorNO;
-          perparticipatorNO=Number(tbodyObj.rows[i].cells[2].getElementsByTagName('input')[0].value);
-          var userconsumption = perparticipatorNO*actMoney;
-          tbodyObj.rows[i].cells[3].getElementsByTagName('input')[0].value=Number(userconsumption);
-          
-         }
+            for(var i=1;i<tbodyObj.rows.length;i++){
+                var perNbParticipants = Number(tbodyObj.rows[i].cells[2].getElementsByTagName('input')[0].value);
+                var userconsumption = perNbParticipants*actMoney;
+                tbodyObj.rows[i].cells[3].getElementsByTagName('input')[0].value=Number(userconsumption);
+            }
 
-
-         
-         
         }
         </script>
 	</head>
@@ -110,11 +101,11 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-3 col-md-3">
-								<strong>NUMBER OF PARTICIPATER:</strong>
+								<strong>NUMBER OF PARTICIPANTS:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<input type="text" class="form-control" id="participatorNO"
-									name="participatorNO" value='${act.participatorNO}'>
+								<input type="text" class="form-control" id="nbParticipants"
+									name="nbParticipants" value='${act.nbParticipants}'>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>CONSUMPTION:</strong>
@@ -142,7 +133,7 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-2 col-md-2 text-left">
-								<strong>participators:</strong>
+								<strong>participants:</strong>
 							</div>
 							<div class="col-xs-10 col-md-10 display: block">
 								<table class="table table-bordered" id="MyTable">
@@ -175,8 +166,8 @@
 												${member.userDept}
 											</td>
 											<td>
-												<input type="text" class="form-control" id="participatorNO"
-									name="perparticipatorNO_${count}" value="${member.participatorNO}">
+												<input type="text" class="form-control" id="nbParticipants"
+									name="perNbParticipants_${count}" value="${member.nbParticipants}">
 											</td>
 											<td>
 											    <input type="text" class="form-control" id="perconsumption"

@@ -74,12 +74,11 @@
     }
     
     function checkinput() {
-        var consumption;
-        var participatorNO = document.getElementById("participatorNO").value;
+        var nbParticipants = document.getElementById("nbParticipants").value;
         actmoney = document.getElementById("actmoney").value;   
         var remaining = document.getElementById('remaining').innerHTML;
     
-        if (participatorNO=="") {
+        if (nbParticipants=="") {
             alert("the participator number can not empty!");
             return false;
         }
@@ -164,11 +163,11 @@
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-xs-6 ">
-							<label for="participatorNO">
-								participator number:
+							<label for="nbParticipants">
+								number of participants:
 							</label>
 							<input type="number" step="1" class="form-control"
-								id="participatorNO" name="participatorNO">
+								id="nbParticipants" name="nbParticipants">
 						</div>
 
 						<div class="form-group ">

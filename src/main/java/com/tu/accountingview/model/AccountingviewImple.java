@@ -138,43 +138,43 @@ public class AccountingviewImple extends Observable implements
 		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
-		for (int i = 0; i < acts.size(); i++) {
+		for (Activity activity : acts) {
 			GroupActVO actsPO = new GroupActVO();
-			actsPO.setActId(acts.get(i).getActId());
-			actsPO.setActName(acts.get(i).getActName());
-			actsPO.setGroupId(acts.get(i).getGroupId());
-			actsPO.setActMoney(acts.get(i).getActMoney());
-			actsPO.setDescription(acts.get(i).getDescription());
-			actsPO.setState(acts.get(i).getState());
+			actsPO.setActId(activity.getActId());
+			actsPO.setActName(activity.getActName());
+			actsPO.setGroupId(activity.getGroupId());
+			actsPO.setActMoney(activity.getActMoney());
+			actsPO.setDescription(activity.getDescription());
+			actsPO.setState(activity.getState());
 
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-			String daterange = formatter.format(acts.get(i)
+			String daterange = formatter.format(activity
 					.getEnrollStartDate())
 					+ " - "
-					+ formatter.format(acts.get(i).getEnrollEndDate());
+					+ formatter.format(activity.getEnrollEndDate());
 			actsPO.setDaterange(daterange);
-			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
-			actsPO.setComment(acts.get(i).getComment());
-			List<UserAct> useractPO = userActDAO.findByActId(acts.get(i)
+			actsPO.setActDate(formatter.format(activity.getActDate()));
+			actsPO.setComment(activity.getComment());
+			List<UserAct> useractsPO = userActDAO.findByActId(activity
 					.getActId());
 			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
-			Integer participatorNO = 0;
-			for (int j = 0; j < useractPO.size(); j++) {
+			Integer nbParticipants = 0;
+			for (UserAct userActPO : useractsPO) {
 				MemberInVO oneMemberIn = new MemberInVO();
-				oneMemberIn.setUserId(useractPO.get(j).getUserId());
-				oneMemberIn.setParticipatorNO(useractPO.get(j)
-						.getParticipatorNO());
-				oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
-				oneMemberIn.setRemark(useractPO.get(j).getRemark());
-				sum += useractPO.get(j).getConsumption();
-				participatorNO += useractPO.get(j).getParticipatorNO();
-				Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+				oneMemberIn.setUserId(userActPO.getUserId());
+				oneMemberIn.setNbParticipants(userActPO
+						.getNbParticipants());
+				oneMemberIn.setConsumption(userActPO.getConsumption());
+				oneMemberIn.setRemark(userActPO.getRemark());
+				sum += userActPO.getConsumption();
+				nbParticipants += userActPO.getNbParticipants();
+				Userlogin userPO = userloginDAO.findById(userActPO.getUserId());
 				oneMemberIn.setUserName(userPO.getUserName());
 				oneMemberIn.setUserDept(userPO.getUserDept());
 				memberInVO.add(oneMemberIn);
 			}
-			actsPO.setParticipatorNO(participatorNO);
+			actsPO.setNbParticipants(nbParticipants);
 			actsPO.setMemberInVO(memberInVO);
 			actsPO.setSum(sum);
 			actsVO.add(actsPO);
@@ -209,21 +209,21 @@ public class AccountingviewImple extends Observable implements
 		List<UserAct> useractPO = userActDAO.findByActId(acts.getActId());
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 		float sum = 0;
-		Integer participatorNO = 0;
+		Integer nbParticipants = 0;
 		for (int j = 0; j < useractPO.size(); j++) {
 			MemberInVO oneMemberIn = new MemberInVO();
 			oneMemberIn.setUserId(useractPO.get(j).getUserId());
-			oneMemberIn.setParticipatorNO(useractPO.get(j).getParticipatorNO());
+			oneMemberIn.setNbParticipants(useractPO.get(j).getNbParticipants());
 			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
 			oneMemberIn.setRemark(useractPO.get(j).getRemark());
 			sum += useractPO.get(j).getConsumption();
-			participatorNO += useractPO.get(j).getParticipatorNO();
+			nbParticipants += useractPO.get(j).getNbParticipants();
 			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
 			oneMemberIn.setUserName(userPO.getUserName());
 			oneMemberIn.setUserDept(userPO.getUserDept());
 			memberInVO.add(oneMemberIn);
 		}
-		actVO.setParticipatorNO(participatorNO);
+		actVO.setNbParticipants(nbParticipants);
 		actVO.setMemberInVO(memberInVO);
 		actVO.setSum(sum);
 

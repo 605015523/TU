@@ -15,7 +15,7 @@ public class GroupActVO implements java.io.Serializable {
 	private String actDate;
 	private String state;
 	private Float sum;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private List<MemberInVO> memberInVO;
 	private String comment;
 
@@ -31,7 +31,7 @@ public class GroupActVO implements java.io.Serializable {
 		actDate = null;
 		state = null;
 		sum = null;
-		participatorNO = null;
+		nbParticipants = null;
 		memberInVO = null;
 		comment = null;
 	}
@@ -116,12 +116,12 @@ public class GroupActVO implements java.io.Serializable {
 		this.memberInVO = memberInVO;
 	}
 
-	public Integer getParticipatorNO() {
-		return participatorNO;
+	public Integer getNbParticipants() {
+		return nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public String getComment() {

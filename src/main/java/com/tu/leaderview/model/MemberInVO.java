@@ -7,7 +7,7 @@ public class MemberInVO implements java.io.Serializable {
 	private Integer userId;
 	private String userName;
 	private String userDept;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
 
@@ -15,11 +15,11 @@ public class MemberInVO implements java.io.Serializable {
 	}
 
 	public MemberInVO(Integer userId, String userName, String userDept,
-			Integer participatorNO, Float consumption, String remark) {
+			Integer nbParticipants, Float consumption, String remark) {
 		this.userId = userId;
 		this.userName = userName;
 		this.userDept = userDept;
-		this.participatorNO = participatorNO;
+		this.nbParticipants = nbParticipants;
 		this.consumption = consumption;
 		this.remark = remark;
 	}
@@ -40,12 +40,12 @@ public class MemberInVO implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	public Integer getParticipatorNO() {
-		return participatorNO;
+	public Integer getNbParticipants() {
+		return nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Float getConsumption() {

@@ -79,10 +79,10 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-3 col-md-3">
-								<strong>NUMBER OF PARTICIPATER:</strong>
+								<strong>NUMBER OF PARTICIPANTS:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.participatorNO}
+								${act.nbParticipants}
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>CONSUMPTION:</strong>
@@ -103,7 +103,7 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-2 col-md-2 text-left">
-								<strong>participators:</strong>
+								<strong>participants:</strong>
 							</div>
 							<div class="col-xs-10 col-md-10 display: block">
 								<table class="table table-bordered">
@@ -134,7 +134,7 @@
 												${member.userDept}
 											</td>
 											<td>
-												${member.participatorNO}
+												${member.nbParticipants}
 											</td>
 											<td>
 												${member.consumption}

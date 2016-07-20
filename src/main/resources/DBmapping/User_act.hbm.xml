@@ -12,7 +12,7 @@
 			</key-property>
 		</composite-id>
 
-		<property name="participatorNO" type="java.lang.Integer">
+		<property name="nbParticipants" type="java.lang.Integer">
 			<column name="participator_number"/>
 		</property>
 		<property name="consumption" type="java.lang.Float">

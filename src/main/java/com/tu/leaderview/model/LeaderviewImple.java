@@ -92,22 +92,22 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 					.getActId());
 			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
-			Integer participatorNO = 0;
+			Integer nbParticipants = 0;
 			for (int j = 0; j < useractPO.size(); j++) {
 				MemberInVO oneMemberIn = new MemberInVO();
 				oneMemberIn.setUserId(useractPO.get(j).getUserId());
-				oneMemberIn.setParticipatorNO(useractPO.get(j)
-						.getParticipatorNO());
+				oneMemberIn.setNbParticipants(useractPO.get(j)
+						.getNbParticipants());
 				oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
 				oneMemberIn.setRemark(useractPO.get(j).getRemark());
 				sum += useractPO.get(j).getConsumption();
-				participatorNO += useractPO.get(j).getParticipatorNO();
+				nbParticipants += useractPO.get(j).getNbParticipants();
 				Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
 				oneMemberIn.setUserName(userPO.getUserName());
 				oneMemberIn.setUserDept(userPO.getUserDept());
 				memberInVO.add(oneMemberIn);
 			}
-			actsPO.setParticipatorNO(participatorNO);
+			actsPO.setNbParticipants(nbParticipants);
 			actsPO.setMemberInVO(memberInVO);
 			actsPO.setSum(sum);
 

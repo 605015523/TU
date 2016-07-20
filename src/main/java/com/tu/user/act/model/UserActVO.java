@@ -7,14 +7,14 @@ public class UserActVO implements java.io.Serializable {
 	// Fields
 	private Integer actId;
 	private Integer userId;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
 
 	public UserActVO() {
 		actId = null;
 		userId = null;
-		participatorNO = null;
+		nbParticipants = null;
 		consumption = null;
 		remark = null;
 	}
@@ -35,12 +35,12 @@ public class UserActVO implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public Integer getParticipatorNO() {
-		return this.participatorNO;
+	public Integer getNbParticipants() {
+		return this.nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Float getConsumption() {

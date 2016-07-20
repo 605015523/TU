@@ -7,18 +7,18 @@ public class UserAct implements java.io.Serializable {
 	// Filed
 	private Integer actId;
 	private Integer userId;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
 
 	public UserAct() {
 	}
 
-	public UserAct(Integer actId, Integer userId, Integer participatorNO,
+	public UserAct(Integer actId, Integer userId, Integer nbParticipants,
 			Float consumption, String remark) {
 		this.actId = actId;
 		this.userId = userId;
-		this.participatorNO = participatorNO;
+		this.nbParticipants = nbParticipants;
 		this.consumption = consumption;
 		this.remark = remark;
 	}
@@ -39,12 +39,12 @@ public class UserAct implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public Integer getParticipatorNO() {
-		return this.participatorNO;
+	public Integer getNbParticipants() {
+		return this.nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Float getConsumption() {

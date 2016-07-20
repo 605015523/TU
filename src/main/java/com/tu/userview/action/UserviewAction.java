@@ -55,7 +55,7 @@ public class UserviewAction extends ActionSupport {
 	private Float spending;
 	private Float quota;
 	private Float remaining;
-	private Integer participatorNO;
+	private Integer nbParticipants;
 	private Float consumption;
 	private String description;
 	private String remark;
@@ -228,7 +228,7 @@ public class UserviewAction extends ActionSupport {
 		Integer userId = (Integer) session.getAttribute("userId");
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
-		oneUserActVO.setParticipatorNO(getParticipatorNO());
+		oneUserActVO.setNbParticipants(getNbParticipants());
 		oneUserActVO.setConsumption(getConsumption());
 		oneUserActVO.setRemark(getRemark());
 		
@@ -384,12 +384,12 @@ public class UserviewAction extends ActionSupport {
 		this.remaining = remaining;
 	}
 
-	public Integer getParticipatorNO() {
-		return this.participatorNO;
+	public Integer getNbParticipants() {
+		return this.nbParticipants;
 	}
 
-	public void setParticipatorNO(Integer participatorNO) {
-		this.participatorNO = participatorNO;
+	public void setNbParticipants(Integer nbParticipants) {
+		this.nbParticipants = nbParticipants;
 	}
 
 	public Float getConsumption() {
