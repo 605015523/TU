@@ -44,7 +44,7 @@
 </style>
 		<script type="text/javascript">
 		   
-       function wordStatic(input) {
+    function wordStatic(input) {
         var el = document.getElementById('description');
         if (el && input) {
         
@@ -73,23 +73,21 @@
         }
     }
     
-    function checkinput(){
-    var participatorNO;
-    var consumption;
-    var remaining;
-    participatorNO=document.getElementById("participatorNO").value;
-    actmoney=document.getElementById("actmoney").value;   
-    remaining=document.getElementById('remaining').innerHTML;
+    function checkinput() {
+        var consumption;
+        var participatorNO = document.getElementById("participatorNO").value;
+        actmoney = document.getElementById("actmoney").value;   
+        var remaining = document.getElementById('remaining').innerHTML;
     
-    if (participatorNO== "") {
-      alert("the participator number can not empty!");
-      return false;
-    }
+        if (participatorNO=="") {
+            alert("the participator number can not empty!");
+            return false;
+        }
  
- 
-    var truthBeTold = window.confirm("Be careful, the consumption may over the remaining!");
-	if(truthBeTold){
-          return true;
+        var truthBeTold = window.confirm("Be careful, the consumption may over the remaining!");
+	    if (truthBeTold){
+            return true;
+        }
     }
       </script>
 	</head>
@@ -205,7 +203,7 @@
 						</div>
 
 						<div class="form-group col-md-3 col-xs-4 navbar-right">
-							<input type="submit" class="btn btn-primary   btn-block"
+							<input type="submit" class="btn btn-primary btn-block"
 								value="submit" />
 						</div>
 

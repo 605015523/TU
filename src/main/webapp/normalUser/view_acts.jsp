@@ -83,8 +83,7 @@
 								${act.actDate}
 							</td>
 							<td>
-								<a
-									href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
+								<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
 							</td>
 						</tr>
 
