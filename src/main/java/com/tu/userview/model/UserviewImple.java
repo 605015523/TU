@@ -17,8 +17,8 @@ import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.messages.dao.Messages;
 import com.tu.messages.dao.MessagesDAOInterface;
-import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.UseActDAOInterface;
+import com.tu.user.act.dao.UserAct;
+import com.tu.user.act.dao.UserActDAOInterface;
 import com.tu.user.group.dao.UserGroup;
 import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.user.msg.dao.UserMsg;
@@ -34,7 +34,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private UseActDAOInterface userActDAO = null;
+	private UserActDAOInterface userActDAO = null;
 	private UserMsgDAOInterface userMsgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
 
@@ -59,7 +59,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		this.actsDAO = actsDAO;
 	}
 
-	public void setUserActDAO(UseActDAOInterface userActDAO) {
+	public void setUserActDAO(UserActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
 	}
 
@@ -95,7 +95,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return this.actsDAO;
 	}
 
-	public UseActDAOInterface getUserActDAO() {
+	public UserActDAOInterface getUserActDAO() {
 		return this.userActDAO;
 	}
 
@@ -157,16 +157,16 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		LOG.info("服务层从控制层获得AuthorId:" + userId);
 
 		List<UseractsVO> oneuseractsVO = new ArrayList<UseractsVO>();
-		List<User_act> userActs = userActDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
+		List<UserAct> userActs = userActDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
 
 		for (int i = 0; i < userActs.size(); i++) {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性
-			// 后续步骤的目的就是通过group、user_act、activities这几个表
+			// 后续步骤的目的就是通过group、userAct、activities这几个表
 			// 间的关联，获取所有UseractsVO中属性的值
 			UseractsVO useractsPO = new UseractsVO();
 
 			Activity actsPO = actsDAO.findById(userActs.get(i).getActId());
-			// 通过user_act中的actId查找ActsPO实例
+			// 通过userAct中的actId查找ActsPO实例
 
 			Group groupPO = groupDAO.findById(actsPO.getGroupId());
 			// 通过ActsPO中的GroupId查找groupPOS实例
@@ -179,17 +179,17 @@ public class UserviewImple extends Observable implements UserviewInterface {
 				// 设置UseractsVO中的所有UserId
 
 				useractsPO.setActId(userActs.get(i).getActId());
-				// 通过user_act中的属性，设置UseractsVO中的actId
+				// 通过userAct中的属性，设置UseractsVO中的actId
 
 				useractsPO.setParticipaterNO(userActs.get(i)
 						.getParticipatorNO());
-				// 通过user_act中的属性，设置UseractsVO中的ParticipaterNO
+				// 通过userAct中的属性，设置UseractsVO中的ParticipaterNO
 
 				useractsPO.setConsumption(userActs.get(i).getConsumption());
-				// 通过user_act中的属性，设置UseractsVO中的consumption
+				// 通过userAct中的属性，设置UseractsVO中的consumption
 
 				useractsPO.setRemark(userActs.get(i).getRemark());
-				// 通过user_act中的属性，设置UseractsVO中的Remark
+				// 通过userAct中的属性，设置UseractsVO中的Remark
 
 				useractsPO.setActName(actsPO.getActName());
 				// 通过ActsPO中的属性，设置UseractsVO中的actName
@@ -235,9 +235,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			try { // 利用Bean拷贝类实现简单地拷贝
 				BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
 			} catch (IllegalAccessException e) {
-				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO.");
+				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO: " + e.toString());
 			} catch (InvocationTargetException e) {
-				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO.");
+				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO: " + e.toString());
 			}
 			oneUserMsgVO.setReadState(((UserMsg) userMsgs.get(i))
 					.getReadState());

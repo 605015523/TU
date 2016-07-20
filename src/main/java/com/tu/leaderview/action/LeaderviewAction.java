@@ -43,7 +43,7 @@ public class LeaderviewAction extends ActionSupport {
 	private ActivitiesInterface actsBean = null;
 	private MessagesInterface msgBean = null;
 	private UserMsgInterface userMsgBean = null;
-	private UserActInterface user_actBean = null;
+	private UserActInterface userActBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer msgId;
@@ -104,12 +104,12 @@ public class LeaderviewAction extends ActionSupport {
 		this.userMsgBean = userMsgBean;
 	}
 
-	public UserActInterface getUser_actBean() {
-		return user_actBean;
+	public UserActInterface getUserActBean() {
+		return userActBean;
 	}
 
-	public void setUser_actBean(UserActInterface userActBean) {
-		user_actBean = userActBean;
+	public void setUserActBean(UserActInterface userActBean) {
+		this.userActBean = userActBean;
 	}
 
 	public void initServletContextObject() {
@@ -143,13 +143,8 @@ public class LeaderviewAction extends ActionSupport {
 		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
 
 		// 添加一个活动到数据库并返回活动的Id
-		try {
-			actId = actsBean.doAddOneAct(oneActVO);
-			addMessage = "add act success";
-		} catch (Exception e) {
-			addMessage = "there are something wrong with control layer: "
-					+ e.toString();
-		}
+		actId = actsBean.doAddOneAct(oneActVO);
+		LOGGER.info("add act success");
 
 		initServletContextObject();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
@@ -245,7 +240,7 @@ public class LeaderviewAction extends ActionSupport {
 				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
 					MemberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
 							.get(j - 1);
-					UserActVO oneuserAct = user_actBean.doGetOneActById(
+					UserActVO oneuserAct = userActBean.doGetOneActById(
 							oneMemberInVO.getUserId(), updateActId);
 					Float consumption = Float.parseFloat(request
 							.getParameter("perconsumption_" + j));
@@ -258,7 +253,7 @@ public class LeaderviewAction extends ActionSupport {
 					memberInVO.add(oneMemberInVO);
 					// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 					try {
-						user_actBean.doUpdateOneUser_act(oneuserAct);
+						userActBean.doUpdateOneUserAct(oneuserAct);
 					} catch (Exception e) {
 					}
 
@@ -294,19 +289,12 @@ public class LeaderviewAction extends ActionSupport {
 		Date endDate = act.parse(daterange.substring(13, 23));
 		oneActVO.setEnrollStartDate(startDate);
 		oneActVO.setEnrollEndDate(endDate);
-		oneActVO.setState("draft");
+		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
 
 		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
-		try {
-			updateMessage = actsBean.doUpdateOneAct(oneActVO);
-			LOGGER.info("updateMessage" + updateMessage);
+		updateMessage = actsBean.doUpdateOneAct(oneActVO);
+		LOGGER.info(updateMessage);
 
-		} catch (Exception e) {
-			updateMessage = "there are something wrong with control layer: "
-					+ e.toString();
-		}
-
-		initServletContextObject();
 		// GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);

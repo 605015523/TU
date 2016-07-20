@@ -26,7 +26,6 @@ import com.tu.userlogin.model.UserloginVO;
 import com.tu.userview.model.UserMsgVO;
 import com.tu.userview.model.UseractsVO;
 import com.tu.userview.model.UserviewInterface;
-import com.tu.userview.model.UserviewVO;
 
 public class UserviewAction extends ActionSupport {
 
@@ -39,7 +38,7 @@ public class UserviewAction extends ActionSupport {
 
 	private UserloginManageInterface userloginManageBean = null;
 	private UserviewInterface userviewBean = null;
-	private UserActInterface user_actBean = null;
+	private UserActInterface userActBean = null;
 	private MessagesInterface msgBean = null;
 	private UserMsgInterface userMsgBean = null;
 	private ActivitiesInterface actsBean = null;
@@ -78,12 +77,12 @@ public class UserviewAction extends ActionSupport {
 		this.userviewBean = userviewBean;
 	}
 
-	public UserActInterface getUser_actBean() {
-		return this.user_actBean;
+	public UserActInterface getUserActBean() {
+		return this.userActBean;
 	}
 
-	public void setUser_actBean(UserActInterface userActBean) {
-		this.user_actBean = userActBean;
+	public void setUserActBean(UserActInterface userActBean) {
+		this.userActBean = userActBean;
 	}
 
 	public UserloginManageInterface getUserloginManageBean() {
@@ -233,7 +232,7 @@ public class UserviewAction extends ActionSupport {
 		oneUserActVO.setConsumption(getConsumption());
 		oneUserActVO.setRemark(getRemark());
 		
-		String addMessage = user_actBean.doAddOneUser_act(oneUserActVO);
+		String addMessage = userActBean.doAddOneUserAct(oneUserActVO);
 
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
@@ -282,7 +281,7 @@ public class UserviewAction extends ActionSupport {
 		Integer userId = (Integer) session.getAttribute("userId");
 		Integer actId = Integer.valueOf(request.getParameter("actId"));
 		try {
-			actionReturnMessage = user_actBean.doDeleteOneUser_act(userId,
+			actionReturnMessage = userActBean.doDeleteOneUserAct(userId,
 					actId);
 			LOG.info(actionReturnMessage);
 

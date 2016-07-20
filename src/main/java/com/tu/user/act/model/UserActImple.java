@@ -7,31 +7,31 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.UseActDAOInterface;
+import com.tu.user.act.dao.UserAct;
+import com.tu.user.act.dao.UserActDAOInterface;
 
 public class UserActImple extends Observable implements UserActInterface {
 	
 	private static final Log LOG = LogFactory.getLog(UserActImple.class);
-	private UseActDAOInterface userActDAO = null;
+	private UserActDAOInterface userActDAO = null;
 
 	public UserActImple() {
 		// do nothing
 	}
 	
-	public UseActDAOInterface getUserActDAO() {
+	public UserActDAOInterface getUserActDAO() {
 		return userActDAO;
 	}
 
-	public void setUserActDAO(UseActDAOInterface userActDAO) {
+	public void setUserActDAO(UserActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
 	}
 
-	// 通过userId和ActId来获取特定user_act对象
+	// 通过userId和ActId来获取特定userAct对象
 	@Override
 	public UserActVO doGetOneActById(Integer userId, Integer actId) {
 		UserActVO userActVO = new UserActVO();
-		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
+		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		try {
 			BeanUtils.copyProperties(userActVO, userActPO);
 
@@ -44,11 +44,11 @@ public class UserActImple extends Observable implements UserActInterface {
 		return userActVO;
 	}
 
-	// 添加一个user_act对象
+	// 添加一个userAct对象
 	@Override
-	public String doAddOneUser_act(UserActVO oneUserActVO) {
+	public String doAddOneUserAct(UserActVO oneUserActVO) {
 		String addMessage = null;
-		User_act userActPO = new User_act();
+		UserAct userActPO = new UserAct();
 
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userActPO, oneUserActVO);
@@ -59,7 +59,7 @@ public class UserActImple extends Observable implements UserActInterface {
 		}
 		try {
 			userActDAO.save(userActPO);
-			addMessage = "add User_act success!";
+			addMessage = "add UserAct success!";
 
 		} catch (Exception e) {
 			addMessage = e.toString();
@@ -67,11 +67,11 @@ public class UserActImple extends Observable implements UserActInterface {
 		return addMessage;
 	}
 
-	// 删除一个user_act对象
+	// 删除一个userAct对象
 	@Override
-	public String doDeleteOneUser_act(Integer userId, Integer actId) {
+	public String doDeleteOneUserAct(Integer userId, Integer actId) {
 		String okOrNot = null;
-		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
+		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		try {
 			if (userActPO != null) {
 				userActDAO.delete(userActPO);
@@ -87,20 +87,20 @@ public class UserActImple extends Observable implements UserActInterface {
 
 	}
 
-	// 更新一个user_act对象
+	// 更新一个userAct对象
 	@Override
-	public void doUpdateOneUser_act(UserActVO userActVO) {
+	public void doUpdateOneUserAct(UserActVO userActVO) {
 		Integer actId = userActVO.getActId();
 		Integer userId = userActVO.getUserId();
-		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
+		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userActPO, userActVO);
 
 		} catch (IllegalAccessException e) {
-			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
+			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact: " + e.toString());
 		} catch (InvocationTargetException e) {
-			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
+			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact: " + e.toString());
 		}
 		try {
 			userActDAO.merge(userActPO);

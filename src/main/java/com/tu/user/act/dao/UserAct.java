@@ -1,6 +1,6 @@
 package com.tu.user.act.dao;
 
-public class User_act implements java.io.Serializable {
+public class UserAct implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3072989564300722466L;
 	
@@ -11,10 +11,10 @@ public class User_act implements java.io.Serializable {
 	private Float consumption;
 	private String remark;
 
-	public User_act() {
+	public UserAct() {
 	}
 
-	public User_act(Integer actId, Integer userId, Integer participatorNO,
+	public UserAct(Integer actId, Integer userId, Integer participatorNO,
 			Float consumption, String remark) {
 		this.actId = actId;
 		this.userId = userId;

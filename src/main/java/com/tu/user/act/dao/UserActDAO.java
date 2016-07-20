@@ -6,7 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class UserActDAO extends HibernateDaoSupport implements
-		UseActDAOInterface {
+		UserActDAOInterface {
 	private static final Log LOGGER = LogFactory.getLog(UserActDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String ACT_ID = "act_id";
@@ -20,39 +20,39 @@ public class UserActDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// 通过用户Id获取所有user_act对象，这样可以获取所有用户参与的活动
+	// 通过用户Id获取所有userAct对象，这样可以获取所有用户参与的活动
 	@Override
-	public List<User_act> findByUserId(java.lang.Integer userId) {
+	public List<UserAct> findByUserId(java.lang.Integer userId) {
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user.act.dao.User_act where user_id = ?", userId);
+					"from com.tu.user.act.dao.UserAct where user_id = ?", userId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
 			throw re;
 		}
 	}
 
-	// 通过actId获取所有user_act对象，这样可以获取所有参与该活动的用户
+	// 通过actId获取所有userAct对象，这样可以获取所有参与该活动的用户
 	@Override
-	public List<User_act> findByActId(java.lang.Integer actId) {
+	public List<UserAct> findByActId(java.lang.Integer actId) {
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user.act.dao.User_act where act_id = ?", actId);
+					"from com.tu.user.act.dao.UserAct where act_id = ?", actId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
 			throw re;
 		}
 	}
 
-	// 通过userId和actId可以获取到特定user_act对象
+	// 通过userId和actId可以获取到特定userAct对象
 	@Override
-	public User_act findByUserIdAndActId(Integer userId, Integer actId) {
+	public UserAct findByUserIdAndActId(Integer userId, Integer actId) {
 		try {
-			String hql = " from com.tu.user.act.dao.User_act where user_id ="
+			String hql = " from com.tu.user.act.dao.UserAct where user_id ="
 					+ userId.toString() + " and act_id=" + actId.toString();
-			User_act userAct = (User_act) this.getHibernateTemplate()
+			UserAct userAct = (UserAct) this.getHibernateTemplate()
 					.find(hql).get(0);
 
 			return userAct;
@@ -62,10 +62,10 @@ public class UserActDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 删除某个user_act对象
+	// 删除某个userAct对象
 	@Override
-	public void delete(User_act persistentInstance) {
-		LOGGER.debug("deleting User_act instance");
+	public void delete(UserAct persistentInstance) {
+		LOGGER.debug("deleting UserAct instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			LOGGER.debug("delete successful");
@@ -75,10 +75,10 @@ public class UserActDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 保存某个user_act对象
+	// 保存某个userAct对象
 	@Override
-	public void save(User_act oneUserActPO) {
-		LOGGER.debug("saving User_act instance");
+	public void save(UserAct oneUserActPO) {
+		LOGGER.debug("saving UserAct instance");
 		try {
 			getHibernateTemplate().save(oneUserActPO);
 			LOGGER.debug("save successful");
@@ -89,12 +89,12 @@ public class UserActDAO extends HibernateDaoSupport implements
 
 	}
 
-	// 更新某个user_act对象
+	// 更新某个userAct对象
 	@Override
-	public void merge(User_act detachedInstance) {
-		LOGGER.debug("merging User_act instance");
+	public void merge(UserAct detachedInstance) {
+		LOGGER.debug("merging UserAct instance");
 		try {
-			User_act result = (User_act) getHibernateTemplate().merge(
+			UserAct result = (UserAct) getHibernateTemplate().merge(
 					detachedInstance);
 			LOGGER.debug("merge successful");
 		} catch (RuntimeException re) {

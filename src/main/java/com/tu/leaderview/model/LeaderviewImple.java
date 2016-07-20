@@ -6,8 +6,8 @@ import java.util.*;
 import com.tu.activities.dao.Activity;
 import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.GroupDAOInterface;
-import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.UseActDAOInterface;
+import com.tu.user.act.dao.UserAct;
+import com.tu.user.act.dao.UserActDAOInterface;
 import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
@@ -18,7 +18,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 	private GroupDAOInterface groupDAO = null;
 	private UserGroupDAOInterface userGroupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private UseActDAOInterface userActDAO = null;
+	private UserActDAOInterface userActDAO = null;
 
 	public LeaderviewImple() {
 
@@ -56,11 +56,11 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		this.actsDAO = actsDAO;
 	}
 
-	public UseActDAOInterface getUserActDAO() {
+	public UserActDAOInterface getUserActDAO() {
 		return this.userActDAO;
 	}
 
-	public void setUserActDAO(UseActDAOInterface userActDAO) {
+	public void setUserActDAO(UserActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
 	}
 
@@ -88,7 +88,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsPO.setDaterange(daterange);
 			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
 			actsPO.setComment(acts.get(i).getComment());
-			List<User_act> useractPO = userActDAO.findByActId(acts.get(i)
+			List<UserAct> useractPO = userActDAO.findByActId(acts.get(i)
 					.getActId());
 			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;
