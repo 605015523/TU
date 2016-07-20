@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.lang.reflect.Field;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.criterion.DetachedCriteria;
@@ -33,27 +34,28 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 		for (int i = 0; i < fields.length; i++) {
 			for (Iterator iter = map.keySet().iterator(); iter.hasNext();) {
 				String key = (String) iter.next();
+				Object value = map.get(key);
+				
 				LOGGER.info("Map中的key值: " + key);
 				LOGGER.info("属性名称: " + fields[i].getName());
 				if (fields[i].getName().equals(key)) { // 判断属性名称是否等于Map中的key值
 					LOGGER.info("属性名称是否等于Map中的key值: "
 							+ fields[i].getName().equals(key));
-					if (!"".equals(map.get(key).toString())
-							&& null != map.get(key).toString()) {
+					if (StringUtils.isNotEmpty(value.toString())) {
 						LOGGER.info("DAO利用反射得到传递进来javabean的属性: "
 								+ fields[i].getName());
 						LOGGER.info("DAO利用map得到传递进来javabean的属性: " + key
-								+ "  " + map.get(key));
+								+ "  " + value);
 						// 判断传递的属性是什么类型，项目中查询的是两个时间段之间
-						if (map.get(key) instanceof Date[]) {
-							Date[] dates = (Date[]) map.get(key);
+						if (value instanceof Date[]) {
+							Date[] dates = (Date[]) value;
 							try {
-								if (!"".equals(dates[0]) && null != dates[0]) {
+								if (null != dates[0]) {
 									detachedCriteria.add(Restrictions.ge(
 											fields[i].getName().toString(),
 											dates[0]));
 								}
-								if (!"".equals(dates[1]) && null != dates[1]) {
+								if (null != dates[1]) {
 									detachedCriteria.add(Restrictions.le(
 											fields[i].getName().toString(),
 											dates[1]));
@@ -63,20 +65,20 @@ public class FuzzyQueryDAO extends HibernateDaoSupport implements
 							}
 						}
 						// 如果是字符串类型
-						else if (map.get(key) instanceof String) {
+						else if (value instanceof String) {
 							detachedCriteria.add(Restrictions.ilike(fields[i]
-									.getName().toString(), map.get(key)
+									.getName().toString(), value
 									.toString(), MatchMode.ANYWHERE));
 						}
 						// 如果是整型
-						else if (map.get(key) instanceof Integer) {
+						else if (value instanceof Integer) {
 							detachedCriteria.add(Restrictions.eq(fields[i]
-									.getName().toString(), map.get(key)));
+									.getName().toString(), value));
 						}
 						// 如果是实体对象
 						else {
 							detachedCriteria.add(Restrictions.eq(fields[i]
-									.getName().toString(), map.get(key)));
+									.getName().toString(), value));
 						}
 					}
 				}
