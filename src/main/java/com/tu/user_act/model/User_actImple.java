@@ -69,7 +69,7 @@ public class User_actImple extends Observable implements User_actInterface {
 		String OkOrNot = null;
 		User_act user_actPO = user_actDAO.findByUserIdAndActId(user_id, act_id);
 		try {
-			if (user_actDAO.findByUserIdAndActId(user_id, act_id) != null) {
+			if (user_actPO != null) {
 				user_actDAO.delete(user_actPO);
 				OkOrNot = "delete success!";
 			} else {

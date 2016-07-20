@@ -134,16 +134,15 @@ public class UserviewAction extends ActionSupport {
 	// 显示选定的参与过的活动细节
 	public String doshowDetails() {
 		initServletContextObject();
-		List<UseractsVO> Useracts = (List<UseractsVO>) session
+		List<UseractsVO> useracts = (List<UseractsVO>) session
 				.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		int year = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < Useracts.size(); i++) {
-			int actId = Useracts.get(i).getActId();
+		for (UseractsVO userActVO : useracts) {
+			int actId = userActVO.getActId();
 			LOG.info("the actId is" + actId);
-			LOG.info("the actName is" + Useracts.get(i).getActName());
+			LOG.info("the actName is" + userActVO.getActName());
 			if (oneactId == actId) {
-				request.setAttribute("act", Useracts.get(i));
+				request.setAttribute("act", userActVO);
 			}
 		}
 		return "showDetails";
@@ -158,8 +157,7 @@ public class UserviewAction extends ActionSupport {
 		List<User_msgVO> inmessages = new ArrayList<User_msgVO>();
 
 		for (int i = 0; i < messages.size(); i++) {
-			ActivitiesVO oneAct = new ActivitiesVO();
-			oneAct = actsBean.doGetOneActById(messages.get(i).getActId());
+			ActivitiesVO oneAct = actsBean.doGetOneActById(messages.get(i).getActId());
 
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 				inmessages.add(messages.get(i));
@@ -184,17 +182,15 @@ public class UserviewAction extends ActionSupport {
 		}
 
 		// 将User_msg中的状态设置为已读
-		User_msg oneUser_Msg = new User_msg();
 		Integer userId = (Integer) session.getAttribute("userId");
-		oneUser_Msg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
+		User_msg oneUser_Msg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
 		if (oneUser_Msg.getReadState().equals("new")) {
 
 			oneUser_Msg.setReadState("read");
 			user_msgBean.doUpdateOneUser_msg(oneUser_Msg);
 			int newMsg = 0;
-			List<User_msg> user_msgVOs = new ArrayList<User_msg>();
-			user_msgVOs = (List<User_msg>) user_msgBean
+			List<User_msg> user_msgVOs = (List<User_msg>) user_msgBean
 					.doGetUserMsg(userId);
 			for (int i = 0; i < user_msgVOs.size(); i++) {
 
@@ -244,7 +240,6 @@ public class UserviewAction extends ActionSupport {
 					+ e.toString();
 		}
 
-		initServletContextObject();
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
 		LOG.info("the year in action is:" + year);
@@ -301,7 +296,6 @@ public class UserviewAction extends ActionSupport {
 			LOG.error(actionReturnMessage);
 		}
 
-		initServletContextObject();
 		UserviewVO userview = (UserviewVO) session.getAttribute("userview");
 		Integer year = (Integer) session.getAttribute("thisyear");
 		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);

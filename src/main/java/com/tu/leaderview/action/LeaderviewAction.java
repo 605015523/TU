@@ -235,8 +235,7 @@ public class LeaderviewAction extends ActionSupport {
 				onegroupactVO.setSum(getSum());
 				onegroupactVO.setParticipatorNO(getParticipatorNO());
 
-				ActivitiesVO oneActVO = new ActivitiesVO();
-				oneActVO = actsBean.doGetOneActById(updateActId);
+				ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
 				oneActVO.setActMoney(getActMoney());
 				try {
 					actsBean.doUpdateOneAct(oneActVO);
@@ -247,8 +246,7 @@ public class LeaderviewAction extends ActionSupport {
 				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
 					memberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
 							.get(j - 1);
-					User_actVO oneuser_act = new User_actVO();
-					oneuser_act = user_actBean.doGetOneActById(
+					User_actVO oneuser_act = user_actBean.doGetOneActById(
 							oneMemberInVO.getUserId(), updateActId);
 					Float consumption = Float.parseFloat(request
 							.getParameter("perconsumption_" + j));
@@ -325,9 +323,8 @@ public class LeaderviewAction extends ActionSupport {
 		String addMessage = null;
 		String updateMessage = null;
 
-		ActivitiesVO oneActVO = new ActivitiesVO();
 		int actId = Integer.parseInt(request.getParameter("actId"));
-		oneActVO = actsBean.doGetOneActById(actId);
+		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState(ActivitiesConstant.STATE_PUBLISH);
 
 		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
@@ -344,7 +341,7 @@ public class LeaderviewAction extends ActionSupport {
 		try {
 			BeanUtils.copyProperties(oneMsgVO, oneActVO);
 		} catch (IllegalAccessException e) {
-			LOG.error(" there is a IllegalAccessException");
+			LOG.error("there is a IllegalAccessException");
 		} catch (InvocationTargetException e) {
 			LOG.error("there is a InvocationTargetException");
 		}
@@ -379,7 +376,7 @@ public class LeaderviewAction extends ActionSupport {
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		LOG.error("the doGetAllGroupAct get success");
+		LOG.info("the doGetAllGroupAct get success");
 		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
@@ -387,10 +384,9 @@ public class LeaderviewAction extends ActionSupport {
 	// 将这个完成的活动提交到申请小组去validate
 	public String doToValidateAct() {
 		initServletContextObject();
-		ActivitiesVO oneActVO = new ActivitiesVO();
 		String validateMessage;
 		Integer actId = (Integer) session.getAttribute("validateActId");
-		oneActVO = actsBean.doGetOneActById(actId);
+		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("tobevalidate");
 
 		try {

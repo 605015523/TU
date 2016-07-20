@@ -28,10 +28,9 @@ public class User_msgImple extends Observable implements User_msgInterface {
 	// 删除一个user_msg对象
 	public String doDeleteOneUser_msg(Integer user_id, Integer msg_id) {
 		String OkOrNot = null;
-		User_msg user_msgPO = new User_msg();
-		user_msgPO = user_msgDAO.findByUserIdAndMsgId(user_id, msg_id);
+		User_msg user_msgPO = user_msgDAO.findByUserIdAndMsgId(user_id, msg_id);
 		try {
-			if (user_msgDAO.findByUserIdAndMsgId(user_id, msg_id) != null) {
+			if (user_msgPO != null) {
 				user_msgDAO.delete(user_msgPO);
 				OkOrNot = "delete success!";
 			} else {

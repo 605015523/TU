@@ -162,35 +162,24 @@ public class UserloginManageAction extends ActionSupport {
 		LOG.info("login success");
 
 		// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
-		initServletContextObject();
 		List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
 		List<Integer> years = new ArrayList<Integer>();
-		for (int i = 0; i < actVOs.size(); i++) {
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(actsBean.doGetAllActivity().get(i).getActDate());
-			if (years.size() == 0) {
-				years.add(cal.get(Calendar.YEAR));
-			} else {
-				Integer j;
-				for (j = 0; j < years.size();) {
-					if (cal.get(Calendar.YEAR) == years.get(j)) {
-						break;
-					}
-					j++;
-				}
-				if (j.equals(years.size()) == true) {
-					years.add(cal.get(Calendar.YEAR));
-					LOG.info("the year" + cal.get(Calendar.YEAR)
-							+ "get success");
-				}
+		Calendar cal = Calendar.getInstance();
+		
+		for (ActivitiesVO actVO : actVOs) {
+			cal.setTime(actVO.getActDate());
+			int actVOYear = cal.get(Calendar.YEAR);
+			
+			if (!years.contains(actVOYear)) {
+				years.add(actVOYear);
+				LOG.info("the year " + actVOYear + " get success");
 			}
 		}
+		
 		// 登录成功，判断预算是否该修改，若为当年的7月1号，预算在原基础上加1000
-		initServletContextObject();
 		UserloginVO thisuser = UserloginManageBean
 				.dogetOneUserInfoByUserId(userId);
 		Date date = new Date();// 取当前时间
-		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		String year = Integer.toString(cal.get(Calendar.YEAR));
 		Date updatedate = new SimpleDateFormat("yyyy-MM-dd").parse(year
@@ -207,47 +196,40 @@ public class UserloginManageAction extends ActionSupport {
 		}
 
 		// 登录成功，识别过期消息，并获取新消息条数
-		for (int i = 0; i < actVOs.size(); i++) {
-			ActivitiesVO oneAct = new ActivitiesVO();
-			oneAct = actVOs.get(i);
+		for (ActivitiesVO oneAct : actVOs) {
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
-				Calendar calendar = new GregorianCalendar();
-				calendar.setTime(date);
-				calendar.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
+				cal.setTime(date);
+				cal.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
 												// 所以对比过期时间时将今天的日期往后推一天
-				date = calendar.getTime(); // 这个时间就是日期往后推一天的结果
+				date = cal.getTime(); // 这个时间就是日期往后推一天的结果
 				if (oneAct.getActDate().before(date)) {
-					oneAct.setState("pending");
+					oneAct.setState(ActivitiesConstant.STATE_PENDING);
 					actsBean.doUpdateOneAct(oneAct);
 				}
 			}
-
 		}
 
 		int newMsg = 0;
 		List<User_msg> user_msgVOs = user_msgBean.doGetUserMsg(userId);
-		for (int i = 0; i < user_msgVOs.size(); i++) {
-			MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVOs.get(i)
+		for (User_msg user_msgVO : user_msgVOs) {
+			MessagesVO oneMsg = msgBean.doGetOneMsgById(user_msgVO
 					.getMsgId());
-			ActivitiesVO oneAct = new ActivitiesVO();
-			oneAct = actsBean.doGetOneActById(oneMsg.getActId());
+			ActivitiesVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
+			
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
-				user_msgVOs.get(i).setReadState("read");
-				user_msgBean.doUpdateOneUser_msg(user_msgVOs.get(i));
+				user_msgVO.setReadState("read");
+				user_msgBean.doUpdateOneUser_msg(user_msgVO);
 
 			}
-			if (user_msgVOs.get(i).getReadState().equals("new")) {
+			if (user_msgVO.getReadState().equals("new")) {
 				newMsg += 1;
 			}
-
 		}
 
 		// 登录成功，获取用户个人信息bean
-		initServletContextObject();
-		UserviewVO userviewVO = new UserviewVO();
-		userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
+		UserviewVO userviewVO = UserviewBean.doGetOneUserviewInfoByUserId(this
 				.getUserId());
 
 		// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用
@@ -262,15 +244,13 @@ public class UserloginManageAction extends ActionSupport {
 
 			// 获取所属小组信息，以便后面的使用
 			initServletContextObject();
-			GroupVO group = new GroupVO();
-			group = groupBean.dogetOneGroup(userId);
+			GroupVO group = groupBean.dogetOneGroup(userId);
 
 			// 获取所有用户Id，以便添加活动时发送消息给用户
 			initServletContextObject();
 			List<Integer> allMemberId = new ArrayList<Integer>();
 			for (int m = 0; m < knowledgeadministratorVOs.size(); m++) {
-				Integer userId = knowledgeadministratorVOs.get(m)
-						.getUserId();
+				Integer userId = knowledgeadministratorVOs.get(m).getUserId();
 				allMemberId.add(userId);
 			}
 

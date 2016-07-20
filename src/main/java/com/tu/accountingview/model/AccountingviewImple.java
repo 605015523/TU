@@ -65,8 +65,8 @@ public class AccountingviewImple extends Observable implements
 		List<Activity> validateacts = new ArrayList<Activity>();
 
 		// 获取所有以及被validate的活动
+		Calendar cal = Calendar.getInstance();
 		for (int i = 0; i < allacts.size(); i++) {
-			Calendar cal = Calendar.getInstance();
 			cal.setTime(allacts.get(i).getActDate());
 			if (allacts.get(i).getState().equals(ActivitiesConstant.STATE_VALIDATE)
 					&& year.equals(cal.get(Calendar.YEAR))) {
@@ -92,22 +92,21 @@ public class AccountingviewImple extends Observable implements
 				allGroupCost.add(onegroupCostVO);
 			}
 			for (int j = 0; j < validateacts.size(); j++) {
-				User_act oneuser_act = new User_act();
 				Integer actId = validateacts.get(j).getActId();
 				Integer groupId = validateacts.get(j).getGroupId();
+				
 				try {
-					oneuser_act = user_actDAO.findByUserIdAndActId(userId,
+					User_act oneuser_act = user_actDAO.findByUserIdAndActId(userId,
 							actId);
-				} catch (Exception e) {
-				}
-				if (oneuser_act.getConsumption() != null) {
-					for (GroupCostVO groupCostVO : allGroupCost) {
-						if (groupId.equals(groupCostVO.getGroupId())) {
-							float sum = (groupCostVO.getCost());
-							groupCostVO.setCost(
-									sum + oneuser_act.getConsumption());
+					
+					if (oneuser_act.getConsumption() != null) {
+						for (GroupCostVO groupCostVO : allGroupCost) {
+							if (groupId.equals(groupCostVO.getGroupId())) {
+								groupCostVO.setCost(groupCostVO.getCost() + oneuser_act.getConsumption());
+							}
 						}
 					}
+				} catch (Exception e) {
 				}
 			}
 			float sum = 0;

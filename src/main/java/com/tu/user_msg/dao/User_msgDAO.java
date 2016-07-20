@@ -32,8 +32,7 @@ public class User_msgDAO extends HibernateDaoSupport implements
 	// 通过userId和msgId查找一个user_msg对象
 	public User_msg findByUserIdAndMsgId(Integer user_id, Integer msg_id) {
 		try {
-			String hql = new String();
-			hql = " from com.tu.user_msg.dao.User_msg where user_id="
+			String hql = " from com.tu.user_msg.dao.User_msg where user_id="
 					+ user_id.toString() + " and msg_id =" + msg_id.toString();
 			User_msg user_msg = (User_msg) this.getHibernateTemplate()
 					.find(hql).get(0);

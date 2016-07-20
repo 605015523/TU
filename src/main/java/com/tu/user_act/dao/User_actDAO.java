@@ -46,8 +46,7 @@ public class User_actDAO extends HibernateDaoSupport implements
 	// 通过userId和actId可以获取到特定user_act对象
 	public User_act findByUserIdAndActId(Integer user_id, Integer act_id) {
 		try {
-			String hql = new String();
-			hql = " from com.tu.user_act.dao.User_act where user_id ="
+			String hql = " from com.tu.user_act.dao.User_act where user_id ="
 					+ user_id.toString() + " and act_id=" + act_id.toString();
 			User_act user_act = (User_act) this.getHibernateTemplate()
 					.find(hql).get(0);

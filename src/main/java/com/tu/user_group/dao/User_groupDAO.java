@@ -56,8 +56,7 @@ public class User_groupDAO extends HibernateDaoSupport implements
 	// 通过groupId和userId找到特定user_group对象
 	public User_group findByGroupIdAndUserId(Integer member_id, Integer group_id) {
 		try {
-			String hql = new String();
-			hql = " from com.tu.user_group.dao.User_group where user_id ="
+			String hql = " from com.tu.user_group.dao.User_group where user_id ="
 					+ member_id.toString() + " and group_id="
 					+ group_id.toString();
 			User_group user_group = (User_group) this.getHibernateTemplate()

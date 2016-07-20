@@ -180,8 +180,7 @@ public class AccountingviewAction extends ActionSupport {
 		int oneactId = (Integer) session.getAttribute("validateActId");
 		ActivitiesVO validateAct = new ActivitiesVO();
 		validateAct = actsBean.doGetOneActById(oneactId);
-		String checkState = getCheckState();
-		validateAct.setState("validate");
+		validateAct.setState(ActivitiesConstant.STATE_VALIDATE);
 		validateAct.setComment(getComment());
 		updateMessage = actsBean.doUpdateOneAct(validateAct);
 

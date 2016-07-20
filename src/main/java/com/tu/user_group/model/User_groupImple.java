@@ -36,8 +36,7 @@ public class User_groupImple extends Observable implements User_groupInterface {
 				.findByGroupIdAndUserId(member_id, group_id);
 
 		try {
-
-			if (user_groupDAO.findByGroupIdAndUserId(member_id, group_id) != null) {
+			if (user_groupPO != null) {
 				user_groupDAO.delete(user_groupPO);
 				OkOrNot = "delete success!";
 			} else {
