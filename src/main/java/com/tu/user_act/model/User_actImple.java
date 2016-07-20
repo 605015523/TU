@@ -28,10 +28,10 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	// 通过userId和ActId来获取特定user_act对象
 	public User_actVO doGetOneActById(Integer userId, Integer actId) {
-		User_actVO user_actVO = new User_actVO();
-		User_act user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		User_actVO userActVO = new User_actVO();
+		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		try {
-			BeanUtils.copyProperties(user_actVO, user_actPO);
+			BeanUtils.copyProperties(userActVO, userActPO);
 
 		} catch (IllegalAccessException e) {
 			LOG.error(" there is a IllegalAccessException");
@@ -39,23 +39,23 @@ public class User_actImple extends Observable implements User_actInterface {
 			LOG.error("there is a InvocationTargetException");
 		}
 
-		return user_actVO;
+		return userActVO;
 	}
 
 	// 添加一个user_act对象
 	public String doAddOneUser_act(User_actVO oneUserActVO) {
 		String addMessage = null;
-		User_act user_actPO = new User_act();
+		User_act userActPO = new User_act();
 
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(user_actPO, oneUserActVO);
+			BeanUtils.copyProperties(userActPO, oneUserActVO);
 		} catch (IllegalAccessException e) {
 			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
 			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		try {
-			user_actDAO.save(user_actPO);
+			user_actDAO.save(userActPO);
 			addMessage = "add User_act success!";
 
 		} catch (Exception e) {
@@ -65,12 +65,12 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 删除一个user_act对象
-	public String doDeleteOneUser_act(Integer user_id, Integer act_id) {
+	public String doDeleteOneUser_act(Integer userId, Integer actId) {
 		String OkOrNot = null;
-		User_act user_actPO = user_actDAO.findByUserIdAndActId(user_id, act_id);
+		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
 		try {
-			if (user_actPO != null) {
-				user_actDAO.delete(user_actPO);
+			if (userActPO != null) {
+				user_actDAO.delete(userActPO);
 				OkOrNot = "delete success!";
 			} else {
 				OkOrNot = "delete fail!";
@@ -84,13 +84,13 @@ public class User_actImple extends Observable implements User_actInterface {
 	}
 
 	// 更新一个user_act对象
-	public void doUpdateOneUser_act(User_actVO user_actVO) {
-		Integer actId = user_actVO.getActId();
-		Integer userId = user_actVO.getUserId();
-		User_act user_actPO = user_actDAO.findByUserIdAndActId(userId, actId);
-		String OkOrNot = null;
+	public void doUpdateOneUser_act(User_actVO userActVO) {
+		Integer actId = userActVO.getActId();
+		Integer userId = userActVO.getUserId();
+		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(user_actPO, user_actVO);
+			BeanUtils.copyProperties(userActPO, userActVO);
 
 		} catch (IllegalAccessException e) {
 			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
@@ -98,10 +98,10 @@ public class User_actImple extends Observable implements User_actInterface {
 			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
 		try {
-			user_actDAO.merge(user_actPO);
-			OkOrNot = "merge success!";
+			user_actDAO.merge(userActPO);
+			okOrNot = "merge success!";
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
 	}
 

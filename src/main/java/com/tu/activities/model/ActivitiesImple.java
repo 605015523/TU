@@ -94,7 +94,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	public String doUpdateOneAct(ActivitiesVO oneActVO) {
 		Integer actId = oneActVO.getActId();
 		Activity oneActPO = actsDAO.findById(actId);
-		String OkOrNot = null;
+		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneActPO, oneActVO);
 		} catch (IllegalAccessException e) {
@@ -104,12 +104,12 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		}
 		try {
 			actsDAO.merge(oneActPO);
-			OkOrNot = "merge success!";
+			okOrNot = "merge success!";
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
 
-		return OkOrNot;
+		return okOrNot;
 	}
 
 	// 删除一个活动

@@ -7,7 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_groupDAO extends HibernateDaoSupport implements
 		User_groupDAOInterface {
-	private static final Log LOG = LogFactory.getLog(User_groupDAO.class);
+	private static final Log LOGGER = LogFactory.getLog(User_groupDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String GROUP_ID = "group_id";
 
@@ -16,67 +16,67 @@ public class User_groupDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个User_group对象
-	public void save(User_group oneUser_groupPO) {
-		LOG.debug("saving User_group instance");
+	public void save(User_group oneUserGroupPO) {
+		LOGGER.debug("saving User_group instance");
 		try {
-			getHibernateTemplate().save(oneUser_groupPO);
-			LOG.debug("save successful");
+			getHibernateTemplate().save(oneUserGroupPO);
+			LOGGER.debug("save successful");
 		} catch (RuntimeException re) {
-			LOG.error("save failed", re);
+			LOGGER.error("save failed", re);
 			throw re;
 		}
 	}
 
 	// 通过userId找到所有user_group对象
-	public List<User_group> findByUserId(Integer user_id) {
+	public List<User_group> findByUserId(Integer userId) {
 		try {
 
 			return getHibernateTemplate()
 					.find("from com.tu.user_group.dao.User_group where user_id = ?",
-							user_id);
+							userId);
 		} catch (RuntimeException re) {
-			LOG.error("find by userId failed", re);
+			LOGGER.error("find by userId failed", re);
 			throw re;
 		}
 	}
 
 	// 通过groupId找到所有user_group对象
-	public List<User_group> findByGroupId(Integer group_id) {
+	public List<User_group> findByGroupId(Integer groupId) {
 		try {
 
 			return getHibernateTemplate().find(
 					"from com.tu.user_group.dao.User_group where group_id = ?",
-					group_id);
+					groupId);
 		} catch (RuntimeException re) {
-			LOG.error("find by groupId failed", re);
+			LOGGER.error("find by groupId failed", re);
 			throw re;
 		}
 	}
 
 	// 通过groupId和userId找到特定user_group对象
-	public User_group findByGroupIdAndUserId(Integer member_id, Integer group_id) {
+	public User_group findByGroupIdAndUserId(Integer memberId, Integer groupId) {
 		try {
 			String hql = " from com.tu.user_group.dao.User_group where user_id ="
-					+ member_id.toString() + " and group_id="
-					+ group_id.toString();
+					+ memberId.toString() + " and group_id="
+					+ groupId.toString();
 			User_group user_group = (User_group) this.getHibernateTemplate()
 					.find(hql).get(0);
 
 			return user_group;
 		} catch (RuntimeException re) {
-			LOG.error("find by groupId and userId failed", re);
+			LOGGER.error("find by groupId and userId failed", re);
 			throw re;
 		}
 	}
 
 	// 删除某个user_group对象
 	public void delete(User_group persistentInstance) {
-		LOG.debug("deleting User_group instance");
+		LOGGER.debug("deleting User_group instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
-			LOG.debug("delete successful");
+			LOGGER.debug("delete successful");
 		} catch (RuntimeException re) {
-			LOG.error("delete failed", re);
+			LOGGER.error("delete failed", re);
 			throw re;
 		}
 	}

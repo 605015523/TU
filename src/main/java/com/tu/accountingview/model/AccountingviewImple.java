@@ -177,12 +177,12 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setSum(sum);
 			actsVO.add(actsPO);
 		}
-		List<GroupActVO> InverseactsVO = new ArrayList<GroupActVO>();
+		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
 		for (int j = 0; j < actsVO.size(); j++) {
-			InverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
+			inverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
 		}
 
-		return InverseactsVO;
+		return inverseactsVO;
 	}
 
 	// 获取所有validate的活动的活动细节的具体实现
@@ -232,29 +232,29 @@ public class AccountingviewImple extends Observable implements
 		List<Activity> acts = actsDAO.findAll();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
-		for (int i = 0; i < acts.size(); i++) {
+		for (Activity activity : acts) {
 			GroupActVO actsPO = new GroupActVO();
-			actsPO.setActId(acts.get(i).getActId());
-			actsPO.setActName(acts.get(i).getActName());
-			actsPO.setGroupId(acts.get(i).getGroupId());
-			actsPO.setActMoney(acts.get(i).getActMoney());
-			actsPO.setDescription(acts.get(i).getDescription());
-			actsPO.setState(acts.get(i).getState());
+			actsPO.setActId(activity.getActId());
+			actsPO.setActName(activity.getActName());
+			actsPO.setGroupId(activity.getGroupId());
+			actsPO.setActMoney(activity.getActMoney());
+			actsPO.setDescription(activity.getDescription());
+			actsPO.setState(activity.getState());
 			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-			String daterange = formatter.format(acts.get(i)
+			String daterange = formatter.format(activity
 					.getEnrollStartDate())
 					+ " - "
-					+ formatter.format(acts.get(i).getEnrollEndDate());
+					+ formatter.format(activity.getEnrollEndDate());
 			actsPO.setDaterange(daterange);
-			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
+			actsPO.setActDate(formatter.format(activity.getActDate()));
 			actsVO.add(actsPO);
 
 		}
-		List<GroupActVO> InverseactsVO = new ArrayList<GroupActVO>();
+		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
 		for (int j = 0; j < actsVO.size(); j++) {
-			InverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
+			inverseactsVO.add(actsVO.get(actsVO.size() - j - 1));
 		}
-		return InverseactsVO;
+		return inverseactsVO;
 
 	}
 }

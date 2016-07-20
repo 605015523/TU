@@ -1,6 +1,5 @@
 package com.tu.user_msg.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -8,7 +7,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public class User_msgDAO extends HibernateDaoSupport implements
 		User_msgDAOInterface {
-	private static final Log LOG = LogFactory.getLog(User_msgDAO.class);
+	private static final Log LOGGER = LogFactory.getLog(User_msgDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String MSG_ID = "group_id";
 	public static final String READ_STATE = "read_state";
@@ -19,67 +18,67 @@ public class User_msgDAO extends HibernateDaoSupport implements
 
 	// 保存一个user_msg对象
 	public void save(User_msg oneUser_msgPO) {
-		LOG.debug("saving User_msg instance");
+		LOGGER.debug("saving User_msg instance");
 		try {
 			getHibernateTemplate().save(oneUser_msgPO);
-			LOG.debug("save successful");
+			LOGGER.debug("save successful");
 		} catch (RuntimeException re) {
-			LOG.error("save failed", re);
+			LOGGER.error("save failed", re);
 			throw re;
 		}
 	}
 
 	// 通过userId和msgId查找一个user_msg对象
-	public User_msg findByUserIdAndMsgId(Integer user_id, Integer msg_id) {
+	public User_msg findByUserIdAndMsgId(Integer userId, Integer msgId) {
 		try {
 			String hql = " from com.tu.user_msg.dao.User_msg where user_id="
-					+ user_id.toString() + " and msg_id =" + msg_id.toString();
-			User_msg user_msg = (User_msg) this.getHibernateTemplate()
+					+ userId.toString() + " and msg_id =" + msgId.toString();
+			User_msg userMsg = (User_msg) this.getHibernateTemplate()
 					.find(hql).get(0);
 
-			return user_msg;
+			return userMsg;
 		} catch (RuntimeException re) {
-			LOG.error("find by msgId and userId failed", re);
+			LOGGER.error("find by msgId and userId failed", re);
 			throw re;
 		}
 	}
 
 	// 通过userId查找所有该用户的messages消息
-	public List<User_msg> findMsgByUserId(java.lang.Integer user_id) {
-		LOG.debug("find all User_msg instance by userId");
+	public List<User_msg> findMsgByUserId(java.lang.Integer userId) {
+		LOGGER.debug("find all User_msg instance by userId");
 		try {
-			List<User_msg> user_msg = getHibernateTemplate().find(
-					"from com.tu.user_msg.dao.User_msg where user_id = ?", user_id);
-			LOG.debug("find successful");
-			return user_msg;
+			List<User_msg> userMsg = getHibernateTemplate().find(
+					"from com.tu.user_msg.dao.User_msg where user_id = ?", userId);
+			LOGGER.debug("find successful");
+			return userMsg;
 		} catch (RuntimeException re) {
-			LOG.error("find msg by userId failed", re);
+			LOGGER.error("find msg by userId failed", re);
 			throw re;
 		}
 	}
 
 	// 删除一个user_msg对象
 	public void delete(User_msg persistentInstance) {
-		LOG.debug("deleting User_msg instance");
+		LOGGER.debug("deleting User_msg instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
-			LOG.debug("delete successful");
+			LOGGER.debug("delete successful");
 		} catch (RuntimeException re) {
-			LOG.error("delete failed", re);
+			LOGGER.error("delete failed", re);
 			throw re;
 		}
 	}
 
 	// 修改一个user_msg对象
 	public User_msg merge(User_msg detachedInstance) {
-		LOG.debug("merging User_msg instance");
+		LOGGER.debug("merging User_msg instance");
 		try {
 			User_msg result = (User_msg) getHibernateTemplate().merge(
 					detachedInstance);
-			LOG.debug("merge successful");
+			LOGGER.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
-			LOG.error("merge failed", re);
+			LOGGER.error("merge failed", re);
 			throw re;
 		}
 	}

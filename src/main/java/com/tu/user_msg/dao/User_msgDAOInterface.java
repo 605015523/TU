@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface User_msgDAOInterface {
 
-	public void save(User_msg oneUser_msgPO);
+	public void save(User_msg oneUserMsgPO);
 
 	public User_msg merge(User_msg detachedInstance);
 

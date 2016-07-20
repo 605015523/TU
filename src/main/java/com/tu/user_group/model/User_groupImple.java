@@ -30,14 +30,14 @@ public class User_groupImple extends Observable implements User_groupInterface {
 	}
 
 	// 删除一个user_group对象
-	public String doDeleteOneUser_group(Integer member_id, Integer group_id) {
+	public String doDeleteOneUser_group(Integer memberId, Integer groupId) {
 		String OkOrNot = null;
-		User_group user_groupPO = user_groupDAO
-				.findByGroupIdAndUserId(member_id, group_id);
+		User_group userGroupPO = user_groupDAO
+				.findByGroupIdAndUserId(memberId, groupId);
 
 		try {
-			if (user_groupPO != null) {
-				user_groupDAO.delete(user_groupPO);
+			if (userGroupPO != null) {
+				user_groupDAO.delete(userGroupPO);
 				OkOrNot = "delete success!";
 			} else {
 				OkOrNot = "delete fail!";
@@ -51,15 +51,15 @@ public class User_groupImple extends Observable implements User_groupInterface {
 
 	// 通过groupId获取某小组所有的成员的具体实现
 	public List<User_groupVO> doGetAllMembersId(Integer groupId) {
-		List<User_groupVO> oneUser_groupVOs = new ArrayList<User_groupVO>();
-		List<User_group> oneUser_groupPOs = user_groupDAO.findByGroupId(groupId);
+		List<User_groupVO> oneUserGroupVOs = new ArrayList<User_groupVO>();
+		List<User_group> oneUserGroupPOs = user_groupDAO.findByGroupId(groupId);
 		
-		for (int i = 0; i < oneUser_groupPOs.size(); i++) {
-			User_group oneUser_groupPO = oneUser_groupPOs.get(i);
+		for (int i = 0; i < oneUserGroupPOs.size(); i++) {
+			User_group oneUser_groupPO = oneUserGroupPOs.get(i);
 			User_groupVO oneUser_groupVO = new User_groupVO();
 			try { // 利用Bean拷贝类实现简单地拷贝
 				BeanUtils.copyProperties(oneUser_groupVO, oneUser_groupPO);
-				oneUser_groupVOs.add(oneUser_groupVO);
+				oneUserGroupVOs.add(oneUser_groupVO);
 			} catch (IllegalAccessException e) {
 				LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 			} catch (InvocationTargetException e) {
@@ -68,7 +68,7 @@ public class User_groupImple extends Observable implements User_groupInterface {
 
 		}
 
-		return oneUser_groupVOs;
+		return oneUserGroupVOs;
 
 	}
 }

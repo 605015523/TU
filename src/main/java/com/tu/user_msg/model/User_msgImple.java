@@ -5,12 +5,16 @@ import java.util.List;
 import java.util.Observable;
 
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.tu.user_msg.dao.User_msg;
 import com.tu.user_msg.dao.User_msgDAOInterface;
 
 public class User_msgImple extends Observable implements User_msgInterface {
 
+	private static final Log LOGGER = LogFactory.getLog(User_msgImple.class);
+			
 	private User_msgDAOInterface user_msgDAO = null;
 
 	public User_msgImple() {
@@ -21,17 +25,17 @@ public class User_msgImple extends Observable implements User_msgInterface {
 		return this.user_msgDAO;
 	}
 
-	public void setUser_msgDAO(User_msgDAOInterface user_msgDAO) {
-		this.user_msgDAO = user_msgDAO;
+	public void setUser_msgDAO(User_msgDAOInterface userMsgDAO) {
+		this.user_msgDAO = userMsgDAO;
 	}
 
 	// 删除一个user_msg对象
-	public String doDeleteOneUser_msg(Integer user_id, Integer msg_id) {
+	public String doDeleteOneUser_msg(Integer userId, Integer msgId) {
 		String OkOrNot = null;
-		User_msg user_msgPO = user_msgDAO.findByUserIdAndMsgId(user_id, msg_id);
+		User_msg userMsgPO = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
 		try {
-			if (user_msgPO != null) {
-				user_msgDAO.delete(user_msgPO);
+			if (userMsgPO != null) {
+				user_msgDAO.delete(userMsgPO);
 				OkOrNot = "delete success!";
 			} else {
 				OkOrNot = "delete fail!";
@@ -48,11 +52,11 @@ public class User_msgImple extends Observable implements User_msgInterface {
 		User_msg onemsgPO = new User_msg();
 		String sendMessage = null;
 		for (int i = 0; i < alluserId.size(); i++) {
-			User_msg oneUser_magVO = new User_msg();
-			oneUser_magVO.setUserId((Integer) alluserId.get(i));
-			oneUser_magVO.setMsgId(msgId);
-			oneUser_magVO.setReadState("new");
-			user_msgDAO.save(oneUser_magVO);
+			User_msg oneUserMagVO = new User_msg();
+			oneUserMagVO.setUserId((Integer) alluserId.get(i));
+			oneUserMagVO.setMsgId(msgId);
+			oneUserMagVO.setReadState("new");
+			user_msgDAO.save(oneUserMagVO);
 		}
 		return null;
 	}
@@ -64,32 +68,29 @@ public class User_msgImple extends Observable implements User_msgInterface {
 
 	// 通过userId和msgId获取一个User_msg对象
 	public User_msg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId) {
-		User_msg oneUser_msg = new User_msg();
-		oneUser_msg = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
-		return oneUser_msg;
+		User_msg oneUserMsg = new User_msg();
+		oneUserMsg = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
+		return oneUserMsg;
 	}
 
 	// 更新一个user_msg对象
-	public void doUpdateOneUser_msg(User_msg oneUser_msgVO) {
-		User_msg oneUser_msgPO = new User_msg();
-		Integer userId = oneUser_msgVO.getUserId();
-		Integer msgId = oneUser_msgVO.getMsgId();
-		oneUser_msgPO = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
-		String OkOrNot = null;
+	public void doUpdateOneUser_msg(User_msg oneUserMsgVO) {
+		Integer userId = oneUserMsgVO.getUserId();
+		Integer msgId = oneUserMsgVO.getMsgId();
+		User_msg oneUserMsgPO = user_msgDAO.findByUserIdAndMsgId(userId, msgId);
+		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(oneUser_msgPO, oneUser_msgVO);
+			BeanUtils.copyProperties(oneUserMsgPO, oneUserMsgVO);
 		} catch (IllegalAccessException e) {
-			System.out
-					.println("there is a IllegalAccessException while copy user_msg in doUpdateOneUser_msg.");
+			LOGGER.error("there is a IllegalAccessException while copy user_msg in doUpdateOneUser_msg.");
 		} catch (InvocationTargetException e) {
-			System.out
-					.println("there is a InvocationTargetException while copy user_msg in doUpdateOneUser_msg.");
+			LOGGER.error("there is a InvocationTargetException while copy user_msg in doUpdateOneUser_msg.");
 		}
 		try {
-			user_msgDAO.merge(oneUser_msgPO);
-			OkOrNot = "merge success!";
+			user_msgDAO.merge(oneUserMsgPO);
+			okOrNot = "merge success!";
 		} catch (Exception e) {
-			OkOrNot = e.toString();
+			okOrNot = e.toString();
 		}
 
 	}
