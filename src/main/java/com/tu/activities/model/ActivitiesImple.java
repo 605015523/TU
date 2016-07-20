@@ -30,6 +30,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 获取所有活动
+	@Override
 	public List<ActivitiesVO> doGetAllActivity() {
 		List<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
 		List<Activity> activitiesPOs = actsDAO.findAll();
@@ -50,6 +51,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 通过actId获取一个活动
+	@Override
 	public ActivitiesVO doGetOneActById(Integer actId) {
 		ActivitiesVO actVO = new ActivitiesVO();
 		Activity actPO = actsDAO.findById(actId);
@@ -65,6 +67,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 添加一个活动
+	@Override
 	public Integer doAddOneAct(ActivitiesVO oneActivitiesVO) {
 		Activity oneactsPO = new Activity();
 		Integer actId = null;
@@ -87,6 +90,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 更新一个活动
+	@Override
 	public String doUpdateOneAct(ActivitiesVO oneActVO) {
 		Integer actId = oneActVO.getActId();
 		Activity oneActPO = actsDAO.findById(actId);
@@ -109,6 +113,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 	}
 
 	// 删除一个活动
+	@Override
 	public String doDeleteOneActivities(ActivitiesVO oneActivitiesVO) {
 		// TODO Auto-generated method stub
 		return null;

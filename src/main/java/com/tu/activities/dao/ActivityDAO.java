@@ -40,11 +40,11 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过actId找到并返回这个Activities对象
-	public Activity findById(java.lang.Integer act_id) {
-		LOG.debug("getting Activities instance with id: " + act_id);
+	public Activity findById(java.lang.Integer actId) {
+		LOG.debug("getting Activities instance with id: " + actId);
 		try {
 			Activity instance = (Activity) getHibernateTemplate().get(
-					"com.tu.activities.dao.Activity", act_id);
+					"com.tu.activities.dao.Activity", actId);
 			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
@@ -53,11 +53,11 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId找到并返回所有属于这个group的对象
-	public List<Activity> findByGroupId(Integer group_id) {
+	public List<Activity> findByGroupId(Integer groupId) {
 		try {
 			return getHibernateTemplate().find(
 					"from com.tu.activities.dao.Activity where group_id = ?",
-					group_id);
+					groupId);
 		} catch (RuntimeException re) {
 			LOG.error("find by userId failed", re);
 			throw re;

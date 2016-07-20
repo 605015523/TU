@@ -3,6 +3,9 @@ package com.tu.accountingview.model;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.tu.activities.dao.Activity;
 import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.activities.model.ActivitiesConstant;
@@ -16,6 +19,8 @@ import com.tu.userlogin.dao.UserloginDAOInterface;
 
 public class AccountingviewImple extends Observable implements
 		AccountingviewInterface {
+	
+	private static final Log LOGGER = LogFactory.getLog(AccountingviewImple.class);
 
 	private UserloginDAOInterface userloginDAO = null;
 	private ActivityDAOInterface actsDAO = null;
@@ -86,7 +91,7 @@ public class AccountingviewImple extends Observable implements
 			
 			for (int j = 0; j < groups.size(); j++) {
 				GroupCostVO onegroupCostVO = new GroupCostVO();
-				onegroupCostVO.setGroupId(((Group) groups.get(j)).getGroupId());
+				onegroupCostVO.setGroupId(groups.get(j).getGroupId());
 				onegroupCostVO.setCost(0);
 
 				allGroupCost.add(onegroupCostVO);
@@ -96,17 +101,18 @@ public class AccountingviewImple extends Observable implements
 				Integer groupId = validateacts.get(j).getGroupId();
 				
 				try {
-					User_act oneuser_act = user_actDAO.findByUserIdAndActId(userId,
+					User_act oneuserAct = user_actDAO.findByUserIdAndActId(userId,
 							actId);
 					
-					if (oneuser_act.getConsumption() != null) {
+					if (oneuserAct.getConsumption() != null) {
 						for (GroupCostVO groupCostVO : allGroupCost) {
 							if (groupId.equals(groupCostVO.getGroupId())) {
-								groupCostVO.setCost(groupCostVO.getCost() + oneuser_act.getConsumption());
+								groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
 							}
 						}
 					}
 				} catch (Exception e) {
+					LOGGER.error(e);
 				}
 			}
 			float sum = 0;
@@ -125,6 +131,7 @@ public class AccountingviewImple extends Observable implements
 	}
 
 	// 通过选择group的方式显示所有group这一年的活动参与情况的实现细节
+	@Override
 	public List<GroupActVO> doGetAllActsByGroupId(Integer groupId) {
 		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
@@ -160,8 +167,7 @@ public class AccountingviewImple extends Observable implements
 				oneMemberIn.setRemark(useractPO.get(j).getRemark());
 				sum += useractPO.get(j).getConsumption();
 				participatorNO += useractPO.get(j).getParticipatorNO();
-				Userlogin userPO = new Userlogin();
-				userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+				Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
 				oneMemberIn.setUserName(userPO.getUserName());
 				oneMemberIn.setUserDept(userPO.getUserDept());
 				memberInVO.add(oneMemberIn);

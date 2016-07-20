@@ -68,8 +68,8 @@ public class AccountingviewAction extends ActionSupport {
 		return this.accountingviewBean;
 	}
 
-	public void setAccountingviewBean(AccountingviewInterface AccountingviewBean) {
-		this.accountingviewBean = AccountingviewBean;
+	public void setAccountingviewBean(AccountingviewInterface accountingviewBean) {
+		this.accountingviewBean = accountingviewBean;
 	}
 
 	public User_groupInterface getUser_groupBean() {
@@ -145,8 +145,7 @@ public class AccountingviewAction extends ActionSupport {
 		String updateMessage = null;
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("checkedActId");
-		ActivitiesVO checkAct = new ActivitiesVO();
-		checkAct = actsBean.doGetOneActById(oneactId);
+		ActivitiesVO checkAct = actsBean.doGetOneActById(oneactId);
 		String checkState = getCheckState();
 		checkAct.setState(checkState);
 		checkAct.setComment(getComment());
@@ -184,13 +183,11 @@ public class AccountingviewAction extends ActionSupport {
 		updateMessage = actsBean.doUpdateOneAct(validateAct);
 
 		// 更新spending
-		GroupActVO groupactVO = new GroupActVO();
-		groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
+		GroupActVO groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
 		for (int i = 0; i < groupactVO.getMemberInVO().size(); i++) {
 			Integer userId = groupactVO.getMemberInVO().get(i).getUserId();
 			Float spending = groupactVO.getMemberInVO().get(i).getConsumption();
-			UserloginVO oneUserVO = new UserloginVO();
-			oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
+			UserloginVO oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
 			oneUserVO.setSpending(oneUserVO.getSpending() + spending);
 			userloginManageBean.doUpdateOneUserInfo(oneUserVO);
 		}

@@ -154,25 +154,19 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			Integer year) {
 		LOG.info("服务层从控制层获得AuthorId:" + userId);
 
-		List<User_act> user_act = new ArrayList<User_act>();
-
 		List<UseractsVO> oneuseractsVO = new ArrayList<UseractsVO>();
+		List<User_act> userActs = user_actDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
 
-		user_act = user_actDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
-
-		for (int i = 0; i < user_act.size(); i++) {
-			Activity actsPO = new Activity();
-			Group groupPO = new Group();
-
+		for (int i = 0; i < userActs.size(); i++) {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性
 			// 后续步骤的目的就是通过group、user_act、activities这几个表
 			// 间的关联，获取所有UseractsVO中属性的值
 			UseractsVO UseractsPO = new UseractsVO();
 
-			actsPO = actsDAO.findById(user_act.get(i).getActId());
+			Activity actsPO = actsDAO.findById(userActs.get(i).getActId());
 			// 通过user_act中的actId查找ActsPO实例
 
-			groupPO = groupDAO.findById(actsPO.getGroupId());
+			Group groupPO = groupDAO.findById(actsPO.getGroupId());
 			// 通过ActsPO中的GroupId查找groupPOS实例
 
 			Calendar cal = Calendar.getInstance();
@@ -182,17 +176,17 @@ public class UserviewImple extends Observable implements UserviewInterface {
 				UseractsPO.setUserId(userId);
 				// 设置UseractsVO中的所有UserId
 
-				UseractsPO.setActId(user_act.get(i).getActId());
+				UseractsPO.setActId(userActs.get(i).getActId());
 				// 通过user_act中的属性，设置UseractsVO中的actId
 
-				UseractsPO.setParticipaterNO(user_act.get(i)
+				UseractsPO.setParticipaterNO(userActs.get(i)
 						.getParticipatorNO());
 				// 通过user_act中的属性，设置UseractsVO中的ParticipaterNO
 
-				UseractsPO.setConsumption(user_act.get(i).getConsumption());
+				UseractsPO.setConsumption(userActs.get(i).getConsumption());
 				// 通过user_act中的属性，设置UseractsVO中的consumption
 
-				UseractsPO.setRemark(user_act.get(i).getRemark());
+				UseractsPO.setRemark(userActs.get(i).getRemark());
 				// 通过user_act中的属性，设置UseractsVO中的Remark
 
 				UseractsPO.setActName(actsPO.getActName());
@@ -266,10 +260,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	// 用户修改密码
 	public String doupdateOneuserInfo(UserloginVO userInfoVO) {
-		Userlogin userInfoPO = new Userlogin();
 		Integer userId = userInfoVO.getUserId();
 		LOG.info("the modified id is:" + userId);
-		userInfoPO = userloginDAO.findById(userId);
+		Userlogin userInfoPO = userloginDAO.findById(userId);
 		String OkOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userInfoPO, userInfoVO);

@@ -32,9 +32,9 @@ import com.tu.userview.model.UserviewVO;
 public class UserloginManageAction extends ActionSupport {
 	private static final long serialVersionUID = -5768511845633999130L;
 	
-	private HttpServletRequest request = null;
-	private HttpServletResponse response = null;
-	private HttpSession session = null;
+	private transient HttpServletRequest request = null;
+	private transient HttpServletResponse response = null;
+	private transient HttpSession session = null;
 
 	UserloginManageInterface UserloginManageBean = null;
 	UserviewInterface UserviewBean = null;
