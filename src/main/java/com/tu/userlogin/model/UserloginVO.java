@@ -68,19 +68,19 @@ public class UserloginVO implements java.io.Serializable {
 		this.userDept = userDept;
 	}
 
-	public Date getIn_date() {
+	public Date getInDate() {
 		return this.inDate;
 	}
 
-	public void setIn_date(Date inDate) {
+	public void setInDate(Date inDate) {
 		this.inDate = inDate;
 	}
 
-	public Date getOut_date() {
+	public Date getOutDate() {
 		return this.outDate;
 	}
 
-	public void setOut_date(Date outDate) {
+	public void setOutDate(Date outDate) {
 		this.outDate = outDate;
 	}
 

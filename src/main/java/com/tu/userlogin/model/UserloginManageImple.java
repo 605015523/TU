@@ -52,8 +52,7 @@ public class UserloginManageImple extends Observable implements
 	// 通过userId获取该用户
 	@Override
 	public UserloginVO dogetOneUserInfoByUserId(Integer userId) {
-		Userlogin userInfoPO = new Userlogin();
-		userInfoPO = userloginDAO.findById(userId);
+		Userlogin userInfoPO = userloginDAO.findById(userId);
 		UserloginVO userInfoVO = new UserloginVO();
 		try {
 			PropertyUtils.copyProperties(userInfoVO, userInfoPO);
@@ -71,9 +70,8 @@ public class UserloginManageImple extends Observable implements
 	// 更新用户spending
 	@Override
 	public void doUpdateOneUserInfo(UserloginVO oneUserVO) {
-		Userlogin oneUserPO = new Userlogin();
 		Integer userId = oneUserVO.getUserId();
-		oneUserPO = userloginDAO.findById(userId);
+		Userlogin oneUserPO = userloginDAO.findById(userId);
 
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneUserPO, oneUserVO);

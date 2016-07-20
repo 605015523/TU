@@ -50,8 +50,6 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	// 发送一个msg
 	@Override
 	public String doSendMsg(Integer msgId, List<Integer> alluserId) {
-		UserMsg onemsgPO = new UserMsg();
-		String sendMessage = null;
 		for (int i = 0; i < alluserId.size(); i++) {
 			UserMsg oneUserMagVO = new UserMsg();
 			oneUserMagVO.setUserId((Integer) alluserId.get(i));
@@ -71,8 +69,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	// 通过userId和msgId获取一个UserMsg对象
 	@Override
 	public UserMsg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId) {
-		UserMsg oneUserMsg = new UserMsg();
-		oneUserMsg = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
+		UserMsg oneUserMsg = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
 		return oneUserMsg;
 	}
 
@@ -86,9 +83,9 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneUserMsgPO, oneUserMsgVO);
 		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException while copy userMsg in doUpdateOneUserMsg.");
+			LOGGER.error("there is a IllegalAccessException while copy userMsg in doUpdateOneUserMsg: " + e.toString());
 		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException while copy userMsg in doUpdateOneUserMsg.");
+			LOGGER.error("there is a InvocationTargetException while copy userMsg in doUpdateOneUserMsg: " + e.toString());
 		}
 		try {
 			userMsgDAO.merge(oneUserMsgPO);

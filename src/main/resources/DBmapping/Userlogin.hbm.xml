@@ -20,10 +20,10 @@
         <property name="userDept" type="java.lang.String">
             <column name="user_dept" length="45" />
         </property>
-         <property name="in_date" type="java.sql.Date">
+         <property name="inDate" type="java.sql.Date">
             <column name="in_date" />
         </property> 
-        <property name="out_date" type="java.sql.Date">
+        <property name="outDate" type="java.sql.Date">
             <column name="out_date" />
         </property> 
         <property name="spending" type="java.lang.Float">

@@ -83,7 +83,7 @@
 								IN_DATE:
 							</td>
 							<td>
-								<c:out value="${userview.in_date}" />
+								<c:out value="${userview.inDate}" />
 							</td>
 						</tr>
 						

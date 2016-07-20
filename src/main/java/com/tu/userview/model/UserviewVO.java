@@ -4,13 +4,15 @@ import java.util.Date;
 import java.util.List;
 
 public class UserviewVO implements java.io.Serializable {
+	private static final long serialVersionUID = -3537565081639531832L;
+	
 	// Fields
 	private Integer userId;
 	private String userName;
 	private List<String> groupName;
 	private String userPassword;
 	private String userDept;
-	private Date in_date;
+	private Date inDate;
 	private Float spending;
 	private Float quota;
 	private Float remaining;
@@ -23,7 +25,7 @@ public class UserviewVO implements java.io.Serializable {
 		groupName = null;
 		userPassword = null;
 		userDept = null;
-		in_date = null;
+		inDate = null;
 		spending = null;
 		quota = null;
 		remaining = null;
@@ -69,12 +71,12 @@ public class UserviewVO implements java.io.Serializable {
 		this.userDept = userDept;
 	}
 
-	public Date getIn_date() {
-		return this.in_date;
+	public Date getInDate() {
+		return this.inDate;
 	}
 
-	public void setIn_date(Date inDate) {
-		this.in_date = inDate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 
 	public Float getSpending() {

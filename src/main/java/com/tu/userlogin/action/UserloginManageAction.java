@@ -50,8 +50,8 @@ public class UserloginManageAction extends ActionSupport {
 	private Integer userRole;
 	private List<String> groupName;
 	private String userDept;
-	private Date in_date;
-	private Date out_date;
+	private Date inDate;
+	private Date outDate;
 	private Float old_balance;
 	private Float quota;
 	private Float remaining;
@@ -65,8 +65,8 @@ public class UserloginManageAction extends ActionSupport {
 		userName = null;
 		userRole = null;
 		userDept = null;
-		in_date = null;
-		out_date = null;
+		inDate = null;
+		outDate = null;
 		old_balance = null;
 		quota = null;
 	}
@@ -185,7 +185,7 @@ public class UserloginManageAction extends ActionSupport {
 		Date updatedate = new SimpleDateFormat("yyyy-MM-dd").parse(year
 				+ "-02-25");
 		try {
-			if ((thisuser.getIn_date().getTime() - updatedate.getTime() < 0)
+			if ((thisuser.getInDate().getTime() - updatedate.getTime() < 0)
 					&& updatedate.before(date)
 					&& thisuser.getQuota() == 1000) {
 				thisuser.setQuota(thisuser.getQuota() + 1000);
@@ -330,20 +330,20 @@ public class UserloginManageAction extends ActionSupport {
 		this.userDept = userDept;
 	}
 
-	public Date getIn_date() {
-		return this.in_date;
+	public Date getInDate() {
+		return this.inDate;
 	}
 
-	public void setIn_date(Date inDate) {
-		this.in_date = inDate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 
-	public Date getOut_date() {
-		return this.out_date;
+	public Date getOutDate() {
+		return this.outDate;
 	}
 
-	public void setOut_date(Date outDate) {
-		this.out_date = outDate;
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
 	}
 
 	public Float getOld_balance() {

@@ -8,7 +8,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 public class MessagesDAO extends HibernateDaoSupport implements
 		MessagesDAOInterface {
 	private static final Log LOG = LogFactory.getLog(MessagesDAO.class);
-	public static final String Msg_ID = "msg_id";
+	public static final String MSG_ID = "msg_id";
 	public static final String ACT_ID = "act_id";
 	public static final String GROUP_ID = "group_id";
 	public static final String ACT_NAME = "act_name";
@@ -42,9 +42,8 @@ public class MessagesDAO extends HibernateDaoSupport implements
 	public Messages findById(java.lang.Integer msgId) {
 		LOG.debug("getting Message instance with id: " + msgId);
 		try {
-			Messages instance = (Messages) getHibernateTemplate().get(
+			return (Messages) getHibernateTemplate().get(
 					"com.tu.messages.dao.Messages", msgId);
-			return instance;
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
 			throw re;

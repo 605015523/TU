@@ -51,8 +51,8 @@ public class UserviewAction extends ActionSupport {
 	private String userPassword;
 	private String userRole;
 	private String userDept;
-	private Date in_date;
-	private Date out_date;
+	private Date inDate;
+	private Date outDate;
 	private Float spending;
 	private Float quota;
 	private Float remaining;
@@ -319,12 +319,12 @@ public class UserviewAction extends ActionSupport {
 		this.groupName = groupName;
 	}
 
-	public Date getOut_date() {
-		return out_date;
+	public Date getOutDate() {
+		return outDate;
 	}
 
-	public void setOut_date(Date outDate) {
-		out_date = outDate;
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
 	}
 
 	public String getUserName() {
@@ -359,12 +359,12 @@ public class UserviewAction extends ActionSupport {
 		this.userDept = userDept;
 	}
 
-	public Date getIn_date() {
-		return this.in_date;
+	public Date getInDate() {
+		return this.inDate;
 	}
 
-	public void setIn_date(Date inDate) {
-		this.in_date = inDate;
+	public void setInDate(Date inDate) {
+		this.inDate = inDate;
 	}
 
 	public Float getSpending() {
