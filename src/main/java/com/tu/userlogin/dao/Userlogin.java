@@ -5,7 +5,6 @@ import java.util.Date;
 /**
  * Userlogin entity.
  * 
- * @author MyEclipse Persistence Tools
  */
 
 public class Userlogin implements java.io.Serializable {

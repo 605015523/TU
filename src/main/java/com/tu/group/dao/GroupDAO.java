@@ -54,7 +54,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		LOGGER.debug("getting group instance with id: " + groupId);
 		try {
 			return (Group) getHibernateTemplate().get(
-					"group.dao.Group", groupId);
+					"com.tu.group.dao.Group", groupId);
 		} catch (RuntimeException re) {
 			LOGGER.error("get failed", re);
 			throw re;

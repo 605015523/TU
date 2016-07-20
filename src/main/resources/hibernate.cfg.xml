@@ -25,7 +25,6 @@
 		<property name="hibernate.c3p0.max_statements">50</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 
-		<property name="myeclipse.connection.profile">activity</property>
 		<mapping resource="DBmapping/Userlogin.hbm.xml" />
 		<mapping resource="DBmapping/User_group.hbm.xml" />
 		<mapping resource="DBmapping/Activities.hbm.xml" />
