@@ -66,5 +66,5 @@
 		</ul>
 	</li>
 	<li role="presentation" class="navbar-right"><a role="button"
-		href="dologoutUserloginManageAction.action">Log out</a></li>
+		href="<c:url value="j_spring_security_logout" />">Log out</a></li>
 </ul>

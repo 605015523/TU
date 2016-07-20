@@ -223,7 +223,6 @@ public class UserviewAction extends ActionSupport {
 	// 请求参与某个活动具体操作
 	public String doActRequest() {
 		initServletContextObject();
-		String addMessage = null;
 		UserActVO oneUserActVO = new UserActVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
 		LOG.info("the inActid is:" + actId);
@@ -233,12 +232,8 @@ public class UserviewAction extends ActionSupport {
 		oneUserActVO.setParticipatorNO(getParticipatorNO());
 		oneUserActVO.setConsumption(getConsumption());
 		oneUserActVO.setRemark(getRemark());
-		try {
-			addMessage = user_actBean.doAddOneUser_act(oneUserActVO);
-		} catch (Exception e) {
-			addMessage = "there are something wrong with control layer: "
-					+ e.toString();
-		}
+		
+		String addMessage = user_actBean.doAddOneUser_act(oneUserActVO);
 
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
@@ -296,7 +291,6 @@ public class UserviewAction extends ActionSupport {
 			LOG.error(actionReturnMessage);
 		}
 
-		UserviewVO userview = (UserviewVO) session.getAttribute("userview");
 		Integer year = (Integer) session.getAttribute("thisyear");
 		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);

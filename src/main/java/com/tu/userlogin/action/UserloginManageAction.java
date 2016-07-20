@@ -135,12 +135,6 @@ public class UserloginManageAction extends ActionSupport {
 		this.userGroupBean = userGroupBean;
 	}
 
-	public String dologout() {
-		initServletContextObject();
-		session.invalidate();
-		return "logout";
-	}
-
 	// 用户登录调用action
 	public String doLogin() throws ParseException {
 

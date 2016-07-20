@@ -16,7 +16,7 @@
 	
 	<!--首页进入地址-->
 	<welcome-file-list>
-		<welcome-file>/login.jsp</welcome-file>
+		<welcome-file>/normalUser/user_home.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<!-- Spring Security -->
