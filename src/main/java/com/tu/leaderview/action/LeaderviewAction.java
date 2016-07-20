@@ -24,8 +24,8 @@ import com.tu.leaderview.model.LeaderviewInterface;
 import com.tu.leaderview.model.MemberInVO;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
-import com.tu.user.act.model.User_actInterface;
-import com.tu.user.act.model.User_actVO;
+import com.tu.user.act.model.UserActInterface;
+import com.tu.user.act.model.UserActVO;
 import com.tu.user.group.model.UserGroupInterface;
 import com.tu.user.msg.model.UserMsgInterface;
 
@@ -43,7 +43,7 @@ public class LeaderviewAction extends ActionSupport {
 	private ActivitiesInterface actsBean = null;
 	private MessagesInterface msgBean = null;
 	private UserMsgInterface userMsgBean = null;
-	private User_actInterface user_actBean = null;
+	private UserActInterface user_actBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
 	private Integer msgId;
@@ -104,11 +104,11 @@ public class LeaderviewAction extends ActionSupport {
 		this.userMsgBean = userMsgBean;
 	}
 
-	public User_actInterface getUser_actBean() {
+	public UserActInterface getUser_actBean() {
 		return user_actBean;
 	}
 
-	public void setUser_actBean(User_actInterface userActBean) {
+	public void setUser_actBean(UserActInterface userActBean) {
 		user_actBean = userActBean;
 	}
 
@@ -245,7 +245,7 @@ public class LeaderviewAction extends ActionSupport {
 				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
 					MemberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
 							.get(j - 1);
-					User_actVO oneuserAct = user_actBean.doGetOneActById(
+					UserActVO oneuserAct = user_actBean.doGetOneActById(
 							oneMemberInVO.getUserId(), updateActId);
 					Float consumption = Float.parseFloat(request
 							.getParameter("perconsumption_" + j));

@@ -7,7 +7,7 @@ import com.tu.activities.dao.Activity;
 import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.act.dao.UseActDAOInterface;
 import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
@@ -18,7 +18,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 	private GroupDAOInterface groupDAO = null;
 	private UserGroupDAOInterface userGroupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private User_actDAOInterface user_actDAO = null;
+	private UseActDAOInterface userActDAO = null;
 
 	public LeaderviewImple() {
 
@@ -56,12 +56,12 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		this.actsDAO = actsDAO;
 	}
 
-	public User_actDAOInterface getUser_actDAO() {
-		return this.user_actDAO;
+	public UseActDAOInterface getUserActDAO() {
+		return this.userActDAO;
 	}
 
-	public void setUser_actDAO(User_actDAOInterface userActDAO) {
-		this.user_actDAO = userActDAO;
+	public void setUserActDAO(UseActDAOInterface userActDAO) {
+		this.userActDAO = userActDAO;
 	}
 
 	// 通过groupId获取所有参加这个活动的user
@@ -88,7 +88,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsPO.setDaterange(daterange);
 			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
 			actsPO.setComment(acts.get(i).getComment());
-			List<User_act> useractPO = user_actDAO.findByActId(acts.get(i)
+			List<User_act> useractPO = userActDAO.findByActId(acts.get(i)
 					.getActId());
 			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 			float sum = 0;

@@ -2,7 +2,7 @@ package com.tu.user.act.dao;
 
 import java.util.List;
 
-public interface User_actDAOInterface {
+public interface UseActDAOInterface {
 
 	List<User_act> findByUserId(Integer userId);
 

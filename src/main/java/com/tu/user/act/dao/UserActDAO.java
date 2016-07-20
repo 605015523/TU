@@ -5,9 +5,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class User_actDAO extends HibernateDaoSupport implements
-		User_actDAOInterface {
-	private static final Log LOGGER = LogFactory.getLog(User_actDAO.class);
+public class UserActDAO extends HibernateDaoSupport implements
+		UseActDAOInterface {
+	private static final Log LOGGER = LogFactory.getLog(UserActDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String ACT_ID = "act_id";
 	public static final String PARTICIPATER_NO = "participater_number";

@@ -18,7 +18,7 @@ import com.tu.group.dao.GroupDAOInterface;
 import com.tu.messages.dao.Messages;
 import com.tu.messages.dao.MessagesDAOInterface;
 import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.act.dao.UseActDAOInterface;
 import com.tu.user.group.dao.UserGroup;
 import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.user.msg.dao.UserMsg;
@@ -34,7 +34,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private User_actDAOInterface user_actDAO = null;
+	private UseActDAOInterface userActDAO = null;
 	private UserMsgDAOInterface userMsgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
 
@@ -59,8 +59,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		this.actsDAO = actsDAO;
 	}
 
-	public void setUser_actDAO(User_actDAOInterface userActDAO) {
-		this.user_actDAO = userActDAO;
+	public void setUserActDAO(UseActDAOInterface userActDAO) {
+		this.userActDAO = userActDAO;
 	}
 
 	public UserMsgDAOInterface getUserMsgDAO() {
@@ -95,8 +95,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return this.actsDAO;
 	}
 
-	public User_actDAOInterface getUser_actDAO() {
-		return this.user_actDAO;
+	public UseActDAOInterface getUserActDAO() {
+		return this.userActDAO;
 	}
 
 	// 获取主界面所有用户信息
@@ -157,7 +157,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		LOG.info("服务层从控制层获得AuthorId:" + userId);
 
 		List<UseractsVO> oneuseractsVO = new ArrayList<UseractsVO>();
-		List<User_act> userActs = user_actDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
+		List<User_act> userActs = userActDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
 
 		for (int i = 0; i < userActs.size(); i++) {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性

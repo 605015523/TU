@@ -8,29 +8,30 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.act.dao.UseActDAOInterface;
 
-public class User_actImple extends Observable implements User_actInterface {
+public class UserActImple extends Observable implements UserActInterface {
 	
-	private static final Log LOG = LogFactory.getLog(User_actImple.class);
-	private User_actDAOInterface user_actDAO = null;
+	private static final Log LOG = LogFactory.getLog(UserActImple.class);
+	private UseActDAOInterface userActDAO = null;
 
-	public User_actDAOInterface getUser_actDAO() {
-		return user_actDAO;
+	public UserActImple() {
+		// do nothing
+	}
+	
+	public UseActDAOInterface getUserActDAO() {
+		return userActDAO;
 	}
 
-	public void setUser_actDAO(User_actDAOInterface userActDAO) {
-		user_actDAO = userActDAO;
-	}
-
-	public User_actImple() {
+	public void setUserActDAO(UseActDAOInterface userActDAO) {
+		this.userActDAO = userActDAO;
 	}
 
 	// 通过userId和ActId来获取特定user_act对象
 	@Override
-	public User_actVO doGetOneActById(Integer userId, Integer actId) {
-		User_actVO userActVO = new User_actVO();
-		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
+	public UserActVO doGetOneActById(Integer userId, Integer actId) {
+		UserActVO userActVO = new UserActVO();
+		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		try {
 			BeanUtils.copyProperties(userActVO, userActPO);
 
@@ -45,7 +46,7 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	// 添加一个user_act对象
 	@Override
-	public String doAddOneUser_act(User_actVO oneUserActVO) {
+	public String doAddOneUser_act(UserActVO oneUserActVO) {
 		String addMessage = null;
 		User_act userActPO = new User_act();
 
@@ -57,7 +58,7 @@ public class User_actImple extends Observable implements User_actInterface {
 			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
 		}
 		try {
-			user_actDAO.save(userActPO);
+			userActDAO.save(userActPO);
 			addMessage = "add User_act success!";
 
 		} catch (Exception e) {
@@ -70,10 +71,10 @@ public class User_actImple extends Observable implements User_actInterface {
 	@Override
 	public String doDeleteOneUser_act(Integer userId, Integer actId) {
 		String okOrNot = null;
-		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		try {
 			if (userActPO != null) {
-				user_actDAO.delete(userActPO);
+				userActDAO.delete(userActPO);
 				okOrNot = "delete success!";
 			} else {
 				okOrNot = "delete fail!";
@@ -88,10 +89,10 @@ public class User_actImple extends Observable implements User_actInterface {
 
 	// 更新一个user_act对象
 	@Override
-	public void doUpdateOneUser_act(User_actVO userActVO) {
+	public void doUpdateOneUser_act(UserActVO userActVO) {
 		Integer actId = userActVO.getActId();
 		Integer userId = userActVO.getUserId();
-		User_act userActPO = user_actDAO.findByUserIdAndActId(userId, actId);
+		User_act userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(userActPO, userActVO);
@@ -102,7 +103,7 @@ public class User_actImple extends Observable implements User_actInterface {
 			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
 		try {
-			user_actDAO.merge(userActPO);
+			userActDAO.merge(userActPO);
 			okOrNot = "merge success!";
 		} catch (Exception e) {
 			okOrNot = e.toString();

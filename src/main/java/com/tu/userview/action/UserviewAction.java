@@ -17,8 +17,8 @@ import com.tu.activities.model.ActivitiesConstant;
 import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.messages.model.MessagesInterface;
-import com.tu.user.act.model.User_actInterface;
-import com.tu.user.act.model.User_actVO;
+import com.tu.user.act.model.UserActInterface;
+import com.tu.user.act.model.UserActVO;
 import com.tu.user.msg.dao.UserMsg;
 import com.tu.user.msg.model.UserMsgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
@@ -39,7 +39,7 @@ public class UserviewAction extends ActionSupport {
 
 	private UserloginManageInterface userloginManageBean = null;
 	private UserviewInterface userviewBean = null;
-	private User_actInterface user_actBean = null;
+	private UserActInterface user_actBean = null;
 	private MessagesInterface msgBean = null;
 	private UserMsgInterface userMsgBean = null;
 	private ActivitiesInterface actsBean = null;
@@ -78,11 +78,11 @@ public class UserviewAction extends ActionSupport {
 		this.userviewBean = userviewBean;
 	}
 
-	public User_actInterface getUser_actBean() {
+	public UserActInterface getUser_actBean() {
 		return this.user_actBean;
 	}
 
-	public void setUser_actBean(User_actInterface userActBean) {
+	public void setUser_actBean(UserActInterface userActBean) {
 		this.user_actBean = userActBean;
 	}
 
@@ -224,7 +224,7 @@ public class UserviewAction extends ActionSupport {
 	public String doActRequest() {
 		initServletContextObject();
 		String addMessage = null;
-		User_actVO oneUserActVO = new User_actVO();
+		UserActVO oneUserActVO = new UserActVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
 		LOG.info("the inActid is:" + actId);
 		Integer userId = (Integer) session.getAttribute("userId");

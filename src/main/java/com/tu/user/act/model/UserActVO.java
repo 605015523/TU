@@ -1,6 +1,6 @@
 package com.tu.user.act.model;
 
-public class User_actVO implements java.io.Serializable {
+public class UserActVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 983685594099729166L;
 	
@@ -11,7 +11,7 @@ public class User_actVO implements java.io.Serializable {
 	private Float consumption;
 	private String remark;
 
-	public User_actVO() {
+	public UserActVO() {
 		actId = null;
 		userId = null;
 		participatorNO = null;

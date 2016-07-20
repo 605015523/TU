@@ -13,7 +13,7 @@ import com.tu.group.dao.Group;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.leaderview.model.MemberInVO;
 import com.tu.user.act.dao.User_act;
-import com.tu.user.act.dao.User_actDAOInterface;
+import com.tu.user.act.dao.UseActDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 
@@ -24,7 +24,7 @@ public class AccountingviewImple extends Observable implements
 
 	private UserloginDAOInterface userloginDAO = null;
 	private ActivityDAOInterface actsDAO = null;
-	private User_actDAOInterface userActDAO = null;
+	private UseActDAOInterface userActDAO = null;
 	private GroupDAOInterface groupDAO = null;
 
 	public AccountingviewImple() {
@@ -47,11 +47,11 @@ public class AccountingviewImple extends Observable implements
 		this.actsDAO = actsDAO;
 	}
 
-	public User_actDAOInterface getUser_actDAO() {
+	public UseActDAOInterface getUserActDAO() {
 		return this.userActDAO;
 	}
 
-	public void setUser_actDAO(User_actDAOInterface userActDAO) {
+	public void setUserActDAO(UseActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
 	}
 

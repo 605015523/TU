@@ -111,7 +111,7 @@
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
-		<property name="user_actDAO" ref="User_actDAO"/>
+		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="msgDAO" ref="MsgDAO"/>
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
@@ -129,8 +129,8 @@
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
 	</bean>
 	
-	<bean id="User_actBean" class="com.tu.user.act.model.User_actImple">
-		<property name="user_actDAO" ref="User_actDAO"/>
+	<bean id="User_actBean" class="com.tu.user.act.model.UserActImple">
+		<property name="userActDAO" ref="UserActDAO"/>
 	</bean>
 
 	<bean id="LeaderviewBean" class="com.tu.leaderview.model.LeaderviewImple">
@@ -138,13 +138,13 @@
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
-		<property name="user_actDAO" ref="User_actDAO"/>
+		<property name="userActDAO" ref="UserActDAO"/>
 	</bean>
 	
 	<bean id="AccountingviewBean" class="com.tu.accountingview.model.AccountingviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
-		<property name="user_actDAO" ref="User_actDAO"/>
+		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
@@ -177,7 +177,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="User_actDAO" class="com.tu.user.act.dao.User_actDAO">
+	<bean id="UserActDAO" class="com.tu.user.act.dao.UserActDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
