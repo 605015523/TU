@@ -9,35 +9,35 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user.group.dao.User_group;
-import com.tu.user.group.dao.User_groupDAOInterface;
+import com.tu.user.group.dao.UserGroup;
+import com.tu.user.group.dao.UserGroupDAOInterface;
 
-public class User_groupImple extends Observable implements User_groupInterface {
+public class UserGroupImple extends Observable implements UserGroupInterface {
 
-	private static final Log LOGGER = LogFactory.getLog(User_groupImple.class);
-	private User_groupDAOInterface user_groupDAO = null;
+	private static final Log LOGGER = LogFactory.getLog(UserGroupImple.class);
+	private UserGroupDAOInterface userGroupDAO = null;
 
-	public User_groupDAOInterface getUser_groupDAO() {
-		return user_groupDAO;
+	public UserGroupDAOInterface getUserGroupDAO() {
+		return userGroupDAO;
 	}
 
-	public void setUser_groupDAO(User_groupDAOInterface userGroupDAO) {
-		user_groupDAO = userGroupDAO;
+	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
+		this.userGroupDAO = userGroupDAO;
 	}
 
-	public User_groupImple() {
+	public UserGroupImple() {
 
 	}
 
-	// 删除一个user_group对象
-	public String doDeleteOneUser_group(Integer memberId, Integer groupId) {
+	// 删除一个userGroup对象
+	public String doDeleteOneUserGroup(Integer memberId, Integer groupId) {
 		String okOrNot = null;
-		User_group userGroupPO = user_groupDAO
+		UserGroup userGroupPO = userGroupDAO
 				.findByGroupIdAndUserId(memberId, groupId);
 
 		try {
 			if (userGroupPO != null) {
-				user_groupDAO.delete(userGroupPO);
+				userGroupDAO.delete(userGroupPO);
 				okOrNot = "delete success!";
 			} else {
 				okOrNot = "delete fail!";
@@ -50,13 +50,13 @@ public class User_groupImple extends Observable implements User_groupInterface {
 	}
 
 	// 通过groupId获取某小组所有的成员的具体实现
-	public List<User_groupVO> doGetAllMembersId(Integer groupId) {
-		List<User_groupVO> oneUserGroupVOs = new ArrayList<User_groupVO>();
-		List<User_group> oneUserGroupPOs = user_groupDAO.findByGroupId(groupId);
+	public List<UserGroupVO> doGetAllMembersId(Integer groupId) {
+		List<UserGroupVO> oneUserGroupVOs = new ArrayList<UserGroupVO>();
+		List<UserGroup> oneUserGroupPOs = userGroupDAO.findByGroupId(groupId);
 		
 		for (int i = 0; i < oneUserGroupPOs.size(); i++) {
-			User_group oneUserGroupPO = oneUserGroupPOs.get(i);
-			User_groupVO oneUserGroupVO = new User_groupVO();
+			UserGroup oneUserGroupPO = oneUserGroupPOs.get(i);
+			UserGroupVO oneUserGroupVO = new UserGroupVO();
 			try { // 利用Bean拷贝类实现简单地拷贝
 				BeanUtils.copyProperties(oneUserGroupVO, oneUserGroupPO);
 				oneUserGroupVOs.add(oneUserGroupVO);

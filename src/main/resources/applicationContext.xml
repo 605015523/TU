@@ -66,7 +66,7 @@
 		<property name="groupBean" ref="GroupBean"/>
 		<property name="msgBean" ref="MsgBean"/>
 		<property name="userMsgBean" ref="UserMsgBean"/>
-		<property name="user_groupBean" ref="User_groupBean"/>
+		<property name="userGroupBean" ref="UserGroupBean"/>
 	</bean>
 
 	<bean id="UserviewActionBean" scope="prototype"
@@ -82,7 +82,7 @@
 	<bean id="LeaderviewActionBean" scope="prototype"
 		class="com.tu.leaderview.action.LeaderviewAction">
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
-		<property name="user_groupBean" ref="User_groupBean"/>
+		<property name="userGroupBean" ref="UserGroupBean"/>
 		
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="msgBean" ref="MsgBean"/>
@@ -95,7 +95,7 @@
 		<property name="accountingviewBean" ref="AccountingviewBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="groupBean" ref="GroupBean"/>
-		<property name="user_groupBean" ref="User_groupBean"/>
+		<property name="userGroupBean" ref="UserGroupBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 	</bean>
 
@@ -110,7 +110,7 @@
 	<bean id="UserviewBean" class="com.tu.userview.model.UserviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
-		<property name="user_groupDAO" ref="User_groupDAO"/>
+		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="user_actDAO" ref="User_actDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="msgDAO" ref="MsgDAO"/>
@@ -125,8 +125,8 @@
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
-	<bean id="User_groupBean" class="com.tu.user.group.model.User_groupImple">
-		<property name="user_groupDAO" ref="User_groupDAO"/>
+	<bean id="UserGroupBean" class="com.tu.user.group.model.UserGroupImple">
+		<property name="userGroupDAO" ref="UserGroupDAO"/>
 	</bean>
 	
 	<bean id="User_actBean" class="com.tu.user.act.model.User_actImple">
@@ -136,7 +136,7 @@
 	<bean id="LeaderviewBean" class="com.tu.leaderview.model.LeaderviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
-		<property name="user_groupDAO" ref="User_groupDAO"/>
+		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="user_actDAO" ref="User_actDAO"/>
 	</bean>
@@ -165,7 +165,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="User_groupDAO" class="com.tu.user.group.dao.User_groupDAO">
+	<bean id="UserGroupDAO" class="com.tu.user.group.dao.UserGroupDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 

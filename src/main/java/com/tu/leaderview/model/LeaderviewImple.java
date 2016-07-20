@@ -8,7 +8,7 @@ import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.group.dao.GroupDAOInterface;
 import com.tu.user.act.dao.User_act;
 import com.tu.user.act.dao.User_actDAOInterface;
-import com.tu.user.group.dao.User_groupDAOInterface;
+import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 
@@ -16,7 +16,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
-	private User_groupDAOInterface user_groupDAO = null;
+	private UserGroupDAOInterface userGroupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
 	private User_actDAOInterface user_actDAO = null;
 
@@ -40,12 +40,12 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		this.groupDAO = groupDAO;
 	}
 
-	public User_groupDAOInterface getUser_groupDAO() {
-		return user_groupDAO;
+	public UserGroupDAOInterface getUserGroupDAO() {
+		return userGroupDAO;
 	}
 
-	public void setUser_groupDAO(User_groupDAOInterface userGroupDAO) {
-		user_groupDAO = userGroupDAO;
+	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
+		this.userGroupDAO = userGroupDAO;
 	}
 
 	public ActivityDAOInterface getActsDAO() {

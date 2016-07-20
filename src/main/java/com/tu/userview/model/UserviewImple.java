@@ -19,8 +19,8 @@ import com.tu.messages.dao.Messages;
 import com.tu.messages.dao.MessagesDAOInterface;
 import com.tu.user.act.dao.User_act;
 import com.tu.user.act.dao.User_actDAOInterface;
-import com.tu.user.group.dao.User_group;
-import com.tu.user.group.dao.User_groupDAOInterface;
+import com.tu.user.group.dao.UserGroup;
+import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.user.msg.dao.UserMsg;
 import com.tu.user.msg.dao.UserMsgDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
@@ -30,7 +30,7 @@ import com.tu.userlogin.model.UserloginVO;
 public class UserviewImple extends Observable implements UserviewInterface {
 
 	private static final Log LOG = LogFactory.getLog(UserviewImple.class);
-	private User_groupDAOInterface user_groupDAO = null;
+	private UserGroupDAOInterface userGroupDAO = null;
 	private UserloginDAOInterface userloginDAO = null;
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
@@ -43,8 +43,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	}
 
-	public void setUser_groupDAO(User_groupDAOInterface userGroupDAO) {
-		this.user_groupDAO = userGroupDAO;
+	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
+		this.userGroupDAO = userGroupDAO;
 	}
 
 	public void setUserloginDAO(UserloginDAOInterface userloginDAO) {
@@ -79,8 +79,8 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		this.msgDAO = msgDAO;
 	}
 
-	public User_groupDAOInterface getUser_groupDAO() {
-		return this.user_groupDAO;
+	public UserGroupDAOInterface getUserGroupDAO() {
+		return this.userGroupDAO;
 	}
 
 	public UserloginDAOInterface getUserloginDAO() {
@@ -109,7 +109,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
 			LOG.info("oneuserloginPO ID get success"
 					+ oneuserloginPO.getUserId());
-			List<User_group> oneUserGroupPO = user_groupDAO.findByUserId(userId);
+			List<UserGroup> oneUserGroupPO = userGroupDAO.findByUserId(userId);
 
 			for (int i = 0; i < oneUserGroupPO.size(); i++) {
 				onegroupPO.add(groupDAO.findById(

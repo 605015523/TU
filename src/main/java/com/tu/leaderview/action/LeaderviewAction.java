@@ -26,7 +26,7 @@ import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
 import com.tu.user.act.model.User_actInterface;
 import com.tu.user.act.model.User_actVO;
-import com.tu.user.group.model.User_groupInterface;
+import com.tu.user.group.model.UserGroupInterface;
 import com.tu.user.msg.model.UserMsgInterface;
 
 public class LeaderviewAction extends ActionSupport {
@@ -39,7 +39,7 @@ public class LeaderviewAction extends ActionSupport {
 	private transient HttpSession session = null;
 
 	private LeaderviewInterface leaderviewBean = null;
-	private User_groupInterface user_groupBean = null;
+	private UserGroupInterface userGroupBean = null;
 	private ActivitiesInterface actsBean = null;
 	private MessagesInterface msgBean = null;
 	private UserMsgInterface userMsgBean = null;
@@ -80,12 +80,12 @@ public class LeaderviewAction extends ActionSupport {
 		this.leaderviewBean = leaderviewBean;
 	}
 
-	public User_groupInterface getUser_groupBean() {
-		return this.user_groupBean;
+	public UserGroupInterface getUserGroupBean() {
+		return this.userGroupBean;
 	}
 
-	public void setUser_groupBean(User_groupInterface userGroupBean) {
-		this.user_groupBean = userGroupBean;
+	public void setUserGroupBean(UserGroupInterface userGroupBean) {
+		this.userGroupBean = userGroupBean;
 	}
 
 	public MessagesInterface getMsgBean() {

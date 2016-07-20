@@ -5,9 +5,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class User_groupDAO extends HibernateDaoSupport implements
-		User_groupDAOInterface {
-	private static final Log LOGGER = LogFactory.getLog(User_groupDAO.class);
+public class UserGroupDAO extends HibernateDaoSupport implements
+		UserGroupDAOInterface {
+	private static final Log LOGGER = LogFactory.getLog(UserGroupDAO.class);
 	public static final String USER_ID = "user_id";
 	public static final String GROUP_ID = "group_id";
 
@@ -15,9 +15,9 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		// do nothing
 	}
 
-	// 保存一个User_group对象
-	public void save(User_group oneUserGroupPO) {
-		LOGGER.debug("saving User_group instance");
+	// 保存一个UserGroup对象
+	public void save(UserGroup oneUserGroupPO) {
+		LOGGER.debug("saving UserGroup instance");
 		try {
 			getHibernateTemplate().save(oneUserGroupPO);
 			LOGGER.debug("save successful");
@@ -27,12 +27,12 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 通过userId找到所有user_group对象
-	public List<User_group> findByUserId(Integer userId) {
+	// 通过userId找到所有userGroup对象
+	public List<UserGroup> findByUserId(Integer userId) {
 		try {
 
 			return getHibernateTemplate()
-					.find("from com.tu.user.group.dao.User_group where user_id = ?",
+					.find("from com.tu.user.group.dao.UserGroup where user_id = ?",
 							userId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
@@ -40,12 +40,12 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 通过groupId找到所有user_group对象
-	public List<User_group> findByGroupId(Integer groupId) {
+	// 通过groupId找到所有userGroup对象
+	public List<UserGroup> findByGroupId(Integer groupId) {
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user.group.dao.User_group where group_id = ?",
+					"from com.tu.user.group.dao.UserGroup where group_id = ?",
 					groupId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by groupId failed", re);
@@ -53,13 +53,13 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 通过groupId和userId找到特定user_group对象
-	public User_group findByGroupIdAndUserId(Integer memberId, Integer groupId) {
+	// 通过groupId和userId找到特定userGroup对象
+	public UserGroup findByGroupIdAndUserId(Integer memberId, Integer groupId) {
 		try {
-			String hql = " from com.tu.user.group.dao.User_group where user_id ="
+			String hql = " from com.tu.user.group.dao.UserGroup where user_id ="
 					+ memberId.toString() + " and group_id="
 					+ groupId.toString();
-			User_group userGroup = (User_group) this.getHibernateTemplate()
+			UserGroup userGroup = (UserGroup) this.getHibernateTemplate()
 					.find(hql).get(0);
 
 			return userGroup;
@@ -69,9 +69,9 @@ public class User_groupDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 删除某个user_group对象
-	public void delete(User_group persistentInstance) {
-		LOGGER.debug("deleting User_group instance");
+	// 删除某个userGroup对象
+	public void delete(UserGroup persistentInstance) {
+		LOGGER.debug("deleting UserGroup instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			LOGGER.debug("delete successful");

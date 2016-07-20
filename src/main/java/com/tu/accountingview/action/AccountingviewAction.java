@@ -19,7 +19,7 @@ import com.tu.activities.model.ActivitiesInterface;
 import com.tu.activities.model.ActivitiesVO;
 import com.tu.group.model.GroupInterface;
 import com.tu.group.model.GroupVO;
-import com.tu.user.group.model.User_groupInterface;
+import com.tu.user.group.model.UserGroupInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
 
@@ -32,7 +32,7 @@ public class AccountingviewAction extends ActionSupport {
 	private transient HttpSession session = null;
 
 	private AccountingviewInterface accountingviewBean = null;
-	private User_groupInterface user_groupBean = null;
+	private UserGroupInterface userGroupBean = null;
 	private ActivitiesInterface actsBean = null;
 	private GroupInterface groupBean = null;
 	private UserloginManageInterface userloginManageBean = null;
@@ -72,12 +72,12 @@ public class AccountingviewAction extends ActionSupport {
 		this.accountingviewBean = accountingviewBean;
 	}
 
-	public User_groupInterface getUser_groupBean() {
-		return this.user_groupBean;
+	public UserGroupInterface getUserGroupBean() {
+		return this.userGroupBean;
 	}
 
-	public void setUser_groupBean(User_groupInterface userGroupBean) {
-		this.user_groupBean = userGroupBean;
+	public void setUserGroupBean(UserGroupInterface userGroupBean) {
+		this.userGroupBean = userGroupBean;
 	}
 
 	public GroupInterface getGroupBean() {

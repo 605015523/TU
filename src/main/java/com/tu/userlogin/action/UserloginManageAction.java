@@ -21,7 +21,7 @@ import com.tu.group.model.GroupVO;
 import com.tu.leaderview.model.LeaderviewInterface;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
-import com.tu.user.group.model.User_groupInterface;
+import com.tu.user.group.model.UserGroupInterface;
 import com.tu.user.msg.dao.UserMsg;
 import com.tu.user.msg.model.UserMsgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
@@ -36,14 +36,14 @@ public class UserloginManageAction extends ActionSupport {
 	private transient HttpServletResponse response = null;
 	private transient HttpSession session = null;
 
-	UserloginManageInterface userloginManageBean = null;
-	UserviewInterface userviewBean = null;
-	LeaderviewInterface leaderviewBean = null;
-	ActivitiesInterface actsBean = null;
-	GroupInterface groupBean = null;
-	MessagesInterface msgBean = null;
-	UserMsgInterface userMsgBean = null;
-	User_groupInterface user_groupBean = null;
+	private UserloginManageInterface userloginManageBean = null;
+	private UserviewInterface userviewBean = null;
+	private LeaderviewInterface leaderviewBean = null;
+	private ActivitiesInterface actsBean = null;
+	private GroupInterface groupBean = null;
+	private MessagesInterface msgBean = null;
+	private UserMsgInterface userMsgBean = null;
+	private UserGroupInterface userGroupBean = null;
 
 	private Integer userId;
 	private String userName;
@@ -127,12 +127,12 @@ public class UserloginManageAction extends ActionSupport {
 		this.msgBean = msgBean;
 	}
 
-	public User_groupInterface getUser_groupBean() {
-		return user_groupBean;
+	public UserGroupInterface getUserGroupBean() {
+		return userGroupBean;
 	}
 
-	public void setUser_groupBean(User_groupInterface userGroupBean) {
-		user_groupBean = userGroupBean;
+	public void setUserGroupBean(UserGroupInterface userGroupBean) {
+		this.userGroupBean = userGroupBean;
 	}
 
 	public String dologout() {

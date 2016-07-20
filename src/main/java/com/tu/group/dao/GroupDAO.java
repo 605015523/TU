@@ -53,9 +53,8 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	public Group findById(Integer groupId) {
 		LOGGER.debug("getting group instance with id: " + groupId);
 		try {
-			Group instance = (Group) getHibernateTemplate().get(
+			return (Group) getHibernateTemplate().get(
 					"group.dao.Group", groupId);
-			return instance;
 		} catch (RuntimeException re) {
 			LOGGER.error("get failed", re);
 			throw re;
@@ -66,11 +65,9 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	@Override
 	public Group findByUserId(Integer userId) {
 		try {
-			Group group = (Group) getHibernateTemplate().find(
+			return (Group) getHibernateTemplate().find(
 					"from com.tu.group.dao.Group where group_leader_id = ?", userId)
 					.get(0);
-
-			return group;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by group_leader_id failed", re);
 			throw re;
@@ -81,10 +78,9 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	@Override
 	public Group findByGroupName(String groupName) {
 		try {
-			Group group = (Group) getHibernateTemplate().find(
+			return (Group) getHibernateTemplate().find(
 					"from com.tu.group.dao.Group where group_name = ?", groupName)
 					.get(0);
-			return group;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by group_leader_id failed", re);
 			throw re;
