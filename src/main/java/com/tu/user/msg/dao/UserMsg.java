@@ -1,6 +1,6 @@
 package com.tu.user.msg.dao;
 
-public class User_msg implements java.io.Serializable {
+public class UserMsg implements java.io.Serializable {
 
 	private static final long serialVersionUID = 2496672216523471838L;
 	
@@ -8,11 +8,11 @@ public class User_msg implements java.io.Serializable {
 	private Integer msgId;
 	private String readState;
 
-	public User_msg() {
+	public UserMsg() {
 
 	}
 
-	public User_msg(Integer userId, Integer msgId, String readState) {
+	public UserMsg(Integer userId, Integer msgId, String readState) {
 		this.userId = userId;
 		this.msgId = msgId;
 		this.readState = readState;

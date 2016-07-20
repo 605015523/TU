@@ -19,10 +19,12 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	public static final String ACT_DATE = "act_date";
 	public static final String STATE = "state";
 
+	@Override
 	protected void initDao() {
 		// do nothing
 	}
 
+	@Override
 	public List<Activity> findAll() {
 		LOG.debug("finding all activities instances");
 		try {
@@ -40,6 +42,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过actId找到并返回这个Activities对象
+	@Override
 	public Activity findById(java.lang.Integer actId) {
 		LOG.debug("getting Activities instance with id: " + actId);
 		try {
@@ -53,6 +56,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 通过groupId找到并返回所有属于这个group的对象
+	@Override
 	public List<Activity> findByGroupId(Integer groupId) {
 		try {
 			return getHibernateTemplate().find(
@@ -65,6 +69,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 保存一个Activities对象
+	@Override
 	public Integer save(Activity oneActivityPO) {
 		LOG.debug("saving Activities instance");
 		try {
@@ -79,6 +84,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 更新一个Activities
+	@Override
 	public Activity merge(Activity detachedInstance) {
 		LOG.debug("merging activitiy instance");
 		try {
@@ -93,6 +99,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	}
 
 	// 删除一个Activities对象
+	@Override
 	public void delete(Activity oneActivityPO) {
 		// TODO Auto-generated method stub
 

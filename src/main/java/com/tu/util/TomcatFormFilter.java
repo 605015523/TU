@@ -45,6 +45,7 @@ public class TomcatFormFilter implements Filter {
 		/**
 		 * 读取参数 -- 修正了中文问题.
 		 */
+		@Override
 		public String getParameter(String name) {
 			return toChi(getHttpServletRequest().getParameter(name));
 		}
@@ -52,6 +53,7 @@ public class TomcatFormFilter implements Filter {
 		/**
 		 * 读取参数列表 - 修正了中文问题.
 		 */
+		@Override
 		public String[] getParameterValues(String name) {
 			String values[] = getHttpServletRequest().getParameterValues(name);
 			if (values != null) {
@@ -63,10 +65,12 @@ public class TomcatFormFilter implements Filter {
 		}
 	}
 
+	@Override
 	public void destroy() {
 
 	}
 
+	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpreq = (HttpServletRequest) request;
@@ -79,6 +83,7 @@ public class TomcatFormFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
 

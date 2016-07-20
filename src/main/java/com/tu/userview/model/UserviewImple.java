@@ -21,8 +21,8 @@ import com.tu.user.act.dao.User_act;
 import com.tu.user.act.dao.User_actDAOInterface;
 import com.tu.user.group.dao.User_group;
 import com.tu.user.group.dao.User_groupDAOInterface;
-import com.tu.user.msg.dao.User_msg;
-import com.tu.user.msg.dao.User_msgDAOInterface;
+import com.tu.user.msg.dao.UserMsg;
+import com.tu.user.msg.dao.UserMsgDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
 import com.tu.userlogin.model.UserloginVO;
@@ -35,7 +35,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
 	private User_actDAOInterface user_actDAO = null;
-	private User_msgDAOInterface user_msgDAO = null;
+	private UserMsgDAOInterface userMsgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
 
 	// 构造方法
@@ -63,12 +63,12 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		this.user_actDAO = userActDAO;
 	}
 
-	public User_msgDAOInterface getUser_msgDAO() {
-		return this.user_msgDAO;
+	public UserMsgDAOInterface getUserMsgDAO() {
+		return this.userMsgDAO;
 	}
 
-	public void setUser_msgDAO(User_msgDAOInterface userMsgDAO) {
-		this.user_msgDAO = userMsgDAO;
+	public void setUserMsgDAO(UserMsgDAOInterface userMsgDAO) {
+		this.userMsgDAO = userMsgDAO;
 	}
 
 	public MessagesDAOInterface getMsgDAO() {
@@ -100,6 +100,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	}
 
 	// 获取主界面所有用户信息
+	@Override
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
 		List<String> onegroupPO = new ArrayList<String>();
 		UserviewVO oneuserviewPO = new UserviewVO();
@@ -150,6 +151,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	}
 
 	// 通过用户Id获取所有用户所参与的活动
+	@Override
 	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year) {
 		LOG.info("服务层从控制层获得AuthorId:" + userId);
@@ -221,22 +223,23 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	}
 
 	// 获取用户的所有messages
-	public List<User_msgVO> dogetMessages(Integer userId) {
-		List<User_msgVO> userMsgsVO = new ArrayList<User_msgVO>();
-		List<User_msg> userMsgs = user_msgDAO.findMsgByUserId(userId);
+	@Override
+	public List<UserMsgVO> dogetMessages(Integer userId) {
+		List<UserMsgVO> userMsgsVO = new ArrayList<UserMsgVO>();
+		List<UserMsg> userMsgs = userMsgDAO.findMsgByUserId(userId);
 		
 		for (int i = 0; i < userMsgs.size(); i++) {
-			Integer oneMsgId = ((User_msg) userMsgs.get(i)).getMsgId();
+			Integer oneMsgId = userMsgs.get(i).getMsgId();
 			Messages oneMessage = msgDAO.findById(oneMsgId);
-			User_msgVO oneUserMsgVO = new User_msgVO();
+			UserMsgVO oneUserMsgVO = new UserMsgVO();
 			try { // 利用Bean拷贝类实现简单地拷贝
 				BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
 			} catch (IllegalAccessException e) {
-				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUser_msgVO.");
+				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO.");
 			} catch (InvocationTargetException e) {
-				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUser_msgVO.");
+				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO.");
 			}
-			oneUserMsgVO.setReadState(((User_msg) userMsgs.get(i))
+			oneUserMsgVO.setReadState(((UserMsg) userMsgs.get(i))
 					.getReadState());
 			Group group = groupDAO.findById(oneMessage.getGroupId());
 			oneUserMsgVO.setGroupName(group.getGroupName());
@@ -249,7 +252,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			oneUserMsgVO.setActDate(formatter.format(oneMessage.getActDate()));
 			userMsgsVO.add(oneUserMsgVO);
 		}
-		List<User_msgVO> inverseuserMsgsVO = new ArrayList<User_msgVO>();
+		List<UserMsgVO> inverseuserMsgsVO = new ArrayList<UserMsgVO>();
 		for (int j = userMsgsVO.size()-1; j >= 0; j--) {
 			inverseuserMsgsVO.add(userMsgsVO.get(j));
 		}
@@ -258,6 +261,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	}
 
 	// 用户修改密码
+	@Override
 	public String doupdateOneuserInfo(UserloginVO userInfoVO) {
 		Integer userId = userInfoVO.getUserId();
 		LOG.info("the modified id is:" + userId);

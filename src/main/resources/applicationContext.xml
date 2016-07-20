@@ -65,7 +65,7 @@
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="groupBean" ref="GroupBean"/>
 		<property name="msgBean" ref="MsgBean"/>
-		<property name="user_msgBean" ref="User_msgBean"/>
+		<property name="userMsgBean" ref="UserMsgBean"/>
 		<property name="user_groupBean" ref="User_groupBean"/>
 	</bean>
 
@@ -76,7 +76,7 @@
 		<property name="user_actBean" ref="User_actBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="msgBean" ref="MsgBean"/>
-		<property name="user_msgBean" ref="User_msgBean"/>
+		<property name="userMsgBean" ref="UserMsgBean"/>
 	</bean>
 
 	<bean id="LeaderviewActionBean" scope="prototype"
@@ -86,7 +86,7 @@
 		
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="msgBean" ref="MsgBean"/>
-		<property name="user_msgBean" ref="User_msgBean"/>
+		<property name="userMsgBean" ref="UserMsgBean"/>
 		<property name="user_actBean" ref="User_actBean"/>
 	</bean>
 	
@@ -114,7 +114,7 @@
 		<property name="user_actDAO" ref="User_actDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="msgDAO" ref="MsgDAO"/>
-		<property name="user_msgDAO" ref="User_msgDAO"/>
+		<property name="userMsgDAO" ref="UserMsgDAO"/>
 	</bean>
 
 	<bean id="ActsBean" class="com.tu.activities.model.ActivitiesImple">
@@ -152,8 +152,8 @@
 		<property name="msgDAO" ref="MsgDAO"/>
 	</bean>
 	
-	<bean id="User_msgBean" class="com.tu.user.msg.model.User_msgImple">
-		<property name="user_msgDAO" ref="User_msgDAO"/>
+	<bean id="UserMsgBean" class="com.tu.user.msg.model.UserMsgImple">
+		<property name="userMsgDAO" ref="UserMsgDAO"/>
 	</bean>
 
 
@@ -185,7 +185,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<bean id="User_msgDAO" class="com.tu.user.msg.dao.User_msgDAO">
+	<bean id="UserMsgDAO" class="com.tu.user.msg.dao.UserMsgDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 

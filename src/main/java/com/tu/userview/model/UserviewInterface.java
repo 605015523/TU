@@ -11,7 +11,7 @@ public interface UserviewInterface {
 	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year);
 
-	public List<User_msgVO> dogetMessages(Integer userId);
+	public List<UserMsgVO> dogetMessages(Integer userId);
 
 	public String doupdateOneuserInfo(UserloginVO userInfo);
 

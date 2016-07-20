@@ -19,11 +19,11 @@ import com.tu.activities.model.ActivitiesVO;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.user.act.model.User_actInterface;
 import com.tu.user.act.model.User_actVO;
-import com.tu.user.msg.dao.User_msg;
-import com.tu.user.msg.model.User_msgInterface;
+import com.tu.user.msg.dao.UserMsg;
+import com.tu.user.msg.model.UserMsgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
-import com.tu.userview.model.User_msgVO;
+import com.tu.userview.model.UserMsgVO;
 import com.tu.userview.model.UseractsVO;
 import com.tu.userview.model.UserviewInterface;
 import com.tu.userview.model.UserviewVO;
@@ -41,7 +41,7 @@ public class UserviewAction extends ActionSupport {
 	private UserviewInterface userviewBean = null;
 	private User_actInterface user_actBean = null;
 	private MessagesInterface msgBean = null;
-	private User_msgInterface user_msgBean = null;
+	private UserMsgInterface userMsgBean = null;
 	private ActivitiesInterface actsBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
@@ -98,12 +98,12 @@ public class UserviewAction extends ActionSupport {
 		this.msgBean = msgBean;
 	}
 
-	public User_msgInterface getUser_msgBean() {
-		return this.user_msgBean;
+	public UserMsgInterface getUserMsgBean() {
+		return this.userMsgBean;
 	}
 
-	public void setUser_msgBean(User_msgInterface userMsgBean) {
-		this.user_msgBean = userMsgBean;
+	public void setUserMsgBean(UserMsgInterface userMsgBean) {
+		this.userMsgBean = userMsgBean;
 	}
 
 	public ActivitiesInterface getActsBean() {
@@ -152,9 +152,9 @@ public class UserviewAction extends ActionSupport {
 	public String doshowMessages() {
 		initServletContextObject();
 		Integer userId = (Integer) session.getAttribute("userId");
-		List<User_msgVO> messages = userviewBean.dogetMessages(userId);
-		List<User_msgVO> overmessages = new ArrayList<User_msgVO>();
-		List<User_msgVO> inmessages = new ArrayList<User_msgVO>();
+		List<UserMsgVO> messages = userviewBean.dogetMessages(userId);
+		List<UserMsgVO> overmessages = new ArrayList<UserMsgVO>();
+		List<UserMsgVO> inmessages = new ArrayList<UserMsgVO>();
 
 		for (int i = 0; i < messages.size(); i++) {
 			ActivitiesVO oneAct = actsBean.doGetOneActById(messages.get(i).getActId());
@@ -173,7 +173,7 @@ public class UserviewAction extends ActionSupport {
 	// 显示所有messages的细节
 	public String doshowMsgDetails() {
 		initServletContextObject();
-		List<User_msgVO> messages = (List<User_msgVO>) session.getAttribute("inmessages");
+		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
@@ -181,16 +181,16 @@ public class UserviewAction extends ActionSupport {
 			}
 		}
 
-		// 将User_msg中的状态设置为已读
+		// 将UserMsg中的状态设置为已读
 		Integer userId = (Integer) session.getAttribute("userId");
-		User_msg oneUserMsg = user_msgBean.dogetOneByUserIdAndMsgId(userId, msgId);
+		UserMsg oneUserMsg = userMsgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
 		if (oneUserMsg.getReadState().equals("new")) {
 
 			oneUserMsg.setReadState("read");
-			user_msgBean.doUpdateOneUser_msg(oneUserMsg);
+			userMsgBean.doUpdateOneUserMsg(oneUserMsg);
 			int newMsg = 0;
-			List<User_msg> userMsgVOs = (List<User_msg>) user_msgBean
+			List<UserMsg> userMsgVOs = (List<UserMsg>) userMsgBean
 					.doGetUserMsg(userId);
 			for (int i = 0; i < userMsgVOs.size(); i++) {
 
@@ -209,7 +209,7 @@ public class UserviewAction extends ActionSupport {
 	// 跳转到参与某个活动的界面
 	public String doInAct() {
 		initServletContextObject();
-		List<User_msgVO> messages = (List<User_msgVO>) session.getAttribute("inmessages");
+		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
 		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {

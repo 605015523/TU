@@ -22,8 +22,8 @@ import com.tu.leaderview.model.LeaderviewInterface;
 import com.tu.messages.model.MessagesInterface;
 import com.tu.messages.model.MessagesVO;
 import com.tu.user.group.model.User_groupInterface;
-import com.tu.user.msg.dao.User_msg;
-import com.tu.user.msg.model.User_msgInterface;
+import com.tu.user.msg.dao.UserMsg;
+import com.tu.user.msg.model.UserMsgInterface;
 import com.tu.userlogin.model.UserloginManageInterface;
 import com.tu.userlogin.model.UserloginVO;
 import com.tu.userview.model.UserviewInterface;
@@ -42,7 +42,7 @@ public class UserloginManageAction extends ActionSupport {
 	ActivitiesInterface actsBean = null;
 	GroupInterface groupBean = null;
 	MessagesInterface msgBean = null;
-	User_msgInterface user_msgBean = null;
+	UserMsgInterface userMsgBean = null;
 	User_groupInterface user_groupBean = null;
 
 	private Integer userId;
@@ -111,12 +111,12 @@ public class UserloginManageAction extends ActionSupport {
 		this.groupBean = groupBean;
 	}
 
-	public User_msgInterface getUser_msgBean() {
-		return this.user_msgBean;
+	public UserMsgInterface getUserMsgBean() {
+		return this.userMsgBean;
 	}
 
-	public void setUser_msgBean(User_msgInterface userMsgBean) {
-		this.user_msgBean = userMsgBean;
+	public void setUserMsgBean(UserMsgInterface userMsgBean) {
+		this.userMsgBean = userMsgBean;
 	}
 
 	public MessagesInterface getMsgBean() {
@@ -210,8 +210,8 @@ public class UserloginManageAction extends ActionSupport {
 		}
 
 		int newMsg = 0;
-		List<User_msg> userMsgVOs = user_msgBean.doGetUserMsg(userId);
-		for (User_msg userMsgVO : userMsgVOs) {
+		List<UserMsg> userMsgVOs = userMsgBean.doGetUserMsg(userId);
+		for (UserMsg userMsgVO : userMsgVOs) {
 			MessagesVO oneMsg = msgBean.doGetOneMsgById(userMsgVO
 					.getMsgId());
 			ActivitiesVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
@@ -220,7 +220,7 @@ public class UserloginManageAction extends ActionSupport {
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
 				userMsgVO.setReadState("read");
-				user_msgBean.doUpdateOneUser_msg(userMsgVO);
+				userMsgBean.doUpdateOneUserMsg(userMsgVO);
 
 			}
 			if (userMsgVO.getReadState().equals("new")) {

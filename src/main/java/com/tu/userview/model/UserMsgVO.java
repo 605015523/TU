@@ -1,6 +1,6 @@
 package com.tu.userview.model;
 
-public class User_msgVO implements java.io.Serializable {
+public class UserMsgVO implements java.io.Serializable {
 	
 	private static final long serialVersionUID = -5706659091511226929L;
 	
@@ -18,12 +18,12 @@ public class User_msgVO implements java.io.Serializable {
 
 	// Constructors
 	/** default constructor */
-	public User_msgVO() {
+	public UserMsgVO() {
 	}
 
 	/** full constructor */
 
-	public User_msgVO(Integer msgId, Integer actId, String groupName,
+	public UserMsgVO(Integer msgId, Integer actId, String groupName,
 			String actName, Float actMoney, String description,
 			String dateRange, String actDate, String state, String readState) {
 		this.msgId = msgId;

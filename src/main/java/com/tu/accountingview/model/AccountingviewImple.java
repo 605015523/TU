@@ -64,6 +64,7 @@ public class AccountingviewImple extends Observable implements
 	}
 
 	// 通过选择year的方式显示所有用户这一年的活动参与情况的实现细节
+	@Override
 	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
 		List<Activity> allacts = actsDAO.findAll();
@@ -186,6 +187,7 @@ public class AccountingviewImple extends Observable implements
 	}
 
 	// 获取所有validate的活动的活动细节的具体实现
+	@Override
 	public GroupActVO doGetAllValidateDetails(Integer actId) {
 		Activity acts = actsDAO.findById(actId);
 		GroupActVO actVO = new GroupActVO();
@@ -228,6 +230,7 @@ public class AccountingviewImple extends Observable implements
 	}
 
 	// 获取所有需要被check和validate的活动
+	@Override
 	public List<GroupActVO> doGetAllCheckValidateActs() {
 		List<Activity> acts = actsDAO.findAll();
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();

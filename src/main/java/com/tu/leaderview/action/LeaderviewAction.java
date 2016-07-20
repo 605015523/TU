@@ -27,7 +27,7 @@ import com.tu.messages.model.MessagesVO;
 import com.tu.user.act.model.User_actInterface;
 import com.tu.user.act.model.User_actVO;
 import com.tu.user.group.model.User_groupInterface;
-import com.tu.user.msg.model.User_msgInterface;
+import com.tu.user.msg.model.UserMsgInterface;
 
 public class LeaderviewAction extends ActionSupport {
 	private static final long serialVersionUID = -1552527472504308094L;
@@ -42,7 +42,7 @@ public class LeaderviewAction extends ActionSupport {
 	private User_groupInterface user_groupBean = null;
 	private ActivitiesInterface actsBean = null;
 	private MessagesInterface msgBean = null;
-	private User_msgInterface user_msgBean = null;
+	private UserMsgInterface userMsgBean = null;
 	private User_actInterface user_actBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
@@ -96,12 +96,12 @@ public class LeaderviewAction extends ActionSupport {
 		this.msgBean = msgBean;
 	}
 
-	public User_msgInterface getUser_msgBean() {
-		return this.user_msgBean;
+	public UserMsgInterface getUserMsgBean() {
+		return this.userMsgBean;
 	}
 
-	public void setUser_msgBean(User_msgInterface userMsgBean) {
-		this.user_msgBean = userMsgBean;
+	public void setUserMsgBean(UserMsgInterface userMsgBean) {
+		this.userMsgBean = userMsgBean;
 	}
 
 	public User_actInterface getUser_actBean() {
@@ -350,7 +350,7 @@ public class LeaderviewAction extends ActionSupport {
 		List<Integer> allMemberId = (List<Integer>) session.getAttribute("allMemberId");
 		try {
 			msgId = msgBean.doAddOneMsg(oneMsgVO);
-			sendMessage = user_msgBean.doSendMsg(msgId, allMemberId);
+			sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
 
 		} catch (Exception e) {
 			addMessage = "there are something wrong with control layer: "

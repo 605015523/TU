@@ -1,6 +1,6 @@
 package com.tu.util;
 
-public class PageStateVO_Prototype {
+public class PageStateVOPrototype {
 	private int totalNumberOfElements; // 总的数据条目数量，0表示没有数据
 	private int pageSize; // 每一页显示的条目数
 	private int lastPageNumber; // 获取最后一页页码，也就是总页数
@@ -14,7 +14,7 @@ public class PageStateVO_Prototype {
 	private int nextPageNumber; // 获取下一页编码
 	private int previousPageNumber; // 获取上一页编码
 
-	public PageStateVO_Prototype() {
+	public PageStateVOPrototype() {
 		// TODO Auto-generated constructor stub
 	}
 

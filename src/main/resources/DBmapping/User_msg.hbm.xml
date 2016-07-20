@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.tu.user.msg.dao.User_msg" table="user_msg"
+	<class name="com.tu.user.msg.dao.UserMsg" table="user_msg"
 		catalog="activity">
 		<composite-id>
 			<key-property name="userId" column="user_id" type="java.lang.Integer">
