@@ -13,21 +13,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.activities.model.ActivitiesConstant;
-import com.tu.activities.model.ActivitiesInterface;
-import com.tu.activities.model.ActivitiesVO;
 import com.tu.dao.user.msg.UserMsg;
-import com.tu.group.model.GroupInterface;
-import com.tu.group.model.GroupVO;
-import com.tu.leaderview.model.LeaderviewInterface;
-import com.tu.messages.model.MessagesInterface;
-import com.tu.messages.model.MessagesVO;
-import com.tu.user.group.model.UserGroupInterface;
-import com.tu.user.msg.model.UserMsgInterface;
-import com.tu.userlogin.model.UserloginManageInterface;
-import com.tu.userlogin.model.UserloginVO;
-import com.tu.userview.model.UserviewInterface;
-import com.tu.userview.model.UserviewVO;
+import com.tu.model.activities.ActivitiesConstant;
+import com.tu.model.activities.ActivitiesInterface;
+import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.group.GroupInterface;
+import com.tu.model.group.GroupVO;
+import com.tu.model.leaderview.LeaderviewInterface;
+import com.tu.model.messages.MessagesInterface;
+import com.tu.model.messages.MessagesVO;
+import com.tu.model.user.group.UserGroupInterface;
+import com.tu.model.user.msg.UserMsgInterface;
+import com.tu.model.userlogin.UserloginManageInterface;
+import com.tu.model.userlogin.UserloginVO;
+import com.tu.model.userview.UserviewInterface;
+import com.tu.model.userview.UserviewVO;
 
 public class UserloginManageAction extends ActionSupport {
 	private static final long serialVersionUID = -5768511845633999130L;

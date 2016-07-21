@@ -103,11 +103,11 @@
 
 
 
-	<bean id="UserloginManageBean" class="com.tu.userlogin.model.UserloginManageImple">
+	<bean id="UserloginManageBean" class="com.tu.model.userlogin.UserloginManageImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 	</bean>
 
-	<bean id="UserviewBean" class="com.tu.userview.model.UserviewImple">
+	<bean id="UserviewBean" class="com.tu.model.userview.UserviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
@@ -117,23 +117,23 @@
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
 	</bean>
 
-	<bean id="ActsBean" class="com.tu.activities.model.ActivitiesImple">
+	<bean id="ActsBean" class="com.tu.model.activities.ActivitiesImple">
 		<property name="actsDAO" ref="ActsDAO"/>
 	</bean>
 
-	<bean id="GroupBean" class="com.tu.group.model.GroupImple">
+	<bean id="GroupBean" class="com.tu.model.group.GroupImple">
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
-	<bean id="UserGroupBean" class="com.tu.user.group.model.UserGroupImple">
+	<bean id="UserGroupBean" class="com.tu.model.user.group.UserGroupImple">
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
 	</bean>
 	
-	<bean id="UserActBean" class="com.tu.user.act.model.UserActImple">
+	<bean id="UserActBean" class="com.tu.model.user.act.UserActImple">
 		<property name="userActDAO" ref="UserActDAO"/>
 	</bean>
 
-	<bean id="LeaderviewBean" class="com.tu.leaderview.model.LeaderviewImple">
+	<bean id="LeaderviewBean" class="com.tu.model.leaderview.LeaderviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
@@ -141,18 +141,18 @@
 		<property name="userActDAO" ref="UserActDAO"/>
 	</bean>
 	
-	<bean id="AccountingviewBean" class="com.tu.accountingview.model.AccountingviewImple">
+	<bean id="AccountingviewBean" class="com.tu.model.accountingview.AccountingviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 	
-	<bean id="MsgBean" class="com.tu.messages.model.MessagesImple">
+	<bean id="MsgBean" class="com.tu.model.messages.MessagesImple">
 		<property name="msgDAO" ref="MsgDAO"/>
 	</bean>
 	
-	<bean id="UserMsgBean" class="com.tu.user.msg.model.UserMsgImple">
+	<bean id="UserMsgBean" class="com.tu.model.user.msg.UserMsgImple">
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
 	</bean>
 
@@ -189,7 +189,7 @@
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<bean id="myUserDetailsService" class="com.tu.userlogin.MyUserDetailsService">
+	<bean id="myUserDetailsService" class="com.tu.authentication.MyUserDetailsService">
 		<property name="userLoginDAO" ref="UserloginDAO"/>
 	</bean>
 

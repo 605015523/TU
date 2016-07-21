@@ -35,7 +35,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate()
-					.find("from com.tu.user.group.dao.UserGroup where user_id = ?",
+					.find("from com.tu.dao.user.group.UserGroup where user_id = ?",
 							userId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by userId failed", re);
@@ -49,7 +49,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 		try {
 
 			return getHibernateTemplate().find(
-					"from com.tu.user.group.dao.UserGroup where group_id = ?",
+					"from com.tu.dao.user.group.UserGroup where group_id = ?",
 					groupId);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by groupId failed", re);
@@ -61,7 +61,7 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 	@Override
 	public UserGroup findByGroupIdAndUserId(Integer memberId, Integer groupId) {
 		try {
-			String hql = " from com.tu.user.group.dao.UserGroup where user_id ="
+			String hql = " from com.tu.dao.user.group.UserGroup where user_id ="
 					+ memberId.toString() + " and group_id="
 					+ groupId.toString();
 			UserGroup userGroup = (UserGroup) this.getHibernateTemplate()

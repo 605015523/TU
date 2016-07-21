@@ -15,19 +15,19 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.activities.model.ActivitiesConstant;
-import com.tu.activities.model.ActivitiesInterface;
-import com.tu.activities.model.ActivitiesVO;
-import com.tu.group.model.GroupVO;
-import com.tu.leaderview.model.GroupActVO;
-import com.tu.leaderview.model.LeaderviewInterface;
-import com.tu.leaderview.model.MemberInVO;
-import com.tu.messages.model.MessagesInterface;
-import com.tu.messages.model.MessagesVO;
-import com.tu.user.act.model.UserActInterface;
-import com.tu.user.act.model.UserActVO;
-import com.tu.user.group.model.UserGroupInterface;
-import com.tu.user.msg.model.UserMsgInterface;
+import com.tu.model.activities.ActivitiesConstant;
+import com.tu.model.activities.ActivitiesInterface;
+import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.group.GroupVO;
+import com.tu.model.leaderview.GroupActVO;
+import com.tu.model.leaderview.LeaderviewInterface;
+import com.tu.model.leaderview.MemberInVO;
+import com.tu.model.messages.MessagesInterface;
+import com.tu.model.messages.MessagesVO;
+import com.tu.model.user.act.UserActInterface;
+import com.tu.model.user.act.UserActVO;
+import com.tu.model.user.group.UserGroupInterface;
+import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.util.ConfigurationConstants;
 
 public class LeaderviewAction extends ActionSupport {

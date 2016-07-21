@@ -11,17 +11,17 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.accountingview.model.AccountingviewInterface;
-import com.tu.accountingview.model.UserGroupCostVO;
-import com.tu.activities.model.ActivitiesConstant;
-import com.tu.activities.model.ActivitiesInterface;
-import com.tu.activities.model.ActivitiesVO;
-import com.tu.group.model.GroupInterface;
-import com.tu.group.model.GroupVO;
-import com.tu.leaderview.model.GroupActVO;
-import com.tu.user.group.model.UserGroupInterface;
-import com.tu.userlogin.model.UserloginManageInterface;
-import com.tu.userlogin.model.UserloginVO;
+import com.tu.model.accountingview.AccountingviewInterface;
+import com.tu.model.accountingview.UserGroupCostVO;
+import com.tu.model.activities.ActivitiesConstant;
+import com.tu.model.activities.ActivitiesInterface;
+import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.group.GroupInterface;
+import com.tu.model.group.GroupVO;
+import com.tu.model.leaderview.GroupActVO;
+import com.tu.model.user.group.UserGroupInterface;
+import com.tu.model.userlogin.UserloginManageInterface;
+import com.tu.model.userlogin.UserloginVO;
 
 public class AccountingviewAction extends ActionSupport {
 	private static final long serialVersionUID = 5474650091305219468L;

@@ -13,19 +13,19 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.tu.activities.model.ActivitiesConstant;
-import com.tu.activities.model.ActivitiesInterface;
-import com.tu.activities.model.ActivitiesVO;
 import com.tu.dao.user.msg.UserMsg;
-import com.tu.messages.model.MessagesInterface;
-import com.tu.user.act.model.UserActInterface;
-import com.tu.user.act.model.UserActVO;
-import com.tu.user.msg.model.UserMsgInterface;
-import com.tu.userlogin.model.UserloginManageInterface;
-import com.tu.userlogin.model.UserloginVO;
-import com.tu.userview.model.UserMsgVO;
-import com.tu.userview.model.UseractsVO;
-import com.tu.userview.model.UserviewInterface;
+import com.tu.model.activities.ActivitiesConstant;
+import com.tu.model.activities.ActivitiesInterface;
+import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.messages.MessagesInterface;
+import com.tu.model.user.act.UserActInterface;
+import com.tu.model.user.act.UserActVO;
+import com.tu.model.user.msg.UserMsgInterface;
+import com.tu.model.userlogin.UserloginManageInterface;
+import com.tu.model.userlogin.UserloginVO;
+import com.tu.model.userview.UserMsgVO;
+import com.tu.model.userview.UseractsVO;
+import com.tu.model.userview.UserviewInterface;
 
 public class UserviewAction extends ActionSupport {
 
