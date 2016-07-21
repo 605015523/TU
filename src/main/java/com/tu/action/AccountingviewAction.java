@@ -28,17 +28,6 @@ public class AccountingviewAction extends AbstractAction {
 	private transient UserloginManageInterface userloginManageBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
-	private Integer msgId;
-	private Integer userId;
-	private String userName;
-	private String userDept;
-	private Integer actId;
-	private Integer groupId;
-	private String actName;
-	private Float actMoney;
-	private String description;
-	private Date actDate;
-	private String daterange;
 	private String checkState;
 	private String comment;
 	
@@ -123,9 +112,8 @@ public class AccountingviewAction extends AbstractAction {
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("checkedActId");
 		ActivitiesVO checkAct = actsBean.doGetOneActById(oneactId);
-		String checkState = getCheckState();
 		checkAct.setState(checkState);
-		checkAct.setComment(getComment());
+		checkAct.setComment(comment);
 		actsBean.doUpdateOneAct(checkAct);
 
 		// 更新所有需要被check和validate的新消息的条数
@@ -215,94 +203,6 @@ public class AccountingviewAction extends AbstractAction {
 	}
 
 	// 所有属性的get、set方法
-	public Integer getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserDept() {
-		return this.userDept;
-	}
-
-	public void setUserDept(String userDept) {
-		this.userDept = userDept;
-	}
-
-	public Integer getActId() {
-		return this.actId;
-	}
-
-	public void setActId(Integer actId) {
-		this.actId = actId;
-	}
-
-	public Integer getGroupId() {
-		return this.groupId;
-	}
-
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
-	}
-
-	public String getActName() {
-		return this.actName;
-	}
-
-	public void setActName(String actName) {
-		this.actName = actName;
-	}
-
-	public Float getActMoney() {
-		return this.actMoney;
-	}
-
-	public void setActMoney(Float actMoney) {
-		this.actMoney = actMoney;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Date getActDate() {
-		return this.actDate;
-	}
-
-	public void setActDate(Date actDate) {
-		this.actDate = actDate;
-	}
-
-	public String getDaterange() {
-		return this.daterange;
-	}
-
-	public void setDaterange(String daterange) {
-		this.daterange = daterange;
-	}
-
-	public Integer getMsgId() {
-		return msgId;
-	}
-
-	public void setMsgId(Integer msgId) {
-		this.msgId = msgId;
-	}
-
 	public String getCheckState() {
 		return checkState;
 	}
