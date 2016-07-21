@@ -7,8 +7,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user.act.dao.UserAct;
-import com.tu.user.act.dao.UserActDAOInterface;
+import com.tu.dao.user.act.UserAct;
+import com.tu.dao.user.act.UserActDAOInterface;
 
 public class UserActImple extends Observable implements UserActInterface {
 	

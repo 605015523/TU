@@ -9,8 +9,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.activities.dao.Activity;
-import com.tu.activities.dao.ActivityDAOInterface;
+import com.tu.dao.activities.Activity;
+import com.tu.dao.activities.ActivityDAOInterface;
 
 public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
@@ -43,9 +43,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 				BeanUtils.copyProperties(oneactivitiesVO, oneactivitiesPO);
 				activitiesVOs.add(oneactivitiesVO);
 			} catch (IllegalAccessException e) {
-				LOGGER.error("there is a IllegalAccessException: " + e.toString());
+				LOGGER.error(e);
 			} catch (InvocationTargetException e) {
-				LOGGER.error("there is a InvocationTargetException: " + e.toString());
+				LOGGER.error(e);
 			}
 		}
 		return activitiesVOs;
@@ -60,9 +60,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 			BeanUtils.copyProperties(actVO, actPO);
 
 		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException: " + e.toString());
+			LOGGER.error(e);
 		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException: " + e.toString());
+			LOGGER.error(e);
 		}
 		return actVO;
 	}
@@ -76,9 +76,9 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneactsPO, oneActivitiesVO);
 		} catch (IllegalAccessException e) {
-			LOGGER.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+			LOGGER.error(e);
 		} catch (InvocationTargetException e) {
-			LOGGER.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+			LOGGER.error(e);
 		}
 		try {
 			actId = actsDAO.save(oneactsPO);

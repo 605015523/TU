@@ -2,7 +2,7 @@ package com.tu.user.msg.model;
 
 import java.util.List;
 
-import com.tu.user.msg.dao.UserMsg;
+import com.tu.dao.user.msg.UserMsg;
 
 public interface UserMsgInterface {
 

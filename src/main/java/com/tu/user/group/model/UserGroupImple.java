@@ -9,8 +9,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.user.group.dao.UserGroup;
-import com.tu.user.group.dao.UserGroupDAOInterface;
+import com.tu.dao.user.group.UserGroup;
+import com.tu.dao.user.group.UserGroupDAOInterface;
 
 public class UserGroupImple extends Observable implements UserGroupInterface {
 

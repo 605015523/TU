@@ -6,17 +6,17 @@ import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.activities.dao.Activity;
-import com.tu.activities.dao.ActivityDAOInterface;
 import com.tu.activities.model.ActivitiesConstant;
-import com.tu.group.dao.Group;
-import com.tu.group.dao.GroupDAOInterface;
+import com.tu.dao.activities.Activity;
+import com.tu.dao.activities.ActivityDAOInterface;
+import com.tu.dao.group.Group;
+import com.tu.dao.group.GroupDAOInterface;
+import com.tu.dao.user.act.UserAct;
+import com.tu.dao.user.act.UserActDAOInterface;
+import com.tu.dao.userlogin.Userlogin;
+import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.leaderview.model.GroupActVO;
 import com.tu.leaderview.model.MemberInVO;
-import com.tu.user.act.dao.UserAct;
-import com.tu.user.act.dao.UserActDAOInterface;
-import com.tu.userlogin.dao.Userlogin;
-import com.tu.userlogin.dao.UserloginDAOInterface;
 import com.tu.util.ConfigurationConstants;
 
 public class AccountingviewImple extends Observable implements

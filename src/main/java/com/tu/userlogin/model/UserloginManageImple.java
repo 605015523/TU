@@ -10,8 +10,8 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.userlogin.dao.Userlogin;
-import com.tu.userlogin.dao.UserloginDAOInterface;
+import com.tu.dao.userlogin.Userlogin;
+import com.tu.dao.userlogin.UserloginDAOInterface;
 
 public class UserloginManageImple extends Observable implements
 		UserloginManageInterface {

@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.tu.userlogin.dao.Userlogin" table="userlogin" catalog="activity">
+    <class name="com.tu.dao.userlogin.Userlogin" table="userlogin" catalog="activity">
         <id name="userId" type="java.lang.Integer">
             <column name="user_id" />
             <generator class="identity" />

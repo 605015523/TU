@@ -3,14 +3,14 @@ package com.tu.leaderview.model;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import com.tu.activities.dao.Activity;
-import com.tu.activities.dao.ActivityDAOInterface;
-import com.tu.group.dao.GroupDAOInterface;
-import com.tu.user.act.dao.UserAct;
-import com.tu.user.act.dao.UserActDAOInterface;
-import com.tu.user.group.dao.UserGroupDAOInterface;
-import com.tu.userlogin.dao.Userlogin;
-import com.tu.userlogin.dao.UserloginDAOInterface;
+import com.tu.dao.activities.Activity;
+import com.tu.dao.activities.ActivityDAOInterface;
+import com.tu.dao.group.GroupDAOInterface;
+import com.tu.dao.user.act.UserAct;
+import com.tu.dao.user.act.UserActDAOInterface;
+import com.tu.dao.user.group.UserGroupDAOInterface;
+import com.tu.dao.userlogin.Userlogin;
+import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.util.ConfigurationConstants;
 
 public class LeaderviewImple extends Observable implements LeaderviewInterface {

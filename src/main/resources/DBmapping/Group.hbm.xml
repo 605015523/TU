@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="com.tu.group.dao.Group" table="group"
+	<class name="com.tu.dao.group.Group" table="group"
 		catalog="activity">
 		 <id name="groupId" type="java.lang.Integer">
             <column name="group_id" />

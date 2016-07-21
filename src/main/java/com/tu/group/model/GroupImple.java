@@ -9,8 +9,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.group.dao.Group;
-import com.tu.group.dao.GroupDAOInterface;
+import com.tu.dao.group.Group;
+import com.tu.dao.group.GroupDAOInterface;
 
 public class GroupImple extends Observable implements GroupInterface {
 

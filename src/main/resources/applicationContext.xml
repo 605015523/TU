@@ -58,7 +58,7 @@
 
 	<!-- 控制层Bean定义 -->
 	<bean id="UserloginManageActionBean" scope="prototype"
-		class="com.tu.userlogin.action.UserloginManageAction">
+		class="com.tu.action.UserloginManageAction">
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="userviewBean" ref="UserviewBean"/>
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
@@ -70,7 +70,7 @@
 	</bean>
 
 	<bean id="UserviewActionBean" scope="prototype"
-		class="com.tu.userview.action.UserviewAction">
+		class="com.tu.action.UserviewAction">
 		<property name="userviewBean" ref="UserviewBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="userActBean" ref="UserActBean"/>
@@ -80,7 +80,7 @@
 	</bean>
 
 	<bean id="LeaderviewActionBean" scope="prototype"
-		class="com.tu.leaderview.action.LeaderviewAction">
+		class="com.tu.action.LeaderviewAction">
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
 		<property name="userGroupBean" ref="UserGroupBean"/>
 		
@@ -91,7 +91,7 @@
 	</bean>
 	
 	<bean id="AccountingviewActionBean" scope="prototype"
-		class="com.tu.accountingview.action.AccountingviewAction">
+		class="com.tu.action.AccountingviewAction">
 		<property name="accountingviewBean" ref="AccountingviewBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="groupBean" ref="GroupBean"/>
@@ -161,38 +161,33 @@
 
 
 
-	<bean id="UserloginDAO" class="com.tu.userlogin.dao.UserloginDAO">
+	<bean id="UserloginDAO" class="com.tu.dao.userlogin.UserloginDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="UserGroupDAO" class="com.tu.user.group.dao.UserGroupDAO">
+	<bean id="UserGroupDAO" class="com.tu.dao.user.group.UserGroupDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="GroupDAO" class="com.tu.group.dao.GroupDAO">
+	<bean id="GroupDAO" class="com.tu.dao.group.GroupDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="ActsDAO" class="com.tu.activities.dao.ActivityDAO">
+	<bean id="ActsDAO" class="com.tu.dao.activities.ActivityDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 
-	<bean id="UserActDAO" class="com.tu.user.act.dao.UserActDAO">
+	<bean id="UserActDAO" class="com.tu.dao.user.act.UserActDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<bean id="MsgDAO" class="com.tu.messages.dao.MessagesDAO">
+	<bean id="MsgDAO" class="com.tu.dao.messages.MessagesDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	
-	<bean id="UserMsgDAO" class="com.tu.user.msg.dao.UserMsgDAO">
+	<bean id="UserMsgDAO" class="com.tu.dao.user.msg.UserMsgDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
-
-	<bean class="com.tu.util.FuzzyQueryDAO">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	
 	
 	<bean id="myUserDetailsService" class="com.tu.userlogin.MyUserDetailsService">
 		<property name="userLoginDAO" ref="UserloginDAO"/>
