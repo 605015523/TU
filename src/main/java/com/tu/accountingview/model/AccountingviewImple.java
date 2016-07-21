@@ -17,6 +17,7 @@ import com.tu.user.act.dao.UserAct;
 import com.tu.user.act.dao.UserActDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
+import com.tu.util.ConfigurationConstants;
 
 public class AccountingviewImple extends Observable implements
 		AccountingviewInterface {
@@ -72,6 +73,7 @@ public class AccountingviewImple extends Observable implements
 		List<Activity> validateacts = new ArrayList<Activity>();
 
 		// 获取所有以及被validate的活动
+		// Get all the validated activities
 		Calendar cal = Calendar.getInstance();
 		for (int i = 0; i < allacts.size(); i++) {
 			cal.setTime(allacts.get(i).getActDate());
@@ -84,20 +86,23 @@ public class AccountingviewImple extends Observable implements
 		List<Group> groups = groupDAO.findAll();
 
 		// 获取所有用户，并且遍历所有用户活动参与情况
+		// Get all the users and check their activities
 		for (Userlogin oneuser : allUser) {
 			UserGroupCostVO oneUserGroupCostVO = new UserGroupCostVO();
 			Integer userId = oneuser.getUserId();
 			oneUserGroupCostVO.setUserId(userId);
 			oneUserGroupCostVO.setUserName(oneuser.getUserName());
-			List<GroupCostVO> allGroupCost = new ArrayList<GroupCostVO>();
+			Map<Integer, GroupCostVO> allGroupCost = new HashMap<Integer, GroupCostVO>();
 			
+			// Initialize groups costs
 			for (int j = 0; j < groups.size(); j++) {
 				GroupCostVO onegroupCostVO = new GroupCostVO();
 				onegroupCostVO.setGroupId(groups.get(j).getGroupId());
 				onegroupCostVO.setCost(0);
 
-				allGroupCost.add(onegroupCostVO);
+				allGroupCost.put(onegroupCostVO.getGroupId(), onegroupCostVO);
 			}
+			
 			for (int j = 0; j < validateacts.size(); j++) {
 				Integer actId = validateacts.get(j).getActId();
 				Integer groupId = validateacts.get(j).getGroupId();
@@ -107,11 +112,8 @@ public class AccountingviewImple extends Observable implements
 							actId);
 					
 					if (oneuserAct.getConsumption() != null) {
-						for (GroupCostVO groupCostVO : allGroupCost) {
-							if (groupId.equals(groupCostVO.getGroupId())) {
-								groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
-							}
-						}
+						GroupCostVO groupCostVO = allGroupCost.get(groupId);
+						groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
 					}
 				} catch (Exception e) {
 					LOGGER.error(e);
@@ -121,11 +123,13 @@ public class AccountingviewImple extends Observable implements
 			for (int n = 0; n < allGroupCost.size(); n++) {
 				sum += allGroupCost.get(n).getCost();
 			}
+			
 			oneUserGroupCostVO.setSum(sum);
 			oneUserGroupCostVO.setQuota(oneuser.getQuota());
 			oneUserGroupCostVO
 					.setDifferent(oneUserGroupCostVO.getQuota() - sum);
-			oneUserGroupCostVO.setGroupCostVO(allGroupCost);
+			oneUserGroupCostVO.setGroupCostVO(allGroupCost.values());
+			
 			allUserGroupCostVO.add(oneUserGroupCostVO);
 		}
 
@@ -147,7 +151,7 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setDescription(activity.getDescription());
 			actsPO.setState(activity.getState());
 
-			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
 			String daterange = formatter.format(activity
 					.getEnrollStartDate())
 					+ " - "
@@ -200,7 +204,7 @@ public class AccountingviewImple extends Observable implements
 		actVO.setDescription(acts.getDescription());
 		actVO.setState(acts.getState());
 
-		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
 		String daterange = formatter.format(acts.getEnrollStartDate()) + " - "
 				+ formatter.format(acts.getEnrollEndDate());
 		actVO.setDaterange(daterange);
@@ -244,7 +248,7 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setActMoney(activity.getActMoney());
 			actsPO.setDescription(activity.getDescription());
 			actsPO.setState(activity.getState());
-			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
 			String daterange = formatter.format(activity
 					.getEnrollStartDate())
 					+ " - "

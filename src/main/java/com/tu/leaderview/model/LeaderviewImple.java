@@ -11,6 +11,7 @@ import com.tu.user.act.dao.UserActDAOInterface;
 import com.tu.user.group.dao.UserGroupDAOInterface;
 import com.tu.userlogin.dao.Userlogin;
 import com.tu.userlogin.dao.UserloginDAOInterface;
+import com.tu.util.ConfigurationConstants;
 
 public class LeaderviewImple extends Observable implements LeaderviewInterface {
 
@@ -80,7 +81,7 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 			actsPO.setDescription(acts.get(i).getDescription());
 			actsPO.setState(acts.get(i).getState());
 
-			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
 			String daterange = formatter.format(acts.get(i)
 					.getEnrollStartDate())
 					+ " - "

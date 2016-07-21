@@ -2,6 +2,8 @@ package com.tu.accountingview.model;
 
 public class GroupCostVO implements java.io.Serializable {
 
+	private static final long serialVersionUID = 5847774643475968642L;
+	
 	private Integer groupId;
 	private float cost;
 
