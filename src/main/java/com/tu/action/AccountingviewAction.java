@@ -2,15 +2,9 @@ package com.tu.action;
 
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.tu.model.accountingview.AccountingviewInterface;
 import com.tu.model.accountingview.UserGroupCostVO;
 import com.tu.model.activities.ActivitiesConstant;
@@ -23,14 +17,10 @@ import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 
-public class AccountingviewAction extends ActionSupport {
+public class AccountingviewAction extends AbstractAction {
 	private static final long serialVersionUID = 5474650091305219468L;
 	private static final Log LOGGER = LogFactory.getLog(AccountingviewAction.class);
 	
-	private transient HttpServletRequest request = null;
-	private transient HttpServletResponse response = null;
-	private transient HttpSession session = null;
-
 	private transient AccountingviewInterface accountingviewBean = null;
 	private transient UserGroupInterface userGroupBean = null;
 	private transient ActivitiesInterface actsBean = null;
@@ -97,12 +87,6 @@ public class AccountingviewAction extends ActionSupport {
 		this.userloginManageBean = userloginManageBean;
 	}
 
-	public void initServletContextObject() {
-		request = ServletActionContext.getRequest();
-		response = ServletActionContext.getResponse();
-		session = request.getSession();
-	}
-
 	// 获取所有需要被审批的活动
 	public String doGetAllCheckAct() {
 		initServletContextObject();
@@ -142,14 +126,13 @@ public class AccountingviewAction extends ActionSupport {
 
 	// check当前活动，修改活动的state（approved或者disapproved）
 	public String doCheckAct() {
-		String updateMessage = null;
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("checkedActId");
 		ActivitiesVO checkAct = actsBean.doGetOneActById(oneactId);
 		String checkState = getCheckState();
 		checkAct.setState(checkState);
 		checkAct.setComment(getComment());
-		updateMessage = actsBean.doUpdateOneAct(checkAct);
+		actsBean.doUpdateOneAct(checkAct);
 
 		// 更新所有需要被check和validate的新消息的条数
 		int newCheck = getNbActsToCheck();

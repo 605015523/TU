@@ -4,15 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
@@ -29,13 +23,9 @@ import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
 
-public class UserloginManageAction extends ActionSupport {
+public class UserloginManageAction extends AbstractAction {
 	private static final long serialVersionUID = -5768511845633999130L;
 	
-	private transient HttpServletRequest request = null;
-	private transient HttpServletResponse response = null;
-	private transient HttpSession session = null;
-
 	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
 	private transient LeaderviewInterface leaderviewBean = null;
@@ -69,12 +59,6 @@ public class UserloginManageAction extends ActionSupport {
 		outDate = null;
 		old_balance = null;
 		quota = null;
-	}
-
-	public void initServletContextObject() {
-		request = ServletActionContext.getRequest();
-		response = ServletActionContext.getResponse();
-		session = request.getSession();
 	}
 
 	public void setUserloginManageBean(

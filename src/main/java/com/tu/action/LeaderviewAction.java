@@ -5,16 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivitiesVO;
@@ -30,15 +24,11 @@ import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.util.ConfigurationConstants;
 
-public class LeaderviewAction extends ActionSupport {
+public class LeaderviewAction extends AbstractAction {
 	private static final long serialVersionUID = -1552527472504308094L;
 	
 	private static final Log LOGGER = LogFactory.getLog(LeaderviewAction.class);
 	
-	private transient HttpServletRequest request = null;
-	private transient HttpServletResponse response = null;
-	private transient HttpSession session = null;
-
 	private transient LeaderviewInterface leaderviewBean = null;
 	private transient UserGroupInterface userGroupBean = null;
 	private transient ActivitiesInterface actsBean = null;
@@ -111,12 +101,6 @@ public class LeaderviewAction extends ActionSupport {
 
 	public void setUserActBean(UserActInterface userActBean) {
 		this.userActBean = userActBean;
-	}
-
-	public void initServletContextObject() {
-		request = ServletActionContext.getRequest();
-		response = ServletActionContext.getResponse();
-		session = request.getSession();
 	}
 
 	// 添加一个活动，将这个活动存入数据库，并发送给审批小组进行审批

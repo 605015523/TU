@@ -4,15 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts2.ServletActionContext;
 
-import com.opensymphony.xwork2.ActionSupport;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
@@ -27,15 +21,11 @@ import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UseractsVO;
 import com.tu.model.userview.UserviewInterface;
 
-public class UserviewAction extends ActionSupport {
+public class UserviewAction extends AbstractAction {
 
 	private static final Log LOG = LogFactory.getLog(UserviewAction.class);
 	private static final long serialVersionUID = -6352178618288011965L;
 	
-	private transient HttpServletRequest request = null;
-	private transient HttpServletResponse response = null;
-	private transient HttpSession session = null;
-
 	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
 	private transient UserActInterface userActBean = null;
@@ -61,7 +51,7 @@ public class UserviewAction extends ActionSupport {
 	private String remark;
 
 	public UserviewAction() {
-
+		// do nothing
 	}
 
 	public void setUserloginManageBean(
@@ -111,12 +101,6 @@ public class UserviewAction extends ActionSupport {
 
 	public void setActsBean(ActivitiesInterface actsBean) {
 		this.actsBean = actsBean;
-	}
-
-	public void initServletContextObject() {
-		request = ServletActionContext.getRequest();
-		response = ServletActionContext.getResponse();
-		session = request.getSession();
 	}
 
 	// 显示所有参与过的活动
