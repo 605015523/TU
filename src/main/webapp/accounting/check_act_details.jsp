@@ -68,13 +68,13 @@
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3">
-								${act.actName}
+								${groupAct.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
 								<strong> Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.daterange}
+								${groupAct.daterange}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -82,13 +82,13 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.actDate}
+								${groupAct.actDate}
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>PRICE per PERSON</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.actMoney}
+								${groupAct.actMoney}
 							</div>
 						</div>
 						
@@ -99,7 +99,7 @@
 							<div class="col-xs-8 col-md-8 display: block">
 							
 								<textarea class="form-control" rows="6" id="description"
-									name="description" >${act.description}</textarea>
+									name="description" >${groupAct.description}</textarea>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -135,11 +135,11 @@
 							<!-- /input-group -->
 
 							<div class="col-xs-2  col-md-2 col-xs-offset-5 col-md-offset-5 ">
-								<c:if test="${act.state=='draft'}">
+								<c:if test="${groupAct.state=='draft'}">
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" />
 								</c:if>
-								<c:if test="${act.state!='draft'}">
+								<c:if test="${groupAct.state!='draft'}">
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" disabled />
 								</c:if>

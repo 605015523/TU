@@ -41,6 +41,9 @@ public class AccountingviewAction extends AbstractAction {
 	private String daterange;
 	private String checkState;
 	private String comment;
+	
+	// To display a group activity
+	private GroupActVO groupAct;
 
 	public AccountingviewAction() {
 		// do nothing
@@ -100,15 +103,8 @@ public class AccountingviewAction extends AbstractAction {
 	// 获取某个需要被check活动的所有细节
 	public String doshowCheckDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int groupActId = groupactsVO.get(i).getActId();
-			if (oneactId == groupActId) {
-				request.setAttribute("act", groupactsVO.get(i));
-			}
-		}
-		request.setAttribute("actId", oneactId);
+		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
 
 		return "ShowCheckDetails";
 	}
@@ -117,9 +113,7 @@ public class AccountingviewAction extends AbstractAction {
 	public String doshowValidateDetails() {
 		initServletContextObject();
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		GroupActVO groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
-		request.setAttribute("act", groupactVO);
-		request.setAttribute("actId", oneactId);
+		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
 
 		return "ShowValidateDetails";
 	}
@@ -214,15 +208,8 @@ public class AccountingviewAction extends AbstractAction {
 	// 显示group中活动的细节
 	public String doshowActDetailsInGroup() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-			if (oneactId == actId) {
-				request.setAttribute("act", groupactsVO.get(i));
-				request.setAttribute("actId", actId);
-			}
-		}
+		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
 
 		return "doShowActByGroupDetails";
 	}
@@ -330,6 +317,14 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public GroupActVO getGroupAct() {
+		return groupAct;
+	}
+
+	public void setGroupAct(GroupActVO groupAct) {
+		this.groupAct = groupAct;
 	}
 
 }

@@ -143,95 +143,57 @@ public class AccountingviewImple extends Observable implements
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
 		for (Activity activity : acts) {
-			GroupActVO actsPO = new GroupActVO();
-			actsPO.setActId(activity.getActId());
-			actsPO.setActName(activity.getActName());
-			actsPO.setGroupId(activity.getGroupId());
-			actsPO.setActMoney(activity.getActMoney());
-			actsPO.setDescription(activity.getDescription());
-			actsPO.setState(activity.getState());
-
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
-			String daterange = formatter.format(activity
-					.getEnrollStartDate())
-					+ " - "
-					+ formatter.format(activity.getEnrollEndDate());
-			actsPO.setDaterange(daterange);
-			actsPO.setActDate(formatter.format(activity.getActDate()));
-			actsPO.setComment(activity.getComment());
-			List<UserAct> useractsPO = userActDAO.findByActId(activity
-					.getActId());
-			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
-			float sum = 0;
-			Integer nbParticipants = 0;
-			for (UserAct userActPO : useractsPO) {
-				MemberInVO oneMemberIn = new MemberInVO();
-				oneMemberIn.setUserId(userActPO.getUserId());
-				oneMemberIn.setNbParticipants(userActPO
-						.getNbParticipants());
-				oneMemberIn.setConsumption(userActPO.getConsumption());
-				oneMemberIn.setRemark(userActPO.getRemark());
-				sum += userActPO.getConsumption();
-				nbParticipants += userActPO.getNbParticipants();
-				Userlogin userPO = userloginDAO.findById(userActPO.getUserId());
-				oneMemberIn.setUserName(userPO.getUserName());
-				oneMemberIn.setUserDept(userPO.getUserDept());
-				memberInVO.add(oneMemberIn);
-			}
-			actsPO.setNbParticipants(nbParticipants);
-			actsPO.setMemberInVO(memberInVO);
-			actsPO.setSum(sum);
-			actsVO.add(actsPO);
+			actsVO.add(convertActivityToGroupActVO(activity));
 		}
-		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = actsVO.size()-1; j >= 0; j--) {
-			inverseactsVO.add(actsVO.get(j));
-		}
+		Collections.reverse(actsVO);
 
-		return inverseactsVO;
+		return actsVO;
 	}
 
 	// 获取所有validate的活动的活动细节的具体实现
 	@Override
 	public GroupActVO doGetAllValidateDetails(Integer actId) {
-		Activity acts = actsDAO.findById(actId);
-		GroupActVO actVO = new GroupActVO();
-
-		actVO.setActId(acts.getActId());
-		actVO.setActName(acts.getActName());
-		actVO.setGroupId(acts.getGroupId());
-		actVO.setActMoney(acts.getActMoney());
-		actVO.setDescription(acts.getDescription());
-		actVO.setState(acts.getState());
+		Activity activity = actsDAO.findById(actId);
+		return convertActivityToGroupActVO(activity);
+	}
+	
+	private GroupActVO convertActivityToGroupActVO(Activity activity) {
+		GroupActVO actsPO = new GroupActVO();
+		actsPO.setActId(activity.getActId());
+		actsPO.setActName(activity.getActName());
+		actsPO.setGroupId(activity.getGroupId());
+		actsPO.setActMoney(activity.getActMoney());
+		actsPO.setDescription(activity.getDescription());
+		actsPO.setState(activity.getState());
 
 		SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
-		String daterange = formatter.format(acts.getEnrollStartDate()) + " - "
-				+ formatter.format(acts.getEnrollEndDate());
-		actVO.setDaterange(daterange);
-		actVO.setActDate(formatter.format(acts.getActDate()));
-		actVO.setComment(acts.getComment());
-		List<UserAct> useractPO = userActDAO.findByActId(acts.getActId());
+		String daterange = formatter.format(activity.getEnrollStartDate())
+				+ " - "	+ formatter.format(activity.getEnrollEndDate());
+		actsPO.setDaterange(daterange);
+		actsPO.setActDate(formatter.format(activity.getActDate()));
+		actsPO.setComment(activity.getComment());
+		List<UserAct> useractsPO = userActDAO.findByActId(activity.getActId());
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 		float sum = 0;
 		Integer nbParticipants = 0;
-		for (int j = 0; j < useractPO.size(); j++) {
+		for (UserAct userActPO : useractsPO) {
 			MemberInVO oneMemberIn = new MemberInVO();
-			oneMemberIn.setUserId(useractPO.get(j).getUserId());
-			oneMemberIn.setNbParticipants(useractPO.get(j).getNbParticipants());
-			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
-			oneMemberIn.setRemark(useractPO.get(j).getRemark());
-			sum += useractPO.get(j).getConsumption();
-			nbParticipants += useractPO.get(j).getNbParticipants();
-			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+			oneMemberIn.setUserId(userActPO.getUserId());
+			oneMemberIn.setNbParticipants(userActPO.getNbParticipants());
+			oneMemberIn.setConsumption(userActPO.getConsumption());
+			oneMemberIn.setRemark(userActPO.getRemark());
+			sum += userActPO.getConsumption();
+			nbParticipants += userActPO.getNbParticipants();
+			Userlogin userPO = userloginDAO.findById(userActPO.getUserId());
 			oneMemberIn.setUserName(userPO.getUserName());
 			oneMemberIn.setUserDept(userPO.getUserDept());
 			memberInVO.add(oneMemberIn);
 		}
-		actVO.setNbParticipants(nbParticipants);
-		actVO.setMemberInVO(memberInVO);
-		actVO.setSum(sum);
-
-		return actVO;
+		actsPO.setNbParticipants(nbParticipants);
+		actsPO.setMemberInVO(memberInVO);
+		actsPO.setSum(sum);
+		
+		return actsPO;
 	}
 
 	// 获取所有需要被check和validate的活动
@@ -258,11 +220,9 @@ public class AccountingviewImple extends Observable implements
 			actsVO.add(actsPO);
 
 		}
-		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = actsVO.size()-1; j >= 0; j--) {
-			inverseactsVO.add(actsVO.get(j));
-		}
-		return inverseactsVO;
+		
+		Collections.reverse(actsVO);
+		return actsVO;
 
 	}
 }

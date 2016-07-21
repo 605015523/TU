@@ -53,13 +53,13 @@
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3">
-								${act.actName}
+								${groupAct.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
 								<strong> Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.daterange}
+								${groupAct.daterange}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -67,13 +67,13 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.actDate}
+								${groupAct.actDate}
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>PRICE per PERSON</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.actMoney}
+								${groupAct.actMoney}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -81,13 +81,13 @@
 								<strong>NUMBER OF PARTICIPANTS:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.nbParticipants}
+								${groupAct.nbParticipants}
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>CONSUMPTION:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.sum}
+								${groupAct.sum}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -96,13 +96,13 @@
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								<p class="desc">
-									${act.description}
+									${groupAct.description}
 								</p>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-2 col-md-2 text-left">
-								<strong>participators:</strong>
+								<strong>participants:</strong>
 							</div>
 							<div class="col-xs-10 col-md-10 display: block">
 								<table class="table table-bordered">
@@ -124,7 +124,7 @@
 											remark
 										</td>
 									</tr>
-									<c:forEach var="member" items="${act.memberInVO}">
+									<c:forEach var="member" items="${groupAct.memberInVO}">
 										<tr>
 											<td>
 												${member.userName}
