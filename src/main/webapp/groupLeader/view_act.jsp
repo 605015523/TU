@@ -74,7 +74,7 @@
 							</td>
 
 						</tr>
-						<c:forEach var="act" items="${groupacts}">
+						<c:forEach var="act" items="${groupActs}">
 							<tr>
 								<td class="col-md-2 col-xs-2 text-center">
 									${act.actName}

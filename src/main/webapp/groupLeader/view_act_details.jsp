@@ -51,43 +51,43 @@
 						<div class="col-xs-3 col-md-3">
 							<strong>ACTNAME:</strong>
 						</div>
-						<div class="col-xs-3  col-md-3">${act.actName}</div>
+						<div class="col-xs-3  col-md-3">${groupAct.actName}</div>
 						<div class="col-xs-3  col-md-3">
 							<strong> Registration Period:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.daterange}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.daterange}</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
 							<strong>DATE:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.actDate}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.actDate}</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>PRICE per PERSON</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.actMoney}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.actMoney}</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
-							<strong>NUMBER OF PARTICIPATER:</strong>
+							<strong>NUMBER OF PARTICIPANTS:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.nbParticipants}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.nbParticipants}</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>CONSUMPTION:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${act.sum}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.sum}</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
 							<strong>DESCRIPTION:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
-							<p class="desc">${act.description}</p>
+							<p class="desc">${groupAct.description}</p>
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-2 col-md-2 text-left">
-							<strong>participators:</strong>
+							<strong>participants:</strong>
 						</div>
 						<div class="col-xs-10 col-md-10 display: block">
 							<table class="table table-bordered">
@@ -99,7 +99,7 @@
 									<td>consumption</td>
 									<td>remark</td>
 								</tr>
-								<c:forEach var="member" items="${act.memberInVO}">
+								<c:forEach var="member" items="${groupAct.memberInVO}">
 									<tr>
 										<td>${member.userName}</td>
 										<td>${member.userDept}</td>
@@ -122,13 +122,13 @@
 							</h5>
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${act.state=='pending'}">
+							<c:if test="${groupAct.state=='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
 
 							</c:if>
-							<c:if test="${act.state!='pending'}">
+							<c:if test="${groupAct.state!='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" disabled />
@@ -137,11 +137,11 @@
 
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${act.state=='pending'}">
+							<c:if test="${groupAct.state=='pending'}">
 								<a role="button" class="btn btn-primary   btn-block"
-									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${act.actId}'>edit</a>
+									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${groupAct.actId}'>edit</a>
 							</c:if>
-							<c:if test="${act.state!='pending'}">
+							<c:if test="${groupAct.state!='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="edit" disabled />

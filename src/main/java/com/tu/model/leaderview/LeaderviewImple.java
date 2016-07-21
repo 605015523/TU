@@ -71,56 +71,61 @@ public class LeaderviewImple extends Observable implements LeaderviewInterface {
 		List<Activity> acts = actsDAO.findByGroupId(groupId);
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
-		for (int i = 0; i < acts.size(); i++) {
-			GroupActVO actsPO = new GroupActVO();
-
-			actsPO.setActId(acts.get(i).getActId());
-			actsPO.setActName(acts.get(i).getActName());
-			actsPO.setGroupId(acts.get(i).getGroupId());
-			actsPO.setActMoney(acts.get(i).getActMoney());
-			actsPO.setDescription(acts.get(i).getDescription());
-			actsPO.setState(acts.get(i).getState());
-
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
-			String daterange = formatter.format(acts.get(i)
-					.getEnrollStartDate())
-					+ " - "
-					+ formatter.format(acts.get(i).getEnrollEndDate());
-			actsPO.setDaterange(daterange);
-			actsPO.setActDate(formatter.format(acts.get(i).getActDate()));
-			actsPO.setComment(acts.get(i).getComment());
-			List<UserAct> useractPO = userActDAO.findByActId(acts.get(i)
-					.getActId());
-			List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
-			float sum = 0;
-			Integer nbParticipants = 0;
-			for (int j = 0; j < useractPO.size(); j++) {
-				MemberInVO oneMemberIn = new MemberInVO();
-				oneMemberIn.setUserId(useractPO.get(j).getUserId());
-				oneMemberIn.setNbParticipants(useractPO.get(j)
-						.getNbParticipants());
-				oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
-				oneMemberIn.setRemark(useractPO.get(j).getRemark());
-				sum += useractPO.get(j).getConsumption();
-				nbParticipants += useractPO.get(j).getNbParticipants();
-				Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
-				oneMemberIn.setUserName(userPO.getUserName());
-				oneMemberIn.setUserDept(userPO.getUserDept());
-				memberInVO.add(oneMemberIn);
-			}
-			actsPO.setNbParticipants(nbParticipants);
-			actsPO.setMemberInVO(memberInVO);
-			actsPO.setSum(sum);
-
-			actsVO.add(actsPO);
-
+		for (Activity act : acts) {
+			actsVO.add(convertToVO(act));
 		}
-		List<GroupActVO> inverseactsVO = new ArrayList<GroupActVO>();
-		for (int j = actsVO.size()-1; j >= 0; j--) {
-			inverseactsVO.add(actsVO.get(j));
-		}
-		return inverseactsVO;
+		Collections.reverse(actsVO);
+		return actsVO;		
+	}
+	
+	@Override
+	public GroupActVO doGetUserActById(Integer actId) {
+		Activity activity = actsDAO.findById(actId);
+		return convertToVO(activity);
+	}
+	
+	private GroupActVO convertToVO(Activity act) {
+		GroupActVO actsPO = new GroupActVO();
 
+		actsPO.setActId(act.getActId());
+		actsPO.setActName(act.getActName());
+		actsPO.setGroupId(act.getGroupId());
+		actsPO.setActMoney(act.getActMoney());
+		actsPO.setDescription(act.getDescription());
+		actsPO.setState(act.getState());
+
+		SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+		String daterange = formatter.format(act
+				.getEnrollStartDate())
+				+ " - "
+				+ formatter.format(act.getEnrollEndDate());
+		actsPO.setDaterange(daterange);
+		actsPO.setActDate(formatter.format(act.getActDate()));
+		actsPO.setComment(act.getComment());
+		List<UserAct> useractPO = userActDAO.findByActId(act
+				.getActId());
+		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
+		float sum = 0;
+		Integer nbParticipants = 0;
+		for (int j = 0; j < useractPO.size(); j++) {
+			MemberInVO oneMemberIn = new MemberInVO();
+			oneMemberIn.setUserId(useractPO.get(j).getUserId());
+			oneMemberIn.setNbParticipants(useractPO.get(j)
+					.getNbParticipants());
+			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
+			oneMemberIn.setRemark(useractPO.get(j).getRemark());
+			sum += useractPO.get(j).getConsumption();
+			nbParticipants += useractPO.get(j).getNbParticipants();
+			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+			oneMemberIn.setUserName(userPO.getUserName());
+			oneMemberIn.setUserDept(userPO.getUserDept());
+			memberInVO.add(oneMemberIn);
+		}
+		actsPO.setNbParticipants(nbParticipants);
+		actsPO.setMemberInVO(memberInVO);
+		actsPO.setSum(sum);
+		
+		return actsPO;
 	}
 
 }

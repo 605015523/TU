@@ -38,7 +38,6 @@
 
 		<action name="*LeaderviewAction" class="LeaderviewActionBean"
 			method="{1}">
-			<result name="ShowAllMember">/groupLeader/members_manage.jsp</result>
 			<result name="ShowAllGroupAct">/groupLeader/view_act.jsp</result>
 			<result name="ShowActDetails">/groupLeader/view_act_details.jsp</result>
 			<result name="EditAct">/groupLeader/edit_act.jsp</result>

@@ -37,12 +37,7 @@ public class LeaderviewAction extends AbstractAction {
 	private transient UserActInterface userActBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
-	private Integer msgId;
-	private Integer userId;
-	private String userName;
-	private String userDept;
 	private Integer actId;
-	private Integer groupId;
 	private String actName;
 	private Float actMoney;
 	private String description;
@@ -50,6 +45,12 @@ public class LeaderviewAction extends AbstractAction {
 	private String daterange;
 	private Integer nbParticipants;
 	private Float sum;
+	
+	// To display one group activity
+	private GroupActVO groupAct;
+	
+	// To display table of group activities
+	private List<GroupActVO> groupActs;
 
 	public LeaderviewAction() {
 		// do nothing
@@ -106,9 +107,6 @@ public class LeaderviewAction extends AbstractAction {
 	// 添加一个活动，将这个活动存入数据库，并发送给审批小组进行审批
 	public String doAddAct() throws ParseException {
 		initServletContextObject();
-		String addMessage = null;
-		String sendMessage = null;
-		String addActMsg = null;
 
 		// 将页面上输入的值存入对象oneActVO中
 		ActivitiesVO oneActVO = new ActivitiesVO();
@@ -132,10 +130,9 @@ public class LeaderviewAction extends AbstractAction {
 		LOGGER.info("add act success");
 
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(group
 				.getGroupId());
 		LOGGER.info("the doAddAct get success");
-		session.setAttribute("groupacts", groupactsVO);
 
 		return "ShowAllGroupAct";
 	}
@@ -144,10 +141,8 @@ public class LeaderviewAction extends AbstractAction {
 	public String doGetAllGroupAct() {
 		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
-		Integer groupId = group.getGroupId();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(group.getGroupId());
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(group.getGroupId());
 		LOGGER.info("the doGetAllGroupAct get success");
-		session.setAttribute("groupacts", groupactsVO);
 
 		return "ShowAllGroupAct";
 	}
@@ -155,16 +150,9 @@ public class LeaderviewAction extends AbstractAction {
 	// 调用时跳转到选定活动的细节页面，将该活动中的所有值传入view_act_details.jsp页面
 	public String doshowActDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-
-			if (oneactId == actId) {
-				request.setAttribute("act", groupactsVO.get(i));
-				request.setAttribute("actId", actId);
-			}
-		}
+		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		
 		return "ShowActDetails";
 
 	}
@@ -172,81 +160,61 @@ public class LeaderviewAction extends AbstractAction {
 	// 进入活动修改界面
 	public String doEditAct() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-			if (oneactId == actId) {
-				request.setAttribute("act", groupactsVO.get(i));
-				request.setAttribute("actId", actId);
-			}
-		}
+		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		
 		return "EditAct";
-
 	}
 
 	// 活动结束时，编辑这个活动
 	public String doEditActDetails() {
 		initServletContextObject();
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-			if (oneactId == actId) {
-				request.setAttribute("act", groupactsVO.get(i));
-				request.setAttribute("actId", actId);
-			}
-		}
+		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		
 		return "EditActDetails";
-
 	}
 
 	// 更新一个活动的细节
 	public String doUpdateActDetails() {
 		initServletContextObject();
 		Integer updateActId = (Integer) session.getAttribute("updateActId");
-		List<GroupActVO> groupactsVO = (List<GroupActVO>) session.getAttribute("groupacts");
-		for (int i = 0; i < groupactsVO.size(); i++) {
-			int actId = groupactsVO.get(i).getActId();
-			if (updateActId == actId) {
-				GroupActVO onegroupactVO = groupactsVO.get(i);
-				onegroupactVO.setActMoney(getActMoney());
-				onegroupactVO.setSum(getSum());
-				onegroupactVO.setNbParticipants(getNbParticipants());
+		groupAct = leaderviewBean.doGetUserActById(updateActId);
+		
+		groupAct.setActMoney(getActMoney());
+		groupAct.setSum(sum);
+		groupAct.setNbParticipants(getNbParticipants());
 
-				ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
-				oneActVO.setActMoney(getActMoney());
-				try {
-					actsBean.doUpdateOneAct(oneActVO);
-				} catch (Exception e) {
-				}
-				List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
-
-				for (int j = 1; j < (onegroupactVO.getMemberInVO().size() + 1); j++) {
-					MemberInVO oneMemberInVO = onegroupactVO.getMemberInVO()
-							.get(j - 1);
-					UserActVO oneuserAct = userActBean.doGetOneActById(
-							oneMemberInVO.getUserId(), updateActId);
-					Float consumption = Float.parseFloat(request
-							.getParameter("perconsumption_" + j));
-					oneuserAct.setConsumption(consumption);
-					oneMemberInVO.setConsumption(consumption);
-					Integer nbParticipants = Integer.parseInt(request
-							.getParameter("perNbParticipants_" + j));
-					oneuserAct.setNbParticipants(nbParticipants);
-					oneMemberInVO.setNbParticipants(nbParticipants);
-					memberInVO.add(oneMemberInVO);
-					// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
-					try {
-						userActBean.doUpdateOneUserAct(oneuserAct);
-					} catch (Exception e) {
-					}
-
-				}
-				onegroupactVO.setMemberInVO(memberInVO);
-				request.setAttribute("act", onegroupactVO);
-			}
+		ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
+		oneActVO.setActMoney(getActMoney());
+		try {
+			actsBean.doUpdateOneAct(oneActVO);
+		} catch (Exception e) {
 		}
+		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
+
+		for (int j = 1; j < (groupAct.getMemberInVO().size() + 1); j++) {
+			MemberInVO oneMemberInVO = groupAct.getMemberInVO()
+					.get(j - 1);
+			UserActVO oneuserAct = userActBean.doGetOneActById(
+					oneMemberInVO.getUserId(), updateActId);
+			Float consumption = Float.parseFloat(request
+					.getParameter("perconsumption_" + j));
+			oneuserAct.setConsumption(consumption);
+			oneMemberInVO.setConsumption(consumption);
+			Integer nbParticipants = Integer.parseInt(request
+					.getParameter("perNbParticipants_" + j));
+			oneuserAct.setNbParticipants(nbParticipants);
+			oneMemberInVO.setNbParticipants(nbParticipants);
+			memberInVO.add(oneMemberInVO);
+			// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
+			try {
+				userActBean.doUpdateOneUserAct(oneuserAct);
+			} catch (Exception e) {
+			}
+
+		}
+		groupAct.setMemberInVO(memberInVO);
 
 		return "ShowActDetails";
 	}
@@ -254,8 +222,6 @@ public class LeaderviewAction extends AbstractAction {
 	// 更新活动到数据库，并发送更新消息给所有成员
 	public String doUpdateAct() throws ParseException {
 		String updateMessage = null;
-		String sendMessage = null;
-		String addMessage = null;
 
 		// 将所有更新的活动消息存入到oneActVO中
 		initServletContextObject();
@@ -282,18 +248,14 @@ public class LeaderviewAction extends AbstractAction {
 
 		// GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOGGER.info("the doUpdateAct get success");
-		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
 
 	// publish这个活动，所有人将收到这个活动发起的一个messages
 	public String doPublishAct() {
 		initServletContextObject();
-		String sendMessage = null;
-		String addMessage = null;
-		String updateMessage = null;
 
 		int actId = Integer.parseInt(request.getParameter("actId"));
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
@@ -301,11 +263,11 @@ public class LeaderviewAction extends AbstractAction {
 
 		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 		try {
-			updateMessage = actsBean.doUpdateOneAct(oneActVO);
-
+			String updateMessage = actsBean.doUpdateOneAct(oneActVO);
+			LOGGER.info(updateMessage);
 		} catch (Exception e) {
-			updateMessage = "there are something wrong with control layer: "
-					+ e.toString();
+			LOGGER.error("there are something wrong with control layer: "
+					+ e.toString());
 		}
 
 		// 将activity中所有属性的值copy到message中
@@ -322,12 +284,12 @@ public class LeaderviewAction extends AbstractAction {
 		initServletContextObject();
 		List<Integer> allMemberId = (List<Integer>) session.getAttribute("allMemberId");
 		try {
-			msgId = msgBean.doAddOneMsg(oneMsgVO);
-			sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
-
+			Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
+			String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
+			LOGGER.info(sendMessage);
 		} catch (Exception e) {
-			addMessage = "there are something wrong with control layer: "
-					+ e.toString();
+			LOGGER.error("there are something wrong with control layer: "
+					+ e.toString());
 		}
 		// 更新session中的year，若已存在这个year，则不执行操作，否则将这个year添加到years中
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
@@ -347,57 +309,30 @@ public class LeaderviewAction extends AbstractAction {
 		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOGGER.info("the doPublishAct get success");
-		session.setAttribute("groupacts", groupactsVO);
 		return "ShowAllGroupAct";
 	}
 
 	// 将这个完成的活动提交到申请小组去validate
 	public String doToValidateAct() {
 		initServletContextObject();
-		String validateMessage;
 		Integer actId = (Integer) session.getAttribute("validateActId");
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("tobevalidate");
 
 		try {
-			validateMessage = actsBean.doUpdateOneAct(oneActVO);
-
+			String validateMessage = actsBean.doUpdateOneAct(oneActVO);
+			LOGGER.info(validateMessage);
 		} catch (Exception e) {
-			validateMessage = "there are something wrong with control layer: "
-					+ e.toString();
+			LOGGER.error("there are something wrong with control layer: "
+					+ e.toString());
 		}
 		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
-		List<GroupActVO> groupactsVO = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		session.setAttribute("groupacts", groupactsVO);
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		return "ShowAllGroupAct";
-	}
-
-	public Integer getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserDept() {
-		return this.userDept;
-	}
-
-	public void setUserDept(String userDept) {
-		this.userDept = userDept;
 	}
 
 	public Integer getActId() {
@@ -406,14 +341,6 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setActId(Integer actId) {
 		this.actId = actId;
-	}
-
-	public Integer getGroupId() {
-		return this.groupId;
-	}
-
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
 	}
 
 	public String getActName() {
@@ -456,14 +383,6 @@ public class LeaderviewAction extends AbstractAction {
 		this.daterange = daterange;
 	}
 
-	public Integer getMsgId() {
-		return msgId;
-	}
-
-	public void setMsgId(Integer msgId) {
-		this.msgId = msgId;
-	}
-
 	public Integer getNbParticipants() {
 		return nbParticipants;
 	}
@@ -478,6 +397,22 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setSum(Float sum) {
 		this.sum = sum;
+	}
+
+	public GroupActVO getGroupAct() {
+		return groupAct;
+	}
+
+	public void setGroupAct(GroupActVO groupAct) {
+		this.groupAct = groupAct;
+	}
+
+	public List<GroupActVO> getGroupActs() {
+		return groupActs;
+	}
+
+	public void setGroupActs(List<GroupActVO> groupActs) {
+		this.groupActs = groupActs;
 	}
 
 }

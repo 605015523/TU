@@ -75,13 +75,13 @@
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3" name="actName">
-								${act.actName}
+								${groupAct.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
 								<strong> Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.daterange}
+								${groupAct.daterange}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -89,14 +89,14 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${act.actDate}
+								${groupAct.actDate}
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>PRICE per PERSON</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 							<input type="text" class="form-control" id="actMoney" name="actMoney" 
-							value="${act.actMoney}">
+							value="${groupAct.actMoney}">
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -105,14 +105,14 @@
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<input type="text" class="form-control" id="nbParticipants"
-									name="nbParticipants" value='${act.nbParticipants}'>
+									name="nbParticipants" value='${groupAct.nbParticipants}'>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>CONSUMPTION:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<input type="text" class="form-control" id="sum"
-									name="sum" value="${act.sum}">
+									name="sum" value="${groupAct.sum}">
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -121,7 +121,7 @@
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								<p class="desc">
-									${act.description}
+									${groupAct.description}
 								</p>
 							</div>
 						</div>
@@ -156,7 +156,7 @@
 										</td>
 									</tr>
 									<c:set var="count" value="0"/>
-									<c:forEach var="member" items="${act.memberInVO}">
+									<c:forEach var="member" items="${groupAct.memberInVO}">
 									<c:set var="count" value="${count+1}"/>
 										<tr>
 											<td>
@@ -196,12 +196,12 @@
 								</h5>
 							</div>
 							<div class="col-xs-2  col-md-2 navbar-right ">
-								<c:if test="${act.state=='pending'}">
+								<c:if test="${groupAct.state=='pending'}">
 
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" />
 								</c:if>
-								<c:if test="${act.state!='pending'}">
+								<c:if test="${groupAct.state!='pending'}">
 
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" disabled />

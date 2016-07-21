@@ -112,12 +112,12 @@
       return false;
     }
     
-     if ( actdate== "") {
+    if ( actdate== "") {
       alert("the  act date can not empty!");
       return false;
     }
     
-     if (actdaterange== "") {
+    if (actdaterange== "") {
       alert("the registration date range can not empty!");
       return false;
     }
@@ -130,7 +130,6 @@
 		<%
 			session.setAttribute("updateActId", request.getAttribute("actId"));
 		%>
-
 
 		<div class="container">
 			<div class="signin-head">
@@ -160,14 +159,14 @@
 								<label for="actDate">
 									Act Date
 								</label>
-								<c:if test="${act.state=='approved'}">
+								<c:if test="${groupAct.state=='approved'}">
 									<input type="text" class="form-control" id="actDate"
-										name="actDate" value="${act.actDate}"
-										placeholder="${act.actDate}" disabled>
+										name="actDate" value="${groupAct.actDate}"
+										placeholder="${groupAct.actDate}" disabled>
 								</c:if>
-								<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+								<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 									<input type="text" class="form-control" id="actDate"
-										name="actDate" value="${act.actDate}" placeholder="ActDate">
+										name="actDate" value="${groupAct.actDate}" placeholder="ActDate">
 								</c:if>
 
 							</div>
@@ -177,14 +176,14 @@
 								<label for="daterange">
 									Registration Date
 								</label>
-								<c:if test="${act.state=='approved'}">
+								<c:if test="${groupAct.state=='approved'}">
 									<input type="text" id="daterange" name="daterange" value=""
-										placeholder="${act.daterange}" class="form-control" disabled>
+										placeholder="${groupAct.daterange}" class="form-control" disabled>
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 								</c:if>
-								<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+								<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 									<input type="text" id="daterange" name="daterange"
-										value="${act.daterange}" class="form-control">
+										value="${groupAct.daterange}" class="form-control">
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 
 								</c:if>
@@ -197,14 +196,14 @@
 								</label>
 								<div class="input-group">
 									<span class="input-group-addon">￥</span>
-									<c:if test="${act.state=='approved'}">
+									<c:if test="${groupAct.state=='approved'}">
 										<input type="number" step="0.1" class="form-control"
-											id="actMoney" name="actMoney" value="${act.actMoney}"
-											placeholder="${act.actMoney}" aria-label="..." disabled>
+											id="actMoney" name="actMoney" value="${groupAct.actMoney}"
+											placeholder="${groupAct.actMoney}" aria-label="..." disabled>
 									</c:if>
-									<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+									<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 										<input type="number" step="0.1" class="form-control"
-											id="actMoney" name="actMoney" value="${act.actMoney}"
+											id="actMoney" name="actMoney" value="${groupAct.actMoney}"
 											aria-label="...">
 
 									</c:if>
@@ -217,13 +216,13 @@
 								<label for="actName">
 									Act Name
 								</label>
-								<c:if test="${act.state=='approved'}">
+								<c:if test="${groupAct.state=='approved'}">
 									<input type="text" class="form-control" id="actName"
-										name="actName" value="" placeholder="${act.actName}" disabled>
+										name="actName" value="" placeholder="${groupAct.actName}" disabled>
 								</c:if>
-								<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+								<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 									<input type="text" class="form-control" id="actName"
-										name="actName" value="${act.actName}" placeholder="act name">
+										name="actName" value="${groupAct.actName}" placeholder="act name">
 								</c:if>
 							</div>
 
@@ -232,14 +231,14 @@
 									Act Description
 								</label>
 								
-								<c:if test="${act.state=='approved'}">
+								<c:if test="${groupAct.state=='approved'}">
 									<textarea class="form-control" rows="6" id="description"
-										name="description" onkeyup="wordStatic(this);" disabled>${act.description}</textarea>
+										name="description" onkeyup="wordStatic(this);" disabled>${groupAct.description}</textarea>
 
 								</c:if>
-								<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+								<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 									<textarea class="form-control" rows="6" id="description"
-										name="description" onkeyup="wordStatic(this);">${act.description}</textarea>
+										name="description" onkeyup="wordStatic(this);">${groupAct.description}</textarea>
 								</c:if>
 
 							</div>
@@ -255,14 +254,14 @@
 
 					</div>
 					<div class="row form-group">
-					<c:if test="${act.state=='disapproved'}">
+					<c:if test="${groupAct.state=='disapproved'}">
 						<div class="form-group col-md-12 col-xs-12">
 						<label for="comment">
 									Comment:
 								</label>						
-							<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+							<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 								<textarea class="form-control" rows="6" id="comment"
-									name="comment" disabled>${act.comment}</textarea>
+									name="comment" disabled>${groupAct.comment}</textarea>
 							</c:if>
 						</div>
 					</c:if>
@@ -279,23 +278,23 @@
 							</h5>
 						</div>
 						<div class="form-group col-md-2 col-xs-3  ">
-							<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+							<c:if test="${groupAct.state=='draft'||groupAct.state=='disapproved'}">
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
 							</c:if>
-							<c:if test="${act.state!='draft'&&act.state!='disapproved'}">
+							<c:if test="${groupAct.state!='draft'&&groupAct.state!='disapproved'}">
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" disabled />
 							</c:if>
 						</div>
 						<div class="form-group col-md-2 col-xs-3 ">
-							<c:if test="${act.state=='approved'||act.state=='modified'}">
+							<c:if test="${groupAct.state=='approved' || groupAct.state=='modified'}">
 								<a role="button" class="btn btn-primary   btn-block"
-									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${act.actId}'>publish</a>
+									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${groupAct.actId}'>publish</a>
 							</c:if>
-							<c:if test="${act.state!='approved'&&act.state!='modified'}">
+							<c:if test="${groupAct.state!='approved' && groupAct.state!='modified'}">
 								<a role="button" class="btn btn-primary   btn-block"
-									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${act.actId}'
+									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${groupAct.actId}'
 									disabled>publish</a>
 							</c:if>
 						</div>

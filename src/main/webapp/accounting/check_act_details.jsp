@@ -28,14 +28,11 @@
     
 
         function checkApproved() {
-
-         if (!($('#approved').is(':checked')||$('#disapproved').is(':checked'))){
-          alert("please choose approved or disapproved");
-          return false;
-         }
-         else
-         return true;
-      
+            if (!($('#approved').is(':checked')||$('#disapproved').is(':checked'))){
+                alert("please choose approved or disapproved");
+                return false;
+            } else
+                return true;
         }
 		
         </script>
