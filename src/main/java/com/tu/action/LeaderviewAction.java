@@ -110,10 +110,10 @@ public class LeaderviewAction extends AbstractAction {
 
 		// 将页面上输入的值存入对象oneActVO中
 		ActivitiesVO oneActVO = new ActivitiesVO();
-		oneActVO.setActName(getActName());
-		oneActVO.setActMoney(getActMoney());
-		oneActVO.setDescription(getDescription());
-		oneActVO.setActDate(getActDate());
+		oneActVO.setActName(actName);
+		oneActVO.setActMoney(actMoney);
+		oneActVO.setDescription(description);
+		oneActVO.setActDate(actDate);
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		oneActVO.setGroupId(group.getGroupId());
 
@@ -129,7 +129,6 @@ public class LeaderviewAction extends AbstractAction {
 		actId = actsBean.doAddOneAct(oneActVO);
 		LOGGER.info("add act success");
 
-		initServletContextObject();
 		groupActs = leaderviewBean.doGetAllUserActsByGroupId(group
 				.getGroupId());
 		LOGGER.info("the doAddAct get success");
@@ -183,7 +182,7 @@ public class LeaderviewAction extends AbstractAction {
 		
 		groupAct.setActMoney(getActMoney());
 		groupAct.setSum(sum);
-		groupAct.setNbParticipants(getNbParticipants());
+		groupAct.setNbParticipants(nbParticipants);
 
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
 		oneActVO.setActMoney(getActMoney());
@@ -202,10 +201,10 @@ public class LeaderviewAction extends AbstractAction {
 					.getParameter("perconsumption_" + j));
 			oneuserAct.setConsumption(consumption);
 			oneMemberInVO.setConsumption(consumption);
-			Integer nbParticipants = Integer.parseInt(request
+			Integer nbParticipantsGrpAct = Integer.parseInt(request
 					.getParameter("perNbParticipants_" + j));
-			oneuserAct.setNbParticipants(nbParticipants);
-			oneMemberInVO.setNbParticipants(nbParticipants);
+			oneuserAct.setNbParticipants(nbParticipantsGrpAct);
+			oneMemberInVO.setNbParticipants(nbParticipantsGrpAct);
 			memberInVO.add(oneMemberInVO);
 			// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
 			try {
@@ -281,7 +280,6 @@ public class LeaderviewAction extends AbstractAction {
 		}
 
 		// 将这个message存到数据库，并且发送给所有用户
-		initServletContextObject();
 		List<Integer> allMemberId = (List<Integer>) session.getAttribute("allMemberId");
 		try {
 			Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
@@ -306,7 +304,6 @@ public class LeaderviewAction extends AbstractAction {
 		newMsg += 1;
 		session.setAttribute("newMsg", newMsg);
 
-		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
@@ -328,7 +325,6 @@ public class LeaderviewAction extends AbstractAction {
 			LOGGER.error("there are something wrong with control layer: "
 					+ e.toString());
 		}
-		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer groupId = group.getGroupId();
 		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
