@@ -60,7 +60,7 @@ public class AccountingviewAction extends AbstractAction {
 		this.groupBean = groupBean;
 	}
 
-	// To retrieve all the activities which are needed to be approved. 
+	// To retrieve all the activities which are needed to be approval. 
 	public String doGetAllCheckAct() {
 		groupActs = accountingviewBean.doGetAllCheckValidateActs();
 		LOGGER.info("the doGetAllGroupAct get success");
