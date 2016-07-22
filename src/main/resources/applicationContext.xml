@@ -61,12 +61,10 @@
 		class="com.tu.action.UserloginManageAction">
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="userviewBean" ref="UserviewBean"/>
-		<property name="leaderviewBean" ref="LeaderviewBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="groupBean" ref="GroupBean"/>
 		<property name="msgBean" ref="MsgBean"/>
 		<property name="userMsgBean" ref="UserMsgBean"/>
-		<property name="userGroupBean" ref="UserGroupBean"/>
 	</bean>
 
 	<bean id="UserviewActionBean" scope="prototype"

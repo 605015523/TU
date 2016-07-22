@@ -12,10 +12,8 @@ import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivitiesVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
-import com.tu.model.leaderview.LeaderviewInterface;
 import com.tu.model.messages.MessagesInterface;
 import com.tu.model.messages.MessagesVO;
-import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginManageInterface;
@@ -29,37 +27,24 @@ public class UserloginManageAction extends AbstractAction {
 	
 	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
-	private transient LeaderviewInterface leaderviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient GroupInterface groupBean = null;
 	private transient MessagesInterface msgBean = null;
 	private transient UserMsgInterface userMsgBean = null;
-	private transient UserGroupInterface userGroupBean = null;
 
 	private Integer userId;
 	private String userName;
 	private Integer userRole;
-	private List<String> groupName;
-	private String userDept;
-	private Date inDate;
-	private Date outDate;
-	private Float old_balance;
-	private Float quota;
-	private Float remaining;
 	private String loginMessage;
 
 	public UserloginManageAction() {
+		// do nothing
 	}
 
 	public void initUserlogin() {
 		userId = null;
 		userName = null;
 		userRole = null;
-		userDept = null;
-		inDate = null;
-		outDate = null;
-		old_balance = null;
-		quota = null;
 	}
 
 	public void setUserloginManageBean(
@@ -73,14 +58,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setUserviewBean(UserviewInterface userviewBean) {
 		this.userviewBean = userviewBean;
-	}
-
-	public LeaderviewInterface getLeaderviewBean() {
-		return leaderviewBean;
-	}
-
-	public void setLeaderviewBean(LeaderviewInterface leaderviewBean) {
-		this.leaderviewBean = leaderviewBean;
 	}
 
 	public void setActsBean(ActivitiesInterface actsBean) {
@@ -109,14 +86,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setMsgBean(MessagesInterface msgBean) {
 		this.msgBean = msgBean;
-	}
-
-	public UserGroupInterface getUserGroupBean() {
-		return userGroupBean;
-	}
-
-	public void setUserGroupBean(UserGroupInterface userGroupBean) {
-		this.userGroupBean = userGroupBean;
 	}
 
 	// 用户登录调用action
@@ -262,8 +231,7 @@ public class UserloginManageAction extends AbstractAction {
 		// 登录不成功所执行的操作
 		initServletContextObject();
 		LOG.info("login fail");
-		loginMessage = "Incorrect ID or password. Please re-enter.";
-		request.setAttribute("loginMessage", loginMessage);
+		setLoginMessage("Incorrect ID or password. Please re-enter.");
 		return "loginFail";
 	}
 	
@@ -293,60 +261,12 @@ public class UserloginManageAction extends AbstractAction {
 		this.userRole = userRole;
 	}
 
-	public String getUserDept() {
-		return this.userDept;
+	public String getLoginMessage() {
+		return loginMessage;
 	}
 
-	public void setUserDept(String userDept) {
-		this.userDept = userDept;
-	}
-
-	public Date getInDate() {
-		return this.inDate;
-	}
-
-	public void setInDate(Date inDate) {
-		this.inDate = inDate;
-	}
-
-	public Date getOutDate() {
-		return this.outDate;
-	}
-
-	public void setOutDate(Date outDate) {
-		this.outDate = outDate;
-	}
-
-	public Float getOld_balance() {
-		return this.old_balance;
-	}
-
-	public void setOld_balance(Float oldBalance) {
-		this.old_balance = oldBalance;
-	}
-
-	public Float getQuota() {
-		return this.quota;
-	}
-
-	public void setQuota(Float quota) {
-		this.quota = quota;
-	}
-
-	public List<String> getGroupName() {
-		return this.groupName;
-	}
-
-	public void setGroupName(List<String> groupName) {
-		this.groupName = groupName;
-	}
-
-	public Float getRemaining() {
-		return this.remaining;
-	}
-
-	public void setRemaining(Float remaining) {
-		this.remaining = remaining;
+	public void setLoginMessage(String loginMessage) {
+		this.loginMessage = loginMessage;
 	}
 
 }
