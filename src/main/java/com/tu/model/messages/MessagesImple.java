@@ -46,7 +46,6 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	@Override
 	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
 		Messages onemsgPO = new Messages();
-		String addMessage = null;
 		Integer msgId = null;
 
 		try { // 利用Bean拷贝类实现简单地拷贝
@@ -60,7 +59,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		try {
 			msgId = (Integer) msgDAO.save(onemsgPO);
 		} catch (Exception e) {
-			addMessage = e.toString();
+			LOG.error(e);
 		}
 		return msgId;
 	}

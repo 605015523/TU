@@ -22,7 +22,7 @@ import com.tu.model.userview.UserviewInterface;
 
 public class UserviewAction extends AbstractAction {
 
-	private static final Log LOG = LogFactory.getLog(UserviewAction.class);
+	private static final Log LOGGER = LogFactory.getLog(UserviewAction.class);
 	private static final long serialVersionUID = -6352178618288011965L;
 	
 	private transient UserloginManageInterface userloginManageBean = null;
@@ -32,7 +32,6 @@ public class UserviewAction extends AbstractAction {
 	private transient ActivitiesInterface actsBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
-	private Float quota;
 	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
@@ -101,8 +100,8 @@ public class UserviewAction extends AbstractAction {
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (UseractsVO userActVO : useracts) {
 			int actId = userActVO.getActId();
-			LOG.info("the actId is" + actId);
-			LOG.info("the actName is" + userActVO.getActName());
+			LOGGER.info("the actId is" + actId);
+			LOGGER.info("the actName is" + userActVO.getActName());
 			if (oneactId == actId) {
 				request.setAttribute("act", userActVO);
 			}
@@ -187,7 +186,7 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
-		LOG.info("the inActid is:" + actId);
+		LOGGER.info("the inActid is:" + actId);
 		Integer userId = (Integer) session.getAttribute("userId");
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
@@ -199,12 +198,12 @@ public class UserviewAction extends AbstractAction {
 
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
-		LOG.info("the year in action is:" + year);
-		LOG.info("the userId in action is:" + userId);
+		LOGGER.info("the year in action is:" + year);
+		LOGGER.info("the userId in action is:" + userId);
 		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 
 		for (int i = 0; i < useractsVO.size(); i++) {
-			LOG.info("the act" + useractsVO.get(i).getActName()
+			LOGGER.info("the act" + useractsVO.get(i).getActName()
 					+ "get success");
 		}
 		session.setAttribute("acts", useractsVO);
@@ -219,7 +218,7 @@ public class UserviewAction extends AbstractAction {
 		String oldpassword = (String) request.getParameter("oldpassword");
 		String newpassword = (String) request.getParameter("newpassword");
 		Integer userId = (Integer) session.getAttribute("userId");
-		LOG.info("the userId is:" + userId);
+		LOGGER.info("the userId is:" + userId);
 		UserloginVO userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		String orgpassword = userInfo.getUserPassword();
 		userInfo.setUserPassword(newpassword);
@@ -245,25 +244,17 @@ public class UserviewAction extends AbstractAction {
 		try {
 			actionReturnMessage = userActBean.doDeleteOneUserAct(userId,
 					actId);
-			LOG.info(actionReturnMessage);
+			LOGGER.info(actionReturnMessage);
 
 		} catch (Exception e) {
 			actionReturnMessage = e.toString();
-			LOG.error(actionReturnMessage);
+			LOGGER.error(actionReturnMessage);
 		}
 
 		Integer year = (Integer) session.getAttribute("thisyear");
 		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
 		return "showActs";
-	}
-
-	public Float getQuota() {
-		return this.quota;
-	}
-
-	public void setQuota(Float quota) {
-		this.quota = quota;
 	}
 
 	public Integer getNbParticipants() {

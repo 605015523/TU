@@ -76,7 +76,8 @@ public class UserloginDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	public Userlogin findByUserName(Object userName) {
+	@Override
+	public Userlogin findByUserName(String userName) {
 		List<Userlogin> users = findByProperty(USER_NAME, userName);
 		if (users.size() > 0) {
 			return users.get(0);

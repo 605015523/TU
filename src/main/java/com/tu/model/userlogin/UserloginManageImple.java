@@ -29,41 +29,20 @@ public class UserloginManageImple extends Observable implements
 	// 获取所有用户的登录信息
 	@Override
 	public List<UserloginVO> doGetAllUserlogin() {
-		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
-		List<Userlogin> knowledgeadministratorPOs = userloginDAO.findAll();
-		for (Userlogin oneKnowledgeadministratorPO : knowledgeadministratorPOs) {
-			UserloginVO oneKnowledgeadministratorVO = new UserloginVO();
-			try {
-				PropertyUtils.copyProperties(oneKnowledgeadministratorVO,
-						oneKnowledgeadministratorPO);
-				knowledgeadministratorVOs.add(oneKnowledgeadministratorVO);
-			} catch (IllegalAccessException e) {
-				LOG.error("出现了IllegalAccessException异常");
-			} catch (InvocationTargetException e) {
-				LOG.error("在出现了InvocationTargetException异常");
-			} catch (NoSuchMethodException e) {
-				LOG.error("Method not found" + e.getMessage());
-			}
+		List<UserloginVO> userLoginsVOs = new ArrayList<UserloginVO>();
+		List<Userlogin> userLogins = userloginDAO.findAll();
+		for (Userlogin userLogin : userLogins) {
+			userLoginsVOs.add(convertoToUserInfoVO(userLogin));
 		}
-		return knowledgeadministratorVOs;
+		return userLoginsVOs;
 	}
 
 	// 通过userId获取该用户
 	@Override
 	public UserloginVO dogetOneUserInfoByUserId(Integer userId) {
 		Userlogin userInfoPO = userloginDAO.findById(userId);
-		UserloginVO userInfoVO = new UserloginVO();
-		try {
-			PropertyUtils.copyProperties(userInfoVO, userInfoPO);
-		} catch (IllegalAccessException e) {
-			LOG.error("出现了IllegalAccessException异常");
-		} catch (InvocationTargetException e) {
-			LOG.error("在出现了InvocationTargetException异常");
-		} catch (NoSuchMethodException e) {
-			LOG.error("Method not found" + e.getMessage());
-		}
 		
-		return userInfoVO;
+		return convertoToUserInfoVO(userInfoPO);
 	}
 
 	// 更新用户spending
@@ -85,6 +64,27 @@ public class UserloginManageImple extends Observable implements
 			LOG.error(e);
 		}
 
+	}
+
+	@Override
+	public UserloginVO dogetOneUserInfoByUserName(String userName) {
+		Userlogin userInfoPO = userloginDAO.findByUserName(userName);
+		
+		return convertoToUserInfoVO(userInfoPO);
+	}
+	
+	private UserloginVO convertoToUserInfoVO(Userlogin userInfoPO) {
+		UserloginVO userInfoVO = new UserloginVO();
+		try {
+			PropertyUtils.copyProperties(userInfoVO, userInfoPO);
+		} catch (IllegalAccessException e) {
+			LOG.error("出现了IllegalAccessException异常");
+		} catch (InvocationTargetException e) {
+			LOG.error("在出现了InvocationTargetException异常");
+		} catch (NoSuchMethodException e) {
+			LOG.error("Method not found" + e.getMessage());
+		}
+		return userInfoVO;
 	}
 
 }

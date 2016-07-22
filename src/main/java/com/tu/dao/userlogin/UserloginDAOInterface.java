@@ -11,6 +11,8 @@ public interface UserloginDAOInterface {
 	public Userlogin findById(java.lang.Integer id);
 
 	public List<Userlogin> findByProperty(String propertyName, Object value);
+	
+	public Userlogin findByUserName(String userName);
 
 	public List<Userlogin> findAll();
 

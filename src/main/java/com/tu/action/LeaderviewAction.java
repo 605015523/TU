@@ -21,6 +21,8 @@ import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.msg.UserMsgInterface;
+import com.tu.model.userlogin.UserloginManageInterface;
+import com.tu.model.userlogin.UserloginVO;
 import com.tu.util.ConfConstants;
 
 public class LeaderviewAction extends AbstractAction {
@@ -31,6 +33,16 @@ public class LeaderviewAction extends AbstractAction {
 	private transient LeaderviewInterface leaderviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient MessagesInterface msgBean = null;
+	private transient UserloginManageInterface userloginManageBean = null;
+	public UserloginManageInterface getUserloginManageBean() {
+		return userloginManageBean;
+	}
+
+	public void setUserloginManageBean(
+			UserloginManageInterface userloginManageBean) {
+		this.userloginManageBean = userloginManageBean;
+	}
+
 	private transient UserMsgInterface userMsgBean = null;
 	private transient UserActInterface userActBean = null;
 
@@ -270,15 +282,18 @@ public class LeaderviewAction extends AbstractAction {
 		}
 
 		// 将这个message存到数据库，并且发送给所有用户
-		List<Integer> allMemberId = (List<Integer>) session.getAttribute("allMemberId");
-		try {
-			Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
-			String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
-			LOGGER.info(sendMessage);
-		} catch (Exception e) {
-			LOGGER.error("there are something wrong with control layer: "
-					+ e.toString());
+		List<UserloginVO> allUserLogins = userloginManageBean.doGetAllUserlogin();
+				
+		// 获取所有用户Id，以便添加活动时发送消息给用户
+		List<Integer> allMemberId = new ArrayList<Integer>();
+		for (int m = 0; m < allUserLogins.size(); m++) {
+			Integer userId = allUserLogins.get(m).getUserId();
+			allMemberId.add(userId);
 		}
+		Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
+		String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
+		LOGGER.info(sendMessage);
+			
 		// 更新session中的year，若已存在这个year，则不执行操作，否则将这个year添加到years中
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Calendar cal = Calendar.getInstance();
