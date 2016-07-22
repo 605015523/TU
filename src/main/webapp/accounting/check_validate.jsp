@@ -53,7 +53,7 @@
 							<td class="col-md-2 col-xs-2 text-center">Act Date</td>
 							<td class="col-md-2 col-xs-2 text-center">Details</td>
 						</tr>
-						<c:forEach var="act" items="${acts}">
+						<c:forEach var="act" items="${groupActs}">
 							<tr>
 								<c:if test="${act.state=='draft'||act.state=='tobevalidate'}">
 									<td class="col-md-3 col-xs-3 text-center">

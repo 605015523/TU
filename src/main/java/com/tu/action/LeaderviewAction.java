@@ -150,9 +150,7 @@ public class LeaderviewAction extends AbstractAction {
 
 	// 调用时跳转到选定活动的细节页面，将该活动中的所有值传入view_act_details.jsp页面
 	public String doshowActDetails() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "ShowActDetails";
 
@@ -160,18 +158,14 @@ public class LeaderviewAction extends AbstractAction {
 
 	// 进入活动修改界面
 	public String doEditAct() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "EditAct";
 	}
 
 	// 活动结束时，编辑这个活动
 	public String doEditActDetails() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = leaderviewBean.doGetUserActById(oneactId);
+		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "EditActDetails";
 	}
@@ -188,10 +182,8 @@ public class LeaderviewAction extends AbstractAction {
 
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(updateActId);
 		oneActVO.setActMoney(getActMoney());
-		try {
-			actsBean.doUpdateOneAct(oneActVO);
-		} catch (Exception e) {
-		}
+		actsBean.doUpdateOneAct(oneActVO);
+		
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 
 		for (int j = 1; j < (groupAct.getMemberInVO().size() + 1); j++) {
@@ -209,11 +201,7 @@ public class LeaderviewAction extends AbstractAction {
 			oneMemberInVO.setNbParticipants(nbParticipantsGrpAct);
 			memberInVO.add(oneMemberInVO);
 			// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
-			try {
-				userActBean.doUpdateOneUserAct(oneuserAct);
-			} catch (Exception e) {
-			}
-
+			userActBean.doUpdateOneUserAct(oneuserAct);
 		}
 		groupAct.setMemberInVO(memberInVO);
 
@@ -258,18 +246,12 @@ public class LeaderviewAction extends AbstractAction {
 	public String doPublishAct() {
 		initServletContextObject();
 
-		int actId = Integer.parseInt(request.getParameter("actId"));
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState(ActivitiesConstant.STATE_PUBLISH);
 
 		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
-		try {
-			String updateMessage = actsBean.doUpdateOneAct(oneActVO);
-			LOGGER.info(updateMessage);
-		} catch (Exception e) {
-			LOGGER.error("there are something wrong with control layer: "
-					+ e.toString());
-		}
+		String updateMessage = actsBean.doUpdateOneAct(oneActVO);
+		LOGGER.info(updateMessage);
 
 		// 将activity中所有属性的值copy到message中
 		MessagesVO oneMsgVO = new MessagesVO();

@@ -120,8 +120,8 @@ public class AccountingviewImple extends Observable implements
 				}
 			}
 			float sum = 0;
-			for (int n = 0; n < allGroupCost.size(); n++) {
-				sum += allGroupCost.get(n).getCost();
+			for (GroupCostVO groupCost : allGroupCost.values()) {
+				sum += groupCost.getCost();
 			}
 			
 			oneUserGroupCostVO.setSum(sum);
