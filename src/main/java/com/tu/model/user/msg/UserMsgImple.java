@@ -50,9 +50,9 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	// 发送一个msg
 	@Override
 	public String doSendMsg(Integer msgId, List<Integer> alluserId) {
-		for (int i = 0; i < alluserId.size(); i++) {
+		for (Integer i : alluserId) {
 			UserMsg oneUserMagVO = new UserMsg();
-			oneUserMagVO.setUserId((Integer) alluserId.get(i));
+			oneUserMagVO.setUserId(i);
 			oneUserMagVO.setMsgId(msgId);
 			oneUserMagVO.setReadState(UserMsgConstants.STATE_NEW);
 			userMsgDAO.save(oneUserMagVO);

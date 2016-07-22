@@ -26,11 +26,13 @@ public class AccountingviewAction extends AbstractAction {
 	private transient UserloginManageInterface userloginManageBean = null;
 
 	// To receive the value from the web page control and return to the parameter of the "success" web page
+	private Integer actId;
 	private String checkState;
 	private String comment;
 	
 	// To display a group activity
 	private GroupActVO groupAct;
+	private List<GroupActVO> groupActs;
 
 	public AccountingviewAction() {
 		// do nothing
@@ -71,28 +73,22 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To retrieve all the activities which are needed to be approval. 
 	public String doGetAllCheckAct() {
-		initServletContextObject();
-		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
+		groupActs = accountingviewBean.doGetAllCheckValidateActs();
 		LOGGER.info("the doGetAllGroupAct get success");
-		session.setAttribute("acts", actsVO);
-
+	
 		return "doGetAllAct";
 	}
 
 	// To retrieve all the detail of one specific activity which is in check.  
 	public String doshowCheckDetails() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
+		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
 
 		return "ShowCheckDetails";
 	}
 
 	// To retrieve all the activities' details which are needed to be validated.
 	public String doshowValidateDetails() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
+		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
 
 		return "ShowValidateDetails";
 	}
@@ -111,8 +107,7 @@ public class AccountingviewAction extends AbstractAction {
 		session.setAttribute("newCheck", newCheck);
 
 		// Update the web page to display all the activities  
-		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
-		session.setAttribute("acts", actsVO);
+		groupActs = accountingviewBean.doGetAllCheckValidateActs();
 		return "doGetAllAct";
 
 	}
@@ -120,10 +115,10 @@ public class AccountingviewAction extends AbstractAction {
 	private Integer getNbActsToCheck() {
 		Integer newCheck = 0;
 		List<ActivitiesVO> allActs = actsBean.doGetAllActivity();
-		for (int i = 0; i < allActs.size(); i++) {
-			if (allActs.get(i).getState().equals(ActivitiesConstant.STATE_DRAFT)
-					|| allActs.get(i).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
-				newCheck += 1;
+		for (ActivitiesVO act : allActs) {
+			if (act.getState().equals(ActivitiesConstant.STATE_DRAFT)
+					|| act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
+				newCheck++;
 			}
 		}
 		
@@ -157,8 +152,7 @@ public class AccountingviewAction extends AbstractAction {
 		session.setAttribute("newCheck", newCheck);
 
 		// Refresh the web page which displays all activities.
-		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
-		session.setAttribute("acts", actsVO);
+		groupActs = accountingviewBean.doGetAllCheckValidateActs();
 		return "doGetAllAct";
 	}
 
@@ -177,9 +171,8 @@ public class AccountingviewAction extends AbstractAction {
 		initServletContextObject();
 		String groupName = request.getParameter("groupname");
 		GroupVO group = groupBean.dogetOneGroupByName(groupName);
-		List<GroupActVO> groupactsVO = accountingviewBean.doGetAllActsByGroupId(group
+		groupActs = accountingviewBean.doGetAllActsByGroupId(group
 				.getGroupId());
-		session.setAttribute("groupacts", groupactsVO);
 
 		return "doShowActByGroup";
 
@@ -187,9 +180,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// Display activity detail of group
 	public String doshowActDetailsInGroup() {
-		initServletContextObject();
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
-		groupAct = accountingviewBean.doGetAllValidateDetails(oneactId);
+		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
 
 		return "doShowActByGroupDetails";
 	}
@@ -217,6 +208,22 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setGroupAct(GroupActVO groupAct) {
 		this.groupAct = groupAct;
+	}
+
+	public List<GroupActVO> getGroupActs() {
+		return groupActs;
+	}
+
+	public void setGroupActs(List<GroupActVO> groupActs) {
+		this.groupActs = groupActs;
+	}
+
+	public Integer getActId() {
+		return actId;
+	}
+
+	public void setActId(Integer actId) {
+		this.actId = actId;
 	}
 
 }

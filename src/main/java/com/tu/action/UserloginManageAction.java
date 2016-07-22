@@ -1,6 +1,5 @@
 package com.tu.action;
 
-import java.text.ParseException;
 import java.util.*;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -89,21 +88,16 @@ public class UserloginManageAction extends AbstractAction {
 	}
 
 	// 用户登录调用action
-	public String doLogin() throws ParseException {
+	public String doLogin() {
 
 		// 用户登录验证模块
 		initServletContextObject();
-		List<UserloginVO> knowledgeadministratorVOs = userloginManageBean.doGetAllUserlogin();
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserloginVO userLogin = userloginManageBean.dogetOneUserInfoByUserName(user.getUsername());
 		
-		for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
-			if (user.getUsername().equals(knowledgeadministratorVOs.get(i).getUserName())) {
-				userName = knowledgeadministratorVOs.get(i).getUserName();
-				userId = knowledgeadministratorVOs.get(i).getUserId();
-				userRole = knowledgeadministratorVOs.get(i).getUserRole();
-				break;
-			}
-		}
+		userName = userLogin.getUserName();
+		userId = userLogin.getUserId();
+		userRole = userLogin.getUserRole();
 
 		// 登录成功，输出到控制台
 		LOG.info("login success");
@@ -189,16 +183,8 @@ public class UserloginManageAction extends AbstractAction {
 			// 获取所属小组信息，以便后面的使用
 			GroupVO group = groupBean.dogetOneGroup(userId);
 
-			// 获取所有用户Id，以便添加活动时发送消息给用户
-			List<Integer> allMemberId = new ArrayList<Integer>();
-			for (int m = 0; m < knowledgeadministratorVOs.size(); m++) {
-				Integer userId = knowledgeadministratorVOs.get(m).getUserId();
-				allMemberId.add(userId);
-			}
-
 			// 将刚刚获取到的内容存到session中
 			session.setAttribute("group", group);
-			session.setAttribute("allMemberId", allMemberId);
 		}
 
 		// 若为审批小组成员，执行以下操作
@@ -209,10 +195,6 @@ public class UserloginManageAction extends AbstractAction {
 						|| actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 					newCheck += 1;
 				}
-			}
-			List<Integer> allUserId = new ArrayList<Integer>();
-			for (int i = 0; i < knowledgeadministratorVOs.size(); i++) {
-				allUserId.add(knowledgeadministratorVOs.get(i).getUserId());
 			}
 
 			List<String> groupsName = new ArrayList<String>();
