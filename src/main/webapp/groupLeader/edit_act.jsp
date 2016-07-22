@@ -127,10 +127,6 @@
       </script>
 	</head>
 	<body>
-		<%
-			session.setAttribute("updateActId", request.getAttribute("actId"));
-		%>
-
 		<div class="container">
 			<div class="signin-head">
 				<img src="images/test/head.png" alt="">
@@ -144,6 +140,7 @@
 
 				<form action="doUpdateActLeaderviewAction.action" method="post"
 					role="form" name="form" id="form" onsubmit="return checkinput();">
+					<input type="hidden" name="actId" value="${actId}"/>
 					<div class="row">
 						<div class="col-md-4 col-xs-4">
 							<div class="form-group">
