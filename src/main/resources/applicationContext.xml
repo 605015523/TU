@@ -79,8 +79,6 @@
 	<bean id="LeaderviewActionBean" scope="prototype"
 		class="com.tu.action.LeaderviewAction">
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
-		<property name="userGroupBean" ref="UserGroupBean"/>
-		
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="msgBean" ref="MsgBean"/>
 		<property name="userMsgBean" ref="UserMsgBean"/>
@@ -92,7 +90,6 @@
 		<property name="accountingviewBean" ref="AccountingviewBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="groupBean" ref="GroupBean"/>
-		<property name="userGroupBean" ref="UserGroupBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 	</bean>
 

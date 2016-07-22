@@ -13,7 +13,6 @@ import com.tu.model.activities.ActivitiesVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 
@@ -22,7 +21,6 @@ public class AccountingviewAction extends AbstractAction {
 	private static final Log LOGGER = LogFactory.getLog(AccountingviewAction.class);
 	
 	private transient AccountingviewInterface accountingviewBean = null;
-	private transient UserGroupInterface userGroupBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient GroupInterface groupBean = null;
 	private transient UserloginManageInterface userloginManageBean = null;
@@ -52,14 +50,6 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setAccountingviewBean(AccountingviewInterface accountingviewBean) {
 		this.accountingviewBean = accountingviewBean;
-	}
-
-	public UserGroupInterface getUserGroupBean() {
-		return this.userGroupBean;
-	}
-
-	public void setUserGroupBean(UserGroupInterface userGroupBean) {
-		this.userGroupBean = userGroupBean;
 	}
 
 	public GroupInterface getGroupBean() {

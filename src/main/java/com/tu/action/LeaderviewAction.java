@@ -20,7 +20,6 @@ import com.tu.model.messages.MessagesInterface;
 import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
-import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.util.ConfConstants;
 
@@ -30,7 +29,6 @@ public class LeaderviewAction extends AbstractAction {
 	private static final Log LOGGER = LogFactory.getLog(LeaderviewAction.class);
 	
 	private transient LeaderviewInterface leaderviewBean = null;
-	private transient UserGroupInterface userGroupBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient MessagesInterface msgBean = null;
 	private transient UserMsgInterface userMsgBean = null;
@@ -70,14 +68,6 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setLeaderviewBean(LeaderviewInterface leaderviewBean) {
 		this.leaderviewBean = leaderviewBean;
-	}
-
-	public UserGroupInterface getUserGroupBean() {
-		return this.userGroupBean;
-	}
-
-	public void setUserGroupBean(UserGroupInterface userGroupBean) {
-		this.userGroupBean = userGroupBean;
 	}
 
 	public MessagesInterface getMsgBean() {
