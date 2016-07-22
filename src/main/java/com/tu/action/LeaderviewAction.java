@@ -22,7 +22,7 @@ import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.group.UserGroupInterface;
 import com.tu.model.user.msg.UserMsgInterface;
-import com.tu.util.ConfigurationConstants;
+import com.tu.util.ConfConstants;
 
 public class LeaderviewAction extends AbstractAction {
 	private static final long serialVersionUID = -1552527472504308094L;
@@ -118,7 +118,7 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setGroupId(group.getGroupId());
 
 		// 由于报名开始日期和结束日期存在了一个string（daterange）中，所以这里要进行格式转换
-		SimpleDateFormat act = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+		SimpleDateFormat act = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 		Date startDate = act.parse(daterange.substring(0, 10));
 		Date endDate = act.parse(daterange.substring(13, 23));
 		oneActVO.setEnrollStartDate(startDate);
@@ -234,7 +234,7 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setActMoney(actMoney);
 		oneActVO.setActDate(actDate);
 		oneActVO.setDescription(description);
-		SimpleDateFormat act = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+		SimpleDateFormat act = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 		Date startDate = act.parse(daterange.substring(0, 10));
 		Date endDate = act.parse(daterange.substring(13, 23));
 		oneActVO.setEnrollStartDate(startDate);

@@ -17,7 +17,7 @@ import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.MemberInVO;
-import com.tu.util.ConfigurationConstants;
+import com.tu.util.ConfConstants;
 
 public class AccountingviewImple extends Observable implements
 		AccountingviewInterface {
@@ -166,7 +166,7 @@ public class AccountingviewImple extends Observable implements
 		actsPO.setDescription(activity.getDescription());
 		actsPO.setState(activity.getState());
 
-		SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 		String daterange = formatter.format(activity.getEnrollStartDate())
 				+ " - "	+ formatter.format(activity.getEnrollEndDate());
 		actsPO.setDaterange(daterange);
@@ -210,7 +210,7 @@ public class AccountingviewImple extends Observable implements
 			actsPO.setActMoney(activity.getActMoney());
 			actsPO.setDescription(activity.getDescription());
 			actsPO.setState(activity.getState());
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+			SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 			String daterange = formatter.format(activity
 					.getEnrollStartDate())
 					+ " - "

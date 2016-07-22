@@ -1,7 +1,6 @@
 package com.tu.action;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,9 +10,9 @@ import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivitiesVO;
-import com.tu.model.messages.MessagesInterface;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
+import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
@@ -29,25 +28,13 @@ public class UserviewAction extends AbstractAction {
 	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
 	private transient UserActInterface userActBean = null;
-	private transient MessagesInterface msgBean = null;
 	private transient UserMsgInterface userMsgBean = null;
 	private transient ActivitiesInterface actsBean = null;
 
 	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
-	private Integer userId;
-	private String userName;
-	private List<String> groupName;
-	private String userPassword;
-	private String userRole;
-	private String userDept;
-	private Date inDate;
-	private Date outDate;
-	private Float spending;
 	private Float quota;
-	private Float remaining;
 	private Integer nbParticipants;
 	private Float consumption;
-	private String description;
 	private String remark;
 
 	public UserviewAction() {
@@ -77,14 +64,6 @@ public class UserviewAction extends AbstractAction {
 
 	public UserloginManageInterface getUserloginManageBean() {
 		return this.userloginManageBean;
-	}
-
-	public MessagesInterface getMsgBean() {
-		return this.msgBean;
-	}
-
-	public void setMsgBean(MessagesInterface msgBean) {
-		this.msgBean = msgBean;
 	}
 
 	public UserMsgInterface getUserMsgBean() {
@@ -168,16 +147,16 @@ public class UserviewAction extends AbstractAction {
 		Integer userId = (Integer) session.getAttribute("userId");
 		UserMsg oneUserMsg = userMsgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
-		if (oneUserMsg.getReadState().equals("new")) {
+		if (oneUserMsg.getReadState().equals(UserMsgConstants.STATE_NEW)) {
 
-			oneUserMsg.setReadState("read");
+			oneUserMsg.setReadState(UserMsgConstants.STATE_READ);
 			userMsgBean.doUpdateOneUserMsg(oneUserMsg);
 			int newMsg = 0;
 			List<UserMsg> userMsgVOs = (List<UserMsg>) userMsgBean
 					.doGetUserMsg(userId);
 			for (int i = 0; i < userMsgVOs.size(); i++) {
 
-				if (userMsgVOs.get(i).getReadState().equals("new")) {
+				if (userMsgVOs.get(i).getReadState().equals(UserMsgConstants.STATE_NEW)) {
 					newMsg += 1;
 				}
 
@@ -212,11 +191,11 @@ public class UserviewAction extends AbstractAction {
 		Integer userId = (Integer) session.getAttribute("userId");
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
-		oneUserActVO.setNbParticipants(getNbParticipants());
-		oneUserActVO.setConsumption(getConsumption());
-		oneUserActVO.setRemark(getRemark());
+		oneUserActVO.setNbParticipants(nbParticipants);
+		oneUserActVO.setConsumption(consumption);
+		oneUserActVO.setRemark(remark);
 		
-		String addMessage = userActBean.doAddOneUserAct(oneUserActVO);
+		userActBean.doAddOneUserAct(oneUserActVO);
 
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Integer year = years.get(years.size() - 1);
@@ -237,12 +216,11 @@ public class UserviewAction extends AbstractAction {
 	public String doChangePwd() {
 		String updateMessage = null;
 		initServletContextObject();
-		UserloginVO userInfo = new UserloginVO();
 		String oldpassword = (String) request.getParameter("oldpassword");
 		String newpassword = (String) request.getParameter("newpassword");
 		Integer userId = (Integer) session.getAttribute("userId");
 		LOG.info("the userId is:" + userId);
-		userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
+		UserloginVO userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		String orgpassword = userInfo.getUserPassword();
 		userInfo.setUserPassword(newpassword);
 		
@@ -280,92 +258,12 @@ public class UserviewAction extends AbstractAction {
 		return "showActs";
 	}
 
-	public Integer getUserId() {
-		return this.userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public List<String> getGroupName() {
-		return groupName;
-	}
-
-	public void setGroupName(List<String> groupName) {
-		this.groupName = groupName;
-	}
-
-	public Date getOutDate() {
-		return outDate;
-	}
-
-	public void setOutDate(Date outDate) {
-		this.outDate = outDate;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getUserPassword() {
-		return this.userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-	}
-
-	public String getUserRole() {
-		return this.userRole;
-	}
-
-	public void setUserRole(String userRole) {
-		this.userRole = userRole;
-	}
-
-	public String getUserDept() {
-		return this.userDept;
-	}
-
-	public void setUserDept(String userDept) {
-		this.userDept = userDept;
-	}
-
-	public Date getInDate() {
-		return this.inDate;
-	}
-
-	public void setInDate(Date inDate) {
-		this.inDate = inDate;
-	}
-
-	public Float getSpending() {
-		return spending;
-	}
-
-	public void setSpending(Float spending) {
-		this.spending = spending;
-	}
-
 	public Float getQuota() {
 		return this.quota;
 	}
 
 	public void setQuota(Float quota) {
 		this.quota = quota;
-	}
-
-	public Float getRemaining() {
-		return this.remaining;
-	}
-
-	public void setRemaining(Float remaining) {
-		this.remaining = remaining;
 	}
 
 	public Integer getNbParticipants() {
@@ -382,14 +280,6 @@ public class UserviewAction extends AbstractAction {
 
 	public void setConsumption(Float consumption) {
 		this.consumption = consumption;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getRemark() {

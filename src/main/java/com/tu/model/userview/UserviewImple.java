@@ -26,7 +26,7 @@ import com.tu.dao.user.msg.UserMsgDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.userlogin.UserloginVO;
-import com.tu.util.ConfigurationConstants;
+import com.tu.util.ConfConstants;
 
 public class UserviewImple extends Observable implements UserviewInterface {
 
@@ -244,7 +244,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 					.getReadState());
 			Group group = groupDAO.findById(oneMessage.getGroupId());
 			oneUserMsgVO.setGroupName(group.getGroupName());
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfigurationConstants.DATE_FORMAT);
+			SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 			String daterange = formatter
 					.format(oneMessage.getEnrollStartDate())
 					+ " - "

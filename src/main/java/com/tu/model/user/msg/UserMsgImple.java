@@ -54,7 +54,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 			UserMsg oneUserMagVO = new UserMsg();
 			oneUserMagVO.setUserId((Integer) alluserId.get(i));
 			oneUserMagVO.setMsgId(msgId);
-			oneUserMagVO.setReadState("new");
+			oneUserMagVO.setReadState(UserMsgConstants.STATE_NEW);
 			userMsgDAO.save(oneUserMagVO);
 		}
 		return null;

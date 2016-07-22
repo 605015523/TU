@@ -1,7 +1,6 @@
 package com.tu.action;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,11 +16,13 @@ import com.tu.model.leaderview.LeaderviewInterface;
 import com.tu.model.messages.MessagesInterface;
 import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.group.UserGroupInterface;
+import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
+import com.tu.util.ConfConstants;
 
 public class UserloginManageAction extends AbstractAction {
 	private static final long serialVersionUID = -5768511845633999130L;
@@ -153,23 +154,20 @@ public class UserloginManageAction extends AbstractAction {
 			}
 		}
 		
-		// 登录成功，判断预算是否该修改，若为当年的7月1号，预算在原基础上加1000
-		UserloginVO thisuser = userloginManageBean
-				.dogetOneUserInfoByUserId(userId);
+		// 登录成功，判断预算是否该修改，若为当年的2月25号，预算在原基础上加1000
+		// Login succeeds, judge the budget if it should be modified,
+		// if the today after this year, 25th feb., the budget will increase by 1000
+		UserloginVO thisuser = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		Date date = new Date();// 取当前时间
 		cal.setTime(date);
-		String year = Integer.toString(cal.get(Calendar.YEAR));
-		Date updatedate = new SimpleDateFormat("yyyy-MM-dd").parse(year
-				+ "-02-25");
-		try {
-			if ((thisuser.getInDate().getTime() - updatedate.getTime() < 0)
-					&& updatedate.before(date)
-					&& thisuser.getQuota() == 1000) {
-				thisuser.setQuota(thisuser.getQuota() + 1000);
-				userloginManageBean.doUpdateOneUserInfo(thisuser);
-			}
-		} catch (Exception e) {
-
+		cal.set(cal.get(Calendar.YEAR), ConfConstants.BUDGET_MONTH-1, ConfConstants.BUDGET_DAY, 0, 0);
+		Date updatedate = cal.getTime();
+		// FIXME float comparison??
+		if ((thisuser.getInDate().getTime() - updatedate.getTime() < 0)
+				&& updatedate.before(date)
+				&& thisuser.getQuota() == ConfConstants.BUDGET_PER_YEAR) {
+			thisuser.setQuota(thisuser.getQuota() + ConfConstants.BUDGET_PER_YEAR);
+			userloginManageBean.doUpdateOneUserInfo(thisuser);
 		}
 
 		// 登录成功，识别过期消息，并获取新消息条数
@@ -196,11 +194,11 @@ public class UserloginManageAction extends AbstractAction {
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
-				userMsgVO.setReadState("read");
+				userMsgVO.setReadState(UserMsgConstants.STATE_READ);
 				userMsgBean.doUpdateOneUserMsg(userMsgVO);
 
 			}
-			if (userMsgVO.getReadState().equals("new")) {
+			if (userMsgVO.getReadState().equals(UserMsgConstants.STATE_NEW)) {
 				newMsg += 1;
 			}
 		}
@@ -253,7 +251,6 @@ public class UserloginManageAction extends AbstractAction {
 			for (int i = 0; i < allgroup.size(); i++) {
 				groupsName.add(allgroup.get(i).getGroupName());
 			}
-			session.setAttribute("allserId", allUserId);
 			session.setAttribute("newCheck", newCheck);
 			session.setAttribute("groupsName", groupsName);
 		}

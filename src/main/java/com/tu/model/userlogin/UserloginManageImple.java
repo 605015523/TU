@@ -31,8 +31,7 @@ public class UserloginManageImple extends Observable implements
 	public List<UserloginVO> doGetAllUserlogin() {
 		List<UserloginVO> knowledgeadministratorVOs = new ArrayList<UserloginVO>();
 		List<Userlogin> knowledgeadministratorPOs = userloginDAO.findAll();
-		for (int i = 0; i < knowledgeadministratorPOs.size(); i++) {
-			Userlogin oneKnowledgeadministratorPO = knowledgeadministratorPOs.get(i);
+		for (Userlogin oneKnowledgeadministratorPO : knowledgeadministratorPOs) {
 			UserloginVO oneKnowledgeadministratorVO = new UserloginVO();
 			try {
 				PropertyUtils.copyProperties(oneKnowledgeadministratorVO,
@@ -82,9 +81,8 @@ public class UserloginManageImple extends Observable implements
 		}
 		try {
 			userloginDAO.merge(oneUserPO);
-
 		} catch (Exception e) {
-
+			LOG.error(e);
 		}
 
 	}

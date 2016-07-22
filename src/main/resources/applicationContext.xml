@@ -75,7 +75,6 @@
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="userActBean" ref="UserActBean"/>
 		<property name="actsBean" ref="ActsBean"/>
-		<property name="msgBean" ref="MsgBean"/>
 		<property name="userMsgBean" ref="UserMsgBean"/>
 	</bean>
 
