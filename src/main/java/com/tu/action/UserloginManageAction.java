@@ -77,10 +77,10 @@ public class UserloginManageAction extends AbstractAction {
 		this.msgBean = msgBean;
 	}
 
-	// 用户登录调用action
+	// The action will be called as user login
 	public String doLogin() {
 
-		// 用户登录验证模块
+		// User login checking module
 		initServletContextObject();
 		UserloginVO userLogin = getCurrentUser();
 		
@@ -88,10 +88,9 @@ public class UserloginManageAction extends AbstractAction {
 		userId = userLogin.getUserId();
 		userRole = userLogin.getUserRole();
 
-		// 登录成功，输出到控制台
 		LOG.info("login success");
 
-		// 登录成功，获取所有数据库中存放的活动年限，以便登录后首页的活动下拉菜单选取年限
+		// To retrieve all the activities' years for displaying by year in front page
 		List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
 		List<Integer> years = new ArrayList<Integer>();
 		Calendar cal = Calendar.getInstance();
@@ -107,10 +106,10 @@ public class UserloginManageAction extends AbstractAction {
 		}
 		
 		// 登录成功，判断预算是否该修改，若为当年的2月25号，预算在原基础上加1000
-		// Login succeeds, judge the budget if it should be modified,
-		// if the today after this year, 25th feb., the budget will increase by 1000
+		// Login succeeds, judge the budget by date.
+		// if the date after this year, 25th feb., the budget will increase by 1000
 		UserloginVO thisuser = userloginManageBean.dogetOneUserInfoByUserId(userId);
-		Date date = new Date();// 取当前时间
+		Date date = new Date();// Get the current date
 		cal.setTime(date);
 		cal.set(cal.get(Calendar.YEAR), ConfConstants.BUDGET_MONTH-1, ConfConstants.BUDGET_DAY, 0, 0);
 		Date updatedate = cal.getTime();
@@ -122,13 +121,13 @@ public class UserloginManageAction extends AbstractAction {
 			userloginManageBean.doUpdateOneUserInfo(thisuser);
 		}
 
-		// 登录成功，识别过期消息，并获取新消息条数
+		// Login succeeds, identify the expiry message and retrieve the number of new messages.
 		for (ActivitiesVO oneAct : actVOs) {
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 				cal.setTime(date);
-				cal.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点
-												// 所以对比过期时间时将今天的日期往后推一天
-				date = cal.getTime(); // 这个时间就是日期往后推一天的结果
+				cal.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点,所以对比过期时间时将今天的日期往后推一天
+										  // actdate records the 00:00 of current day, so the expiry date will be the day after today
+				date = cal.getTime(); // the date is the day after today
 				if (oneAct.getActDate().before(date)) {
 					oneAct.setState(ActivitiesConstant.STATE_PENDING);
 					actsBean.doUpdateOneAct(oneAct);
@@ -155,27 +154,27 @@ public class UserloginManageAction extends AbstractAction {
 			}
 		}
 
-		// 登录成功，获取用户个人信息bean
+		// Login succeeds, get the User info
 		UserviewVO userviewVO = userviewBean.doGetOneUserviewInfoByUserId(this
 				.getUserId());
 
-		// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用
+		// Save the following values into session for further disposal
 		session.setAttribute("userRole", userRole);
 		session.setAttribute("userview", userviewVO);
 		session.setAttribute("years", years);
 		session.setAttribute("newMsg", newMsg);
 
-		// 登陆成功，若为组长执行以下活动
+		// If the role is group leader
 		if (userRole.equals(1)) {
 
-			// 获取所属小组信息，以便后面的使用
+			// Get group info
 			GroupVO group = groupBean.dogetOneGroup(userId);
 
-			// 将刚刚获取到的内容存到session中
+			// Save group info into session
 			session.setAttribute("group", group);
 		}
 
-		// 若为审批小组成员，执行以下操作
+		// If the role is approval 
 		if (userRole.equals(2)) {
 			int newCheck = 0;
 			for (int k = 0; k < actVOs.size(); k++) {
@@ -198,7 +197,7 @@ public class UserloginManageAction extends AbstractAction {
 	}
 	
 	public String displayLoginFailed() {
-		// 登录不成功所执行的操作
+		// Login failed, the following will run
 		initServletContextObject();
 		LOG.info("login fail");
 		setLoginMessage("Incorrect ID or password. Please re-enter.");
