@@ -14,7 +14,6 @@ import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
-import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UseractsVO;
@@ -25,7 +24,6 @@ public class UserviewAction extends AbstractAction {
 	private static final Log LOGGER = LogFactory.getLog(UserviewAction.class);
 	private static final long serialVersionUID = -6352178618288011965L;
 	
-	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
 	private transient UserActInterface userActBean = null;
 	private transient UserMsgInterface userMsgBean = null;
@@ -38,11 +36,6 @@ public class UserviewAction extends AbstractAction {
 
 	public UserviewAction() {
 		// do nothing
-	}
-
-	public void setUserloginManageBean(
-			UserloginManageInterface userloginManageBean) {
-		this.userloginManageBean = userloginManageBean;
 	}
 
 	public UserviewInterface getUserviewBean() {
@@ -59,10 +52,6 @@ public class UserviewAction extends AbstractAction {
 
 	public void setUserActBean(UserActInterface userActBean) {
 		this.userActBean = userActBean;
-	}
-
-	public UserloginManageInterface getUserloginManageBean() {
-		return this.userloginManageBean;
 	}
 
 	public UserMsgInterface getUserMsgBean() {
@@ -84,7 +73,7 @@ public class UserviewAction extends AbstractAction {
 	// 显示所有参与过的活动
 	public String doshowActs() {
 		initServletContextObject();
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = getCurrentUser().getUserId();
 		Integer year = Integer.valueOf(request.getParameter("year"));
 		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
@@ -99,10 +88,9 @@ public class UserviewAction extends AbstractAction {
 				.getAttribute("acts");
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (UseractsVO userActVO : useracts) {
-			int actId = userActVO.getActId();
-			LOGGER.info("the actId is" + actId);
-			LOGGER.info("the actName is" + userActVO.getActName());
-			if (oneactId == actId) {
+			if (oneactId == userActVO.getActId()) {
+				LOGGER.info("the actId is" + oneactId);
+				LOGGER.info("the actName is" + userActVO.getActName());
 				request.setAttribute("act", userActVO);
 			}
 		}
@@ -112,18 +100,18 @@ public class UserviewAction extends AbstractAction {
 	// 显示所有messages
 	public String doshowMessages() {
 		initServletContextObject();
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = getCurrentUser().getUserId();
 		List<UserMsgVO> messages = userviewBean.dogetMessages(userId);
 		List<UserMsgVO> overmessages = new ArrayList<UserMsgVO>();
 		List<UserMsgVO> inmessages = new ArrayList<UserMsgVO>();
 
-		for (int i = 0; i < messages.size(); i++) {
-			ActivitiesVO oneAct = actsBean.doGetOneActById(messages.get(i).getActId());
+		for (UserMsgVO message : messages) {
+			ActivitiesVO oneAct = actsBean.doGetOneActById(message.getActId());
 
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
-				inmessages.add(messages.get(i));
+				inmessages.add(message);
 			} else {
-				overmessages.add(messages.get(i));
+				overmessages.add(message);
 			}
 		}
 		session.setAttribute("inmessages", inmessages);
@@ -143,7 +131,7 @@ public class UserviewAction extends AbstractAction {
 		}
 
 		// 将UserMsg中的状态设置为已读
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = getCurrentUser().getUserId();
 		UserMsg oneUserMsg = userMsgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
 		if (oneUserMsg.getReadState().equals(UserMsgConstants.STATE_NEW)) {
@@ -187,7 +175,7 @@ public class UserviewAction extends AbstractAction {
 		UserActVO oneUserActVO = new UserActVO();
 		Integer actId = (Integer) session.getAttribute("inActId");
 		LOGGER.info("the inActid is:" + actId);
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = getCurrentUser().getUserId();
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
 		oneUserActVO.setNbParticipants(nbParticipants);
@@ -204,7 +192,7 @@ public class UserviewAction extends AbstractAction {
 
 		for (int i = 0; i < useractsVO.size(); i++) {
 			LOGGER.info("the act" + useractsVO.get(i).getActName()
-					+ "get success");
+					+ " get success");
 		}
 		session.setAttribute("acts", useractsVO);
 		session.setAttribute("thisyear", year);
@@ -217,9 +205,8 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		String oldpassword = (String) request.getParameter("oldpassword");
 		String newpassword = (String) request.getParameter("newpassword");
-		Integer userId = (Integer) session.getAttribute("userId");
-		LOGGER.info("the userId is:" + userId);
-		UserloginVO userInfo = userloginManageBean.dogetOneUserInfoByUserId(userId);
+		UserloginVO userInfo = getCurrentUser();
+		LOGGER.info("the userName is:" + userInfo.getUserName());
 		String orgpassword = userInfo.getUserPassword();
 		userInfo.setUserPassword(newpassword);
 		
@@ -239,7 +226,7 @@ public class UserviewAction extends AbstractAction {
 	public String doDeleteOneAct() {
 		String actionReturnMessage = null;
 		initServletContextObject();
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = getCurrentUser().getUserId();
 		Integer actId = Integer.valueOf(request.getParameter("actId"));
 		try {
 			actionReturnMessage = userActBean.doDeleteOneUserAct(userId,

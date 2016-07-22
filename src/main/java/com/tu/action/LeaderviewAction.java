@@ -21,7 +21,6 @@ import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.msg.UserMsgInterface;
-import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.util.ConfConstants;
 
@@ -33,16 +32,7 @@ public class LeaderviewAction extends AbstractAction {
 	private transient LeaderviewInterface leaderviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient MessagesInterface msgBean = null;
-	private transient UserloginManageInterface userloginManageBean = null;
-	public UserloginManageInterface getUserloginManageBean() {
-		return userloginManageBean;
-	}
-
-	public void setUserloginManageBean(
-			UserloginManageInterface userloginManageBean) {
-		this.userloginManageBean = userloginManageBean;
-	}
-
+	
 	private transient UserMsgInterface userMsgBean = null;
 	private transient UserActInterface userActBean = null;
 

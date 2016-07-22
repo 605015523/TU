@@ -2,9 +2,6 @@ package com.tu.action;
 
 import java.util.*;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
@@ -15,7 +12,6 @@ import com.tu.model.messages.MessagesInterface;
 import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
-import com.tu.model.userlogin.UserloginManageInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
@@ -24,7 +20,6 @@ import com.tu.util.ConfConstants;
 public class UserloginManageAction extends AbstractAction {
 	private static final long serialVersionUID = -5768511845633999130L;
 	
-	private transient UserloginManageInterface userloginManageBean = null;
 	private transient UserviewInterface userviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient GroupInterface groupBean = null;
@@ -44,11 +39,6 @@ public class UserloginManageAction extends AbstractAction {
 		userId = null;
 		userName = null;
 		userRole = null;
-	}
-
-	public void setUserloginManageBean(
-			UserloginManageInterface userloginManageBean) {
-		this.userloginManageBean = userloginManageBean;
 	}
 
 	public UserviewInterface getUserviewBean() {
@@ -92,8 +82,7 @@ public class UserloginManageAction extends AbstractAction {
 
 		// 用户登录验证模块
 		initServletContextObject();
-		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		UserloginVO userLogin = userloginManageBean.dogetOneUserInfoByUserName(user.getUsername());
+		UserloginVO userLogin = getCurrentUser();
 		
 		userName = userLogin.getUserName();
 		userId = userLogin.getUserId();
@@ -171,7 +160,6 @@ public class UserloginManageAction extends AbstractAction {
 				.getUserId());
 
 		// 登陆后，将用户一直需要用到的这些信息存到session，以便后面页面的使用
-		session.setAttribute("userId", userId);
 		session.setAttribute("userRole", userRole);
 		session.setAttribute("userview", userviewVO);
 		session.setAttribute("years", years);
