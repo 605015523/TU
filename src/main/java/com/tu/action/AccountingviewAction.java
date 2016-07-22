@@ -25,7 +25,7 @@ public class AccountingviewAction extends AbstractAction {
 	private transient GroupInterface groupBean = null;
 	private transient UserloginManageInterface userloginManageBean = null;
 
-	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
+	// To receive the value from the web page control and return to the parameter of the "success" web page
 	private String checkState;
 	private String comment;
 	
@@ -69,7 +69,7 @@ public class AccountingviewAction extends AbstractAction {
 		this.userloginManageBean = userloginManageBean;
 	}
 
-	// 获取所有需要被审批的活动
+	// To retrieve all the activities which are needed to be approval. 
 	public String doGetAllCheckAct() {
 		initServletContextObject();
 		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
@@ -79,7 +79,7 @@ public class AccountingviewAction extends AbstractAction {
 		return "doGetAllAct";
 	}
 
-	// 获取某个需要被check活动的所有细节
+	// To retrieve all the detail of one specific activity which is in check.  
 	public String doshowCheckDetails() {
 		initServletContextObject();
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
@@ -88,7 +88,7 @@ public class AccountingviewAction extends AbstractAction {
 		return "ShowCheckDetails";
 	}
 
-	// 获取所有需要被validate的活动的细节
+	// To retrieve all the activities' details which are needed to be validated.
 	public String doshowValidateDetails() {
 		initServletContextObject();
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
@@ -97,7 +97,7 @@ public class AccountingviewAction extends AbstractAction {
 		return "ShowValidateDetails";
 	}
 
-	// check当前活动，修改活动的state（approved或者disapproved）
+	// To check current activity, then modify the activity's status valued from "approved" or "disapproval" .
 	public String doCheckAct() {
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("checkedActId");
@@ -106,11 +106,11 @@ public class AccountingviewAction extends AbstractAction {
 		checkAct.setComment(comment);
 		actsBean.doUpdateOneAct(checkAct);
 
-		// 更新所有需要被check和validate的新消息的条数
+		// Update the number of news which are needed to be checked or validated 
 		int newCheck = getNbActsToCheck();
 		session.setAttribute("newCheck", newCheck);
 
-		// 将显示所有活动的页面更新
+		// Update the web page to display all the activities  
 		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
 		session.setAttribute("acts", actsVO);
 		return "doGetAllAct";
@@ -130,8 +130,10 @@ public class AccountingviewAction extends AbstractAction {
 		return newCheck;
 	}
 
-	// validate当前活动，将状态从tobevalidate修改成validate
-	// 并且将所有用户的spending更新
+	
+	// To validate the current activity with its status changing from "tobevalidate" to "validate"
+	// Then, re-calculate user's spending
+	
 	public String doValidateAct() {
 		initServletContextObject();
 		int oneactId = (Integer) session.getAttribute("validateActId");
@@ -140,7 +142,7 @@ public class AccountingviewAction extends AbstractAction {
 		validateAct.setComment(getComment());
 		actsBean.doUpdateOneAct(validateAct);
 
-		// 更新spending
+		// re-calculate user's spending
 		GroupActVO groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
 		for (int i = 0; i < groupactVO.getMemberInVO().size(); i++) {
 			Integer userId = groupactVO.getMemberInVO().get(i).getUserId();
@@ -150,17 +152,17 @@ public class AccountingviewAction extends AbstractAction {
 			userloginManageBean.doUpdateOneUserInfo(oneUserVO);
 		}
 
-		// 更新所有需要被check和validate的新消息的条数
+		// Update the number of news needed to be checked and validated.
 		int newCheck = getNbActsToCheck();
 		session.setAttribute("newCheck", newCheck);
 
-		// 将显示所有活动的页面更新
+		// Refresh the web page which displays all activities.
 		List<GroupActVO> actsVO = accountingviewBean.doGetAllCheckValidateActs();
 		session.setAttribute("acts", actsVO);
 		return "doGetAllAct";
 	}
 
-	// 通过选择year的方式显示所有用户这一年的活动参与情况（仅显示已经被validate的活动）
+	// Display all users' activities by year ( activity shall be in validated status)
 	public String doshowAllActsByYear() {
 		initServletContextObject();
 		Integer year = Integer.parseInt(request.getParameter("year"));
@@ -170,7 +172,7 @@ public class AccountingviewAction extends AbstractAction {
 		return "doShowActByYear";
 	}
 
-	// 通过选择group的方式显示所有group这一年的活动参与情况（仅显示已经被validate的活动）
+	// Display the chosen group's activities by groupname (activity shall be in validated status)
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
 		String groupName = request.getParameter("groupname");
@@ -183,7 +185,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	}
 
-	// 显示group中活动的细节
+	// Display activity detail of group
 	public String doshowActDetailsInGroup() {
 		initServletContextObject();
 		int oneactId = Integer.parseInt(request.getParameter("actId"));
@@ -192,7 +194,7 @@ public class AccountingviewAction extends AbstractAction {
 		return "doShowActByGroupDetails";
 	}
 
-	// 所有属性的get、set方法
+	// get() and set() to property
 	public String getCheckState() {
 		return checkState;
 	}
