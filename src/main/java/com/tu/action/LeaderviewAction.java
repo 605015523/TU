@@ -36,7 +36,7 @@ public class LeaderviewAction extends AbstractAction {
 	private transient UserMsgInterface userMsgBean = null;
 	private transient UserActInterface userActBean = null;
 
-	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
+	// Receive the controls value from the caller page and return the parameters to the "success" web page 
 	private Integer actId;
 	private String actName;
 	private Float actMoney;
@@ -96,11 +96,11 @@ public class LeaderviewAction extends AbstractAction {
 		this.userActBean = userActBean;
 	}
 
-	// 添加一个活动，将这个活动存入数据库，并发送给审批小组进行审批
+	// Add one activity and send it to approval group
 	public String doAddAct() throws ParseException {
 		initServletContextObject();
 
-		// 将页面上输入的值存入对象oneActVO中
+		// Put values from web page in object oneActV0
 		ActivitiesVO oneActVO = new ActivitiesVO();
 		oneActVO.setActName(actName);
 		oneActVO.setActMoney(actMoney);
@@ -109,7 +109,7 @@ public class LeaderviewAction extends AbstractAction {
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		oneActVO.setGroupId(group.getGroupId());
 
-		// 由于报名开始日期和结束日期存在了一个string（daterange）中，所以这里要进行格式转换
+		// Convert date format since starting date and ending date stored in the same string variable (daterange)
 		SimpleDateFormat act = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
 		Date startDate = act.parse(daterange.substring(0, 10));
 		Date endDate = act.parse(daterange.substring(13, 23));
@@ -117,7 +117,7 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setEnrollEndDate(endDate);
 		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
 
-		// 添加一个活动到数据库并返回活动的Id
+		// Add one activity and return activity ID
 		actId = actsBean.doAddOneAct(oneActVO);
 		LOGGER.info("add act success");
 
@@ -128,7 +128,7 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowAllGroupAct";
 	}
 
-	// 显示该小组所有活动，将活动中的所有值传入到view_act.jsp界面
+	// Get the specific group's activities and put them in view_act.jsp
 	public String doGetAllGroupAct() {
 		initServletContextObject();
 		GroupVO group = (GroupVO) session.getAttribute("group");
@@ -138,7 +138,7 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowAllGroupAct";
 	}
 
-	// 调用时跳转到选定活动的细节页面，将该活动中的所有值传入view_act_details.jsp页面
+	// Get and put all the detail of one activity in view_act_details.jsp
 	public String doshowActDetails() {
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
@@ -146,21 +146,21 @@ public class LeaderviewAction extends AbstractAction {
 
 	}
 
-	// 进入活动修改界面
+	// Go into activity modification web page
 	public String doEditAct() {
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "EditAct";
 	}
 
-	// 活动结束时，编辑这个活动
+	// when the activity is finished, edit it in this page
 	public String doEditActDetails() {
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "EditActDetails";
 	}
 
-	// 更新一个活动的细节
+	// Update the activity detail in this page
 	public String doUpdateActDetails() {
 		initServletContextObject();
 		Integer updateActId = (Integer) session.getAttribute("updateActId");
@@ -190,7 +190,7 @@ public class LeaderviewAction extends AbstractAction {
 			oneuserAct.setNbParticipants(nbParticipantsGrpAct);
 			oneMemberInVO.setNbParticipants(nbParticipantsGrpAct);
 			memberInVO.add(oneMemberInVO);
-			// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
+			// Write the updated detail into database by calling method doUpdateOneAct of class activitiesImple
 			userActBean.doUpdateOneUserAct(oneuserAct);
 		}
 		groupAct.setMemberInVO(memberInVO);
@@ -198,11 +198,11 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowActDetails";
 	}
 
-	// 更新活动到数据库，并发送更新消息给所有成员
+	// Update the activity message and send it to everyone
 	public String doUpdateAct() throws ParseException {
 		String updateMessage = null;
 
-		// 将所有更新的活动消息存入到oneActVO中
+		// onActV0 stores all the updated activity messages
 		initServletContextObject();
 		ActivitiesVO oneActVO = new ActivitiesVO();
 		Integer updateActId = (Integer) session.getAttribute("updateActId");
@@ -221,7 +221,7 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setEnrollEndDate(endDate);
 		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
 
-		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
+		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		updateMessage = actsBean.doUpdateOneAct(oneActVO);
 		LOGGER.info(updateMessage);
 
@@ -232,18 +232,18 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowAllGroupAct";
 	}
 
-	// publish这个活动，所有人将收到这个活动发起的一个messages
+	// Publish the activity and then everyone would see the message
 	public String doPublishAct() {
 		initServletContextObject();
 
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState(ActivitiesConstant.STATE_PUBLISH);
 
-		// 将该活动在数据库中的数据更新，调用activitiesImple中的doUpdateOneAct
+		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		String updateMessage = actsBean.doUpdateOneAct(oneActVO);
 		LOGGER.info(updateMessage);
 
-		// 将activity中所有属性的值copy到message中
+		// Copy all properties from activity to message
 		MessagesVO oneMsgVO = new MessagesVO();
 		try {
 			BeanUtils.copyProperties(oneMsgVO, oneActVO);
@@ -253,10 +253,10 @@ public class LeaderviewAction extends AbstractAction {
 			LOGGER.error("there is a InvocationTargetException: " + e.toString());
 		}
 
-		// 将这个message存到数据库，并且发送给所有用户
+		// Write message into database and send to everyone
 		List<UserloginVO> allUserLogins = userloginManageBean.doGetAllUserlogin();
 				
-		// 获取所有用户Id，以便添加活动时发送消息给用户
+		// Retrieve all the user IDs for new message sending 
 		List<Integer> allMemberId = new ArrayList<Integer>();
 		for (int m = 0; m < allUserLogins.size(); m++) {
 			Integer userId = allUserLogins.get(m).getUserId();
@@ -266,7 +266,7 @@ public class LeaderviewAction extends AbstractAction {
 		String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
 		LOGGER.info(sendMessage);
 			
-		// 更新session中的year，若已存在这个year，则不执行操作，否则将这个year添加到years中
+		// Update variable year in session. If the year exists, ignore, or append year into attribute years
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(oneActVO.getActDate());
@@ -288,7 +288,7 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowAllGroupAct";
 	}
 
-	// 将这个完成的活动提交到申请小组去validate
+	// Submit the activity into approval group for validating
 	public String doToValidateAct() {
 		initServletContextObject();
 		Integer actId = (Integer) session.getAttribute("validateActId");
