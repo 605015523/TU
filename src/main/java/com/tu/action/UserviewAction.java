@@ -29,7 +29,7 @@ public class UserviewAction extends AbstractAction {
 	private transient UserMsgInterface userMsgBean = null;
 	private transient ActivitiesInterface actsBean = null;
 
-	// 接收调用页的相应控件值，正常返回后传给success对应页面的参数
+	// Receive the caller page attributes and return parameters into "success" web page
 	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
@@ -70,7 +70,7 @@ public class UserviewAction extends AbstractAction {
 		this.actsBean = actsBean;
 	}
 
-	// 显示所有参与过的活动
+	// Display all participating activities
 	public String doshowActs() {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
@@ -81,7 +81,7 @@ public class UserviewAction extends AbstractAction {
 		return "showActs";
 	}
 
-	// 显示选定的参与过的活动细节
+	// Display the specific activity's detail
 	public String doshowDetails() {
 		initServletContextObject();
 		List<UseractsVO> useracts = (List<UseractsVO>) session
@@ -97,7 +97,7 @@ public class UserviewAction extends AbstractAction {
 		return "showDetails";
 	}
 
-	// 显示所有messages
+	// Display all the messages
 	public String doshowMessages() {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
@@ -119,7 +119,7 @@ public class UserviewAction extends AbstractAction {
 		return "showMessages";
 	}
 
-	// 显示所有messages的细节
+	// Display all the messages' details
 	public String doshowMsgDetails() {
 		initServletContextObject();
 		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
@@ -130,7 +130,7 @@ public class UserviewAction extends AbstractAction {
 			}
 		}
 
-		// 将UserMsg中的状态设置为已读
+		// Set the status of UserMsg as read.
 		Integer userId = getCurrentUser().getUserId();
 		UserMsg oneUserMsg = userMsgBean.dogetOneByUserIdAndMsgId(userId, msgId);
 
@@ -155,7 +155,7 @@ public class UserviewAction extends AbstractAction {
 		return "showMsgDetails";
 	}
 
-	// 跳转到参与某个活动的界面
+	// Go jump to one activity's page
 	public String doInAct() {
 		initServletContextObject();
 		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
@@ -169,7 +169,7 @@ public class UserviewAction extends AbstractAction {
 		return "doInAct";
 	}
 
-	// 请求参与某个活动具体操作
+	// Request to join one activity
 	public String doActRequest() {
 		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
@@ -199,7 +199,7 @@ public class UserviewAction extends AbstractAction {
 		return "showActs";
 	}
 
-	// 修改密码
+	// Change password
 	public String doChangePwd() {
 		String updateMessage = null;
 		initServletContextObject();
@@ -222,7 +222,7 @@ public class UserviewAction extends AbstractAction {
 
 	}
 
-	// 删除一个想参与的活动（特别的，若该活动报名时间结束则不能再删除）
+	// Cancel one participated activity ( if the registration time is off, cannot be canceled)
 	public String doDeleteOneAct() {
 		String actionReturnMessage = null;
 		initServletContextObject();
