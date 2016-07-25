@@ -26,7 +26,6 @@
 		<script src="js/bootstrap.min.js"></script>
 
 
-
 	</head>
 	<body>
 		<div class="container">
@@ -42,7 +41,6 @@
 					<h3 class="panel-title">
 						details
 					</h3>
-
 				</div>
 
 

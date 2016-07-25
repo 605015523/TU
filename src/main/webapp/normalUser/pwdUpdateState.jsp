@@ -38,7 +38,6 @@
 					<h3 class="panel-title">
 						Change Password
 					</h3>
-
 				</div>
 
 				<hr class="invisible" />

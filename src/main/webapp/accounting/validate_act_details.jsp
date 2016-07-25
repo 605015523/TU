@@ -32,13 +32,11 @@
 			</div>
 			<jsp:include page="../menu.jsp">
 		        <jsp:param name="active" value="act"/>
-		    </jsp:include>
+			</jsp:include>
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						details
-					</h3>
+					<h3 class="panel-title">details</h3>
 				</div>
 
 				<div class="panel-body table-bordered">

@@ -41,7 +41,6 @@
 					<h3 class="panel-title">
 						My activities in ${thisyear}
 					</h3>
-
 				</div>
 
 
