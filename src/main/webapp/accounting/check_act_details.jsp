@@ -38,9 +38,6 @@
         </script>
 	</head>
 	<body>
-		<%
-			session.setAttribute("checkedActId", request.getAttribute("actId"));
-		%>
 
 		<div class="container">
 			<div class="signin-head">
@@ -62,6 +59,7 @@
 					<form action="doCheckActAccountingviewAction.action" method="post"
 						role="form" name="form" id="form"
 						onsubmit="return checkApproved();">
+						<input type="hidden" name="actId" value="${actId}"/>
 						<div class="row form-group form-group-lg">
 
 							<div class="col-xs-3 col-md-3">

@@ -86,8 +86,7 @@ public class AccountingviewAction extends AbstractAction {
 	// To check current activity, then modify the activity's status valued from "approved" or "disapproval" .
 	public String doCheckAct() {
 		initServletContextObject();
-		int oneactId = (Integer) session.getAttribute("checkedActId");
-		ActivitiesVO checkAct = actsBean.doGetOneActById(oneactId);
+		ActivitiesVO checkAct = actsBean.doGetOneActById(actId);
 		checkAct.setState(checkState);
 		checkAct.setComment(comment);
 		actsBean.doUpdateOneAct(checkAct);
