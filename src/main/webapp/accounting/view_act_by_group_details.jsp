@@ -26,9 +26,6 @@
 		<script src="js/bootstrap.min.js"></script>
 	</head>
 	<body>
-        <%
-			session.setAttribute("validateActId",request.getAttribute("actId"));
-		%>
 		<div class="container">
 			<div class="signin-head">
 				<img src="images/test/head.png" alt="">

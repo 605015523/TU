@@ -71,14 +71,14 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To retrieve all the detail of one specific activity which is in check.  
 	public String doshowCheckDetails() {
-		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
+		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
 
 		return "ShowCheckDetails";
 	}
 
 	// To retrieve all the activities' details which are needed to be validated.
 	public String doshowValidateDetails() {
-		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
+		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
 
 		return "ShowValidateDetails";
 	}
@@ -120,14 +120,13 @@ public class AccountingviewAction extends AbstractAction {
 	
 	public String doValidateAct() {
 		initServletContextObject();
-		int oneactId = (Integer) session.getAttribute("validateActId");
-		ActivitiesVO validateAct = actsBean.doGetOneActById(oneactId);
+		ActivitiesVO validateAct = actsBean.doGetOneActById(actId);
 		validateAct.setState(ActivitiesConstant.STATE_VALIDATE);
 		validateAct.setComment(getComment());
 		actsBean.doUpdateOneAct(validateAct);
 
 		// re-calculate user's spending
-		GroupActVO groupactVO = accountingviewBean.doGetAllValidateDetails(oneactId);
+		GroupActVO groupactVO = accountingviewBean.doGetGroupActivityByID(actId);
 		for (int i = 0; i < groupactVO.getMemberInVO().size(); i++) {
 			Integer userId = groupactVO.getMemberInVO().get(i).getUserId();
 			Float spending = groupactVO.getMemberInVO().get(i).getConsumption();
@@ -168,7 +167,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// Display activity detail of group
 	public String doshowActDetailsInGroup() {
-		groupAct = accountingviewBean.doGetAllValidateDetails(actId);
+		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
 
 		return "doShowActByGroupDetails";
 	}

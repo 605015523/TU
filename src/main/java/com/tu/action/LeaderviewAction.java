@@ -289,7 +289,6 @@ public class LeaderviewAction extends AbstractAction {
 	// Submit the activity into approval group for validating
 	public String doToValidateAct() {
 		initServletContextObject();
-		Integer actId = (Integer) session.getAttribute("validateActId");
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("tobevalidate");
 

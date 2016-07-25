@@ -149,7 +149,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 获取所有validate的活动的活动细节的具体实现
 	@Override
-	public GroupActVO doGetAllValidateDetails(Integer actId) {
+	public GroupActVO doGetGroupActivityByID(Integer actId) {
 		Activity activity = actsDAO.findById(actId);
 		return convertActivityToGroupActVO(activity);
 	}

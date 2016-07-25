@@ -10,7 +10,7 @@ public interface AccountingviewInterface {
 
 	List<UserGroupCostVO> doGetAllActsByYear(Integer year);
 
-	GroupActVO doGetAllValidateDetails(Integer oneactId);
+	GroupActVO doGetGroupActivityByID(Integer oneactId);
 
 	List<GroupActVO> doGetAllActsByGroupId(Integer groupId);
 
