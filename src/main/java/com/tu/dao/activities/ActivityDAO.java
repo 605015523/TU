@@ -103,4 +103,16 @@ public class ActivityDAO extends HibernateDaoSupport implements
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public List<Activity> findByYear(Integer year) {
+		try {
+			return getHibernateTemplate().find(
+					"from com.tu.dao.activities.Activity where year(act_date) = ?",
+					year);
+		} catch (RuntimeException re) {
+			LOG.error("find by userId failed", re);
+			throw re;
+		}
+	}
 }

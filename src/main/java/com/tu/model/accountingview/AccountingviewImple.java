@@ -69,17 +69,16 @@ public class AccountingviewImple extends Observable implements
 	@Override
 	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
-		List<Activity> allacts = actsDAO.findAll();
+		List<Activity> allacts = actsDAO.findByYear(year);
 		List<Activity> validateacts = new ArrayList<Activity>();
 
 		// 获取所有以及被validate的活动
 		// Get all the validated activities
 		Calendar cal = Calendar.getInstance();
-		for (int i = 0; i < allacts.size(); i++) {
-			cal.setTime(allacts.get(i).getActDate());
-			if (allacts.get(i).getState().equals(ActivitiesConstant.STATE_VALIDATE)
-					&& year.equals(cal.get(Calendar.YEAR))) {
-				validateacts.add(allacts.get(i));
+		for (Activity activity : allacts) {
+			cal.setTime(activity.getActDate());
+			if (activity.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
+				validateacts.add(activity);
 			}
 		}
 		List<Userlogin> allUser = userloginDAO.findAll();
@@ -108,8 +107,7 @@ public class AccountingviewImple extends Observable implements
 				Integer groupId = validateacts.get(j).getGroupId();
 				
 				try {
-					UserAct oneuserAct = userActDAO.findByUserIdAndActId(userId,
-							actId);
+					UserAct oneuserAct = userActDAO.findByUserIdAndActId(userId, actId);
 					
 					if (oneuserAct != null && oneuserAct.getConsumption() != null) {
 						GroupCostVO groupCostVO = allGroupCost.get(groupId);
@@ -126,8 +124,7 @@ public class AccountingviewImple extends Observable implements
 			
 			oneUserGroupCostVO.setSum(sum);
 			oneUserGroupCostVO.setQuota(oneuser.getQuota());
-			oneUserGroupCostVO
-					.setDifferent(oneUserGroupCostVO.getQuota() - sum);
+			oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota() - sum);
 			oneUserGroupCostVO.setGroupCostVO(allGroupCost.values());
 			
 			allUserGroupCostVO.add(oneUserGroupCostVO);

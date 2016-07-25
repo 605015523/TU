@@ -28,9 +28,10 @@ public class AccountingviewAction extends AbstractAction {
 	private String checkState;
 	private String comment;
 	
-	// To display a group activity
+	// To display
 	private GroupActVO groupAct;
 	private List<GroupActVO> groupActs;
+	private List<UserGroupCostVO> allUserGroupCost;
 
 	public AccountingviewAction() {
 		// do nothing
@@ -149,8 +150,7 @@ public class AccountingviewAction extends AbstractAction {
 	public String doshowAllActsByYear() {
 		initServletContextObject();
 		Integer year = Integer.parseInt(request.getParameter("year"));
-		List<UserGroupCostVO> allUserGroupCostVO = accountingviewBean.doGetAllActsByYear(year);
-		session.setAttribute("allUserGroupCost", allUserGroupCostVO);
+		allUserGroupCost = accountingviewBean.doGetAllActsByYear(year);
 
 		return "doShowActByYear";
 	}
@@ -213,6 +213,14 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setActId(Integer actId) {
 		this.actId = actId;
+	}
+
+	public List<UserGroupCostVO> getAllUserGroupCost() {
+		return allUserGroupCost;
+	}
+
+	public void setAllUserGroupCostVO(List<UserGroupCostVO> allUserGroupCost) {
+		this.allUserGroupCost = allUserGroupCost;
 	}
 
 }

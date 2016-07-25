@@ -13,6 +13,8 @@ public interface ActivityDAOInterface {
 	public Activity findById(Integer actId);
 
 	public List<Activity> findByGroupId(Integer groupId);
+	
+	public List<Activity> findByYear(Integer year);
 
 	public Activity merge(Activity oneActPO);
 }
