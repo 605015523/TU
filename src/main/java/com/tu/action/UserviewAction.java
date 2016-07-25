@@ -33,6 +33,7 @@ public class UserviewAction extends AbstractAction {
 	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
+	private Integer actId;
 
 	public UserviewAction() {
 		// do nothing
@@ -86,10 +87,9 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		List<UseractsVO> useracts = (List<UseractsVO>) session
 				.getAttribute("acts");
-		int oneactId = Integer.parseInt(request.getParameter("actId"));
 		for (UseractsVO userActVO : useracts) {
-			if (oneactId == userActVO.getActId()) {
-				LOGGER.info("the actId is" + oneactId);
+			if (actId == userActVO.getActId()) {
+				LOGGER.info("the actId is" + actId);
 				LOGGER.info("the actName is" + userActVO.getActName());
 				request.setAttribute("act", userActVO);
 			}
@@ -227,7 +227,6 @@ public class UserviewAction extends AbstractAction {
 		String actionReturnMessage = null;
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
-		Integer actId = Integer.valueOf(request.getParameter("actId"));
 		try {
 			actionReturnMessage = userActBean.doDeleteOneUserAct(userId,
 					actId);
@@ -266,6 +265,14 @@ public class UserviewAction extends AbstractAction {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Integer getActId() {
+		return actId;
+	}
+
+	public void setActId(Integer actId) {
+		this.actId = actId;
 	}
 
 }

@@ -8,7 +8,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
-import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
@@ -30,7 +29,7 @@ public class AccountingviewImple extends Observable implements
 	private GroupDAOInterface groupDAO = null;
 
 	public AccountingviewImple() {
-
+		// nothing to do
 	}
 
 	public UserloginDAOInterface getUserloginDAO() {
@@ -67,7 +66,7 @@ public class AccountingviewImple extends Observable implements
 
 	// 通过选择year的方式显示所有用户这一年的活动参与情况的实现细节
 	@Override
-	public List<UserGroupCostVO> doGetAllActsByYear(Integer year) {
+	public List<UserGroupCostVO> doGetUserGroupCostsForValidatedActsByYear(Integer year) {
 		List<UserGroupCostVO> allUserGroupCostVO = new ArrayList<UserGroupCostVO>();
 		List<Activity> allacts = actsDAO.findByYear(year);
 		List<Activity> validateacts = new ArrayList<Activity>();
@@ -82,55 +81,61 @@ public class AccountingviewImple extends Observable implements
 			}
 		}
 		List<Userlogin> allUser = userloginDAO.findAll();
-		List<Group> groups = groupDAO.findAll();
 
 		// 获取所有用户，并且遍历所有用户活动参与情况
 		// Get all the users and check their activities
 		for (Userlogin oneuser : allUser) {
-			UserGroupCostVO oneUserGroupCostVO = new UserGroupCostVO();
-			Integer userId = oneuser.getUserId();
-			oneUserGroupCostVO.setUserId(userId);
-			oneUserGroupCostVO.setUserName(oneuser.getUserName());
-			Map<Integer, GroupCostVO> allGroupCost = new HashMap<Integer, GroupCostVO>();
-			
-			// Initialize groups costs
-			for (int j = 0; j < groups.size(); j++) {
-				GroupCostVO onegroupCostVO = new GroupCostVO();
-				onegroupCostVO.setGroupId(groups.get(j).getGroupId());
-				onegroupCostVO.setCost(0);
-
-				allGroupCost.put(onegroupCostVO.getGroupId(), onegroupCostVO);
-			}
-			
-			for (int j = 0; j < validateacts.size(); j++) {
-				Integer actId = validateacts.get(j).getActId();
-				Integer groupId = validateacts.get(j).getGroupId();
-				
-				try {
-					UserAct oneuserAct = userActDAO.findByUserIdAndActId(userId, actId);
-					
-					if (oneuserAct != null && oneuserAct.getConsumption() != null) {
-						GroupCostVO groupCostVO = allGroupCost.get(groupId);
-						groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
-					}
-				} catch (Exception e) {
-					LOGGER.error(e);
-				}
-			}
-			float sum = 0;
-			for (GroupCostVO groupCost : allGroupCost.values()) {
-				sum += groupCost.getCost();
-			}
-			
-			oneUserGroupCostVO.setSum(sum);
-			oneUserGroupCostVO.setQuota(oneuser.getQuota());
-			oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota() - sum);
-			oneUserGroupCostVO.setGroupCostVO(allGroupCost.values());
-			
+			UserGroupCostVO oneUserGroupCostVO = computeOneUserGroupCost(oneuser, validateacts);
 			allUserGroupCostVO.add(oneUserGroupCostVO);
 		}
 
 		return allUserGroupCostVO;
+	}
+	
+	/**
+	 * Computes the user group costs for the given activities
+	 * @param oneuser
+	 * @param activities list of activities
+	 * @return user group costs
+	 */
+	private UserGroupCostVO computeOneUserGroupCost(Userlogin oneuser, List<Activity> activities) {
+		UserGroupCostVO oneUserGroupCostVO = new UserGroupCostVO();
+		Integer userId = oneuser.getUserId();
+		oneUserGroupCostVO.setUserId(userId);
+		oneUserGroupCostVO.setUserName(oneuser.getUserName());
+		Map<Integer, GroupCostVO> allGroupCost = new HashMap<Integer, GroupCostVO>();
+		
+		// Compute user group cost for the given activities
+		for (Activity act : activities) {
+			Integer actId = act.getActId();
+			UserAct oneuserAct = userActDAO.findByUserIdAndActId(userId, actId);
+			
+			if (oneuserAct != null && oneuserAct.getConsumption() != null) {
+				Integer groupId = act.getGroupId();
+				GroupCostVO groupCostVO = allGroupCost.get(groupId);
+				if (groupCostVO == null) {
+					groupCostVO = new GroupCostVO();
+					groupCostVO.setGroupId(groupId);
+					groupCostVO.setCost(0);
+					allGroupCost.put(groupId, groupCostVO);
+				} else {
+					groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
+				}
+			}
+		}
+		
+		// Sum of all costs
+		float sum = 0;
+		for (GroupCostVO groupCost : allGroupCost.values()) {
+			sum += groupCost.getCost();
+		}
+		
+		oneUserGroupCostVO.setSum(sum);
+		oneUserGroupCostVO.setQuota(oneuser.getQuota());
+		oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota() - sum);
+		oneUserGroupCostVO.setGroupCostVO(allGroupCost.values());
+		
+		return oneUserGroupCostVO;
 	}
 
 	// 通过选择group的方式显示所有group这一年的活动参与情况的实现细节

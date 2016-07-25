@@ -42,7 +42,7 @@
 			<result name="ShowActDetails">/groupLeader/view_act_details.jsp</result>
 			<result name="EditAct">/groupLeader/edit_act.jsp</result>
 			<result name="EditActDetails">/groupLeader/edit_act_details.jsp</result>
-
+			<result name="redirectToDoGetAllGroupAct" type="redirectAction">doGetAllGroupActLeaderviewAction</result>
 		</action>
 
 		<action name="*AccountingviewAction" class="AccountingviewActionBean"
@@ -52,8 +52,8 @@
 			<result name="doGetAllAct">/accounting/check_validate.jsp</result>
 			<result name="doShowActByYear">/accounting/view_act_by_year.jsp</result>
 			<result name="doShowActByGroup">/accounting/view_act_by_group.jsp</result>
-			<result name="doShowActByGroupDetails">/accounting/view_act_by_group_details.jsp
-			</result>
+			<result name="doShowActByGroupDetails">/accounting/view_act_by_group_details.jsp</result>
+			<result name="redirectDoGetAllAct" type="redirectAction">doGetAllCheckActAccountingviewAction</result>
 		</action>
 
 

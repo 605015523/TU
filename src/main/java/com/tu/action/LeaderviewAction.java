@@ -119,13 +119,9 @@ public class LeaderviewAction extends AbstractAction {
 
 		// Add one activity and return activity ID
 		actId = actsBean.doAddOneAct(oneActVO);
-		LOGGER.info("add act success");
-
-		groupActs = leaderviewBean.doGetAllUserActsByGroupId(group
-				.getGroupId());
 		LOGGER.info("the doAddAct get success");
 
-		return "ShowAllGroupAct";
+		return "redirectToDoGetAllGroupAct";
 	}
 
 	// Get the specific group's activities and put them in view_act.jsp
@@ -162,7 +158,6 @@ public class LeaderviewAction extends AbstractAction {
 
 	// Update the activity detail in this page
 	public String doUpdateActDetails() {
-		initServletContextObject();
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		groupAct.setActMoney(getActMoney());
@@ -201,7 +196,7 @@ public class LeaderviewAction extends AbstractAction {
 	public String doUpdateAct() throws ParseException {
 		String updateMessage = null;
 
-		// onActV0 stores all the updated activity messages
+		// oneActVO stores all the updated activity messages
 		initServletContextObject();
 		ActivitiesVO oneActVO = new ActivitiesVO();
 		oneActVO.setActId(actId);
@@ -222,12 +217,9 @@ public class LeaderviewAction extends AbstractAction {
 		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		updateMessage = actsBean.doUpdateOneAct(oneActVO);
 		LOGGER.info(updateMessage);
-
-		// GroupVO group = (GroupVO) session.getAttribute("group");
-		Integer groupId = group.getGroupId();
-		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOGGER.info("the doUpdateAct get success");
-		return "ShowAllGroupAct";
+		
+		return "redirectToDoGetAllGroupAct";
 	}
 
 	// Publish the activity and then everyone would see the message
@@ -279,16 +271,13 @@ public class LeaderviewAction extends AbstractAction {
 		newMsg += 1;
 		session.setAttribute("newMsg", newMsg);
 
-		GroupVO group = (GroupVO) session.getAttribute("group");
-		Integer groupId = group.getGroupId();
-		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
 		LOGGER.info("the doPublishAct get success");
-		return "ShowAllGroupAct";
+		
+		return "redirectToDoGetAllGroupAct";
 	}
 
 	// Submit the activity into approval group for validating
 	public String doToValidateAct() {
-		initServletContextObject();
 		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("tobevalidate");
 
@@ -299,10 +288,7 @@ public class LeaderviewAction extends AbstractAction {
 			LOGGER.error("there are something wrong with control layer: "
 					+ e.toString());
 		}
-		GroupVO group = (GroupVO) session.getAttribute("group");
-		Integer groupId = group.getGroupId();
-		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
-		return "ShowAllGroupAct";
+		return "redirectToDoGetAllGroupAct";
 	}
 
 	public Integer getActId() {

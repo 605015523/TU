@@ -8,7 +8,7 @@ public interface AccountingviewInterface {
 
 	List<GroupActVO> doGetAllCheckValidateActs();
 
-	List<UserGroupCostVO> doGetAllActsByYear(Integer year);
+	List<UserGroupCostVO> doGetUserGroupCostsForValidatedActsByYear(Integer year);
 
 	GroupActVO doGetGroupActivityByID(Integer oneactId);
 

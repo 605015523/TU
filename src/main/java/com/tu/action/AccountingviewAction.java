@@ -25,6 +25,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To receive the value from the web page control and return to the parameter of the "success" web page
 	private Integer actId;
+	private Integer year;
 	private String checkState;
 	private String comment;
 	
@@ -95,9 +96,7 @@ public class AccountingviewAction extends AbstractAction {
 		int newCheck = getNbActsToCheck();
 		session.setAttribute("newCheck", newCheck);
 
-		// Update the web page to display all the activities  
-		groupActs = accountingviewBean.doGetAllCheckValidateActs();
-		return "doGetAllAct";
+		return "redirectDoGetAllAct";
 
 	}
 	
@@ -139,16 +138,12 @@ public class AccountingviewAction extends AbstractAction {
 		int newCheck = getNbActsToCheck();
 		session.setAttribute("newCheck", newCheck);
 
-		// Refresh the web page which displays all activities.
-		groupActs = accountingviewBean.doGetAllCheckValidateActs();
-		return "doGetAllAct";
+		return "redirectDoGetAllAct";
 	}
 
 	// Display all users' activities by year ( activity shall be in validated status)
 	public String doshowAllActsByYear() {
-		initServletContextObject();
-		Integer year = Integer.parseInt(request.getParameter("year"));
-		allUserGroupCost = accountingviewBean.doGetAllActsByYear(year);
+		allUserGroupCost = accountingviewBean.doGetUserGroupCostsForValidatedActsByYear(year);
 
 		return "doShowActByYear";
 	}
@@ -219,6 +214,14 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setAllUserGroupCostVO(List<UserGroupCostVO> allUserGroupCost) {
 		this.allUserGroupCost = allUserGroupCost;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 
 }
