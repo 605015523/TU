@@ -1,6 +1,8 @@
 package com.tu.dao.user.act;
 
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -49,17 +51,22 @@ public class UserActDAO extends HibernateDaoSupport implements
 	// 通过userId和actId可以获取到特定userAct对象
 	@Override
 	public UserAct findByUserIdAndActId(Integer userId, Integer actId) {
+		UserAct userAct = null;
+		
 		try {
 			String hql = " from com.tu.dao.user.act.UserAct where user_id ="
 					+ userId.toString() + " and act_id=" + actId.toString();
-			UserAct userAct = (UserAct) this.getHibernateTemplate()
-					.find(hql).get(0);
-
-			return userAct;
+			
+			List<UserAct> userActs = this.getHibernateTemplate().find(hql);
+			if (CollectionUtils.isNotEmpty(userActs)) {
+				userAct = userActs.get(0);
+			}
 		} catch (RuntimeException re) {
 			LOGGER.error("find by actId and userId failed", re);
 			throw re;
 		}
+		
+		return userAct;
 	}
 
 	// 删除某个userAct对象

@@ -111,7 +111,7 @@ public class AccountingviewImple extends Observable implements
 					UserAct oneuserAct = userActDAO.findByUserIdAndActId(userId,
 							actId);
 					
-					if (oneuserAct.getConsumption() != null) {
+					if (oneuserAct != null && oneuserAct.getConsumption() != null) {
 						GroupCostVO groupCostVO = allGroupCost.get(groupId);
 						groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
 					}
