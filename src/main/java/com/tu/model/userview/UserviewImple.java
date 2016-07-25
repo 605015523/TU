@@ -153,18 +153,18 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	// 通过用户Id获取所有用户所参与的活动
 	@Override
-	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
+	public List<UserActDetailedVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year) {
 		LOG.info("服务层从控制层获得AuthorId:" + userId);
 
-		List<UseractsVO> oneuseractsVO = new ArrayList<UseractsVO>();
+		List<UserActDetailedVO> oneuseractsVO = new ArrayList<UserActDetailedVO>();
 		List<UserAct> userActs = userActDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
 
 		for (int i = 0; i < userActs.size(); i++) {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性
 			// 后续步骤的目的就是通过group、userAct、activities这几个表
 			// 间的关联，获取所有UseractsVO中属性的值
-			UseractsVO useractsPO = new UseractsVO();
+			UserActDetailedVO useractsPO = new UserActDetailedVO();
 
 			Activity actsPO = actsDAO.findById(userActs.get(i).getActId());
 			// 通过userAct中的actId查找ActsPO实例
@@ -182,7 +182,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 				useractsPO.setActId(userActs.get(i).getActId());
 				// 通过userAct中的属性，设置UseractsVO中的actId
 
-				useractsPO.setParticipaterNO(userActs.get(i)
+				useractsPO.setNbParticipants(userActs.get(i)
 						.getNbParticipants());
 				// 通过userAct中的属性，设置UseractsVO中的ParticipaterNO
 
@@ -216,7 +216,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			}
 
 		}
-		List<UseractsVO> inverseoneUseractsVO = new ArrayList<UseractsVO>();
+		List<UserActDetailedVO> inverseoneUseractsVO = new ArrayList<UserActDetailedVO>();
 		for (int j = oneuseractsVO.size()-1; j >=0 ; j--) {
 			inverseoneUseractsVO.add(oneuseractsVO.get(j));
 		}

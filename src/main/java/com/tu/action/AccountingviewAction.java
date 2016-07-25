@@ -9,7 +9,7 @@ import com.tu.model.accountingview.AccountingviewInterface;
 import com.tu.model.accountingview.UserGroupCostVO;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
-import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
@@ -87,7 +87,7 @@ public class AccountingviewAction extends AbstractAction {
 	// To check current activity, then modify the activity's status valued from "approved" or "disapproval" .
 	public String doCheckAct() {
 		initServletContextObject();
-		ActivitiesVO checkAct = actsBean.doGetOneActById(actId);
+		ActivityVO checkAct = actsBean.doGetOneActById(actId);
 		checkAct.setState(checkState);
 		checkAct.setComment(comment);
 		actsBean.doUpdateOneAct(checkAct);
@@ -102,8 +102,8 @@ public class AccountingviewAction extends AbstractAction {
 	
 	private Integer getNbActsToCheck() {
 		Integer newCheck = 0;
-		List<ActivitiesVO> allActs = actsBean.doGetAllActivity();
-		for (ActivitiesVO act : allActs) {
+		List<ActivityVO> allActs = actsBean.doGetAllActivity();
+		for (ActivityVO act : allActs) {
 			if (act.getState().equals(ActivitiesConstant.STATE_DRAFT)
 					|| act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 				newCheck++;
@@ -119,7 +119,7 @@ public class AccountingviewAction extends AbstractAction {
 	
 	public String doValidateAct() {
 		initServletContextObject();
-		ActivitiesVO validateAct = actsBean.doGetOneActById(actId);
+		ActivityVO validateAct = actsBean.doGetOneActById(actId);
 		validateAct.setState(ActivitiesConstant.STATE_VALIDATE);
 		validateAct.setComment(getComment());
 		actsBean.doUpdateOneAct(validateAct);

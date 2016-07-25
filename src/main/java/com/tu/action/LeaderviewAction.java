@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
-import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
@@ -101,7 +101,7 @@ public class LeaderviewAction extends AbstractAction {
 		initServletContextObject();
 
 		// Put values from web page in object oneActV0
-		ActivitiesVO oneActVO = new ActivitiesVO();
+		ActivityVO oneActVO = new ActivityVO();
 		oneActVO.setActName(actName);
 		oneActVO.setActMoney(actMoney);
 		oneActVO.setDescription(description);
@@ -164,7 +164,7 @@ public class LeaderviewAction extends AbstractAction {
 		groupAct.setSum(sum);
 		groupAct.setNbParticipants(nbParticipants);
 
-		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
+		ActivityVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setActMoney(getActMoney());
 		actsBean.doUpdateOneAct(oneActVO);
 		
@@ -198,7 +198,7 @@ public class LeaderviewAction extends AbstractAction {
 
 		// oneActVO stores all the updated activity messages
 		initServletContextObject();
-		ActivitiesVO oneActVO = new ActivitiesVO();
+		ActivityVO oneActVO = new ActivityVO();
 		oneActVO.setActId(actId);
 		GroupVO group = (GroupVO) session.getAttribute("group");
 		Integer onegroupId = group.getGroupId();
@@ -226,7 +226,7 @@ public class LeaderviewAction extends AbstractAction {
 	public String doPublishAct() {
 		initServletContextObject();
 
-		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
+		ActivityVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState(ActivitiesConstant.STATE_PUBLISH);
 
 		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
@@ -278,7 +278,7 @@ public class LeaderviewAction extends AbstractAction {
 
 	// Submit the activity into approval group for validating
 	public String doToValidateAct() {
-		ActivitiesVO oneActVO = actsBean.doGetOneActById(actId);
+		ActivityVO oneActVO = actsBean.doGetOneActById(actId);
 		oneActVO.setState("tobevalidate");
 
 		try {

@@ -5,7 +5,7 @@ import java.util.*;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
-import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.messages.MessagesInterface;
@@ -91,11 +91,11 @@ public class UserloginManageAction extends AbstractAction {
 		LOG.info("login success");
 
 		// To retrieve all the activities' years for displaying by year in front page
-		List<ActivitiesVO> actVOs = actsBean.doGetAllActivity();
+		List<ActivityVO> actVOs = actsBean.doGetAllActivity();
 		List<Integer> years = new ArrayList<Integer>();
 		Calendar cal = Calendar.getInstance();
 		
-		for (ActivitiesVO actVO : actVOs) {
+		for (ActivityVO actVO : actVOs) {
 			cal.setTime(actVO.getActDate());
 			int actVOYear = cal.get(Calendar.YEAR);
 			
@@ -122,7 +122,7 @@ public class UserloginManageAction extends AbstractAction {
 		}
 
 		// Login succeeds, identify the expiry message and retrieve the number of new messages.
-		for (ActivitiesVO oneAct : actVOs) {
+		for (ActivityVO oneAct : actVOs) {
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 				cal.setTime(date);
 				cal.add(Calendar.DATE, -1);// 因为actdate中记录的时间是当天的零点,所以对比过期时间时将今天的日期往后推一天
@@ -140,7 +140,7 @@ public class UserloginManageAction extends AbstractAction {
 		for (UserMsg userMsgVO : userMsgVOs) {
 			MessagesVO oneMsg = msgBean.doGetOneMsgById(userMsgVO
 					.getMsgId());
-			ActivitiesVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
+			ActivityVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
 			
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
 					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)

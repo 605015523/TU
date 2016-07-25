@@ -2,7 +2,7 @@ package com.tu.model.activities;
 
 import java.util.Date;
 
-public class ActivitiesVO implements java.io.Serializable {
+public class ActivityVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 8705985126638462768L;
 	
@@ -19,7 +19,7 @@ public class ActivitiesVO implements java.io.Serializable {
 
 	// Constructors
 	/** default constructor */
-	public ActivitiesVO() {
+	public ActivityVO() {
 		actId = null;
 		groupId = null;
 		actName = null;

@@ -9,14 +9,14 @@ import org.apache.commons.logging.LogFactory;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
-import com.tu.model.activities.ActivitiesVO;
+import com.tu.model.activities.ActivityVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
-import com.tu.model.userview.UseractsVO;
+import com.tu.model.userview.UserActDetailedVO;
 import com.tu.model.userview.UserviewInterface;
 
 public class UserviewAction extends AbstractAction {
@@ -76,7 +76,7 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		Integer year = Integer.valueOf(request.getParameter("year"));
-		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
 		session.setAttribute("thisyear", year);
 		return "showActs";
@@ -85,9 +85,9 @@ public class UserviewAction extends AbstractAction {
 	// Display the specific activity's detail
 	public String doshowDetails() {
 		initServletContextObject();
-		List<UseractsVO> useracts = (List<UseractsVO>) session
+		List<UserActDetailedVO> useracts = (List<UserActDetailedVO>) session
 				.getAttribute("acts");
-		for (UseractsVO userActVO : useracts) {
+		for (UserActDetailedVO userActVO : useracts) {
 			if (actId == userActVO.getActId()) {
 				LOGGER.info("the actId is" + actId);
 				LOGGER.info("the actName is" + userActVO.getActName());
@@ -106,7 +106,7 @@ public class UserviewAction extends AbstractAction {
 		List<UserMsgVO> inmessages = new ArrayList<UserMsgVO>();
 
 		for (UserMsgVO message : messages) {
-			ActivitiesVO oneAct = actsBean.doGetOneActById(message.getActId());
+			ActivityVO oneAct = actsBean.doGetOneActById(message.getActId());
 
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
 				inmessages.add(message);
@@ -188,7 +188,7 @@ public class UserviewAction extends AbstractAction {
 		Integer year = years.get(years.size() - 1);
 		LOGGER.info("the year in action is:" + year);
 		LOGGER.info("the userId in action is:" + userId);
-		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 
 		for (int i = 0; i < useractsVO.size(); i++) {
 			LOGGER.info("the act" + useractsVO.get(i).getActName()
@@ -238,7 +238,7 @@ public class UserviewAction extends AbstractAction {
 		}
 
 		Integer year = (Integer) session.getAttribute("thisyear");
-		List<UseractsVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("acts", useractsVO);
 		return "showActs";
 	}

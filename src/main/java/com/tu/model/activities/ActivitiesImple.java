@@ -32,13 +32,13 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 获取所有活动
 	@Override
-	public List<ActivitiesVO> doGetAllActivity() {
-		List<ActivitiesVO> activitiesVOs = new ArrayList<ActivitiesVO>();
+	public List<ActivityVO> doGetAllActivity() {
+		List<ActivityVO> activitiesVOs = new ArrayList<ActivityVO>();
 		List<Activity> activitiesPOs = actsDAO.findAll();
 		
 		for (int i = 0; i < activitiesPOs.size(); i++) {
 			Activity oneactivitiesPO = activitiesPOs.get(i);
-			ActivitiesVO oneactivitiesVO = new ActivitiesVO();
+			ActivityVO oneactivitiesVO = new ActivityVO();
 			try {
 				BeanUtils.copyProperties(oneactivitiesVO, oneactivitiesPO);
 				activitiesVOs.add(oneactivitiesVO);
@@ -53,8 +53,8 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 通过actId获取一个活动
 	@Override
-	public ActivitiesVO doGetOneActById(Integer actId) {
-		ActivitiesVO actVO = new ActivitiesVO();
+	public ActivityVO doGetOneActById(Integer actId) {
+		ActivityVO actVO = new ActivityVO();
 		Activity actPO = actsDAO.findById(actId);
 		try {
 			BeanUtils.copyProperties(actVO, actPO);
@@ -69,7 +69,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 添加一个活动
 	@Override
-	public Integer doAddOneAct(ActivitiesVO oneActivitiesVO) {
+	public Integer doAddOneAct(ActivityVO oneActivitiesVO) {
 		Activity oneactsPO = new Activity();
 		Integer actId = null;
 
@@ -91,7 +91,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 更新一个活动
 	@Override
-	public String doUpdateOneAct(ActivitiesVO oneActVO) {
+	public String doUpdateOneAct(ActivityVO oneActVO) {
 		Integer actId = oneActVO.getActId();
 		Activity oneActPO = actsDAO.findById(actId);
 		String okOrNot = null;
@@ -114,7 +114,7 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	// 删除一个活动
 	@Override
-	public String doDeleteOneActivities(ActivitiesVO oneActivitiesVO) {
+	public String doDeleteOneActivities(ActivityVO oneActivitiesVO) {
 		// TODO Auto-generated method stub
 		return null;
 	}

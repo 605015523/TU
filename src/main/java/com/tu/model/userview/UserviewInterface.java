@@ -8,7 +8,7 @@ public interface UserviewInterface {
 
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userID);
 
-	public List<UseractsVO> doGetAllUserActsByUserId(Integer userId,
+	public List<UserActDetailedVO> doGetAllUserActsByUserId(Integer userId,
 			Integer year);
 
 	public List<UserMsgVO> dogetMessages(Integer userId);
