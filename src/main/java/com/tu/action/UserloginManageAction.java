@@ -193,7 +193,11 @@ public class UserloginManageAction extends AbstractAction {
 			session.setAttribute("groupsName", groupsName);
 		}
 
-		return "userloginSuccess";
+		return "redirectToHomePage";
+	}
+	
+	public String displayHomePage() {
+		return "homePage";
 	}
 	
 	public String displayLoginFailed() {

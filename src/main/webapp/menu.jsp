@@ -3,7 +3,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <ul class="nav nav-tabs">
-	<li role="presentation" <c:if test="${param.active=='home'}">class="active"</c:if>><a href="normalUser/user_home.jsp">Home</a>
+	<li role="presentation" <c:if test="${param.active=='home'}">class="active"</c:if>><a href="displayHomePageUserloginManageAction">Home</a>
 	</li>
 	<c:if test="${userRole==1}">
 		<li role="presentation" class="dropdown <c:if test="${param.active=='act'}">active</c:if>"><a id="dLabel"

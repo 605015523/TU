@@ -18,9 +18,9 @@
 		<!-- 通配符方式的用户登录管理Action定义 -->
 		<action name="*UserloginManageAction" class="UserloginManageActionBean"
 			method="{1}">
-			<result name="userloginSuccess">/normalUser/user_home.jsp</result>
+			<result name="homePage">/normalUser/user_home.jsp</result>
 			<result name="loginFail">/login.jsp</result>
-			<result name="logout">/login.jsp</result>
+			<result name="redirectToHomePage" type="redirectAction">displayHomePageUserloginManageAction</result>
 		</action>
 
 		<action name="*UserviewAction" class="UserviewActionBean"
