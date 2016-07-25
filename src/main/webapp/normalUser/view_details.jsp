@@ -38,9 +38,7 @@
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						details
-					</h3>
+					<h3 class="panel-title">details</h3>
 				</div>
 
 
@@ -64,13 +62,13 @@
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
-							<strong> Date:</strong>
+							<strong>Date:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							${act.actDate}
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<strong> Price per Person</strong>
+							<strong>Price per Person</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							${act.actMoney}
@@ -78,7 +76,7 @@
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
-							<strong> Description:</strong>
+							<strong>Description:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
@@ -89,7 +87,7 @@
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
-							<strong> Remark:</strong>
+							<strong>Remark:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p
@@ -101,14 +99,14 @@
 					</div>
 					<div class="row form-group form-group-lg center-block">
 						<script type="text/javascript">
-	                 function deleteAct(){
-    var actId=${act.actId};
-	var truthBeTold = window.confirm("quit this activity?");
-	if(truthBeTold){
-    window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
-    window.alert("quit success!");
-}
-            }
+					function deleteAct(){
+						var actId=${act.actId};
+						var truthBeTold = window.confirm("quit this activity?");
+						if (truthBeTold){
+							window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
+							window.alert("quit success!");
+						}
+					}
 </script>
 						<c:if
 							test="${act.state=='pending'||act.state=='tobevalidate'||act.state=='validate'}">

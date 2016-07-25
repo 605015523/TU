@@ -18,7 +18,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>SIGN IN</title>
+		<title>Registration</title>
 
 		<link href="css/signin.css" rel="stylesheet">
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -137,7 +137,7 @@
 
 						<div class="form-group">
 							<label>
-								Act Money:
+								Price / person
 							</label>
 							<h5 id="actmoney">${message.actMoney}</h5>
 						</div>

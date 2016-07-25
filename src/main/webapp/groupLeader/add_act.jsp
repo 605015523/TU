@@ -112,12 +112,12 @@
     }
     
     if (actmoney== "") {
-      alert("the act money can not empty!");
+      alert("the Price / person cannot be empty!");
       return false;
     }
     
      if ( actdate== "") {
-      alert("the  act date can not empty!");
+      alert("the activity date cannot be empty!");
       return false;
     }
     
@@ -176,7 +176,7 @@
 
 						<div class="form-group">
 							<label for="actMoney">
-								Act Money
+								Price / person
 							</label>
 							<div class="input-group">
 								<span class="input-group-addon">￥</span>

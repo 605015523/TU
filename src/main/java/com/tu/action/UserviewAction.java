@@ -35,9 +35,11 @@ public class UserviewAction extends AbstractAction {
 	private String remark;
 	private Integer actId;
 	private Integer msgId;
+	private Integer year;
 	
 	// To display
 	private List<UserActDetailedVO> useracts;
+	private UserActDetailedVO act;
 
 	public UserviewAction() {
 		// do nothing
@@ -79,7 +81,6 @@ public class UserviewAction extends AbstractAction {
 	public String doshowActs() {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
-		Integer year = Integer.valueOf(request.getParameter("year"));
 		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("thisyear", year);
 		return "showActs";
@@ -88,10 +89,9 @@ public class UserviewAction extends AbstractAction {
 	// Display the specific activity's detail
 	public String doshowDetails() {
 		Integer userId = getCurrentUser().getUserId();
-		UserActDetailedVO userActVO = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
+		act = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
 		LOGGER.info("the actId is " + actId);
-		LOGGER.info("the actName is " + userActVO.getActName());
-		request.setAttribute("act", userActVO);
+		LOGGER.info("the actName is " + act.getActName());
 		
 		return "showDetails";
 	}
@@ -169,28 +169,25 @@ public class UserviewAction extends AbstractAction {
 	public String doActRequest() {
 		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
-		LOGGER.info("the actid is:" + actId);
+		LOGGER.info("the actid is: " + actId);
 		Integer userId = getCurrentUser().getUserId();
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
 		oneUserActVO.setNbParticipants(nbParticipants);
-		oneUserActVO.setConsumption(consumption);
+		
+		// FIXME: know why consumption is actually not given
+		//ActivityVO oneAct = actsBean.doGetOneActById(actId);
+		//oneAct.getActMoney()
+		oneUserActVO.setConsumption(consumption != null ? consumption : 0);
+		
 		oneUserActVO.setRemark(remark);
 		
 		userActBean.doAddOneUserAct(oneUserActVO);
 
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
-		Integer year = years.get(years.size() - 1);
-		LOGGER.info("the year in action is:" + year);
-		LOGGER.info("the userId in action is:" + userId);
-		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
+		year = years.get(years.size() - 1);
 
-		for (int i = 0; i < useracts.size(); i++) {
-			LOGGER.info("the act" + useracts.get(i).getActName()
-					+ " get success");
-		}
-		session.setAttribute("thisyear", year);
-		return "showActs";
+		return "redirectToShowActs";
 	}
 
 	// Change password
@@ -222,8 +219,7 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		try {
-			actionReturnMessage = userActBean.doDeleteOneUserAct(userId,
-					actId);
+			actionReturnMessage = userActBean.doDeleteOneUserAct(userId, actId);
 			LOGGER.info(actionReturnMessage);
 
 		} catch (Exception e) {
@@ -231,9 +227,8 @@ public class UserviewAction extends AbstractAction {
 			LOGGER.error(actionReturnMessage);
 		}
 
-		Integer year = (Integer) session.getAttribute("thisyear");
-		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
-		return "showActs";
+		year = (Integer) session.getAttribute("thisyear");
+		return "redirectToShowActs";
 	}
 
 	public Integer getNbParticipants() {
@@ -282,6 +277,22 @@ public class UserviewAction extends AbstractAction {
 
 	public void setMsgId(Integer msgId) {
 		this.msgId = msgId;
+	}
+
+	public UserActDetailedVO getAct() {
+		return act;
+	}
+
+	public void setAct(UserActDetailedVO act) {
+		this.act = act;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 
 

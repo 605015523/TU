@@ -38,7 +38,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Group Acts detail
+						Group Activities details
 					</h3>
 				</div>
 				<div class="panel-body">
@@ -49,7 +49,7 @@
 						<tr>
 							<td class="col-md-3 col-xs-3 text-center">ACTNAME</td>
 							<td class="col-md-2 col-xs-2 text-center">State</td>
-							<td class="col-md-3 col-xs-3 text-center">Act Money</td>
+							<td class="col-md-3 col-xs-3 text-center">Price / person</td>
 							<td class="col-md-2 col-xs-2 text-center">Act Date</td>
 							<td class="col-md-2 col-xs-2 text-center">Details</td>
 						</tr>
@@ -69,14 +69,14 @@
 										<strong>${act.actDate}</strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-									 <c:if test="${act.state=='draft'}">
-										<a
-											href='<c:url value="/doshowCheckDetailsAccountingviewAction.action" />?actId=${act.actId}'><strong>details</strong>
+									<c:if test="${act.state=='draft'}">
+										<a href='<c:url value="/doshowCheckDetailsAccountingviewAction.action" />?actId=${act.actId}'>
+											<strong>details</strong>
 										</a>
 									</c:if>
 									<c:if test="${act.state=='tobevalidate'}">
-										<a
-											href='<c:url value="/doshowValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'><strong>details</strong>
+										<a href='<c:url value="/doshowValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>
+											<strong>details</strong>
 										</a>
 									</c:if>
 									</td>

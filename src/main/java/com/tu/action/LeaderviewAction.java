@@ -158,6 +158,7 @@ public class LeaderviewAction extends AbstractAction {
 
 	// Update the activity detail in this page
 	public String doUpdateActDetails() {
+		initServletContextObject();
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		groupAct.setActMoney(getActMoney());

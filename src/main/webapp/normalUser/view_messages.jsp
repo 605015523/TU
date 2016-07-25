@@ -51,13 +51,13 @@
 
 						<tr>
 							<td class="col-md-2 col-xs-3 text-center">
-								GROUP
+								Group
 							</td>
 							<td class="col-md-3 col-xs-3 text-center">
 								Act Name
 							</td>
 							<td class="col-md-2 col-xs-1 text-center">
-								Act Money
+								Price / person
 							</td>
 							<td class="col-md-2 col-xs-2 text-center">
 								Date

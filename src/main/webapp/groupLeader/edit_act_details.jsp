@@ -189,8 +189,7 @@
 							<div
 								class="col-xs-6  col-md-6 col-xs-offset-2 col-md-offset-2 text-right ">
 								<h5>
-									●Click
-									<strong>submit</strong>to finish edit.
+									●Click <strong>submit</strong> to finish edit.
 								</h5>
 							</div>
 							<div class="col-xs-2  col-md-2 navbar-right ">
