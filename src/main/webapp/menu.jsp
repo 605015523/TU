@@ -8,12 +8,12 @@
 	<c:if test="${userRole==1}">
 		<li role="presentation" class="dropdown <c:if test="${param.active=='act'}">active</c:if>"><a id="dLabel"
 			data-target="#" href="#" data-toggle="dropdown" role="button"
-			aria-haspopup="true" aria-expanded="false"> Act <span
+			aria-haspopup="true" aria-expanded="false">Manage activities<span
 				class="caret"></span>
 		</a>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="groupLeader/add_act.jsp">Add Act</a></li>
-				<li><a href="doGetAllGroupActLeaderviewAction.action">View Act</a></li>
+				<li><a href="groupLeader/add_act.jsp">Add activity</a></li>
+				<li><a href="doGetAllGroupActLeaderviewAction.action">View activities</a></li>
 			</ul></li>
 	</c:if>
 	<c:if test="${userRole==2}">
@@ -25,11 +25,11 @@
 		</a></li>
 		<li role="presentation" class="dropdown"><a id="dLabel"
 			data-target="#" href="#" data-toggle="dropdown" role="button"
-			aria-haspopup="true" aria-expanded="false">Act Details <span
+			aria-haspopup="true" aria-expanded="false">Activity details <span
 				class="caret"></span>
 		</a>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li class="dropdown-header">total cost</li>
+				<li class="dropdown-header">Total cost</li>
 				<c:forEach var="year" items="${years}">
 					<li><a
 						href='<c:url value="/doshowAllActsByYearAccountingviewAction.action" />?year=${year}'>${year}</a>
@@ -54,7 +54,7 @@
 
 	<li role="presentation" class="dropdown <c:if test="${param.active=='activities'}">active</c:if>"><a id="dLabel"
 		data-target="#" href="#" data-toggle="dropdown" role="button"
-		aria-haspopup="true" aria-expanded="false">Activities <span
+		aria-haspopup="true" aria-expanded="false">My activities <span
 			class="caret"></span>
 		</a>
 		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">

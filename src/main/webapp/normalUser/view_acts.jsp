@@ -18,7 +18,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>View activities</title>
+		<title>View my activities</title>
 
 		<script src="js/jquery-2.2.0.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -39,7 +39,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Acts in ${thisyear}
+						My activities in ${thisyear}
 					</h3>
 
 				</div>
