@@ -64,7 +64,7 @@
 							Details
 						</td>
 					</tr>
-					<c:forEach var="act" items="${acts}">
+					<c:forEach var="act" items="${useracts}">
 						<tr>
 							<td>
 								${act.actName}

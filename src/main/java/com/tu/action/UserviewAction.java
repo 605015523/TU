@@ -34,6 +34,10 @@ public class UserviewAction extends AbstractAction {
 	private Float consumption;
 	private String remark;
 	private Integer actId;
+	private Integer msgId;
+	
+	// To display
+	private List<UserActDetailedVO> useracts;
 
 	public UserviewAction() {
 		// do nothing
@@ -76,24 +80,19 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		Integer year = Integer.valueOf(request.getParameter("year"));
-		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
-		session.setAttribute("acts", useractsVO);
+		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
 		session.setAttribute("thisyear", year);
 		return "showActs";
 	}
 
 	// Display the specific activity's detail
 	public String doshowDetails() {
-		initServletContextObject();
-		List<UserActDetailedVO> useracts = (List<UserActDetailedVO>) session
-				.getAttribute("acts");
-		for (UserActDetailedVO userActVO : useracts) {
-			if (actId == userActVO.getActId()) {
-				LOGGER.info("the actId is" + actId);
-				LOGGER.info("the actName is" + userActVO.getActName());
-				request.setAttribute("act", userActVO);
-			}
-		}
+		Integer userId = getCurrentUser().getUserId();
+		UserActDetailedVO userActVO = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
+		LOGGER.info("the actId is " + actId);
+		LOGGER.info("the actName is " + userActVO.getActName());
+		request.setAttribute("act", userActVO);
+		
 		return "showDetails";
 	}
 
@@ -123,7 +122,6 @@ public class UserviewAction extends AbstractAction {
 	public String doshowMsgDetails() {
 		initServletContextObject();
 		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
-		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
 				session.setAttribute("msgDetails", messages.get(i));
@@ -159,11 +157,9 @@ public class UserviewAction extends AbstractAction {
 	public String doInAct() {
 		initServletContextObject();
 		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
-		Integer msgId = Integer.parseInt(request.getParameter("msgId"));
 		for (int i = 0; i < messages.size(); i++) {
 			if (messages.get(i).getMsgId().equals(msgId)) {
 				session.setAttribute("message", messages.get(i));
-				session.setAttribute("inActId", messages.get(i).getActId());
 			}
 		}
 		return "doInAct";
@@ -173,8 +169,7 @@ public class UserviewAction extends AbstractAction {
 	public String doActRequest() {
 		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
-		Integer actId = (Integer) session.getAttribute("inActId");
-		LOGGER.info("the inActid is:" + actId);
+		LOGGER.info("the actid is:" + actId);
 		Integer userId = getCurrentUser().getUserId();
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
@@ -188,13 +183,12 @@ public class UserviewAction extends AbstractAction {
 		Integer year = years.get(years.size() - 1);
 		LOGGER.info("the year in action is:" + year);
 		LOGGER.info("the userId in action is:" + userId);
-		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
+		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
 
-		for (int i = 0; i < useractsVO.size(); i++) {
-			LOGGER.info("the act" + useractsVO.get(i).getActName()
+		for (int i = 0; i < useracts.size(); i++) {
+			LOGGER.info("the act" + useracts.get(i).getActName()
 					+ " get success");
 		}
-		session.setAttribute("acts", useractsVO);
 		session.setAttribute("thisyear", year);
 		return "showActs";
 	}
@@ -238,8 +232,7 @@ public class UserviewAction extends AbstractAction {
 		}
 
 		Integer year = (Integer) session.getAttribute("thisyear");
-		List<UserActDetailedVO> useractsVO = userviewBean.doGetAllUserActsByUserId(userId, year);
-		session.setAttribute("acts", useractsVO);
+		useracts = userviewBean.doGetAllUserActsByUserId(userId, year);
 		return "showActs";
 	}
 
@@ -274,5 +267,22 @@ public class UserviewAction extends AbstractAction {
 	public void setActId(Integer actId) {
 		this.actId = actId;
 	}
+	
+	public List<UserActDetailedVO> getUseracts() {
+		return useracts;
+	}
+
+	public void setUseracts(List<UserActDetailedVO> useracts) {
+		this.useracts = useracts;
+	}
+
+	public Integer getMsgId() {
+		return msgId;
+	}
+
+	public void setMsgId(Integer msgId) {
+		this.msgId = msgId;
+	}
+
 
 }

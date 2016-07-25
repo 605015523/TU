@@ -104,6 +104,7 @@
 
 			<form action="doActRequestUserviewAction.action" method="post"
 				role="form" name="form" id="form" onsubmit="return checkinput();">
+				<input type="hidden" name="actId" value="${message.actId}"/>
 				<div class="row">
 
 					<div class="col-md-4 col-xs-4 well">

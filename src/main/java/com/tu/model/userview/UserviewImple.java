@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 
@@ -41,7 +42,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	// 构造方法
 	public UserviewImple() {
-
+		// do nothing
 	}
 
 	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
@@ -159,68 +160,46 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 		List<UserActDetailedVO> oneuseractsVO = new ArrayList<UserActDetailedVO>();
 		List<UserAct> userActs = userActDAO.findByUserId(userId);// 通过userId遍历所有用户参与过的活动的actId
-
-		for (int i = 0; i < userActs.size(); i++) {
+		Calendar cal = Calendar.getInstance();
+		
+		for (UserAct userAct : userActs) {
 			// 建立一个UseractsVO实例，里面包含用户参与的活动的所有属性
 			// 后续步骤的目的就是通过group、userAct、activities这几个表
 			// 间的关联，获取所有UseractsVO中属性的值
-			UserActDetailedVO useractsPO = new UserActDetailedVO();
 
-			Activity actsPO = actsDAO.findById(userActs.get(i).getActId());
-			// 通过userAct中的actId查找ActsPO实例
-
-			Group groupPO = groupDAO.findById(actsPO.getGroupId());
-			// 通过ActsPO中的GroupId查找groupPOS实例
-
-			Calendar cal = Calendar.getInstance();
+			Activity actsPO = actsDAO.findById(userAct.getActId());
 			cal.setTime(actsPO.getActDate());
 
 			if (cal.get(Calendar.YEAR) == year) {
-				useractsPO.setUserId(userId);
-				// 设置UseractsVO中的所有UserId
-
-				useractsPO.setActId(userActs.get(i).getActId());
-				// 通过userAct中的属性，设置UseractsVO中的actId
-
-				useractsPO.setNbParticipants(userActs.get(i)
-						.getNbParticipants());
-				// 通过userAct中的属性，设置UseractsVO中的ParticipaterNO
-
-				useractsPO.setConsumption(userActs.get(i).getConsumption());
-				// 通过userAct中的属性，设置UseractsVO中的consumption
-
-				useractsPO.setRemark(userActs.get(i).getRemark());
-				// 通过userAct中的属性，设置UseractsVO中的Remark
-
-				useractsPO.setActName(actsPO.getActName());
-				// 通过ActsPO中的属性，设置UseractsVO中的actName
-
-				useractsPO.setActMoney(actsPO.getActMoney());
-				// 通过ActsPO中的属性，设置UseractsVO中的actMoney
-
-				useractsPO.setState(actsPO.getState());
-				// 通过ActsPO中的属性，设置UseractsVO中的actState
-
-				useractsPO.setDescription(actsPO.getDescription());
-				// 通过ActsPO中的属性，设置UseractsVO中的description
-
-				// DateFormat df1 = DateFormat.getDateInstance();//日期格式，精确到日
-				SimpleDateFormat formatter = new SimpleDateFormat("MM-dd");
-				useractsPO.setActDate(formatter.format(actsPO.getActDate()));
-				// 通过ActsPO中的属性，设置UseractsVO中的actDate
-
-				useractsPO.setGroup(groupPO.getGroupName());
-				// 通过groupPOS中的属性，设置UseractsVO中的groupName
-
+				UserActDetailedVO useractsPO = createUserActDetailed(userAct, actsPO);
 				oneuseractsVO.add(useractsPO);
 			}
+		}
+		Collections.reverse(oneuseractsVO);
+		
+		return oneuseractsVO;
+	}
+	
+	private UserActDetailedVO createUserActDetailed(UserAct userAct, Activity actsPO) {
+		UserActDetailedVO useractsPO = new UserActDetailedVO();
+		
+		useractsPO.setUserId(userAct.getUserId());
+		useractsPO.setActId(userAct.getActId());
+		useractsPO.setNbParticipants(userAct.getNbParticipants());
+		useractsPO.setConsumption(userAct.getConsumption());
+		useractsPO.setRemark(userAct.getRemark());
 
-		}
-		List<UserActDetailedVO> inverseoneUseractsVO = new ArrayList<UserActDetailedVO>();
-		for (int j = oneuseractsVO.size()-1; j >=0 ; j--) {
-			inverseoneUseractsVO.add(oneuseractsVO.get(j));
-		}
-		return inverseoneUseractsVO;
+		useractsPO.setActName(actsPO.getActName());
+		useractsPO.setActMoney(actsPO.getActMoney());
+		useractsPO.setState(actsPO.getState());
+		useractsPO.setDescription(actsPO.getDescription());
+
+		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
+		useractsPO.setActDate(formatter.format(actsPO.getActDate()));
+		Group groupPO = groupDAO.findById(actsPO.getGroupId());
+		useractsPO.setGroup(groupPO.getGroupName());
+		
+		return useractsPO;
 	}
 
 	// 获取用户的所有messages
@@ -253,12 +232,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			oneUserMsgVO.setActDate(formatter.format(oneMessage.getActDate()));
 			userMsgsVO.add(oneUserMsgVO);
 		}
-		List<UserMsgVO> inverseuserMsgsVO = new ArrayList<UserMsgVO>();
-		for (int j = userMsgsVO.size()-1; j >= 0; j--) {
-			inverseuserMsgsVO.add(userMsgsVO.get(j));
-		}
-		return inverseuserMsgsVO;
-
+		
+		Collections.reverse(userMsgsVO);
+		return userMsgsVO;
 	}
 
 	// 用户修改密码
@@ -285,6 +261,15 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		}
 
 		return okOrNot;
+	}
+
+	@Override
+	public UserActDetailedVO doGetUserActsByUserIdAndActId(Integer userId,
+			Integer actId) {
+		UserAct userAct = userActDAO.findByUserIdAndActId(userId, actId);
+		Activity actsPO = actsDAO.findById(userAct.getActId());
+		
+		return createUserActDetailed(userAct, actsPO);
 	}
 
 }
