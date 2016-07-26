@@ -50,7 +50,7 @@
 							<strong>ACTNAME:</strong>
 						</div>
 						<div class="col-xs-3  col-md-3">
-							${msgDetails.actName}
+							${msgDetails.message.activity.actName}
 						</div>
 						<div class="col-xs-3  col-md-3">
 							<strong>GROUP:</strong>
@@ -61,16 +61,16 @@
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
-							<strong> DATE:</strong>
+							<strong>DATE:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${msgDetails.actDate}
+							<s:property value="msgDetails.message.activity.actDate"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<strong> PRICE per PERSON</strong>
+							<strong>PRICE per PERSON:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${msgDetails.actMoney}
+							${msgDetails.message.activity.actMoney}
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -78,7 +78,7 @@
 							<strong>REGISTRATION DATE:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${msgDetails.dateRange}
+							<s:property value="msgDetails.message.activity.enrollStartDate"/> - <s:property value="msgDetails.message.activity.enrollEndDate"/>
 						</div>
 						
 					</div>
@@ -89,7 +89,7 @@
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
-								${msgDetails.description}
+								${msgDetails.message.activity.description}
 							</p>
 						</div>
 					</div>
@@ -98,7 +98,7 @@
 							<div
 								class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
 								<a role="button" class="btn btn-primary  btn-block"
-									href='<c:url value="/doInActUserviewAction.action" />?msgId=${msgDetails.msgId}'>I'm
+									href='<c:url value="/doInActUserviewAction.action" />?msgId=${msgDetails.message.msgId}'>I'm
 									in</a>
 							</div>
 					

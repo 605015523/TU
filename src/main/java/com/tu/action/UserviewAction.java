@@ -42,6 +42,7 @@ public class UserviewAction extends AbstractAction {
 	private UserActDetailedVO act;
 	private List<UserMsgVO> overmessages;
 	private List<UserMsgVO> inmessages;
+	private UserMsgVO msgDetails;
 
 	public UserviewAction() {
 		// do nothing
@@ -105,13 +106,13 @@ public class UserviewAction extends AbstractAction {
 		overmessages = new ArrayList<UserMsgVO>();
 		inmessages = new ArrayList<UserMsgVO>();
 
-		for (UserMsgVO message : messages) {
-			ActivityVO oneAct = actsBean.doGetOneActById(message.getActId());
+		for (UserMsgVO userMsg : messages) {
+			ActivityVO oneAct = actsBean.doGetOneActById(userMsg.getMessage().getActivity().getActId());
 
 			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
-				inmessages.add(message);
+				inmessages.add(userMsg);
 			} else {
-				overmessages.add(message);
+				overmessages.add(userMsg);
 			}
 		}
 		return "showMessages";
@@ -121,14 +122,13 @@ public class UserviewAction extends AbstractAction {
 	public String doshowMsgDetails() {
 		initServletContextObject();
 		Integer userId = this.getCurrentUser().getUserId();
-		UserMsgVO oneUserMsg = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
-		session.setAttribute("msgDetails", oneUserMsg);
+		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
 
 		// Set the status of UserMsg as read.
-		if (oneUserMsg.getReadState().equals(UserMsgConstants.STATE_NEW)) {
+		if (msgDetails.getReadState().equals(UserMsgConstants.STATE_NEW)) {
 
-			oneUserMsg.setReadState(UserMsgConstants.STATE_READ);
-			userMsgBean.doUpdateOneUserMsg(oneUserMsg);
+			msgDetails.setReadState(UserMsgConstants.STATE_READ);
+			userMsgBean.doUpdateOneUserMsg(msgDetails);
 			int newMsg = userMsgBean.countNewMsgs(userId);
 			session.setAttribute("newMsg", newMsg);
 
@@ -139,10 +139,8 @@ public class UserviewAction extends AbstractAction {
 
 	// Go jump to one activity's page
 	public String doInAct() {
-		initServletContextObject();
 		Integer userId = this.getCurrentUser().getUserId();
-		UserMsgVO message = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
-		session.setAttribute("message", message);
+		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
 		
 		return "doInAct";
 	}
@@ -290,6 +288,14 @@ public class UserviewAction extends AbstractAction {
 
 	public void setInmessages(List<UserMsgVO> inmessages) {
 		this.inmessages = inmessages;
+	}
+
+	public UserMsgVO getMsgDetails() {
+		return msgDetails;
+	}
+
+	public void setMsgDetails(UserMsgVO msgDetails) {
+		this.msgDetails = msgDetails;
 	}
 
 

@@ -1,20 +1,15 @@
 package com.tu.model.userview;
 
+import com.tu.model.messages.MessagesVO;
+
 public class UserMsgVO implements java.io.Serializable {
 	
 	private static final long serialVersionUID = -5706659091511226929L;
 	
 	// Fields
-	private Integer msgId;
 	private Integer userId;
-	private Integer actId;
+	private MessagesVO message;
 	private String groupName;
-	private String actName;
-	private Float actMoney;
-	private String description;
-	private String dateRange;
-	private String actDate;
-	private String state;
 	private String readState;
 
 	// Constructors
@@ -25,36 +20,11 @@ public class UserMsgVO implements java.io.Serializable {
 
 	/** full constructor */
 
-	public UserMsgVO(Integer msgId, Integer userId, Integer actId, String groupName,
-			String actName, Float actMoney, String description,
-			String dateRange, String actDate, String state, String readState) {
-		this.msgId = msgId;
+	public UserMsgVO(MessagesVO message, Integer userId, String groupName, String readState) {
+		this.message = message;
 		this.userId = userId;
-		this.actId = actId;
 		this.groupName = groupName;
-		this.actName = actName;
-		this.actMoney = actMoney;
-		this.description = description;
-		this.dateRange = dateRange;
-		this.actDate = actDate;
-		this.state = state;
 		this.readState = readState;
-	}
-
-	public Integer getMsgId() {
-		return msgId;
-	}
-
-	public void setMsgId(Integer msgId) {
-		this.msgId = msgId;
-	}
-
-	public Integer getActId() {
-		return this.actId;
-	}
-
-	public void setActId(Integer actId) {
-		this.actId = actId;
 	}
 
 	public String getGroupName() {
@@ -65,46 +35,6 @@ public class UserMsgVO implements java.io.Serializable {
 		this.groupName = groupName;
 	}
 
-	public String getActName() {
-		return this.actName;
-	}
-
-	public void setActName(String actName) {
-		this.actName = actName;
-	}
-
-	public Float getActMoney() {
-		return this.actMoney;
-	}
-
-	public void setActMoney(Float actMoney) {
-		this.actMoney = actMoney;
-	}
-
-	public String getDescription() {
-		return this.description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getActDate() {
-		return this.actDate;
-	}
-
-	public void setActDate(String actdate) {
-		this.actDate = actdate;
-	}
-
-	public String getState() {
-		return this.state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
 	public String getReadState() {
 		return this.readState;
 	}
@@ -113,20 +43,20 @@ public class UserMsgVO implements java.io.Serializable {
 		this.readState = readState;
 	}
 
-	public String getDateRange() {
-		return dateRange;
-	}
-
-	public void setDateRange(String dateRange) {
-		this.dateRange = dateRange;
-	}
-
 	public Integer getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public MessagesVO getMessage() {
+		return message;
+	}
+
+	public void setMessage(MessagesVO message) {
+		this.message = message;
 	}
 
 }

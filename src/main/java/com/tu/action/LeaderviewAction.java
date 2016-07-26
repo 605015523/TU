@@ -236,13 +236,7 @@ public class LeaderviewAction extends AbstractAction {
 
 		// Copy all properties from activity to message
 		MessagesVO oneMsgVO = new MessagesVO();
-		try {
-			BeanUtils.copyProperties(oneMsgVO, oneActVO);
-		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException: " + e.toString());
-		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException: " + e.toString());
-		}
+		oneMsgVO.setActivity(oneActVO);
 
 		// Write message into database and send to everyone
 		List<UserloginVO> allUserLogins = userloginManageBean.doGetAllUserlogin();

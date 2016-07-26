@@ -137,10 +137,10 @@ public class UserloginManageAction extends AbstractAction {
 		int newMsg = 0;
 		List<UserMsgVO> userMsgVOs = userMsgBean.doGetUserMsgs(userId);
 		for (UserMsgVO userMsgVO : userMsgVOs) {
-			
-			if (userMsgVO.getState().equals(ActivitiesConstant.STATE_PENDING)
-					|| userMsgVO.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
-					|| userMsgVO.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
+			ActivityVO activity = userMsgVO.getMessage().getActivity();
+			if (activity.getState().equals(ActivitiesConstant.STATE_PENDING)
+					|| activity.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
+					|| activity.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
 				userMsgVO.setReadState(UserMsgConstants.STATE_READ);
 				userMsgBean.doUpdateOneUserMsg(userMsgVO);
 

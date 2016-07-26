@@ -104,7 +104,7 @@
 
 			<form action="doActRequestUserviewAction.action" method="post"
 				role="form" name="form" id="form" onsubmit="return checkinput();">
-				<input type="hidden" name="actId" value="${message.actId}"/>
+				<input type="hidden" name="actId" value="${msgDetails.message.activity.actId}"/>
 				<div class="row">
 
 					<div class="col-md-4 col-xs-4 well">
@@ -112,7 +112,7 @@
 							<label>
 								Act Name:
 							</label>
-							${message.actName}
+							${msgDetails.message.activity.actName}
 						</div>
 						<div class="form-group">
 							<label>
@@ -125,27 +125,28 @@
 							<label>
 								Act Date:
 							</label>
-							${message.actDate}
-
+							<s:property value="msgDetails.message.activity.actDate"/>
 						</div>
 						<div class="form-group">
 							<label>
 								Registration Date:
 							</label>
-							${message.dateRange}
+							<s:property value="msgDetails.message.activity.enrollStartDate"/> - <s:property value="msgDetails.message.activity.enrollEndDate"/>
 						</div>
 
 						<div class="form-group">
 							<label>
 								Price / person
 							</label>
-							<h5 id="actmoney">${message.actMoney}</h5>
+							<h5 id="actmoney">
+								${msgDetails.message.activity.actMoney}
+							</h5>
 						</div>
 						<div class="form-group">
 							<label>
 								Act Description
 							</label>
-							${message.description}
+							${msgDetails.message.activity.description}
 
 						</div>
 					</div>

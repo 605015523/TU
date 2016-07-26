@@ -9,11 +9,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.tu.dao.messages.Message;
 import com.tu.dao.messages.MessagesDAOInterface;
+import com.tu.mapper.DAOModelMapper;
 
 public class MessagesImple extends Observable implements MessagesInterface {
 
 	private static final Log LOG = LogFactory.getLog(MessagesImple.class);
 	private MessagesDAOInterface msgDAO = null;
+	private DAOModelMapper daoModelMapper;
 
 	public MessagesDAOInterface getMsgDAO() {
 		return this.msgDAO;
@@ -35,9 +37,9 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		try {
 			BeanUtils.copyProperties(oneMessagesVO, oneMessagesPO);
 		} catch (IllegalAccessException e) {
-			LOG.error(" there is a IllegalAccessException");
+			LOG.error("there is a IllegalAccessException", e);
 		} catch (InvocationTargetException e) {
-			LOG.error("there is a InvocationTargetException");
+			LOG.error("there is a InvocationTargetException", e);
 		}
 		return oneMessagesVO;
 	}
@@ -45,16 +47,8 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	// 添加一个messages
 	@Override
 	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
-		Message onemsgPO = new Message();
+		Message onemsgPO = daoModelMapper.convertMesssageVOTOMessage(oneMessagesVO);
 		Integer msgId = null;
-
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(onemsgPO, oneMessagesVO);
-		} catch (IllegalAccessException e) {
-			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
-		} catch (InvocationTargetException e) {
-			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
-		}
 
 		try {
 			msgId = (Integer) msgDAO.save(onemsgPO);
@@ -64,4 +58,12 @@ public class MessagesImple extends Observable implements MessagesInterface {
 		return msgId;
 	}
 
+	public DAOModelMapper getDaoModelMapper() {
+		return daoModelMapper;
+	}
+
+	public void setDaoModelMapper(DAOModelMapper daoModelMapper) {
+		this.daoModelMapper = daoModelMapper;
+	}
+	
 }

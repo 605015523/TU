@@ -100,6 +100,7 @@
 
 	<bean id="UserloginManageBean" class="com.tu.model.userlogin.UserloginManageImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 
 	<bean id="UserviewBean" class="com.tu.model.userview.UserviewImple">
@@ -114,6 +115,7 @@
 
 	<bean id="ActsBean" class="com.tu.model.activities.ActivitiesImple">
 		<property name="actsDAO" ref="ActsDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 
 	<bean id="GroupBean" class="com.tu.model.group.GroupImple">
@@ -145,14 +147,20 @@
 	
 	<bean id="MsgBean" class="com.tu.model.messages.MessagesImple">
 		<property name="msgDAO" ref="MsgDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 	
 	<bean id="UserMsgBean" class="com.tu.model.user.msg.UserMsgImple">
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
 		<property name="msgDAO" ref="MsgDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 
+	<bean id="DaoModelMapper" class="com.tu.mapper.DAOModelMapper">
+		<property name="msgDAO" ref="MsgDAO"/>
+		<property name="groupDAO" ref="GroupDAO"/>
+	</bean>
 
 	<!-- 数据访问层Bean定义 -->
 

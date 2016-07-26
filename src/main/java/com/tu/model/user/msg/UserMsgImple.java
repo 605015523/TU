@@ -1,7 +1,6 @@
 package com.tu.model.user.msg;
 
 import java.lang.reflect.InvocationTargetException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,25 +10,24 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
-import com.tu.dao.messages.Message;
 import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.dao.user.msg.UserMsgDAOInterface;
+import com.tu.mapper.DAOModelMapper;
 import com.tu.model.userview.UserMsgVO;
-import com.tu.util.ConfConstants;
 
 public class UserMsgImple extends Observable implements UserMsgInterface {
 
 	private static final Log LOGGER = LogFactory.getLog(UserMsgImple.class);
-			
+	
+	private DAOModelMapper daoModelMapper;
 	private UserMsgDAOInterface userMsgDAO = null;
 	private MessagesDAOInterface msgDAO = null;
 	private GroupDAOInterface groupDAO = null;
-
+	
 	public UserMsgImple() {
-
+		// do nothing
 	}
 
 	// 删除一个user_msg对象
@@ -70,7 +68,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 		List<UserMsg> userMsgs = userMsgDAO.findMsgByUserId(userId);
 		
 		for (UserMsg userMsg : userMsgs) {
-			userMsgsVO.add(convertoUserMsgToUserMsgVO(userMsg));
+			userMsgsVO.add(daoModelMapper.convertoUserMsgToUserMsgVO(userMsg));
 		}
 		
 		Collections.reverse(userMsgsVO);
@@ -81,39 +79,15 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	@Override
 	public UserMsgVO doGetOneByUserIdAndMsgId(Integer userId, Integer msgId) {
 		UserMsg oneUserMsg = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
-		return convertoUserMsgToUserMsgVO(oneUserMsg);
+		return daoModelMapper.convertoUserMsgToUserMsgVO(oneUserMsg);
 	}
 	
-	private UserMsgVO convertoUserMsgToUserMsgVO(UserMsg userMsg) {
-		UserMsgVO oneUserMsgVO = new UserMsgVO();
-		Integer oneMsgId = userMsg.getMsgId();
-		Message oneMessage = msgDAO.findById(oneMsgId);
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
-		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO: ", e);
-		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO: ", e);
-		}
-		oneUserMsgVO.setReadState(userMsg.getReadState());
-		Group group = groupDAO.findById(oneMessage.getGroupId());
-		oneUserMsgVO.setGroupName(group.getGroupName());
-		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-		String daterange = formatter
-				.format(oneMessage.getEnrollStartDate())
-				+ " - "
-				+ formatter.format(oneMessage.getEnrollEndDate());
-		oneUserMsgVO.setDateRange(daterange);
-		oneUserMsgVO.setActDate(formatter.format(oneMessage.getActDate()));
-		
-		return oneUserMsgVO;
-	}
 	
 	// 更新一个userMsg对象
 	@Override
 	public void doUpdateOneUserMsg(UserMsgVO oneUserMsgVO) {
 		Integer userId = oneUserMsgVO.getUserId();
-		Integer msgId = oneUserMsgVO.getMsgId();
+		Integer msgId = oneUserMsgVO.getMessage().getMsgId();
 		UserMsg oneUserMsgPO = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
 		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝
@@ -168,6 +142,14 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 
 	public void setGroupDAO(GroupDAOInterface groupDAO) {
 		this.groupDAO = groupDAO;
+	}
+
+	public DAOModelMapper getDaoModelMapper() {
+		return daoModelMapper;
+	}
+
+	public void setDaoModelMapper(DAOModelMapper daoModelMapper) {
+		this.daoModelMapper = daoModelMapper;
 	}
 
 }

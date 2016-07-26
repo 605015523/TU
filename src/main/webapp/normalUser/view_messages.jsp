@@ -63,78 +63,78 @@
 								Details
 							</td>
 						</tr>
-						<c:forEach var="message" items="${inmessages}">
+						<s:iterator var="usermsg" value="inmessages">
 							<tr>
-								<c:if test="${message.readState=='new'}">
+								<c:if test="${usermsg.readState=='new'}">
 
 									<td class="col-md-2 col-xs-3 text-center">
-										<strong>${message.groupName}</strong>
+										<strong>${usermsg.groupName}</strong>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										<strong>${message.actName}</strong>
+										<strong>${usermsg.message.activity.actName}</strong>
 									</td>
 									<td class="col-md-2 col-xs-1 text-center">
 										<div class="text-success text-center">
-											<strong> ${message.actMoney}</strong>
+											<strong><s:property value="message.activity.actMoney"/></strong>
 										</div>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<strong>${message.actDate}</strong>
+										<strong><s:property value="message.activity.actDate"/></strong>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										<a href='<c:url value="/doshowMsgDetailsUserviewAction.action" />?msgId=${message.msgId}'>details</a>
+										<a href='<c:url value="/doshowMsgDetailsUserviewAction.action" />?msgId=${usermsg.message.msgId}'>details</a>
 									</td>
 
 								</c:if>
-								<c:if test="${message.readState=='read'}">
+								<c:if test="${usermsg.readState=='read'}">
 									<td class="col-md-2 col-xs-3 text-center">
-										${message.groupName}
+										${usermsg.groupName}
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										${message.actName}
+										${usermsg.message.activity.actName}
 									</td>
 									<td class="col-md-2 col-xs-1 text-center">
 										<div class="text-success text-center">
-											<strong> ${message.actMoney}</strong>
+											<strong><s:property value="message.activity.actMoney"/></strong>
 										</div>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										${message.actDate}
+										<s:property value="message.activity.actDate"/>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										<a href='<c:url value="/doshowMsgDetailsUserviewAction.action" />?msgId=${message.msgId}'>details</a>
+										<a href='<c:url value="/doshowMsgDetailsUserviewAction.action" />?msgId=${usermsg.message.msgId}'>details</a>
 									</td>
 								</c:if>
 							</tr>
-						</c:forEach>
+						</s:iterator>
 
 					</table>
 					
 					<c:if test="${overmessages!=null}">
 						<table class="table row">
-							<c:forEach var="message" items="${overmessages}">
+							<s:iterator var="usermsg" value="overmessages">
 								<tr class="active">
 
 									<td class="col-md-2 col-xs-3 text-center">
-										${message.groupName}
+										${usermsg.groupName}
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										${message.actName}
+										${usermsg.message.activity.actName}
 									</td>
 									<td class="col-md-2 col-xs-1 text-center">
 										<div class="text-success text-center">
-											<strong> ${message.actMoney}</strong>
+											<strong>${usermsg.message.activity.actMoney}</strong>
 										</div>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										${message.actDate}
+										<s:property value="message.activity.actDate"/>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
 										details
 									</td>
 
 								</tr>
-							</c:forEach>
+							</s:iterator>
 						</table>
 					</c:if>
 
