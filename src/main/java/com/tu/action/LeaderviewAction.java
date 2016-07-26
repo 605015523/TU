@@ -159,7 +159,7 @@ public class LeaderviewAction extends AbstractAction {
 		initServletContextObject();
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
-		groupAct.setActMoney(getActMoney());
+		groupAct.getActivity().setActMoney(getActMoney());
 		groupAct.setSum(sum);
 		groupAct.setNbParticipants(nbParticipants);
 

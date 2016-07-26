@@ -108,22 +108,10 @@ public class DAOModelMapper {
 	
 	public GroupActVO convertActivityToGroupActVO(Activity act) {
 		GroupActVO actsPO = new GroupActVO();
+		
+		ActivityVO actVO = convertActivityToActivityVO(act);
+		actsPO.setActivity(actVO);
 
-		actsPO.setActId(act.getActId());
-		actsPO.setActName(act.getActName());
-		actsPO.setGroupId(act.getGroupId());
-		actsPO.setActMoney(act.getActMoney());
-		actsPO.setDescription(act.getDescription());
-		actsPO.setState(act.getState());
-
-		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-		String daterange = formatter.format(act
-				.getEnrollStartDate())
-				+ " - "
-				+ formatter.format(act.getEnrollEndDate());
-		actsPO.setDaterange(daterange);
-		actsPO.setActDate(formatter.format(act.getActDate()));
-		actsPO.setComment(act.getComment());
 		List<UserAct> useractPO = userActDAO.findByActId(act
 				.getActId());
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();

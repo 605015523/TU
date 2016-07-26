@@ -53,7 +53,7 @@
 							<td class="col-md-2 col-xs-2 text-center">Act Date</td>
 							<td class="col-md-2 col-xs-2 text-center">Details</td>
 						</tr>
-						<c:forEach var="act" items="${groupActs}">
+						<s:iterator var="act" value="acts">
 							<tr>
 								<c:if test="${act.state=='draft'||act.state=='tobevalidate'}">
 									<td class="col-md-3 col-xs-3 text-center">
@@ -66,7 +66,7 @@
 										<strong>${act.actMoney}</strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<strong>${act.actDate}</strong>
+										<strong><s:property value="actDate"/></strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 									<c:if test="${act.state=='draft'}">
@@ -101,7 +101,7 @@
 										${act.actMoney}
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										${act.actDate}
+										<s:property value="actDate"/>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 									<c:if test="${act.state=='validate'}">
@@ -116,7 +116,7 @@
 									</td>
 								</c:if>
 							</tr>
-						</c:forEach>
+						</s:iterator>
 					</table>
 				</div>
 			</div>

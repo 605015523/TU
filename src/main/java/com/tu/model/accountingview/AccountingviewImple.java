@@ -1,6 +1,5 @@
 package com.tu.model.accountingview;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.apache.commons.logging.Log;
@@ -14,8 +13,8 @@ import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.mapper.DAOModelMapper;
 import com.tu.model.activities.ActivitiesConstant;
+import com.tu.model.activities.ActivityVO;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.util.ConfConstants;
 
 public class AccountingviewImple extends Observable implements
 		AccountingviewInterface {
@@ -107,7 +106,7 @@ public class AccountingviewImple extends Observable implements
 				if (groupCostVO == null) {
 					groupCostVO = new GroupCostVO();
 					groupCostVO.setGroupId(groupId);
-					groupCostVO.setCost(0);
+					groupCostVO.setCost(oneuserAct.getConsumption());
 					allGroupCost.put(groupId, groupCostVO);
 				} else {
 					groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
@@ -124,7 +123,7 @@ public class AccountingviewImple extends Observable implements
 		oneUserGroupCostVO.setSum(sum);
 		oneUserGroupCostVO.setQuota(oneuser.getQuota());
 		oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota() - sum);
-		oneUserGroupCostVO.setGroupCostVO(allGroupCost.values());
+		oneUserGroupCostVO.setGroupCostVO(allGroupCost);
 		
 		return oneUserGroupCostVO;
 	}
@@ -152,27 +151,13 @@ public class AccountingviewImple extends Observable implements
 	
 	// 获取所有需要被check和validate的活动
 	@Override
-	public List<GroupActVO> doGetAllCheckValidateActs() {
+	public List<ActivityVO> doGetAllCheckValidateActs() {
 		List<Activity> acts = actsDAO.findAll();
-		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
+		List<ActivityVO> actsVO = new ArrayList<ActivityVO>();
 
 		for (Activity activity : acts) {
-			GroupActVO actsPO = new GroupActVO();
-			actsPO.setActId(activity.getActId());
-			actsPO.setActName(activity.getActName());
-			actsPO.setGroupId(activity.getGroupId());
-			actsPO.setActMoney(activity.getActMoney());
-			actsPO.setDescription(activity.getDescription());
-			actsPO.setState(activity.getState());
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-			String daterange = formatter.format(activity
-					.getEnrollStartDate())
-					+ " - "
-					+ formatter.format(activity.getEnrollEndDate());
-			actsPO.setDaterange(daterange);
-			actsPO.setActDate(formatter.format(activity.getActDate()));
-			actsVO.add(actsPO);
-
+			ActivityVO actVO = daoModelMapper.convertActivityToActivityVO(activity);
+			actsVO.add(actVO);
 		}
 		
 		Collections.reverse(actsVO);

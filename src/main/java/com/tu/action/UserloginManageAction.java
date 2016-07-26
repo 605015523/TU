@@ -170,13 +170,9 @@ public class UserloginManageAction extends AbstractAction {
 				}
 			}
 
-			List<String> groupsName = new ArrayList<String>();
-			List<GroupVO> allgroup = groupBean.doGetAllGroup();
-			for (int i = 0; i < allgroup.size(); i++) {
-				groupsName.add(allgroup.get(i).getGroupName());
-			}
 			session.setAttribute("newCheck", newCheck);
-			session.setAttribute("groupsName", groupsName);
+			List<GroupVO> allGroups = groupBean.doGetAllGroup();
+			session.setAttribute("groups", allGroups);
 		}
 
 		return "redirectToHomePage";

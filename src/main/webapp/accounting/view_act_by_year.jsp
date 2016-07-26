@@ -46,13 +46,12 @@
 							<td class="text-center">
 								userName
 							</td>
-						<c:forEach var="groupname" items="${groupsName}">	
-							<td>${groupname}</td>
+						<c:forEach var="group" items="${groups}">
+							<td>${group.groupName}</td>
 						</c:forEach>
 						    <td class="text-center">quota</td>
 						    <td class="text-center">sum</td>
-						     <td class="text-center">different</td>
-						
+						    <td class="text-center">different</td>
 						</tr>
 						
 						<c:forEach var="oneUserGroupCost" items="${allUserGroupCost}">
@@ -60,11 +59,16 @@
 								<td class="col-md-2 col-xs-2 text-center">
 									${oneUserGroupCost.userName}
 								</td>
-                             <c:forEach var="onegroupCost" items="${oneUserGroupCost.groupCostVO}">
+								<c:forEach var="group" items="${groups}">
+									<td class="col-md-1 col-xs-1">
+										${oneUserGroupCost.groupCostVO[group.groupId].cost}
+									</td>
+								</c:forEach>
+                             <%-- <c:forEach var="onegroupCost" items="${oneUserGroupCost.groupCostVO}">
 								<td class="col-md-1 col-xs-1">
 									${onegroupCost.cost}
 								</td>
-							</c:forEach>
+							</c:forEach> --%>
 							 <td class="text-center">${oneUserGroupCost.quota}</td>
 						    <td class="text-center">${oneUserGroupCost.sum}</td>
 						     <td class="text-center">${oneUserGroupCost.different}</td>

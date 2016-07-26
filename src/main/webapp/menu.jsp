@@ -28,21 +28,21 @@
 			aria-haspopup="true" aria-expanded="false">Activity details <span
 				class="caret"></span>
 		</a>
-			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li class="dropdown-header">Total cost</li>
-				<c:forEach var="year" items="${years}">
-					<li><a
-						href='<c:url value="/doshowAllActsByYearAccountingviewAction.action" />?year=${year}'>${year}</a>
-					</li>
-				</c:forEach>
-				<li class="dropdown-header">All in group</li>
-				<c:forEach var="groupname" items="${groupsName}">
-					<li><a
-						href='<c:url value="/doshowAllActsByGroupAccountingviewAction.action" />?groupname=${groupname}'>${groupname}</a>
-					</li>
-				</c:forEach>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li class="dropdown-header">Total cost</li>
+			<c:forEach var="year" items="${years}">
+				<li><a
+					href='<c:url value="/doshowAllActsByYearAccountingviewAction.action" />?year=${year}'>${year}</a>
+				</li>
+			</c:forEach>
+			<li class="dropdown-header">All in group</li>
+			<c:forEach var="group" items="${groups}">
+				<li><a
+					href='<c:url value="/doshowAllActsByGroupAccountingviewAction.action" />?groupname=${group.groupName}'>${group.groupName}</a>
+				</li>
+			</c:forEach>
 
-			</ul></li>
+		</ul></li>
 
 	</c:if>
 	<li role="presentation" <c:if test="${param.active=='messages'}">class="active"</c:if>><a

@@ -66,13 +66,13 @@
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3">
-								${groupAct.actName}
+								${groupAct.activity.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
-								<strong> Registration Period:</strong>
+								<strong>Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.daterange}
+								<s:property value="groupAct.activity.enrollStartDate"/> - <s:property value="groupAct.activity.enrollEndDate"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -80,13 +80,13 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.actDate}
+								<s:property value="groupAct.activity.actDate"/>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<strong>PRICE per PERSON</strong>
+								<strong>PRICE per PERSON:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.actMoney}
+								${groupAct.activity.actMoney}
 							</div>
 						</div>
 						
@@ -97,7 +97,7 @@
 							<div class="col-xs-8 col-md-8 display: block">
 							
 								<textarea class="form-control" rows="6" id="description"
-									name="description" >${groupAct.description}</textarea>
+									name="description" >${groupAct.activity.description}</textarea>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -133,14 +133,8 @@
 							<!-- /input-group -->
 
 							<div class="col-xs-2  col-md-2 col-xs-offset-5 col-md-offset-5 ">
-								<c:if test="${groupAct.state=='draft'}">
 									<input type="submit" class="btn btn-primary   btn-block"
-										value="submit" />
-								</c:if>
-								<c:if test="${groupAct.state!='draft'}">
-									<input type="submit" class="btn btn-primary   btn-block"
-										value="submit" disabled />
-								</c:if>
+										value="submit" <c:if test="${groupAct.activity.state!='draft'}">disabled</c:if>/>
 							</div>
 						</div>
 						<hr class="invisible" />

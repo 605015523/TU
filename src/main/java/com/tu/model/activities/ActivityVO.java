@@ -20,16 +20,7 @@ public class ActivityVO implements java.io.Serializable {
 	// Constructors
 	/** default constructor */
 	public ActivityVO() {
-		actId = null;
-		groupId = null;
-		actName = null;
-		actMoney = null;
-		description = null;
-		enrollStartDate = null;
-		enrollEndDate = null;
-		actDate = null;
-		state = null;
-		comment = null;
+		// Do nothing
 	}
 
 	public Integer getActId() {

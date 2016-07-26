@@ -32,6 +32,7 @@ public class AccountingviewAction extends AbstractAction {
 	
 	// To display
 	private GroupActVO groupAct;
+	private List<ActivityVO> acts;
 	private List<GroupActVO> groupActs;
 	private List<UserGroupCostVO> allUserGroupCost;
 
@@ -65,7 +66,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To retrieve all the activities which are needed to be approval. 
 	public String doGetAllCheckAct() {
-		groupActs = accountingviewBean.doGetAllCheckValidateActs();
+		acts = accountingviewBean.doGetAllCheckValidateActs();
 		LOGGER.info("the doGetAllGroupAct get success");
 	
 		return "doGetAllAct";
@@ -223,6 +224,14 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setYear(Integer year) {
 		this.year = year;
+	}
+
+	public List<ActivityVO> getActs() {
+		return acts;
+	}
+
+	public void setActs(List<ActivityVO> acts) {
+		this.acts = acts;
 	}
 
 }

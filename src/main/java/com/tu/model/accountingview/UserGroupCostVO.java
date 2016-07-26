@@ -11,7 +11,7 @@ public class UserGroupCostVO implements java.io.Serializable {
 	private Float sum;
 	private Float different;
 	private Float quota;
-	private Collection<GroupCostVO> groupCostVO;
+	private Map<Integer, GroupCostVO> groupCostVO;
 
 	// Constructors
 	/** default constructor */
@@ -56,11 +56,11 @@ public class UserGroupCostVO implements java.io.Serializable {
 		this.different = different;
 	}
 
-	public Collection<GroupCostVO> getGroupCostVO() {
+	public Map<Integer, GroupCostVO> getGroupCostVO() {
 		return groupCostVO;
 	}
 
-	public void setGroupCostVO(Collection<GroupCostVO> groupCostVO) {
+	public void setGroupCostVO(Map<Integer, GroupCostVO> groupCostVO) {
 		this.groupCostVO = groupCostVO;
 	}
 
