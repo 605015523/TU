@@ -256,7 +256,7 @@ public class LeaderviewAction extends AbstractAction {
 		Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
 		String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
 		LOGGER.info(sendMessage);
-			
+
 		// Update variable year in session. If the year exists, ignore, or append year into attribute years
 		List<Integer> years = (List<Integer>) session.getAttribute("years");
 		Calendar cal = Calendar.getInstance();

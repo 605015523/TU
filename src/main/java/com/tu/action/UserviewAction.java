@@ -1,6 +1,7 @@
 package com.tu.action;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -170,22 +171,22 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
 		LOGGER.info("the actid is: " + actId);
+		ActivityVO oneAct = actsBean.doGetOneActById(actId);
 		Integer userId = getCurrentUser().getUserId();
 		oneUserActVO.setActId(actId);
 		oneUserActVO.setUserId(userId);
 		oneUserActVO.setNbParticipants(nbParticipants);
 		
 		// FIXME: know why consumption is actually not given
-		//ActivityVO oneAct = actsBean.doGetOneActById(actId);
-		//oneAct.getActMoney()
+		//oneUserActVO.setConsumption(oneAct.getActMoney()*nbParticipants); ?
 		oneUserActVO.setConsumption(consumption != null ? consumption : 0);
-		
 		oneUserActVO.setRemark(remark);
 		
 		userActBean.doAddOneUserAct(oneUserActVO);
 
-		List<Integer> years = (List<Integer>) session.getAttribute("years");
-		year = years.get(years.size() - 1);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(oneAct.getActDate());
+		year = cal.get(Calendar.YEAR);
 
 		return "redirectToShowActs";
 	}
