@@ -2,7 +2,7 @@ package com.tu.dao.messages;
 
 import java.util.Date;
 
-public class Messages implements java.io.Serializable {
+public class Message implements java.io.Serializable {
 	private static final long serialVersionUID = -2301807989217269139L;
 	
 	// Fields
@@ -19,12 +19,12 @@ public class Messages implements java.io.Serializable {
 
 	// Constructors
 	/** default constructor */
-	public Messages() {
+	public Message() {
+		// do nothing
 	}
 
 	/** full constructor */
-
-	public Messages(Integer msgId, Integer actId, Integer groupId,
+	public Message(Integer msgId, Integer actId, Integer groupId,
 			String actName, Float actMoney, String description,
 			Date enrollStartDate, Date enrollEndDate, Date actDate, String state) {
 		this.msgId = msgId;

@@ -6,6 +6,7 @@ public class UserMsgVO implements java.io.Serializable {
 	
 	// Fields
 	private Integer msgId;
+	private Integer userId;
 	private Integer actId;
 	private String groupName;
 	private String actName;
@@ -19,14 +20,16 @@ public class UserMsgVO implements java.io.Serializable {
 	// Constructors
 	/** default constructor */
 	public UserMsgVO() {
+		// do nothing
 	}
 
 	/** full constructor */
 
-	public UserMsgVO(Integer msgId, Integer actId, String groupName,
+	public UserMsgVO(Integer msgId, Integer userId, Integer actId, String groupName,
 			String actName, Float actMoney, String description,
 			String dateRange, String actDate, String state, String readState) {
 		this.msgId = msgId;
+		this.userId = userId;
 		this.actId = actId;
 		this.groupName = groupName;
 		this.actName = actName;
@@ -116,6 +119,14 @@ public class UserMsgVO implements java.io.Serializable {
 
 	public void setDateRange(String dateRange) {
 		this.dateRange = dateRange;
+	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 }

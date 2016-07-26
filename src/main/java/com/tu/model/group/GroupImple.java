@@ -30,7 +30,7 @@ public class GroupImple extends Observable implements GroupInterface {
 	}
 
 	@Override
-	public GroupVO dogetOneGroup(Integer userId) {
+	public GroupVO doGetOneGroup(Integer userId) {
 		GroupVO groupVO = new GroupVO();
 		Group groupPO = groupDAO.findByUserId(userId);
 		try {
@@ -46,7 +46,7 @@ public class GroupImple extends Observable implements GroupInterface {
 	}
 
 	@Override
-	public GroupVO dogetOneGroupByName(String groupName) {
+	public GroupVO doGetOneGroupByName(String groupName) {
 		GroupVO groupVO = new GroupVO();
 		Group groupPO = groupDAO.findByGroupName(groupName);
 		try {
@@ -62,7 +62,7 @@ public class GroupImple extends Observable implements GroupInterface {
 	}
 
 	@Override
-	public List<GroupVO> dogetAllGroup() {
+	public List<GroupVO> doGetAllGroup() {
 		List<GroupVO> allGroupVO = new ArrayList<GroupVO>();
 		List<Group> allGroupPO = groupDAO.findAll();
 		for (int i = 0; i < allGroupPO.size(); i++) {

@@ -7,7 +7,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
@@ -41,6 +40,8 @@ public class UserviewAction extends AbstractAction {
 	// To display
 	private List<UserActDetailedVO> useracts;
 	private UserActDetailedVO act;
+	private List<UserMsgVO> overmessages;
+	private List<UserMsgVO> inmessages;
 
 	public UserviewAction() {
 		// do nothing
@@ -99,11 +100,10 @@ public class UserviewAction extends AbstractAction {
 
 	// Display all the messages
 	public String doshowMessages() {
-		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
-		List<UserMsgVO> messages = userviewBean.dogetMessages(userId);
-		List<UserMsgVO> overmessages = new ArrayList<UserMsgVO>();
-		List<UserMsgVO> inmessages = new ArrayList<UserMsgVO>();
+		List<UserMsgVO> messages = userMsgBean.doGetUserMsgs(userId);
+		overmessages = new ArrayList<UserMsgVO>();
+		inmessages = new ArrayList<UserMsgVO>();
 
 		for (UserMsgVO message : messages) {
 			ActivityVO oneAct = actsBean.doGetOneActById(message.getActId());
@@ -114,39 +114,22 @@ public class UserviewAction extends AbstractAction {
 				overmessages.add(message);
 			}
 		}
-		session.setAttribute("inmessages", inmessages);
-		session.setAttribute("overmessages", overmessages);
 		return "showMessages";
 	}
 
 	// Display all the messages' details
 	public String doshowMsgDetails() {
 		initServletContextObject();
-		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
-		for (int i = 0; i < messages.size(); i++) {
-			if (messages.get(i).getMsgId().equals(msgId)) {
-				session.setAttribute("msgDetails", messages.get(i));
-			}
-		}
+		Integer userId = this.getCurrentUser().getUserId();
+		UserMsgVO oneUserMsg = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
+		session.setAttribute("msgDetails", oneUserMsg);
 
 		// Set the status of UserMsg as read.
-		Integer userId = getCurrentUser().getUserId();
-		UserMsg oneUserMsg = userMsgBean.dogetOneByUserIdAndMsgId(userId, msgId);
-
 		if (oneUserMsg.getReadState().equals(UserMsgConstants.STATE_NEW)) {
 
 			oneUserMsg.setReadState(UserMsgConstants.STATE_READ);
 			userMsgBean.doUpdateOneUserMsg(oneUserMsg);
-			int newMsg = 0;
-			List<UserMsg> userMsgVOs = (List<UserMsg>) userMsgBean
-					.doGetUserMsg(userId);
-			for (int i = 0; i < userMsgVOs.size(); i++) {
-
-				if (userMsgVOs.get(i).getReadState().equals(UserMsgConstants.STATE_NEW)) {
-					newMsg += 1;
-				}
-
-			}
+			int newMsg = userMsgBean.countNewMsgs(userId);
 			session.setAttribute("newMsg", newMsg);
 
 		}
@@ -157,18 +140,15 @@ public class UserviewAction extends AbstractAction {
 	// Go jump to one activity's page
 	public String doInAct() {
 		initServletContextObject();
-		List<UserMsgVO> messages = (List<UserMsgVO>) session.getAttribute("inmessages");
-		for (int i = 0; i < messages.size(); i++) {
-			if (messages.get(i).getMsgId().equals(msgId)) {
-				session.setAttribute("message", messages.get(i));
-			}
-		}
+		Integer userId = this.getCurrentUser().getUserId();
+		UserMsgVO message = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
+		session.setAttribute("message", message);
+		
 		return "doInAct";
 	}
 
 	// Request to join one activity
 	public String doActRequest() {
-		initServletContextObject();
 		UserActVO oneUserActVO = new UserActVO();
 		LOGGER.info("the actid is: " + actId);
 		ActivityVO oneAct = actsBean.doGetOneActById(actId);
@@ -203,7 +183,7 @@ public class UserviewAction extends AbstractAction {
 		userInfo.setUserPassword(newpassword);
 		
 		if (orgpassword.equals(oldpassword)) {
-			updateMessage = userviewBean.doupdateOneuserInfo(userInfo);
+			updateMessage = userviewBean.doUpdateOneuserInfo(userInfo);
 			request.setAttribute("updateMessage", updateMessage);
 			return "pwdUpdateSuccess";
 		} else {
@@ -294,6 +274,22 @@ public class UserviewAction extends AbstractAction {
 
 	public void setYear(Integer year) {
 		this.year = year;
+	}
+
+	public List<UserMsgVO> getOvermessages() {
+		return overmessages;
+	}
+
+	public void setOvermessages(List<UserMsgVO> overmessages) {
+		this.overmessages = overmessages;
+	}
+
+	public List<UserMsgVO> getInmessages() {
+		return inmessages;
+	}
+
+	public void setInmessages(List<UserMsgVO> inmessages) {
+		this.inmessages = inmessages;
 	}
 
 

@@ -16,13 +16,11 @@ import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
 import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
-import com.tu.dao.messages.Messages;
 import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
 import com.tu.dao.user.group.UserGroup;
 import com.tu.dao.user.group.UserGroupDAOInterface;
-import com.tu.dao.user.msg.UserMsg;
 import com.tu.dao.user.msg.UserMsgDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
@@ -202,44 +200,10 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return useractsPO;
 	}
 
-	// 获取用户的所有messages
-	@Override
-	public List<UserMsgVO> dogetMessages(Integer userId) {
-		List<UserMsgVO> userMsgsVO = new ArrayList<UserMsgVO>();
-		List<UserMsg> userMsgs = userMsgDAO.findMsgByUserId(userId);
-		
-		for (int i = 0; i < userMsgs.size(); i++) {
-			Integer oneMsgId = userMsgs.get(i).getMsgId();
-			Messages oneMessage = msgDAO.findById(oneMsgId);
-			UserMsgVO oneUserMsgVO = new UserMsgVO();
-			try { // 利用Bean拷贝类实现简单地拷贝
-				BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
-			} catch (IllegalAccessException e) {
-				LOG.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO: " + e.toString());
-			} catch (InvocationTargetException e) {
-				LOG.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO: " + e.toString());
-			}
-			oneUserMsgVO.setReadState(((UserMsg) userMsgs.get(i))
-					.getReadState());
-			Group group = groupDAO.findById(oneMessage.getGroupId());
-			oneUserMsgVO.setGroupName(group.getGroupName());
-			SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-			String daterange = formatter
-					.format(oneMessage.getEnrollStartDate())
-					+ " - "
-					+ formatter.format(oneMessage.getEnrollEndDate());
-			oneUserMsgVO.setDateRange(daterange);
-			oneUserMsgVO.setActDate(formatter.format(oneMessage.getActDate()));
-			userMsgsVO.add(oneUserMsgVO);
-		}
-		
-		Collections.reverse(userMsgsVO);
-		return userMsgsVO;
-	}
 
 	// 用户修改密码
 	@Override
-	public String doupdateOneuserInfo(UserloginVO userInfoVO) {
+	public String doUpdateOneuserInfo(UserloginVO userInfoVO) {
 		Integer userId = userInfoVO.getUserId();
 		LOG.info("the modified id is:" + userId);
 		Userlogin userInfoPO = userloginDAO.findById(userId);

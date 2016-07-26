@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface ActivitiesInterface {
 
-	public Integer doAddOneAct(ActivityVO oneActivitiesVO);
+	Integer doAddOneAct(ActivityVO oneActivitiesVO);
 
-	public String doDeleteOneActivities(ActivityVO oneActivitiesVO);
+	String doDeleteOneActivities(ActivityVO oneActivitiesVO);
 
-	public ActivityVO doGetOneActById(Integer actId);
+	ActivityVO doGetOneActById(Integer actId);
 
-	public List<ActivityVO> doGetAllActivity();
+	List<ActivityVO> doGetAllActivity();
 
-	public String doUpdateOneAct(ActivityVO oneActVO);
+	String doUpdateOneAct(ActivityVO oneActVO);
 
 }

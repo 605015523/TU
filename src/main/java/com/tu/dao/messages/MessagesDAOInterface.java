@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface MessagesDAOInterface {
 
-	public Object save(Messages oneActivitiesPO);
+	Object save(Message oneActivitiesPO);
 
-	public List<Messages> findAll();
+	List<Message> findAll();
 
-	public Messages findById(Integer actId);
+	Message findById(Integer actId);
 
 }

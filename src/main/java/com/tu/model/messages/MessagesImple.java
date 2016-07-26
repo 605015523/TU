@@ -7,7 +7,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.dao.messages.Messages;
+import com.tu.dao.messages.Message;
 import com.tu.dao.messages.MessagesDAOInterface;
 
 public class MessagesImple extends Observable implements MessagesInterface {
@@ -31,7 +31,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	@Override
 	public MessagesVO doGetOneMsgById(Integer msgId) {
 		MessagesVO oneMessagesVO = new MessagesVO();
-		Messages oneMessagesPO = msgDAO.findById(msgId);
+		Message oneMessagesPO = msgDAO.findById(msgId);
 		try {
 			BeanUtils.copyProperties(oneMessagesVO, oneMessagesPO);
 		} catch (IllegalAccessException e) {
@@ -45,7 +45,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 	// 添加一个messages
 	@Override
 	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
-		Messages onemsgPO = new Messages();
+		Message onemsgPO = new Message();
 		Integer msgId = null;
 
 		try { // 利用Bean拷贝类实现简单地拷贝

@@ -149,6 +149,8 @@
 	
 	<bean id="UserMsgBean" class="com.tu.model.user.msg.UserMsgImple">
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
+		<property name="msgDAO" ref="MsgDAO"/>
+		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 
 

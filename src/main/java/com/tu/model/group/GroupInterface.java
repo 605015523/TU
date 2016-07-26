@@ -4,10 +4,10 @@ import java.util.List;
 
 public interface GroupInterface {
 
-	GroupVO dogetOneGroup(Integer userId);
+	GroupVO doGetOneGroup(Integer userId);
 
-	List<GroupVO> dogetAllGroup();
+	List<GroupVO> doGetAllGroup();
 
-	GroupVO dogetOneGroupByName(String groupName);
+	GroupVO doGetOneGroupByName(String groupName);
 
 }

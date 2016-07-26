@@ -4,17 +4,17 @@ import java.util.List;
 
 public interface ActivityDAOInterface {
 
-	public Integer save(Activity oneActivityPO);
+	Integer save(Activity oneActivityPO);
 
-	public void delete(Activity oneActivityPO);
+	void delete(Activity oneActivityPO);
 
-	public List<Activity> findAll();
+	List<Activity> findAll();
 
-	public Activity findById(Integer actId);
+	Activity findById(Integer actId);
 
-	public List<Activity> findByGroupId(Integer groupId);
+	List<Activity> findByGroupId(Integer groupId);
 	
-	public List<Activity> findByYear(Integer year);
+	List<Activity> findByYear(Integer year);
 
-	public Activity merge(Activity oneActPO);
+	Activity merge(Activity oneActPO);
 }

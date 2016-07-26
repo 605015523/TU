@@ -14,8 +14,6 @@ public interface UserviewInterface {
 	UserActDetailedVO doGetUserActsByUserIdAndActId(Integer userId,
 			Integer actId);
 	
-	List<UserMsgVO> dogetMessages(Integer userId);
-
-	String doupdateOneuserInfo(UserloginVO userInfo);
+	String doUpdateOneuserInfo(UserloginVO userInfo);
 
 }

@@ -153,7 +153,7 @@ public class AccountingviewAction extends AbstractAction {
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
 		String groupName = request.getParameter("groupname");
-		GroupVO group = groupBean.dogetOneGroupByName(groupName);
+		GroupVO group = groupBean.doGetOneGroupByName(groupName);
 		groupActs = accountingviewBean.doGetAllActsByGroupId(group
 				.getGroupId());
 

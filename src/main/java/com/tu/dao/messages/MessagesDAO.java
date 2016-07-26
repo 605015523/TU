@@ -26,7 +26,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 
 	// 获取所有的messages
 	@Override
-	public List<Messages> findAll() {
+	public List<Message> findAll() {
 		LOG.debug("finding all Message instances");
 		try {
 			String queryString = "from Messages";
@@ -39,11 +39,11 @@ public class MessagesDAO extends HibernateDaoSupport implements
 
 	// 通过messagesId来获取特定的messages对象
 	@Override
-	public Messages findById(java.lang.Integer msgId) {
+	public Message findById(java.lang.Integer msgId) {
 		LOG.debug("getting Message instance with id: " + msgId);
 		try {
-			return (Messages) getHibernateTemplate().get(
-					"com.tu.dao.messages.Messages", msgId);
+			return (Message) getHibernateTemplate().get(
+					"com.tu.dao.messages.Message", msgId);
 		} catch (RuntimeException re) {
 			LOG.error("get failed", re);
 			throw re;
@@ -52,7 +52,7 @@ public class MessagesDAO extends HibernateDaoSupport implements
 
 	// 保存一个messages对象
 	@Override
-	public Integer save(Messages oneMessagePO) {
+	public Integer save(Message oneMessagePO) {
 		LOG.debug("saving message instance");
 		try {
 			getHibernateTemplate().save(oneMessagePO);

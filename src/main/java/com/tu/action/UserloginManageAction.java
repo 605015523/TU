@@ -2,17 +2,16 @@ package com.tu.action;
 
 import java.util.*;
 
-import com.tu.dao.user.msg.UserMsg;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.messages.MessagesInterface;
-import com.tu.model.messages.MessagesVO;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginVO;
+import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
 import com.tu.util.ConfConstants;
@@ -136,15 +135,12 @@ public class UserloginManageAction extends AbstractAction {
 		}
 
 		int newMsg = 0;
-		List<UserMsg> userMsgVOs = userMsgBean.doGetUserMsg(userId);
-		for (UserMsg userMsgVO : userMsgVOs) {
-			MessagesVO oneMsg = msgBean.doGetOneMsgById(userMsgVO
-					.getMsgId());
-			ActivityVO oneAct = actsBean.doGetOneActById(oneMsg.getActId());
+		List<UserMsgVO> userMsgVOs = userMsgBean.doGetUserMsgs(userId);
+		for (UserMsgVO userMsgVO : userMsgVOs) {
 			
-			if (oneAct.getState().equals(ActivitiesConstant.STATE_PENDING)
-					|| oneAct.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
-					|| oneAct.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
+			if (userMsgVO.getState().equals(ActivitiesConstant.STATE_PENDING)
+					|| userMsgVO.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
+					|| userMsgVO.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
 				userMsgVO.setReadState(UserMsgConstants.STATE_READ);
 				userMsgBean.doUpdateOneUserMsg(userMsgVO);
 
@@ -168,7 +164,7 @@ public class UserloginManageAction extends AbstractAction {
 		if (userRole.equals(1)) {
 
 			// Get group info
-			GroupVO group = groupBean.dogetOneGroup(userId);
+			GroupVO group = groupBean.doGetOneGroup(userId);
 
 			// Save group info into session
 			session.setAttribute("group", group);
@@ -185,7 +181,7 @@ public class UserloginManageAction extends AbstractAction {
 			}
 
 			List<String> groupsName = new ArrayList<String>();
-			List<GroupVO> allgroup = groupBean.dogetAllGroup();
+			List<GroupVO> allgroup = groupBean.doGetAllGroup();
 			for (int i = 0; i < allgroup.size(); i++) {
 				groupsName.add(allgroup.get(i).getGroupName());
 			}

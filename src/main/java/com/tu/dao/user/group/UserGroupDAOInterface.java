@@ -4,14 +4,14 @@ import java.util.List;
 
 public interface UserGroupDAOInterface {
 
-	public void save(UserGroup oneUserGroupPO);
+	void save(UserGroup oneUserGroupPO);
 
-	public List<UserGroup> findByUserId(Integer userId);
+	List<UserGroup> findByUserId(Integer userId);
 
-	public List<UserGroup> findByGroupId(Integer groupId);
+	List<UserGroup> findByGroupId(Integer groupId);
 
-	public UserGroup findByGroupIdAndUserId(Integer groupId, Integer userId);
+	UserGroup findByGroupIdAndUserId(Integer groupId, Integer userId);
 
-	public void delete(UserGroup userGroupPO);
+	void delete(UserGroup userGroupPO);
 
 }

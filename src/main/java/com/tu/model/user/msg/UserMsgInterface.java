@@ -2,16 +2,18 @@ package com.tu.model.user.msg;
 
 import java.util.List;
 
-import com.tu.dao.user.msg.UserMsg;
+import com.tu.model.userview.UserMsgVO;
 
 public interface UserMsgInterface {
 
 	String doSendMsg(Integer msgId, List<Integer> alluserId);
 
-	List<UserMsg> doGetUserMsg(Integer userId);
+	List<UserMsgVO> doGetUserMsgs(Integer userId);
 
-	UserMsg dogetOneByUserIdAndMsgId(Integer userId, Integer msgId);
+	UserMsgVO doGetOneByUserIdAndMsgId(Integer userId, Integer msgId);
 
-	void doUpdateOneUserMsg(UserMsg oneUserMsg);
+	void doUpdateOneUserMsg(UserMsgVO oneUserMsg);
+	
+	Integer countNewMsgs(Integer userId);
 
 }
