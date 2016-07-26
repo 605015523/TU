@@ -1,6 +1,9 @@
 package com.tu.mapper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -12,19 +15,27 @@ import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
 import com.tu.dao.messages.Message;
 import com.tu.dao.messages.MessagesDAOInterface;
+import com.tu.dao.user.act.UserAct;
+import com.tu.dao.user.act.UserActDAOInterface;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.dao.userlogin.Userlogin;
+import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivityVO;
+import com.tu.model.leaderview.GroupActVO;
+import com.tu.model.leaderview.MemberInVO;
 import com.tu.model.messages.MessagesVO;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
+import com.tu.util.ConfConstants;
 
 public class DAOModelMapper {
 	private static final Log LOGGER = LogFactory.getLog(DAOModelMapper.class);
 	private MessagesDAOInterface msgDAO;
 	private GroupDAOInterface groupDAO;
+	private UserActDAOInterface userActDAO;
+	private UserloginDAOInterface userloginDAO;
 	
-	
+
 	public UserloginVO convertoToUserInfoVO(Userlogin userInfoPO) {
 		UserloginVO userInfoVO = new UserloginVO();
 		try {
@@ -95,6 +106,50 @@ public class DAOModelMapper {
 		return actVO;
 	}
 	
+	public GroupActVO convertActivityToGroupActVO(Activity act) {
+		GroupActVO actsPO = new GroupActVO();
+
+		actsPO.setActId(act.getActId());
+		actsPO.setActName(act.getActName());
+		actsPO.setGroupId(act.getGroupId());
+		actsPO.setActMoney(act.getActMoney());
+		actsPO.setDescription(act.getDescription());
+		actsPO.setState(act.getState());
+
+		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
+		String daterange = formatter.format(act
+				.getEnrollStartDate())
+				+ " - "
+				+ formatter.format(act.getEnrollEndDate());
+		actsPO.setDaterange(daterange);
+		actsPO.setActDate(formatter.format(act.getActDate()));
+		actsPO.setComment(act.getComment());
+		List<UserAct> useractPO = userActDAO.findByActId(act
+				.getActId());
+		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
+		float sum = 0;
+		Integer nbParticipants = 0;
+		for (int j = 0; j < useractPO.size(); j++) {
+			MemberInVO oneMemberIn = new MemberInVO();
+			oneMemberIn.setUserId(useractPO.get(j).getUserId());
+			oneMemberIn.setNbParticipants(useractPO.get(j)
+					.getNbParticipants());
+			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
+			oneMemberIn.setRemark(useractPO.get(j).getRemark());
+			sum += useractPO.get(j).getConsumption();
+			nbParticipants += useractPO.get(j).getNbParticipants();
+			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+			oneMemberIn.setUserName(userPO.getUserName());
+			oneMemberIn.setUserDept(userPO.getUserDept());
+			memberInVO.add(oneMemberIn);
+		}
+		actsPO.setNbParticipants(nbParticipants);
+		actsPO.setMemberInVO(memberInVO);
+		actsPO.setSum(sum);
+		
+		return actsPO;
+	}
+	
 	public MessagesDAOInterface getMsgDAO() {
 		return msgDAO;
 	}
@@ -109,6 +164,22 @@ public class DAOModelMapper {
 
 	public void setGroupDAO(GroupDAOInterface groupDAO) {
 		this.groupDAO = groupDAO;
+	}
+	
+	public UserActDAOInterface getUserActDAO() {
+		return userActDAO;
+	}
+
+	public void setUserActDAO(UserActDAOInterface userActDAO) {
+		this.userActDAO = userActDAO;
+	}
+
+	public UserloginDAOInterface getUserloginDAO() {
+		return userloginDAO;
+	}
+
+	public void setUserloginDAO(UserloginDAOInterface userloginDAO) {
+		this.userloginDAO = userloginDAO;
 	}
 
 }

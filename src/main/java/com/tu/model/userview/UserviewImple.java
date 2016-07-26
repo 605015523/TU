@@ -16,12 +16,10 @@ import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
 import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
-import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
 import com.tu.dao.user.group.UserGroup;
 import com.tu.dao.user.group.UserGroupDAOInterface;
-import com.tu.dao.user.msg.UserMsgDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.userlogin.UserloginVO;
@@ -35,8 +33,6 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
 	private UserActDAOInterface userActDAO = null;
-	private UserMsgDAOInterface userMsgDAO = null;
-	private MessagesDAOInterface msgDAO = null;
 
 	// 构造方法
 	public UserviewImple() {
@@ -61,22 +57,6 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 	public void setUserActDAO(UserActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
-	}
-
-	public UserMsgDAOInterface getUserMsgDAO() {
-		return this.userMsgDAO;
-	}
-
-	public void setUserMsgDAO(UserMsgDAOInterface userMsgDAO) {
-		this.userMsgDAO = userMsgDAO;
-	}
-
-	public MessagesDAOInterface getMsgDAO() {
-		return this.msgDAO;
-	}
-
-	public void setMsgDAO(MessagesDAOInterface msgDAO) {
-		this.msgDAO = msgDAO;
 	}
 
 	public UserGroupDAOInterface getUserGroupDAO() {

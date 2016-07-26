@@ -10,8 +10,6 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.dao.group.GroupDAOInterface;
-import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.msg.UserMsg;
 import com.tu.dao.user.msg.UserMsgDAOInterface;
 import com.tu.mapper.DAOModelMapper;
@@ -23,8 +21,6 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	
 	private DAOModelMapper daoModelMapper;
 	private UserMsgDAOInterface userMsgDAO = null;
-	private MessagesDAOInterface msgDAO = null;
-	private GroupDAOInterface groupDAO = null;
 	
 	public UserMsgImple() {
 		// do nothing
@@ -126,22 +122,6 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 
 	public void setUserMsgDAO(UserMsgDAOInterface userMsgDAO) {
 		this.userMsgDAO = userMsgDAO;
-	}
-
-	public MessagesDAOInterface getMsgDAO() {
-		return msgDAO;
-	}
-
-	public void setMsgDAO(MessagesDAOInterface msgDAO) {
-		this.msgDAO = msgDAO;
-	}
-
-	public GroupDAOInterface getGroupDAO() {
-		return groupDAO;
-	}
-
-	public void setGroupDAO(GroupDAOInterface groupDAO) {
-		this.groupDAO = groupDAO;
 	}
 
 	public DAOModelMapper getDaoModelMapper() {

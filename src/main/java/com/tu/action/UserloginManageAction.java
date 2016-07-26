@@ -7,7 +7,6 @@ import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
-import com.tu.model.messages.MessagesInterface;
 import com.tu.model.user.msg.UserMsgConstants;
 import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginVO;
@@ -22,7 +21,6 @@ public class UserloginManageAction extends AbstractAction {
 	private transient UserviewInterface userviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient GroupInterface groupBean = null;
-	private transient MessagesInterface msgBean = null;
 	private transient UserMsgInterface userMsgBean = null;
 
 	private Integer userId;
@@ -66,14 +64,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setUserMsgBean(UserMsgInterface userMsgBean) {
 		this.userMsgBean = userMsgBean;
-	}
-
-	public MessagesInterface getMsgBean() {
-		return msgBean;
-	}
-
-	public void setMsgBean(MessagesInterface msgBean) {
-		this.msgBean = msgBean;
 	}
 
 	// The action will be called as user login

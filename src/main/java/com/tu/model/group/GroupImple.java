@@ -18,15 +18,7 @@ public class GroupImple extends Observable implements GroupInterface {
 	private GroupDAOInterface groupDAO = null;
 
 	public GroupImple() {
-
-	}
-
-	public GroupDAOInterface getGroupDAO() {
-		return this.groupDAO;
-	}
-
-	public void setGroupDAO(GroupDAOInterface groupDAO) {
-		this.groupDAO = groupDAO;
+		// Do nothing
 	}
 
 	@Override
@@ -82,4 +74,12 @@ public class GroupImple extends Observable implements GroupInterface {
 		return allGroupVO;
 	}
 
+	public GroupDAOInterface getGroupDAO() {
+		return this.groupDAO;
+	}
+
+	public void setGroupDAO(GroupDAOInterface groupDAO) {
+		this.groupDAO = groupDAO;
+	}
+	
 }

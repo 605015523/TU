@@ -16,19 +16,11 @@ import com.tu.mapper.DAOModelMapper;
 public class ActivitiesImple extends Observable implements ActivitiesInterface {
 
 	private static final Log LOGGER = LogFactory.getLog(ActivitiesImple.class);
-	private ActivityDAOInterface actsDAO = null;
+	private ActivityDAOInterface actsDAO;
 	private DAOModelMapper daoModelMapper;
 
 	public ActivitiesImple() {
 		// 构造方法
-	}
-	
-	public ActivityDAOInterface getActsDAO() {
-		return this.actsDAO;
-	}
-
-	public void setActsDAO(ActivityDAOInterface actsDAO) {
-		this.actsDAO = actsDAO;
 	}
 	
 
@@ -103,6 +95,15 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		return null;
 	}
 
+	// Getters and setters
+	public ActivityDAOInterface getActsDAO() {
+		return this.actsDAO;
+	}
+
+	public void setActsDAO(ActivityDAOInterface actsDAO) {
+		this.actsDAO = actsDAO;
+	}
+	
 	public DAOModelMapper getDaoModelMapper() {
 		return daoModelMapper;
 	}

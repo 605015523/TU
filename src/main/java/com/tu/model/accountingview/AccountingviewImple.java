@@ -8,14 +8,13 @@ import org.apache.commons.logging.LogFactory;
 
 import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
-import com.tu.dao.group.GroupDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
+import com.tu.mapper.DAOModelMapper;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.model.leaderview.MemberInVO;
 import com.tu.util.ConfConstants;
 
 public class AccountingviewImple extends Observable implements
@@ -26,7 +25,7 @@ public class AccountingviewImple extends Observable implements
 	private UserloginDAOInterface userloginDAO = null;
 	private ActivityDAOInterface actsDAO = null;
 	private UserActDAOInterface userActDAO = null;
-	private GroupDAOInterface groupDAO = null;
+	private DAOModelMapper daoModelMapper;
 
 	public AccountingviewImple() {
 		// nothing to do
@@ -54,14 +53,6 @@ public class AccountingviewImple extends Observable implements
 
 	public void setUserActDAO(UserActDAOInterface userActDAO) {
 		this.userActDAO = userActDAO;
-	}
-
-	public GroupDAOInterface getGroupDAO() {
-		return this.groupDAO;
-	}
-
-	public void setGroupDAO(GroupDAOInterface groupDAO) {
-		this.groupDAO = groupDAO;
 	}
 
 	// 通过选择year的方式显示所有用户这一年的活动参与情况的实现细节
@@ -145,7 +136,7 @@ public class AccountingviewImple extends Observable implements
 		List<GroupActVO> actsVO = new ArrayList<GroupActVO>();
 
 		for (Activity activity : acts) {
-			actsVO.add(convertActivityToGroupActVO(activity));
+			actsVO.add(daoModelMapper.convertActivityToGroupActVO(activity));
 		}
 		Collections.reverse(actsVO);
 
@@ -156,48 +147,9 @@ public class AccountingviewImple extends Observable implements
 	@Override
 	public GroupActVO doGetGroupActivityByID(Integer actId) {
 		Activity activity = actsDAO.findById(actId);
-		return convertActivityToGroupActVO(activity);
+		return daoModelMapper.convertActivityToGroupActVO(activity);
 	}
 	
-	private GroupActVO convertActivityToGroupActVO(Activity activity) {
-		GroupActVO actsPO = new GroupActVO();
-		actsPO.setActId(activity.getActId());
-		actsPO.setActName(activity.getActName());
-		actsPO.setGroupId(activity.getGroupId());
-		actsPO.setActMoney(activity.getActMoney());
-		actsPO.setDescription(activity.getDescription());
-		actsPO.setState(activity.getState());
-
-		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-		String daterange = formatter.format(activity.getEnrollStartDate())
-				+ " - "	+ formatter.format(activity.getEnrollEndDate());
-		actsPO.setDaterange(daterange);
-		actsPO.setActDate(formatter.format(activity.getActDate()));
-		actsPO.setComment(activity.getComment());
-		List<UserAct> useractsPO = userActDAO.findByActId(activity.getActId());
-		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
-		float sum = 0;
-		Integer nbParticipants = 0;
-		for (UserAct userActPO : useractsPO) {
-			MemberInVO oneMemberIn = new MemberInVO();
-			oneMemberIn.setUserId(userActPO.getUserId());
-			oneMemberIn.setNbParticipants(userActPO.getNbParticipants());
-			oneMemberIn.setConsumption(userActPO.getConsumption());
-			oneMemberIn.setRemark(userActPO.getRemark());
-			sum += userActPO.getConsumption();
-			nbParticipants += userActPO.getNbParticipants();
-			Userlogin userPO = userloginDAO.findById(userActPO.getUserId());
-			oneMemberIn.setUserName(userPO.getUserName());
-			oneMemberIn.setUserDept(userPO.getUserDept());
-			memberInVO.add(oneMemberIn);
-		}
-		actsPO.setNbParticipants(nbParticipants);
-		actsPO.setMemberInVO(memberInVO);
-		actsPO.setSum(sum);
-		
-		return actsPO;
-	}
-
 	// 获取所有需要被check和validate的活动
 	@Override
 	public List<GroupActVO> doGetAllCheckValidateActs() {
@@ -226,5 +178,13 @@ public class AccountingviewImple extends Observable implements
 		Collections.reverse(actsVO);
 		return actsVO;
 
+	}
+
+	public DAOModelMapper getDaoModelMapper() {
+		return daoModelMapper;
+	}
+
+	public void setDaoModelMapper(DAOModelMapper daoModelMapper) {
+		this.daoModelMapper = daoModelMapper;
 	}
 }

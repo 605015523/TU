@@ -63,7 +63,6 @@
 		<property name="userviewBean" ref="UserviewBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="groupBean" ref="GroupBean"/>
-		<property name="msgBean" ref="MsgBean"/>
 		<property name="userMsgBean" ref="UserMsgBean"/>
 	</bean>
 
@@ -109,8 +108,6 @@
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
-		<property name="msgDAO" ref="MsgDAO"/>
-		<property name="userMsgDAO" ref="UserMsgDAO"/>
 	</bean>
 
 	<bean id="ActsBean" class="com.tu.model.activities.ActivitiesImple">
@@ -131,18 +128,15 @@
 	</bean>
 
 	<bean id="LeaderviewBean" class="com.tu.model.leaderview.LeaderviewImple">
-		<property name="userloginDAO" ref="UserloginDAO"/>
-		<property name="groupDAO" ref="GroupDAO"/>
-		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
-		<property name="userActDAO" ref="UserActDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 	
 	<bean id="AccountingviewBean" class="com.tu.model.accountingview.AccountingviewImple">
 		<property name="userloginDAO" ref="UserloginDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
-		<property name="groupDAO" ref="GroupDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 	
 	<bean id="MsgBean" class="com.tu.model.messages.MessagesImple">
@@ -153,13 +147,13 @@
 	<bean id="UserMsgBean" class="com.tu.model.user.msg.UserMsgImple">
 		<property name="daoModelMapper" ref="DaoModelMapper"/>
 		<property name="userMsgDAO" ref="UserMsgDAO"/>
-		<property name="msgDAO" ref="MsgDAO"/>
-		<property name="groupDAO" ref="GroupDAO"/>
 	</bean>
 
 	<bean id="DaoModelMapper" class="com.tu.mapper.DAOModelMapper">
 		<property name="msgDAO" ref="MsgDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
+		<property name="userActDAO" ref="UserActDAO"/>
+		<property name="userloginDAO" ref="UserloginDAO"/>
 	</bean>
 
 	<!-- 数据访问层Bean定义 -->
