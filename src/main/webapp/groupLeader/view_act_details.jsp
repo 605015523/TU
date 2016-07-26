@@ -48,21 +48,23 @@
 						<div class="col-xs-3 col-md-3">
 							<strong>ACTNAME:</strong>
 						</div>
-						<div class="col-xs-3  col-md-3">${groupAct.actName}</div>
+						<div class="col-xs-3  col-md-3">${groupAct.activity.actName}</div>
 						<div class="col-xs-3  col-md-3">
 							<strong> Registration Period:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${groupAct.daterange}</div>
+						<div class="col-xs-3 col-md-3">
+							<s:property value="groupAct.activity.enrollStartDate"/> - <s:property value="groupAct.activity.enrollEndDate"/>
+						</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
 							<strong>DATE:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${groupAct.actDate}</div>
+						<div class="col-xs-3 col-md-3"><s:property value="groupAct.activity.actDate"/></div>
 						<div class="col-xs-3 col-md-3">
 							<strong>PRICE per PERSON</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${groupAct.actMoney}</div>
+						<div class="col-xs-3 col-md-3">${groupAct.activity.actMoney}</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
@@ -79,7 +81,7 @@
 							<strong>DESCRIPTION:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
-							<p class="desc">${groupAct.description}</p>
+							<p class="desc">${groupAct.activity.description}</p>
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -119,13 +121,13 @@
 							</h5>
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${groupAct.state=='pending'}">
+							<c:if test="${groupAct.activity.state=='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
 
 							</c:if>
-							<c:if test="${groupAct.state!='pending'}">
+							<c:if test="${groupAct.activity.state!='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" disabled />
@@ -134,11 +136,11 @@
 
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${groupAct.state=='pending'}">
+							<c:if test="${groupAct.activity.state=='pending'}">
 								<a role="button" class="btn btn-primary   btn-block"
-									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${groupAct.actId}'>edit</a>
+									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
 							</c:if>
-							<c:if test="${groupAct.state!='pending'}">
+							<c:if test="${groupAct.activity.state!='pending'}">
 
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="edit" disabled />

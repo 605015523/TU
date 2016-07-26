@@ -254,10 +254,8 @@ public class LeaderviewAction extends AbstractAction {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(oneActVO.getActDate());
 		Integer thisyear = cal.get(Calendar.YEAR);
-		if (years.size() != 0) {
-			if (!thisyear.equals(years.get(years.size() - 1))) {
-				years.add(thisyear);
-			}
+		if (years.size() != 0 && !thisyear.equals(years.get(years.size() - 1))) {
+			years.add(thisyear);
 		}
 
 		Integer newMsg = (Integer) session.getAttribute("newMsg");

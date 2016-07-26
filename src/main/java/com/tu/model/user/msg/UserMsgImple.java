@@ -81,7 +81,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 	
 	// 更新一个userMsg对象
 	@Override
-	public void doUpdateOneUserMsg(UserMsgVO oneUserMsgVO) {
+	public String doUpdateOneUserMsg(UserMsgVO oneUserMsgVO) {
 		Integer userId = oneUserMsgVO.getUserId();
 		Integer msgId = oneUserMsgVO.getMessage().getMsgId();
 		UserMsg oneUserMsgPO = userMsgDAO.findByUserIdAndMsgId(userId, msgId);
@@ -100,6 +100,7 @@ public class UserMsgImple extends Observable implements UserMsgInterface {
 			okOrNot = e.toString();
 		}
 
+		return okOrNot;
 	}
 
 	@Override

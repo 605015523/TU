@@ -74,46 +74,46 @@
 							</td>
 
 						</tr>
-						<c:forEach var="act" items="${groupActs}">
+						<s:iterator var="groupAct" value="groupActs">
 							<tr>
 								<td class="col-md-2 col-xs-2 text-center">
-									${act.actName}
+									${groupAct.activity.actName}
 								</td>
 
 								<td class="col-md-1 col-xs-1">
-									<c:if test="${act.state=='draft'||act.state=='disapproved'}">
+									<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
 										<div class="text-danger text-center">
-											<strong> ${act.state}</strong>
+											<strong> ${groupAct.activity.state}</strong>
 										</div>
 									</c:if>
-									<c:if test="${act.state!='draft'&&act.state!='disapproved'}">
+									<c:if test="${groupAct.activity.state!='draft'&&groupAct.activity.state!='disapproved'}">
 										<div class="text-success text-center">
-											<strong> ${act.state}</strong>
+											<strong> ${groupAct.activity.state}</strong>
 										</div>
 									</c:if>
 
 								</td>
 								<td class="col-md-3 col-xs-3 text-center">
-									${act.daterange}
+									<s:property value="activity.enrollStartDate"/> - <s:property value="activity.enrollEndDate"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-									${act.actDate}
+									<s:property value="activity.actDate"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
 									<c:if
-										test="${act.state!='draft'&&act.state!='disapproved'&&act.state!='approved'}">
+										test="${groupAct.activity.state!='draft'&&groupAct.activity.state!='disapproved'&&groupAct.activity.state!='approved'}">
 										<a
-											href='<c:url value="/doshowActDetailsLeaderviewAction.action" />?actId=${act.actId}'>details</a>
+											href='<c:url value="/doshowActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>details</a>
 									</c:if>
 									<c:if
-										test="${act.state=='draft'||act.state=='disapproved'||act.state=='approved'}">
+										test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'||groupAct.activity.state=='approved'}">
                      details
                      </c:if>
 								</td>
 
 								<td class="col-md-2 col-xs-2 text-center">
 									<c:if
-										test="${act.state=='pending'||act.state=='validate'||act.state=='publish'||act.state=='tobevalidate'}">
+										test="${groupAct.activity.state=='pending'||groupAct.activity.state=='validate'||groupAct.activity.state=='publish'||groupAct.activity.state=='tobevalidate'}">
                       
                        edit
                     
@@ -121,17 +121,17 @@
 
 
 									<c:if
-										test="${act.state!='pending'&&act.state!='validate'&&act.state!='publish'&&act.state!='tobevalidate'}">
+										test="${groupAct.activity.state!='pending'&&groupAct.activity.state!='validate'&&groupAct.activity.state!='publish'&&groupAct.activity.state!='tobevalidate'}">
 
 										<a
-											href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${act.actId}'>edit</a>
+											href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
 									</c:if>
 								</td>
 
 							</tr>
 
 
-						</c:forEach>
+						</s:iterator>
 
 					</table>
 

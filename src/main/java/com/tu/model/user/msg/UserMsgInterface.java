@@ -12,7 +12,7 @@ public interface UserMsgInterface {
 
 	UserMsgVO doGetOneByUserIdAndMsgId(Integer userId, Integer msgId);
 
-	void doUpdateOneUserMsg(UserMsgVO oneUserMsg);
+	String doUpdateOneUserMsg(UserMsgVO oneUserMsg);
 	
 	Integer countNewMsgs(Integer userId);
 

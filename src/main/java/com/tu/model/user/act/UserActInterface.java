@@ -8,6 +8,6 @@ public interface UserActInterface {
 
 	UserActVO doGetOneActById(Integer userId, Integer updateActId);
 
-	void doUpdateOneUserAct(UserActVO oneuserAct);
+	String doUpdateOneUserAct(UserActVO oneuserAct);
 
 }

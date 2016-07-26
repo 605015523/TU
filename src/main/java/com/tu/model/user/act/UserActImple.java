@@ -89,7 +89,7 @@ public class UserActImple extends Observable implements UserActInterface {
 
 	// 更新一个userAct对象
 	@Override
-	public void doUpdateOneUserAct(UserActVO userActVO) {
+	public String doUpdateOneUserAct(UserActVO userActVO) {
 		Integer actId = userActVO.getActId();
 		Integer userId = userActVO.getUserId();
 		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
@@ -108,6 +108,8 @@ public class UserActImple extends Observable implements UserActInterface {
 		} catch (Exception e) {
 			okOrNot = e.toString();
 		}
+		
+		return okOrNot;
 	}
 
 }
