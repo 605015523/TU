@@ -57,7 +57,6 @@
 							<td>
 								<c:out value="${userview.userName}" />
 							</td>
-
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
@@ -72,7 +71,6 @@
 								GROUP:
 							</td>
 							<td>
-
 								<c:forEach var="groupName" items="${userview.groupName}">
 									<span class="label label-primary">${groupName}</span>
 								</c:forEach>
@@ -92,7 +90,9 @@
 								QUOTA:
 							</td>
 							<td>
-								<c:out value="${userview.quota}" />
+								<s:text name="format.money">
+									<s:param value="userview.quota"/>
+								</s:text>
 							</td>
 						</tr>
 						<tr>
@@ -100,7 +100,9 @@
 								SPENDING:
 							</td>
 							<td>
-								<c:out value="${userview.spending}" />
+								<s:text name="format.money">
+									<s:param value="userview.spending"/>
+								</s:text>
 							</td>
 						</tr>
 						<tr>
@@ -108,7 +110,9 @@
 								REMAINING:
 							</td>
 							<td>
-								<c:out value="${userview.remaining}" />
+								<s:text name="format.money">
+									<s:param value="userview.remaining" />
+								</s:text>
 							</td>
 						</tr>
 

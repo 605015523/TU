@@ -118,7 +118,7 @@
 							<label>
 								Group:
 							</label>
-							${message.groupName}
+							${msgDetails.groupName}
 						</div>
 
 						<div class="form-group">
@@ -136,15 +136,17 @@
 
 						<div class="form-group">
 							<label>
-								Price / person
+								Price / person:
 							</label>
 							<h5 id="actmoney">
-								${msgDetails.message.activity.actMoney}
+								<s:text name="format.money">
+									<s:param value="msgDetails.message.activity.actMoney"/>
+								</s:text>
 							</h5>
 						</div>
 						<div class="form-group">
 							<label>
-								Act Description
+								Act Description:
 							</label>
 							${msgDetails.message.activity.description}
 
@@ -155,13 +157,17 @@
 						<div class="form-group col-md-6 col-xs-6 ">
 							Quota:
 							<div class="text-success">
-								<strong>${userview.quota}</strong>
+								<s:text name="format.money">
+									<strong><s:param value="userview.quota"/></strong>
+								</s:text>
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-xs-6 ">
 							Remaining:
 							<div class="text-danger">
-								<span id="remaining">${userview.remaining}</span>
+								<s:text name="format.money">
+									<span id="remaining"><s:param value="userview.remaining"/></span>
+								</s:text>
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-xs-6 ">

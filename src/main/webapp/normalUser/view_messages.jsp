@@ -95,7 +95,9 @@
 									</td>
 									<td class="col-md-2 col-xs-1 text-center">
 										<div class="text-success text-center">
-											<strong><s:property value="message.activity.actMoney"/></strong>
+											<s:text name="format.money">
+												<strong><s:param value="message.activity.actMoney"/></strong>
+											</s:text>
 										</div>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
@@ -119,7 +121,9 @@
 								</td>
 								<td class="col-md-2 col-xs-1 text-center">
 									<div class="text-success text-center">
-										<strong>${usermsg.message.activity.actMoney}</strong>
+										<s:text name="format.money">
+										    <s:param value="message.activity.actMoney"/>
+										</s:text>
 									</div>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">

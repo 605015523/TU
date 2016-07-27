@@ -70,7 +70,9 @@
 							<strong>Price per Person</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${act.actMoney}
+							<s:text name="format.money">
+								<s:param value="act.consumption"/>
+							</s:text>
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">

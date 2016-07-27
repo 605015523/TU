@@ -70,7 +70,9 @@
 							<strong>PRICE per PERSON:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${msgDetails.message.activity.actMoney}
+							<s:text name="format.money">
+								<s:param value="msgDetails.message.activity.actMoney"/>
+							</s:text>
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -85,7 +87,7 @@
 
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
-							<strong> DESCRIPTION:</strong>
+							<strong>DESCRIPTION:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
