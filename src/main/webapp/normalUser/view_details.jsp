@@ -81,7 +81,7 @@
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
-								${act.description}
+								<s:property value="act.description"/>
 							</p>
 						</div>
 
@@ -93,7 +93,7 @@
 						<div class="col-xs-8 col-md-8 display: block">
 							<p
 								style="background-color: #eaeaea; height: 200px; border-radius: 5px; padding: 10px;">
-								${act.remark}
+								<s:property value="act.remark"/>
 							</p>
 						</div>
 

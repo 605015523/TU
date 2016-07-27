@@ -86,16 +86,16 @@
 										${act.actName}
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<c:if test="${act.state=='disapproved'}">
+										<s:if test="%{state=='disapproved'}">
 											<div class="text-danger">
 												${act.state}
 											</div>
-										</c:if>
-										<c:if test="${act.state!='disapproved'}">
+										</s:if>
+										<s:else>
 											<div class="text-success">
 												${act.state}
 											</div>
-										</c:if>
+										</s:else>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
 										${act.actMoney}
@@ -104,15 +104,15 @@
 										<s:date name="actDate" format="%{getText('format.date')}"/>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-									<c:if test="${act.state=='validate'}">
+									<s:if test="%{state=='validate'}">
 										<a
 											href='<c:url value="/doshowValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>details
 										</a>
-									</c:if>
-									<c:if test="${act.state!='validate'}">
+									</s:if>
+									<s:else>
 										<a
 											href='<c:url value="/doshowCheckDetailsAccountingviewAction.action" />?actId=${act.actId}'>details</a>
-									</c:if>
+									</s:else>
 									</td>
 								</c:if>
 							</tr>

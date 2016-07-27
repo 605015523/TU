@@ -117,16 +117,15 @@ public class DAOModelMapper {
 		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
 		float sum = 0;
 		Integer nbParticipants = 0;
-		for (int j = 0; j < useractPO.size(); j++) {
+		for (UserAct userAct : useractPO) {
 			MemberInVO oneMemberIn = new MemberInVO();
-			oneMemberIn.setUserId(useractPO.get(j).getUserId());
-			oneMemberIn.setNbParticipants(useractPO.get(j)
-					.getNbParticipants());
-			oneMemberIn.setConsumption(useractPO.get(j).getConsumption());
-			oneMemberIn.setRemark(useractPO.get(j).getRemark());
-			sum += useractPO.get(j).getConsumption();
-			nbParticipants += useractPO.get(j).getNbParticipants();
-			Userlogin userPO = userloginDAO.findById(useractPO.get(j).getUserId());
+			oneMemberIn.setUserId(userAct.getUserId());
+			oneMemberIn.setNbParticipants(userAct.getNbParticipants());
+			oneMemberIn.setConsumption(userAct.getConsumption());
+			oneMemberIn.setRemark(userAct.getRemark());
+			sum += userAct.getConsumption();
+			nbParticipants += userAct.getNbParticipants();
+			Userlogin userPO = userloginDAO.findById(userAct.getUserId());
 			oneMemberIn.setUserName(userPO.getUserName());
 			oneMemberIn.setUserDept(userPO.getUserDept());
 			memberInVO.add(oneMemberIn);

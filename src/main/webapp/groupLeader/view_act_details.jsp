@@ -64,7 +64,11 @@
 						<div class="col-xs-3 col-md-3">
 							<strong>PRICE per PERSON</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${groupAct.activity.actMoney}</div>
+						<div class="col-xs-3 col-md-3">
+							<s:text name="format.money">
+								<s:param value="groupAct.activity.actMoney"/>
+							</s:text>
+						</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
@@ -74,7 +78,9 @@
 						<div class="col-xs-3 col-md-3">
 							<strong>CONSUMPTION:</strong>
 						</div>
-						<div class="col-xs-3 col-md-3">${groupAct.sum}</div>
+						<div class="col-xs-3 col-md-3">
+							<s:text name="format.money"><s:param value="groupAct.sum"/></s:text>
+						</div>
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
@@ -98,16 +104,16 @@
 									<td>consumption</td>
 									<td>remark</td>
 								</tr>
-								<c:forEach var="member" items="${groupAct.memberInVO}">
+								<s:iterator var="member" value="groupAct.memberInVO">
 									<tr>
 										<td>${member.userName}</td>
 										<td>${member.userDept}</td>
 										<td>${member.nbParticipants}</td>
-										<td>${member.consumption}</td>
-										<td>${member.remark}</td>
+										<td><s:text name="format.money"><s:param value="consumption"/></s:text></td>
+										<td><s:property value="remark"/></td>
 									</tr>
 
-								</c:forEach>
+								</s:iterator>
 
 							</table>
 						</div>

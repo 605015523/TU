@@ -86,7 +86,7 @@
 								<strong>PRICE per PERSON:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.activity.actMoney}
+								<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
 							</div>
 						</div>
 						
