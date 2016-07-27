@@ -107,7 +107,7 @@
 								</td>
 
 								<td class="col-md-2 col-xs-2 text-center">
-									<s:if test="%{activity.state=='pending'||activity.state=='validate'||activity.state=='publish'||activity.state=='tobevalidate'}">
+									<s:if test="%{activity.state=='validate'||activity.state=='publish'||activity.state=='tobevalidate'}">
                        					edit
                       				</s:if>
 									<s:else>

@@ -143,8 +143,19 @@ public class LeaderviewAction extends AbstractAction {
 	// Go into activity modification web page
 	public String doEditAct() {
 		groupAct = leaderviewBean.doGetUserActById(actId);
+		String state = groupAct.getActivity().getState();
+
+		List<String> finishedStates = Arrays.asList("pending", "validate", "publish", "tobevalidate");
 		
-		return "EditAct";
+		if (!finishedStates.contains(state)) {
+			return "EditAct";
+		}
+		
+		if ("pending".equals(state)) {
+			return "EditActDetails";
+		}
+		
+		return "Error";
 	}
 
 	// when the activity is finished, edit it in this page

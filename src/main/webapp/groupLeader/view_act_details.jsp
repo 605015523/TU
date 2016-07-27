@@ -140,7 +140,7 @@
 						<div class="col-xs-2  col-md-2 navbar-right ">
 							<s:if test="%{groupAct.activity.state=='pending'}">
 								<a role="button" class="btn btn-primary   btn-block"
-									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
+									href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
 							</s:if>
 							<s:else>
 								<input type="submit" class="btn btn-primary   btn-block"
