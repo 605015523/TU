@@ -99,7 +99,7 @@
 										</div>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<s:property value="message.activity.actDate"/>
+										<s:date name="message.activity.actDate" format="%{getText('format.date')}"/>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
 										<a href='<c:url value="/doshowMsgDetailsUserviewAction.action" />?msgId=${usermsg.message.msgId}'>details</a>

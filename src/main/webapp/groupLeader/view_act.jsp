@@ -38,21 +38,17 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Group Acts detail
+						Group Acts details
 					</h3>
-
 				</div>
 
 
 				<div class="panel-body">
-					<div class="row">
-
-					</div>
-
 
 					<table class="table table-hover "
 						style="margin: 10px; padding: 10px 10px 10px 10px;">
 
+						<thead>
 						<tr>
 							<td class="col-md-2 col-xs-2 text-center">
 								ACTNAME
@@ -74,6 +70,7 @@
 							</td>
 
 						</tr>
+						</thead>
 						<s:iterator var="groupAct" value="groupActs">
 							<tr>
 								<td class="col-md-2 col-xs-2 text-center">
@@ -94,10 +91,10 @@
 
 								</td>
 								<td class="col-md-3 col-xs-3 text-center">
-									<s:property value="activity.enrollStartDate"/> - <s:property value="activity.enrollEndDate"/>
+									<s:date name="activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="activity.enrollEndDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-									<s:property value="activity.actDate"/>
+									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
 									<c:if

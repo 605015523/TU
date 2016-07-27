@@ -73,13 +73,13 @@
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3" name="actName">
-								${groupAct.actName}
+								${groupAct.activity.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
-								<strong> Registration Period:</strong>
+								<strong>Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.daterange}
+								<s:date name="groupAct.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="groupAct.activity.enrollEndDate" format="%{getText('format.date')}"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -87,14 +87,14 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.actDate}
+								<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<strong>PRICE per PERSON</strong>
+								<strong>PRICE per PERSON:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 							<input type="text" class="form-control" id="actMoney" name="actMoney" 
-							value="${groupAct.actMoney}">
+							value="${groupAct.activity.actMoney}">
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -119,7 +119,7 @@
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								<p class="desc">
-									${groupAct.description}
+									${groupAct.activity.description}
 								</p>
 							</div>
 						</div>
@@ -193,12 +193,12 @@
 								</h5>
 							</div>
 							<div class="col-xs-2  col-md-2 navbar-right ">
-								<c:if test="${groupAct.state=='pending'}">
+								<c:if test="${groupAct.activity.state=='pending'}">
 
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" />
 								</c:if>
-								<c:if test="${groupAct.state!='pending'}">
+								<c:if test="${groupAct.activity.state!='pending'}">
 
 									<input type="submit" class="btn btn-primary   btn-block"
 										value="submit" disabled />
