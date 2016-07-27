@@ -78,16 +78,16 @@
 								</td>
 
 								<td class="col-md-1 col-xs-1">
-									<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+									<s:if test="%{activity.state=='draft'||activity.state=='disapproved'}">
 										<div class="text-danger text-center">
 											<strong> ${groupAct.activity.state}</strong>
 										</div>
-									</c:if>
-									<c:if test="${groupAct.activity.state!='draft'&&groupAct.activity.state!='disapproved'}">
+									</s:if>
+									<s:else>
 										<div class="text-success text-center">
 											<strong> ${groupAct.activity.state}</strong>
 										</div>
-									</c:if>
+									</s:else>
 
 								</td>
 								<td class="col-md-3 col-xs-3 text-center">
@@ -97,32 +97,22 @@
 									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-									<c:if
-										test="${groupAct.activity.state!='draft'&&groupAct.activity.state!='disapproved'&&groupAct.activity.state!='approved'}">
-										<a
-											href='<c:url value="/doshowActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>details</a>
-									</c:if>
-									<c:if
-										test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'||groupAct.activity.state=='approved'}">
-                     details
-                     </c:if>
+									<s:if test="%{activity.state=='draft'||activity.state=='disapproved'||activity.state=='approved'}">
+                     					details
+                     				</s:if>
+									<s:else>
+										<a href='<c:url value="/doshowActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>details</a>
+									</s:else>
+									
 								</td>
 
 								<td class="col-md-2 col-xs-2 text-center">
-									<c:if
-										test="${groupAct.activity.state=='pending'||groupAct.activity.state=='validate'||groupAct.activity.state=='publish'||groupAct.activity.state=='tobevalidate'}">
-                      
-                       edit
-                    
-                      </c:if>
-
-
-									<c:if
-										test="${groupAct.activity.state!='pending'&&groupAct.activity.state!='validate'&&groupAct.activity.state!='publish'&&groupAct.activity.state!='tobevalidate'}">
-
-										<a
-											href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
-									</c:if>
+									<s:if test="%{activity.state=='pending'||activity.state=='validate'||activity.state=='publish'||activity.state=='tobevalidate'}">
+                       					edit
+                      				</s:if>
+									<s:else>
+										<a href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
+									</s:else>
 								</td>
 
 							</tr>

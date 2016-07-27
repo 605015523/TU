@@ -38,7 +38,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						UserInfo
+						User Information
 					</h3>
 					<p class="navbar-text navbar-right">
 						<a href="normalUser/change_pwd.jsp" class="navbar-link">Change
