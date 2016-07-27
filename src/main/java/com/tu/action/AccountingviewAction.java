@@ -72,18 +72,31 @@ public class AccountingviewAction extends AbstractAction {
 		return "doGetAllAct";
 	}
 
-	// To retrieve all the detail of one specific activity which is in check.  
-	public String doshowCheckDetails() {
+	// To retrieve all the details of one specific activity  
+	public String doshowCheckValidateDetails() {
 		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
-
-		return "ShowCheckDetails";
+		String state = groupAct.getActivity().getState();
+		
+		// To retrieve all the detail of one specific activity which is in check.  
+		List<String> inCheckStates = Arrays.asList("draft", "approved", "publish", "disapproved", "pending");
+		if (inCheckStates.contains(state)) {
+			return "ShowCheckDetails";
+		}
+		
+		// To retrieve all the activities' details which are needed to be validated
+		List<String> inValidateStates = Arrays.asList("tobevalidate", "validate");
+		if (inCheckStates.contains(state)) {
+			return "ShowValidateDetails";
+		}
+		
+		return "Error";
 	}
-
-	// To retrieve all the activities' details which are needed to be validated.
-	public String doshowValidateDetails() {
+	
+	// Display activity detail of group
+	public String doshowActDetailsInGroup() {
 		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
-
-		return "ShowValidateDetails";
+		
+		return "doShowActByGroupDetails";
 	}
 
 	// To check current activity, then modify the activity's status valued from "approved" or "disapproval" .
@@ -160,13 +173,6 @@ public class AccountingviewAction extends AbstractAction {
 
 		return "doShowActByGroup";
 
-	}
-
-	// Display activity detail of group
-	public String doshowActDetailsInGroup() {
-		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
-
-		return "doShowActByGroupDetails";
 	}
 
 	// get() and set() to property

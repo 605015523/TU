@@ -158,13 +158,6 @@ public class LeaderviewAction extends AbstractAction {
 		return "Error";
 	}
 
-	// when the activity is finished, edit it in this page
-	public String doEditActDetails() {
-		groupAct = leaderviewBean.doGetUserActById(actId);
-		
-		return "EditActDetails";
-	}
-
 	// Update the activity detail in this page
 	public String doUpdateActDetails() {
 		initServletContextObject();
@@ -281,7 +274,7 @@ public class LeaderviewAction extends AbstractAction {
 	// Submit the activity into approval group for validating
 	public String doToValidateAct() {
 		ActivityVO oneActVO = actsBean.doGetOneActById(actId);
-		oneActVO.setState("tobevalidate");
+		oneActVO.setState(ActivitiesConstant.STATE_TOBEVALIDATE);
 
 		try {
 			String validateMessage = actsBean.doUpdateOneAct(oneActVO);

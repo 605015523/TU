@@ -54,68 +54,36 @@
 							<td class="col-md-2 col-xs-2 text-center">Details</td>
 						</tr>
 						<s:iterator var="act" value="acts">
-							<tr>
-								<c:if test="${act.state=='draft'||act.state=='tobevalidate'}">
-									<td class="col-md-3 col-xs-3 text-center">
-										<strong>${act.actName}</strong>
-									</td>
+						
+							<tr <s:if test="%{state=='draft'||state=='tobevalidate'}">class="important"</s:if>>
+								<td class="col-md-3 col-xs-3 text-center">
+									${act.actName}
+								</td>
+								
+								<s:if test="%{state=='draft'||state=='tobevalidate'||state=='disapproved'}">
 									<td class="col-md-2 col-xs-2 text-danger text-center">
-										<strong> ${act.state}</strong>
+										${act.state}
 									</td>
-									<td class="col-md-3 col-xs-3 text-center">
-										<strong>${act.actMoney}</strong>
+								</s:if>
+								<s:else>
+									<td class="col-md-2 col-xs-2 text-success text-center">
+										${act.state}
 									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-										<strong><s:date name="actDate" format="%{getText('format.date')}"/></strong>
-									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-									<c:if test="${act.state=='draft'}">
-										<a href='<c:url value="/doshowCheckDetailsAccountingviewAction.action" />?actId=${act.actId}'>
-											<strong>details</strong>
-										</a>
-									</c:if>
-									<c:if test="${act.state=='tobevalidate'}">
-										<a href='<c:url value="/doshowValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>
-											<strong>details</strong>
-										</a>
-									</c:if>
-									</td>
-								</c:if>
-								<c:if test="${act.state!='draft'&&act.state!='tobevalidate'}">
-									<td class="col-md-3 col-xs-3 text-center">
-										${act.actName}
-									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-										<s:if test="%{state=='disapproved'}">
-											<div class="text-danger">
-												${act.state}
-											</div>
-										</s:if>
-										<s:else>
-											<div class="text-success">
-												${act.state}
-											</div>
-										</s:else>
-									</td>
-									<td class="col-md-3 col-xs-3 text-center">
-										<s:text name="format.money"><s:param value="actMoney"/></s:text>
-									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-										<s:date name="actDate" format="%{getText('format.date')}"/>
-									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-									<s:if test="%{state=='validate'}">
-										<a
-											href='<c:url value="/doshowValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>details
-										</a>
-									</s:if>
-									<s:else>
-										<a
-											href='<c:url value="/doshowCheckDetailsAccountingviewAction.action" />?actId=${act.actId}'>details</a>
-									</s:else>
-									</td>
-								</c:if>
-							</tr>
+								</s:else>
+								
+								<td class="col-md-3 col-xs-3 text-center">
+									<s:text name="format.money"><s:param value="actMoney"/></s:text>
+								</td>
+									
+								<td class="col-md-2 col-xs-2 text-center">
+									<s:date name="actDate" format="%{getText('format.date')}"/>
+								</td>
+								
+								<td class="col-md-2 col-xs-2 text-center">
+									<a href='<c:url value="/doshowCheckValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>details</a>
+								</td>
+
+							
 						</s:iterator>
 					</table>
 				</div>

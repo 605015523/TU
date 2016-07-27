@@ -81,3 +81,7 @@
 .desc {
   min-height: 50px;
 }
+
+.important {
+  font-weight:bold;
+}

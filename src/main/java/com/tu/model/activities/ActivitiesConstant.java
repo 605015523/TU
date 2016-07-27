@@ -6,6 +6,8 @@ public final class ActivitiesConstant {
 	public static final String STATE_PENDING = "pending";
 	public static final String STATE_DRAFT = "draft";
 	public static final String STATE_PUBLISH = "publish";
+	public static final String STATE_DISAPPROVED = "disapproved";
+	public static final String STATE_APPROVED = "approved";
 	
 	/**
 	 * Private constructor.
