@@ -23,7 +23,7 @@ import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.MemberInVO;
-import com.tu.model.messages.MessagesVO;
+import com.tu.model.messages.MessageVO;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
 import com.tu.util.ConfConstants;
@@ -61,7 +61,7 @@ public class DAOModelMapper {
 			Group group = groupDAO.findById(oneMessage.getGroupId());
 			oneUserMsgVO.setGroupName(group.getGroupName());
 			
-			MessagesVO message = new MessagesVO();
+			MessageVO message = new MessageVO();
 			BeanUtils.copyProperties(message, oneMessage);
 			
 			ActivityVO activity = new ActivityVO();
@@ -79,7 +79,7 @@ public class DAOModelMapper {
 		return oneUserMsgVO;
 	}
 	
-	public Message convertMesssageVOTOMessage(MessagesVO oneMessagesVO) {
+	public Message convertMesssageVOTOMessage(MessageVO oneMessagesVO) {
 		Message onemsgPO = new Message();
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(onemsgPO, oneMessagesVO);

@@ -108,39 +108,31 @@
 							</tr>
 						</s:iterator>
 
+						<s:iterator var="usermsg" value="overmessages">
+							<tr class="active">
+
+								<td class="col-md-2 col-xs-3 text-center">
+									${usermsg.groupName}
+								</td>
+								<td class="col-md-3 col-xs-3 text-center">
+									${usermsg.message.activity.actName}
+								</td>
+								<td class="col-md-2 col-xs-1 text-center">
+									<div class="text-success text-center">
+										<strong>${usermsg.message.activity.actMoney}</strong>
+									</div>
+								</td>
+								<td class="col-md-2 col-xs-2 text-center">
+									<s:date name="message.activity.actDate" format="%{getText('format.date')}"/>
+								</td>
+								<td class="col-md-3 col-xs-3 text-center">
+									details
+								</td>
+
+							</tr>
+						</s:iterator>
 					</table>
-					
-					<c:if test="${overmessages!=null}">
-						<table class="table row">
-							<s:iterator var="usermsg" value="overmessages">
-								<tr class="active">
-
-									<td class="col-md-2 col-xs-3 text-center">
-										${usermsg.groupName}
-									</td>
-									<td class="col-md-3 col-xs-3 text-center">
-										${usermsg.message.activity.actName}
-									</td>
-									<td class="col-md-2 col-xs-1 text-center">
-										<div class="text-success text-center">
-											<strong>${usermsg.message.activity.actMoney}</strong>
-										</div>
-									</td>
-									<td class="col-md-2 col-xs-2 text-center">
-										<s:date name="message.activity.actDate" format="%{getText('format.date')}"/>
-									</td>
-									<td class="col-md-3 col-xs-3 text-center">
-										details
-									</td>
-
-								</tr>
-							</s:iterator>
-						</table>
-					</c:if>
-
 				</div>
-
-
 
 			</div>
 

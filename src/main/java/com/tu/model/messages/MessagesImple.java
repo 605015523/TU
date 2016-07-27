@@ -31,8 +31,8 @@ public class MessagesImple extends Observable implements MessagesInterface {
 
 	// 通过messagesId获取该messages对象
 	@Override
-	public MessagesVO doGetOneMsgById(Integer msgId) {
-		MessagesVO oneMessagesVO = new MessagesVO();
+	public MessageVO doGetOneMsgById(Integer msgId) {
+		MessageVO oneMessagesVO = new MessageVO();
 		Message oneMessagesPO = msgDAO.findById(msgId);
 		try {
 			BeanUtils.copyProperties(oneMessagesVO, oneMessagesPO);
@@ -46,7 +46,7 @@ public class MessagesImple extends Observable implements MessagesInterface {
 
 	// 添加一个messages
 	@Override
-	public Integer doAddOneMsg(MessagesVO oneMessagesVO) {
+	public Integer doAddOneMsg(MessageVO oneMessagesVO) {
 		Message onemsgPO = daoModelMapper.convertMesssageVOTOMessage(oneMessagesVO);
 		Integer msgId = null;
 

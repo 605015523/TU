@@ -1,6 +1,6 @@
 package com.tu.model.userview;
 
-import com.tu.model.messages.MessagesVO;
+import com.tu.model.messages.MessageVO;
 
 public class UserMsgVO implements java.io.Serializable {
 	
@@ -8,7 +8,7 @@ public class UserMsgVO implements java.io.Serializable {
 	
 	// Fields
 	private Integer userId;
-	private MessagesVO message;
+	private MessageVO message;
 	private String groupName;
 	private String readState;
 
@@ -20,7 +20,7 @@ public class UserMsgVO implements java.io.Serializable {
 
 	/** full constructor */
 
-	public UserMsgVO(MessagesVO message, Integer userId, String groupName, String readState) {
+	public UserMsgVO(MessageVO message, Integer userId, String groupName, String readState) {
 		this.message = message;
 		this.userId = userId;
 		this.groupName = groupName;
@@ -51,11 +51,11 @@ public class UserMsgVO implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public MessagesVO getMessage() {
+	public MessageVO getMessage() {
 		return message;
 	}
 
-	public void setMessage(MessagesVO message) {
+	public void setMessage(MessageVO message) {
 		this.message = message;
 	}
 

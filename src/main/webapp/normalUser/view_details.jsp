@@ -42,7 +42,6 @@
 				</div>
 
 
-
 				<div class="panel-body table-bordered">
 
 					<div class="row form-group form-group-lg">
@@ -65,7 +64,7 @@
 							<strong>Date:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${act.actDate}
+							<s:date name="act.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>Price per Person</strong>

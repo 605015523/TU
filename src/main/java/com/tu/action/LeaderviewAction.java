@@ -15,7 +15,7 @@ import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
 import com.tu.model.leaderview.MemberInVO;
 import com.tu.model.messages.MessagesInterface;
-import com.tu.model.messages.MessagesVO;
+import com.tu.model.messages.MessageVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.user.msg.UserMsgInterface;
@@ -233,7 +233,7 @@ public class LeaderviewAction extends AbstractAction {
 		LOGGER.info(updateMessage);
 
 		// Copy all properties from activity to message
-		MessagesVO oneMsgVO = new MessagesVO();
+		MessageVO oneMsgVO = new MessageVO();
 		oneMsgVO.setActivity(oneActVO);
 
 		// Write message into database and send to everyone

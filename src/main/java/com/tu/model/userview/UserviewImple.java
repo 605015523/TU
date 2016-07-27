@@ -1,7 +1,6 @@
 package com.tu.model.userview;
 
 import java.lang.reflect.InvocationTargetException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -23,7 +22,6 @@ import com.tu.dao.user.group.UserGroupDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.userlogin.UserloginVO;
-import com.tu.util.ConfConstants;
 
 public class UserviewImple extends Observable implements UserviewInterface {
 
@@ -172,8 +170,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		useractsPO.setState(actsPO.getState());
 		useractsPO.setDescription(actsPO.getDescription());
 
-		SimpleDateFormat formatter = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
-		useractsPO.setActDate(formatter.format(actsPO.getActDate()));
+		useractsPO.setActDate(actsPO.getActDate());
 		Group groupPO = groupDAO.findById(actsPO.getGroupId());
 		useractsPO.setGroup(groupPO.getGroupName());
 		

@@ -2,8 +2,8 @@ package com.tu.model.messages;
 
 public interface MessagesInterface {
 
-	Integer doAddOneMsg(MessagesVO oneMessagesVO);
+	Integer doAddOneMsg(MessageVO oneMessagesVO);
 
-	MessagesVO doGetOneMsgById(Integer oneMsgId);
+	MessageVO doGetOneMsgById(Integer oneMsgId);
 
 }

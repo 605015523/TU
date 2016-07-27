@@ -2,7 +2,7 @@ package com.tu.model.messages;
 
 import com.tu.model.activities.ActivityVO;
 
-public class MessagesVO implements java.io.Serializable {
+public class MessageVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3582074631065605747L;
 	
@@ -11,7 +11,7 @@ public class MessagesVO implements java.io.Serializable {
 
 	// Constructors
 	/** default constructor */
-	public MessagesVO() {
+	public MessageVO() {
 		// do nothing
 	}
 

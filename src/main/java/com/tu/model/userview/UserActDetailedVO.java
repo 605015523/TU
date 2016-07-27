@@ -1,5 +1,7 @@
 package com.tu.model.userview;
 
+import java.util.Date;
+
 import com.tu.model.user.act.UserActVO;
 
 public class UserActDetailedVO extends UserActVO {
@@ -8,7 +10,7 @@ public class UserActDetailedVO extends UserActVO {
 	private String actName;
 	private String group;
 	private Float actMoney;
-	private String actDate;
+	private Date actDate;
 	private String state;
 	private String description;
 
@@ -46,12 +48,12 @@ public class UserActDetailedVO extends UserActVO {
 		this.actMoney = actMoney;
 	}
 
-	public String getActDate() {
+	public Date getActDate() {
 		return actDate;
 	}
 
-	public void setActDate(String string) {
-		this.actDate = string;
+	public void setActDate(Date actDate) {
+		this.actDate = actDate;
 	}
 
 	public String getState() {
