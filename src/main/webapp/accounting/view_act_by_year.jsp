@@ -54,7 +54,7 @@
 						    <td class="text-center">different</td>
 						</tr>
 						
-						<c:forEach var="oneUserGroupCost" items="${allUserGroupCost}">
+						<s:iterator var="oneUserGroupCost" value="allUserGroupCost">
 							<tr>
 								<td class="col-md-2 col-xs-2 text-center">
 									${oneUserGroupCost.userName}
@@ -69,12 +69,12 @@
 									${onegroupCost.cost}
 								</td>
 							</c:forEach> --%>
-							 <td class="text-center">${oneUserGroupCost.quota}</td>
-						    <td class="text-center">${oneUserGroupCost.sum}</td>
-						     <td class="text-center">${oneUserGroupCost.different}</td>
+								<td class="text-center"><s:text name="format.money"><s:param value="quota"/></s:text></td>
+						    	<td class="text-center"><s:text name="format.money"><s:param value="sum"/></s:text></td>
+						    	<td class="text-center"><s:text name="format.money"><s:param value="different"/></s:text></td>
 							</tr>
 
-						</c:forEach>
+						</s:iterator>
 
 					</table>
 

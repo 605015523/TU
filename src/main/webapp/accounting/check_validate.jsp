@@ -98,7 +98,7 @@
 										</s:else>
 									</td>
 									<td class="col-md-3 col-xs-3 text-center">
-										${act.actMoney}
+										<s:text name="format.money"><s:param value="actMoney"/></s:text>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 										<s:date name="actDate" format="%{getText('format.date')}"/>

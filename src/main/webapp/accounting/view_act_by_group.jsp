@@ -51,23 +51,23 @@
 					<td class="col-md-2 col-xs-2 text-center">Act Date</td>
 					<td class="col-md-2 col-xs-2 text-center">Details</td>
 				    </tr>
-						<c:forEach var="grpAct" items="${groupActs}">
+						<s:iterator var="grpAct" value="groupActs">
 							<c:if test="${grpAct.activity.state=='validate'}">
 								<tr>
 								<td class="col-md-3 col-xs-3 text-center">${grpAct.activity.actName}</td>
 								<td class="col-md-2 col-xs-2 text-success text-center">
 									<strong>${grpAct.activity.state}</strong></td>
 								<td class="col-md-3 col-xs-3 text-center">
-									<s:date name="grpAct.activity.enrollStartDate"/> - <s:date name="grpAct.activity.enrollEndDate"/>
+									<s:date name="activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="activity.enrollEndDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-									<s:date name="grpAct.activity.actDate"/>
+									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
 								<a href='<c:url value="/doshowActDetailsInGroupAccountingviewAction.action" />?actId=${grpAct.activity.actId}'>details</a></td>
 				                </tr>
 							</c:if>
-                      </c:forEach>
+                      </s:iterator>
 					</table>
 				</div>
 			</div>
