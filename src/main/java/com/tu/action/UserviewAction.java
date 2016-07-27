@@ -159,8 +159,8 @@ public class UserviewAction extends AbstractAction {
 		oneUserActVO.setNbParticipants(nbParticipants);
 		
 		// FIXME: know why consumption is actually not given
-		//oneUserActVO.setConsumption(oneAct.getActMoney()*nbParticipants); ?
-		oneUserActVO.setConsumption(consumption != null ? consumption : 0);
+		oneUserActVO.setConsumption(oneAct.getActMoney()*nbParticipants);
+		//oneUserActVO.setConsumption(consumption != null ? consumption : 0);
 		oneUserActVO.setRemark(remark);
 		
 		userActBean.doAddOneUserAct(oneUserActVO);
