@@ -175,12 +175,12 @@
 								</label>
 								<c:if test="${groupAct.activity.state=='approved'}">
 									<input type="text" id="daterange" name="daterange" value=""
-										placeholder="<s:property value='groupAct.activity.enrollStartDate'/> - <s:property value='groupAct.activity.endStartDate'/>" class="form-control" disabled>
+										placeholder="<s:date name='groupAct.activity.enrollStartDate' format="MM/dd/yyyy"/> - <s:date name='groupAct.activity.enrollEndDate' format="MM/dd/yyyy"/>" class="form-control" disabled>
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 								</c:if>
 								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
 									<input type="text" id="daterange" name="daterange"
-										value="<s:property value='groupAct.activity.enrollStartDate'/> - <s:property value='groupAct.activity.endStartDate'/>" class="form-control">
+										value="<s:date name='groupAct.activity.enrollStartDate' format="MM/dd/yyyy"/> - <s:date name='groupAct.activity.enrollEndDate' format="MM/dd/yyyy"/>" class="form-control">
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 
 								</c:if>

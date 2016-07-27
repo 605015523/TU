@@ -183,6 +183,29 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		
 	</build>
 
+	<profiles>
+	    <profile>
+	        <id>CI-WEB</id>
+	        <properties>
+	            <sonar.branch>WEB</sonar.branch>
+	            <sonar.language>web</sonar.language>
+	            <sonar.sources>src</sonar.sources>
+	            <ci.build.sourceDirectory>src/main/webapp</ci.build.sourceDirectory>
+	            <ci.build.testSourceDirectory>src/test/webapp</ci.build.testSourceDirectory>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>CI-JS</id>
+	        <properties>
+	            <sonar.branch>JS</sonar.branch>
+	            <sonar.language>javascript</sonar.language>
+	            <sonar.sources>src</sonar.sources>
+	            <ci.build.sourceDirectory>src/main/webapp</ci.build.sourceDirectory>
+	            <ci.build.testSourceDirectory>src/test/webapp</ci.build.testSourceDirectory>
+	        </properties>
+	    </profile>
+	</profiles>
 </project>
