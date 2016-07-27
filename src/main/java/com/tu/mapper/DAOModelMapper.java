@@ -1,7 +1,6 @@
 package com.tu.mapper;
 
 import java.lang.reflect.InvocationTargetException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,6 @@ import com.tu.model.leaderview.MemberInVO;
 import com.tu.model.messages.MessageVO;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
-import com.tu.util.ConfConstants;
 
 public class DAOModelMapper {
 	private static final Log LOGGER = LogFactory.getLog(DAOModelMapper.class);
