@@ -18,6 +18,7 @@ import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UserActDetailedVO;
 import com.tu.model.userview.UserviewInterface;
+import com.tu.model.userview.UserviewVO;
 
 public class UserviewAction extends AbstractAction {
 
@@ -43,6 +44,7 @@ public class UserviewAction extends AbstractAction {
 	private List<UserMsgVO> overmessages;
 	private List<UserMsgVO> inmessages;
 	private UserMsgVO msgDetails;
+	private UserviewVO userview;
 
 	public UserviewAction() {
 		// do nothing
@@ -141,6 +143,7 @@ public class UserviewAction extends AbstractAction {
 	public String doInAct() {
 		Integer userId = this.getCurrentUser().getUserId();
 		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
+		userview = userviewBean.doGetOneUserviewInfoByUserId(userId);
 		
 		return "doInAct";
 	}
@@ -296,6 +299,14 @@ public class UserviewAction extends AbstractAction {
 
 	public void setMsgDetails(UserMsgVO msgDetails) {
 		this.msgDetails = msgDetails;
+	}
+
+	public UserviewVO getUserview() {
+		return userview;
+	}
+
+	public void setUserview(UserviewVO userview) {
+		this.userview = userview;
 	}
 
 

@@ -42,19 +42,20 @@
 				<div class="panel-body table-bordered">
 					<form action="doToValidateActLeaderviewAction.action" method="post"
 						role="form" name="form" id="form">
+						<input type="hidden" name="actId" value="${actId}"/>
 						<div class="row form-group form-group-lg">
 
 							<div class="col-xs-3 col-md-3">
 								<strong>ACTNAME:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3">
-								${groupAct.actName}
+								${groupAct.activity.actName}
 							</div>
 							<div class="col-xs-3  col-md-3">
-								<strong> Registration Period:</strong>
+								<strong>Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.daterange}
+								<s:date name="groupAct.activity.enrollStartDate"/> - <s:date name="groupAct.activity.enrollEndDate"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -62,13 +63,13 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.actDate}
+								<s:date name="groupAct.activity.actDate"/>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>PRICE per PERSON</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								${groupAct.actMoney}
+								${groupAct.activity.actMoney}
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -91,7 +92,7 @@
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								<p class="desc">
-									${groupAct.description}
+									${groupAct.activity.description}
 								</p>
 							</div>
 						</div>

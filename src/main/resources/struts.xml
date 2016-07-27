@@ -10,6 +10,8 @@
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<!-- 设置struts2的对象工厂为spring -->
 	<constant name="struts.objectFactory" value="spring" />
+	
+	<constant name="struts.custom.i18n.resources" value="global" />
 
 	<package name="default" extends="struts-default">
 

@@ -51,16 +51,20 @@
 					<td class="col-md-2 col-xs-2 text-center">Act Date</td>
 					<td class="col-md-2 col-xs-2 text-center">Details</td>
 				    </tr>
-						<c:forEach var="act" items="${groupActs}">
-							<c:if test="${act.state=='validate'}">
+						<c:forEach var="grpAct" items="${groupActs}">
+							<c:if test="${grpAct.activity.state=='validate'}">
 								<tr>
-								<td class="col-md-3 col-xs-3 text-center">${act.actName}</td>
+								<td class="col-md-3 col-xs-3 text-center">${grpAct.activity.actName}</td>
 								<td class="col-md-2 col-xs-2 text-success text-center">
-									<strong> ${act.state}</strong></td>
-								<td class="col-md-3 col-xs-3 text-center">${act.daterange}</td>
-								<td class="col-md-2 col-xs-2 text-center">${act.actDate}</td>
+									<strong>${grpAct.activity.state}</strong></td>
+								<td class="col-md-3 col-xs-3 text-center">
+									<s:date name="grpAct.activity.enrollStartDate"/> - <s:date name="grpAct.activity.enrollEndDate"/>
+								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-								<a href='<c:url value="/doshowActDetailsInGroupAccountingviewAction.action" />?actId=${act.actId}'>details</a></td>
+									<s:date name="grpAct.activity.actDate"/>
+								</td>
+								<td class="col-md-2 col-xs-2 text-center">
+								<a href='<c:url value="/doshowActDetailsInGroupAccountingviewAction.action" />?actId=${grpAct.activity.actId}'>details</a></td>
 				                </tr>
 							</c:if>
                       </c:forEach>

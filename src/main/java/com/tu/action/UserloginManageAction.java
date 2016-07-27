@@ -27,6 +27,9 @@ public class UserloginManageAction extends AbstractAction {
 	private String userName;
 	private Integer userRole;
 	private String loginMessage;
+	
+	// To display
+	private UserviewVO userview;
 
 	public UserloginManageAction() {
 		// do nothing
@@ -140,13 +143,8 @@ public class UserloginManageAction extends AbstractAction {
 			}
 		}
 
-		// Login succeeds, get the User info
-		UserviewVO userviewVO = userviewBean.doGetOneUserviewInfoByUserId(this
-				.getUserId());
-
 		// Save the following values into session for further disposal
 		session.setAttribute("userRole", userRole);
-		session.setAttribute("userview", userviewVO);
 		session.setAttribute("years", years);
 		session.setAttribute("newMsg", newMsg);
 
@@ -179,6 +177,9 @@ public class UserloginManageAction extends AbstractAction {
 	}
 	
 	public String displayHomePage() {
+		userview = userviewBean.doGetOneUserviewInfoByUserId(getCurrentUser()
+				.getUserId());
+		
 		return "homePage";
 	}
 	
@@ -222,6 +223,14 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setLoginMessage(String loginMessage) {
 		this.loginMessage = loginMessage;
+	}
+
+	public UserviewVO getUserview() {
+		return userview;
+	}
+
+	public void setUserview(UserviewVO userview) {
+		this.userview = userview;
 	}
 
 }

@@ -80,10 +80,10 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								IN_DATE:
+								IN DATE:
 							</td>
 							<td>
-								<c:out value="${userview.inDate}" />
+								<s:date name="userview.inDate" format="%{getText('format.date')}"/>
 							</td>
 						</tr>
 						
@@ -97,7 +97,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								SPENDING
+								SPENDING:
 							</td>
 							<td>
 								<c:out value="${userview.spending}" />

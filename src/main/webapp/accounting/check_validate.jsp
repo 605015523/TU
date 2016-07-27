@@ -66,7 +66,7 @@
 										<strong>${act.actMoney}</strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<strong><s:property value="actDate"/></strong>
+										<strong><s:date name="actDate" format="%{getText('format.date')}"/></strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 									<c:if test="${act.state=='draft'}">
@@ -101,7 +101,7 @@
 										${act.actMoney}
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
-										<s:property value="actDate"/>
+										<s:date name="actDate" format="%{getText('format.date')}"/>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 									<c:if test="${act.state=='validate'}">

@@ -155,7 +155,7 @@
 						<div class="form-group col-md-6 col-xs-6 ">
 							Quota:
 							<div class="text-success">
-								<strong> ${userview.quota}</strong>
+								<strong>${userview.quota}</strong>
 							</div>
 						</div>
 						<div class="form-group col-md-6 col-xs-6 ">

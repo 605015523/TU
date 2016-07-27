@@ -64,7 +64,7 @@
 							<strong>DATE:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<s:property value="msgDetails.message.activity.actDate"/>
+							<s:date name="msgDetails.message.activity.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>PRICE per PERSON:</strong>
@@ -78,7 +78,7 @@
 							<strong>REGISTRATION DATE:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<s:property value="msgDetails.message.activity.enrollStartDate"/> - <s:property value="msgDetails.message.activity.enrollEndDate"/>
+							<s:date name="msgDetails.message.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="msgDetails.message.activity.enrollEndDate" format="%{getText('format.date')}"/>
 						</div>
 						
 					</div>

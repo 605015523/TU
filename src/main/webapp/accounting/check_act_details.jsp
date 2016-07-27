@@ -72,7 +72,7 @@
 								<strong>Registration Period:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<s:property value="groupAct.activity.enrollStartDate"/> - <s:property value="groupAct.activity.enrollEndDate"/>
+								<s:date name="groupAct.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="groupAct.activity.enrollEndDate" format="%{getText('format.date')}"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -80,7 +80,7 @@
 								<strong>DATE:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<s:property value="groupAct.activity.actDate"/>
+								<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<strong>PRICE per PERSON:</strong>
