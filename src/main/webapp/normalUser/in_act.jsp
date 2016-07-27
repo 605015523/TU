@@ -75,9 +75,9 @@
     
     function checkinput() {
         var nbParticipants = document.getElementById("nbParticipants").value;
-        actmoney = document.getElementById("actmoney").value;   
-        var remaining = document.getElementById('remaining').innerHTML;
-    
+        //var actmoney = <s:property value="msgDetails.message.activity.actMoney"/>
+        //var remaining = <s:property value="userview.remaining"/>;
+
         if (nbParticipants=="") {
             alert("the number of participants cannot be empty!");
             return false;

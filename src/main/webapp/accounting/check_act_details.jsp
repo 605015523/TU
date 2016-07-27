@@ -133,7 +133,7 @@
 							<!-- /input-group -->
 
 							<div class="col-xs-2  col-md-2 col-xs-offset-5 col-md-offset-5 ">
-									<input type="submit" class="btn btn-primary   btn-block"
+									<input type="submit" class="btn btn-primary  btn-block"
 										value="submit" <c:if test="${groupAct.activity.state!='draft'}">disabled</c:if>/>
 							</div>
 						</div>

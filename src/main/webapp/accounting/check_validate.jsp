@@ -82,8 +82,8 @@
 								<td class="col-md-2 col-xs-2 text-center">
 									<a href='<c:url value="/doshowCheckValidateDetailsAccountingviewAction.action" />?actId=${act.actId}'>details</a>
 								</td>
+							</tr>
 
-							
 						</s:iterator>
 					</table>
 				</div>

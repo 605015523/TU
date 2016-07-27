@@ -154,7 +154,7 @@
 										</td>
 									</tr>
 									<c:set var="count" value="0"/>
-									<c:forEach var="member" items="${groupAct.memberInVO}">
+									<s:iterator var="member" value="groupAct.memberInVO">
 									<c:set var="count" value="${count+1}"/>
 										<tr>
 											<td>
@@ -164,7 +164,7 @@
 												${member.userDept}
 											</td>
 											<td>
-												<input type="text" class="form-control" id="nbParticipants"
+												<input type="number" class="form-control" id="nbParticipants"
 									name="perNbParticipants_${count}" value="${member.nbParticipants}">
 											</td>
 											<td>
@@ -172,12 +172,10 @@
 									name="perconsumption_${count}" value="${member.consumption}">
 												
 											</td>
-											<td>
-												${member.remark}
-											</td>
+											<td><s:property value="remark"/></td>
 										</tr>
 
-									</c:forEach>
+									</s:iterator>
 								</table>
 
 
