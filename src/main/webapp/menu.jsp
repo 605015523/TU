@@ -17,13 +17,13 @@
 			</ul></li>
 	</c:if>
 	<c:if test="${userRole==2}">
-		<li role="presentation"><a
-			href="doGetAllCheckActAccountingviewAction.action">Check&Validate<c:if
+		<li role="presentation" <c:if test="${param.active=='check'}">class="active"</c:if>active><a
+			href="doGetAllCheckActAccountingviewAction.action" >Check&Validate<c:if
 					test="${newCheck!=0}">
 					<span class="badge">${newCheck}</span>
 				</c:if>
 		</a></li>
-		<li role="presentation" class="dropdown"><a id="dLabel"
+		<li role="presentation" class="dropdown <c:if test="${param.active=='act_details'}">active</c:if>"><a id="dLabel"
 			data-target="#" href="#" data-toggle="dropdown" role="button"
 			aria-haspopup="true" aria-expanded="false">Activity details <span
 				class="caret"></span>

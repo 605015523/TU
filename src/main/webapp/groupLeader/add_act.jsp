@@ -90,44 +90,39 @@
             if (length>=1000){
                 input.value=value;
             }
-
         }
     }
     
     function checkinput(){
-    var actname;
-    var actmoney;
-    var actdate;
-    var actdaterange;
-  
-    
-    actname=document.getElementById("actName").value;
-    actmoney=document.getElementById("actMoney").value;
-    actdate=document.getElementById("actDate").value;
-    actdaterange=document.getElementById("daterange").value;
-    
-    if (actname== "") {
-      alert("the act name can not empty!");
-      return false;
-    }
-    
-    if (actmoney== "") {
-      alert("the Price / person cannot be empty!");
-      return false;
-    }
-    
-     if ( actdate== "") {
-      alert("the activity date cannot be empty!");
-      return false;
-    }
-    
-     if (actdaterange== "") {
-      alert("the registration date range can not empty!");
-      return false;
-    }
+        var actname;
+        var actmoney;
+        var actdate;
+        var actdaterange;
 
-
-  
+        actname=document.getElementById("actName").value;
+        actmoney=document.getElementById("actMoney").value;
+        actdate=document.getElementById("actDate").value;
+        actdaterange=document.getElementById("daterange").value;
+    
+        if (actname== "") {
+            alert("the act name can not empty!");
+            return false;
+        }
+    
+        if (actmoney== "") {
+            alert("the Price / person cannot be empty!");
+            return false;
+        }
+    
+        if ( actdate== "") {
+            alert("the activity date cannot be empty!");
+            return false;
+        }
+    
+        if (actdaterange== "") {
+            alert("the registration date range can not empty!");
+            return false;
+        }
     }
       </script>
 	</head>

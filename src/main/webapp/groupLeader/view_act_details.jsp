@@ -87,7 +87,7 @@
 							<strong>DESCRIPTION:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
-							<p class="desc">${groupAct.activity.description}</p>
+							<p class="desc"><s:property value="groupAct.activity.description"/></p>
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -112,7 +112,6 @@
 										<td><s:text name="format.money"><s:param value="consumption"/></s:text></td>
 										<td><s:property value="remark"/></td>
 									</tr>
-
 								</s:iterator>
 
 							</table>
@@ -127,31 +126,26 @@
 							</h5>
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${groupAct.activity.state=='pending'}">
-
+							<s:if test="%{groupAct.activity.state=='disapproved'}">
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
 
-							</c:if>
-							<c:if test="${groupAct.activity.state!='pending'}">
-
+							</s:if>
+							<s:else>
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" disabled />
-
-							</c:if>
+							</s:else>
 
 						</div>
 						<div class="col-xs-2  col-md-2 navbar-right ">
-							<c:if test="${groupAct.activity.state=='pending'}">
+							<s:if test="%{groupAct.activity.state=='pending'}">
 								<a role="button" class="btn btn-primary   btn-block"
 									href='<c:url value="/doEditActDetailsLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
-							</c:if>
-							<c:if test="${groupAct.activity.state!='pending'}">
-
+							</s:if>
+							<s:else>
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="edit" disabled />
-
-							</c:if>
+							</s:else>
 
 						</div>
 
