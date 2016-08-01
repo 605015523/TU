@@ -38,7 +38,7 @@
 			<li class="dropdown-header">All in group</li>
 			<c:forEach var="group" items="${groups}">
 				<li><a
-					href='<c:url value="/doshowAllActsByGroupAccountingviewAction.action" />?groupname=${group.groupName}'>${group.groupName}</a>
+					href='<c:url value="/doshowAllActsByGroupAccountingviewAction.action" />?groupId=${group.groupId}'>${group.groupName}</a>
 				</li>
 			</c:forEach>
 

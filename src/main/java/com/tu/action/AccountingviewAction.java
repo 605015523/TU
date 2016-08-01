@@ -166,8 +166,8 @@ public class AccountingviewAction extends AbstractAction {
 	// Display the chosen group's activities by groupname (activity shall be in validated status)
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
-		String groupName = request.getParameter("groupname");
-		GroupVO group = groupBean.doGetOneGroupByName(groupName);
+		Integer groupId = Integer.valueOf(request.getParameter("groupId"));
+		GroupVO group = groupBean.doGetOneGroupById(groupId);
 		groupActs = accountingviewBean.doGetAllActsByGroupId(group
 				.getGroupId());
 

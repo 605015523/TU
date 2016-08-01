@@ -8,6 +8,6 @@ public interface GroupInterface {
 
 	List<GroupVO> doGetAllGroup();
 
-	GroupVO doGetOneGroupByName(String groupName);
+	GroupVO doGetOneGroupById(Integer groupId);
 
 }
