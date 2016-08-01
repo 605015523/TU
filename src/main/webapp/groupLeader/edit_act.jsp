@@ -158,12 +158,12 @@
 								</label>
 								<c:if test="${groupAct.activity.state=='approved'}">
 									<input type="text" class="form-control" id="actDate"
-										name="actDate" value="<s:property value='groupAct.activity.actDate'/>"
-										placeholder="<s:property value='groupAct.activity.actDate'/>" disabled>
+										name="actDate" value="<s:date name='groupAct.activity.actDate' format='MM/dd/yyyy'/>"
+										disabled>
 								</c:if>
 								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
 									<input type="text" class="form-control" id="actDate"
-										name="actDate" value="<s:property value='groupAct.activity.actDate'/>" placeholder="ActDate"/>
+										name="actDate" value="<s:date name='groupAct.activity.actDate' format='MM/dd/yyyy'/>" placeholder="ActDate"/>
 								</c:if>
 
 							</div>
