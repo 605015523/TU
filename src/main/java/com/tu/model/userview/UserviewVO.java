@@ -10,7 +10,6 @@ public class UserviewVO implements java.io.Serializable {
 	private Integer userId;
 	private String userName;
 	private List<String> groupName;
-	private String userPassword;
 	private String userDept;
 	private Date inDate;
 	private Float spending;
@@ -23,7 +22,6 @@ public class UserviewVO implements java.io.Serializable {
 		userId = null;
 		userName = null;
 		groupName = null;
-		userPassword = null;
 		userDept = null;
 		inDate = null;
 		spending = null;
@@ -53,14 +51,6 @@ public class UserviewVO implements java.io.Serializable {
 
 	public void setGroupName(List<String> groupName) {
 		this.groupName = groupName;
-	}
-
-	public String getUserPassword() {
-		return this.userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
 	}
 
 	public String getUserDept() {

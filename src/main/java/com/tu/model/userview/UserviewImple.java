@@ -97,7 +97,6 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 			oneuserviewPO.setUserId(oneuserloginPO.getUserId());
 			oneuserviewPO.setUserName(oneuserloginPO.getUserName());
-			oneuserviewPO.setUserPassword(oneuserloginPO.getUserPassword());
 			oneuserviewPO.setGroupName(onegroupPO);
 			oneuserviewPO.setUserDept(oneuserloginPO.getUserDept());
 			oneuserviewPO.setInDate(oneuserloginPO.getInDate());
