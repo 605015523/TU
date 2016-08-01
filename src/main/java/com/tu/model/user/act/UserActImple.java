@@ -91,7 +91,7 @@ public class UserActImple extends Observable implements UserActInterface {
 	@Override
 	public String doUpdateOneUserAct(UserActVO userActVO) {
 		Integer actId = userActVO.getActId();
-		Integer userId = userActVO.getUserId();
+		Integer userId = userActVO.getUser().getUserId();
 		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		String okOrNot = null;
 		try { // 利用Bean拷贝类实现简单地拷贝

@@ -13,7 +13,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
-import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
@@ -21,6 +20,7 @@ import com.tu.dao.user.group.UserGroup;
 import com.tu.dao.user.group.UserGroupDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
+import com.tu.mapper.DAOModelMapper;
 import com.tu.model.userlogin.UserloginVO;
 
 public class UserviewImple extends Observable implements UserviewInterface {
@@ -31,6 +31,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	private GroupDAOInterface groupDAO = null;
 	private ActivityDAOInterface actsDAO = null;
 	private UserActDAOInterface userActDAO = null;
+	private DAOModelMapper daoModelMapper;
 
 	// 构造方法
 	public UserviewImple() {
@@ -146,7 +147,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			cal.setTime(actsPO.getActDate());
 
 			if (cal.get(Calendar.YEAR) == year) {
-				UserActDetailedVO useractsPO = createUserActDetailed(userAct, actsPO);
+				UserActDetailedVO useractsPO = daoModelMapper.createUserActDetailed(userAct, actsPO);
 				oneuseractsVO.add(useractsPO);
 			}
 		}
@@ -155,27 +156,6 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		return oneuseractsVO;
 	}
 	
-	private UserActDetailedVO createUserActDetailed(UserAct userAct, Activity actsPO) {
-		UserActDetailedVO useractsPO = new UserActDetailedVO();
-		
-		useractsPO.setUserId(userAct.getUserId());
-		useractsPO.setActId(userAct.getActId());
-		useractsPO.setNbParticipants(userAct.getNbParticipants());
-		useractsPO.setConsumption(userAct.getConsumption());
-		useractsPO.setRemark(userAct.getRemark());
-
-		useractsPO.setActName(actsPO.getActName());
-		useractsPO.setActMoney(actsPO.getActMoney());
-		useractsPO.setState(actsPO.getState());
-		useractsPO.setDescription(actsPO.getDescription());
-
-		useractsPO.setActDate(actsPO.getActDate());
-		Group groupPO = groupDAO.findById(actsPO.getGroupId());
-		useractsPO.setGroup(groupPO.getGroupName());
-		
-		return useractsPO;
-	}
-
 
 	// 用户修改密码
 	@Override
@@ -209,7 +189,15 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		UserAct userAct = userActDAO.findByUserIdAndActId(userId, actId);
 		Activity actsPO = actsDAO.findById(userAct.getActId());
 		
-		return createUserActDetailed(userAct, actsPO);
+		return daoModelMapper.createUserActDetailed(userAct, actsPO);
+	}
+
+	public DAOModelMapper getDaoModelMapper() {
+		return daoModelMapper;
+	}
+
+	public void setDaoModelMapper(DAOModelMapper daoModelMapper) {
+		this.daoModelMapper = daoModelMapper;
 	}
 
 }

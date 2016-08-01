@@ -44,7 +44,7 @@
         }
            
     if(newPwd.length<6||newPwd.length>12) {
-           alert("the new password should between 6-12 character!");
+           alert("the new password should between 6-12 characters!");
            return false;
     }
         window.location.href="<c:url value='/doChangePwdUserviewAction.action?newpassword="+newPwd +"&oldpassword="+oldPwd+"' />";
@@ -68,52 +68,43 @@
 
 				<hr class="invisible" />
 				<div class="panel-body">
-					<form method="post"
-						style="max-width: 330px; padding: 15px; margin: auto; background-color: #bdbdbd">
-						<form>
-							<c:if test="${updateMessage!=null}">${updateMessage}</c:if>
+					<form method="post"	style="max-width: 330px; padding: 15px; margin: auto; background-color: #bdbdbd">
+						<c:if test="${updateMessage!=null}">${updateMessage}</c:if>
 
-							<div class="form-group">
-								<label>
-									Old Password:
-								</label>
-								<input type="password" class="form-control" id="oldPassword">
-							</div>
-							<div class="form-group">
-
-								<label>
-									New Password:
-								</label>
-								<input type="password" class="form-control" id="newPassword"
-									placeholder="6-12 character">
-							</div>
-							<div class="form-group">
-
-								<label>
-									Confirm Password:
-								</label>
-								<input type="password" class="form-control" id="conPassword"
-									placeholder="6-12 character">
-							</div>
+						<div class="form-group">
+							<label>
+								Old Password:
+							</label>
+							<input type="password" class="form-control" id="oldPassword">
+						</div>
+						<div class="form-group">
 
 							<label>
-								LOGIN IN
+								New Password:
 							</label>
-							<input type="button" class="btn btn-primary form-control"
-								value="submit" onclick="checkpassword();" />
-
-						</form>
-						<div>
+							<input type="password" class="form-control" id="newPassword"
+								placeholder="6-12 characters">
 						</div>
-						<div>
+						<div class="form-group">
 
-							<a href="normalUser/user_home.jsp" type="button"
-								class="btn btn-default navbar-btn"><span
-								class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-								back</a>
+							<label>
+								Confirm Password:
+							</label>
+							<input type="password" class="form-control" id="conPassword"
+								placeholder="6-12 characters">
 						</div>
+
+						<input type="button" class="btn btn-primary form-control"
+							value="submit" onclick="checkpassword();" />
 
 					</form>
+					
+					<div>
+						<a href="normalUser/user_home.jsp" type="button"
+							class="btn btn-default navbar-btn"><span
+							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							back</a>
+					</div>
 
 				</div>
 			</div>

@@ -13,7 +13,7 @@ import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.model.leaderview.MemberInVO;
+import com.tu.model.user.act.UserActVO;
 import com.tu.model.userlogin.UserloginVO;
 
 public class AccountingviewAction extends AbstractAction {
@@ -141,8 +141,8 @@ public class AccountingviewAction extends AbstractAction {
 
 		// re-calculate user's spending
 		GroupActVO groupactVO = accountingviewBean.doGetGroupActivityByID(actId);
-		for (MemberInVO memberInVO : groupactVO.getMemberInVO()) {
-			Integer userId = memberInVO.getUserId();
+		for (UserActVO memberInVO : groupactVO.getMemberInVO()) {
+			Integer userId = memberInVO.getUser().getUserId();
 			Float spending = memberInVO.getConsumption();
 			UserloginVO oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
 			oneUserVO.setSpending(oneUserVO.getSpending() + spending);

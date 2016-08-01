@@ -13,7 +13,6 @@ import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
-import com.tu.model.leaderview.MemberInVO;
 import com.tu.model.messages.MessagesInterface;
 import com.tu.model.messages.MessageVO;
 import com.tu.model.user.act.UserActInterface;
@@ -171,24 +170,20 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setActMoney(getActMoney());
 		actsBean.doUpdateOneAct(oneActVO);
 		
-		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
+		List<UserActVO> memberInVO = new ArrayList<UserActVO>();
 
 		for (int j = 1; j < (groupAct.getMemberInVO().size() + 1); j++) {
-			MemberInVO oneMemberInVO = groupAct.getMemberInVO()
-					.get(j - 1);
-			UserActVO oneuserAct = userActBean.doGetOneActById(
-					oneMemberInVO.getUserId(), actId);
-			Float consumption = Float.parseFloat(request
-					.getParameter("perconsumption_" + j));
-			oneuserAct.setConsumption(consumption);
+			UserActVO oneMemberInVO = groupAct.getMemberInVO().get(j - 1);
+			
+			Float consumption = Float.parseFloat(request.getParameter("perconsumption_" + j));
 			oneMemberInVO.setConsumption(consumption);
-			Integer nbParticipantsGrpAct = Integer.parseInt(request
-					.getParameter("perNbParticipants_" + j));
-			oneuserAct.setNbParticipants(nbParticipantsGrpAct);
+			
+			Integer nbParticipantsGrpAct = Integer.parseInt(request.getParameter("perNbParticipants_" + j));
 			oneMemberInVO.setNbParticipants(nbParticipantsGrpAct);
+			
 			memberInVO.add(oneMemberInVO);
 			// Write the updated detail into database by calling method doUpdateOneAct of class activitiesImple
-			userActBean.doUpdateOneUserAct(oneuserAct);
+			userActBean.doUpdateOneUserAct(oneMemberInVO);
 		}
 		groupAct.setMemberInVO(memberInVO);
 

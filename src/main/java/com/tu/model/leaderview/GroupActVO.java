@@ -3,6 +3,7 @@ package com.tu.model.leaderview;
 import java.util.*;
 
 import com.tu.model.activities.ActivityVO;
+import com.tu.model.user.act.UserActVO;
 
 public class GroupActVO implements java.io.Serializable {
 
@@ -11,7 +12,7 @@ public class GroupActVO implements java.io.Serializable {
 	private ActivityVO activity;
 	private Float sum;
 	private Integer nbParticipants;
-	private List<MemberInVO> memberInVO;
+	private List<UserActVO> memberInVO;
 	
 
 	// Constructors
@@ -28,11 +29,11 @@ public class GroupActVO implements java.io.Serializable {
 		this.sum = sum;
 	}
 
-	public List<MemberInVO> getMemberInVO() {
+	public List<UserActVO> getMemberInVO() {
 		return memberInVO;
 	}
 
-	public void setMemberInVO(List<MemberInVO> memberInVO) {
+	public void setMemberInVO(List<UserActVO> memberInVO) {
 		this.memberInVO = memberInVO;
 	}
 

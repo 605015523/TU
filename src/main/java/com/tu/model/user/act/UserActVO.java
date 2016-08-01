@@ -1,19 +1,21 @@
 package com.tu.model.user.act;
 
+import com.tu.model.userlogin.UserloginVO;
+
 public class UserActVO implements java.io.Serializable {
 
 	private static final long serialVersionUID = 983685594099729166L;
 	
 	// Fields
 	private Integer actId;
-	private Integer userId;
+	private UserloginVO user;
 	private Integer nbParticipants;
 	private Float consumption;
 	private String remark;
 
 	public UserActVO() {
 		actId = null;
-		userId = null;
+		user = null;
 		nbParticipants = null;
 		consumption = null;
 		remark = null;
@@ -27,12 +29,12 @@ public class UserActVO implements java.io.Serializable {
 		this.actId = actId;
 	}
 
-	public Integer getUserId() {
-		return this.userId;
+	public UserloginVO getUser() {
+		return this.user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(UserloginVO user) {
+		this.user = user;
 	}
 
 	public Integer getNbParticipants() {

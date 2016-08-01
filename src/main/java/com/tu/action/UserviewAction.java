@@ -153,9 +153,8 @@ public class UserviewAction extends AbstractAction {
 		UserActVO oneUserActVO = new UserActVO();
 		LOGGER.info("the actid is: " + actId);
 		ActivityVO oneAct = actsBean.doGetOneActById(actId);
-		Integer userId = getCurrentUser().getUserId();
 		oneUserActVO.setActId(actId);
-		oneUserActVO.setUserId(userId);
+		oneUserActVO.setUser(getCurrentUser());
 		oneUserActVO.setNbParticipants(nbParticipants);
 		
 		// FIXME: know why consumption is actually not given

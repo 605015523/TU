@@ -108,6 +108,7 @@
 		<property name="userGroupDAO" ref="UserGroupDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="actsDAO" ref="ActsDAO"/>
+		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 
 	<bean id="ActsBean" class="com.tu.model.activities.ActivitiesImple">

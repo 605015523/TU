@@ -21,9 +21,10 @@ import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.model.leaderview.MemberInVO;
 import com.tu.model.messages.MessageVO;
+import com.tu.model.user.act.UserActVO;
 import com.tu.model.userlogin.UserloginVO;
+import com.tu.model.userview.UserActDetailedVO;
 import com.tu.model.userview.UserMsgVO;
 
 public class DAOModelMapper {
@@ -112,20 +113,19 @@ public class DAOModelMapper {
 
 		List<UserAct> useractPO = userActDAO.findByActId(act
 				.getActId());
-		List<MemberInVO> memberInVO = new ArrayList<MemberInVO>();
+		List<UserActVO> memberInVO = new ArrayList<UserActVO>();
 		float sum = 0;
 		Integer nbParticipants = 0;
 		for (UserAct userAct : useractPO) {
-			MemberInVO oneMemberIn = new MemberInVO();
-			oneMemberIn.setUserId(userAct.getUserId());
+			UserActVO oneMemberIn = new UserActVO();
+			
 			oneMemberIn.setNbParticipants(userAct.getNbParticipants());
 			oneMemberIn.setConsumption(userAct.getConsumption());
 			oneMemberIn.setRemark(userAct.getRemark());
 			sum += userAct.getConsumption();
 			nbParticipants += userAct.getNbParticipants();
 			Userlogin userPO = userloginDAO.findById(userAct.getUserId());
-			oneMemberIn.setUserName(userPO.getUserName());
-			oneMemberIn.setUserDept(userPO.getUserDept());
+			oneMemberIn.setUser(convertoToUserInfoVO(userPO));
 			memberInVO.add(oneMemberIn);
 		}
 		actsPO.setNbParticipants(nbParticipants);
@@ -133,6 +133,29 @@ public class DAOModelMapper {
 		actsPO.setSum(sum);
 		
 		return actsPO;
+	}
+	
+	public UserActDetailedVO createUserActDetailed(UserAct userAct, Activity actsPO) {
+		UserActDetailedVO useractsVO = new UserActDetailedVO();
+		
+		Userlogin userPO = userloginDAO.findById(userAct.getUserId());
+		
+		useractsVO.setUser(convertoToUserInfoVO(userPO));
+		useractsVO.setActId(userAct.getActId());
+		useractsVO.setNbParticipants(userAct.getNbParticipants());
+		useractsVO.setConsumption(userAct.getConsumption());
+		useractsVO.setRemark(userAct.getRemark());
+
+		useractsVO.setActName(actsPO.getActName());
+		useractsVO.setActMoney(actsPO.getActMoney());
+		useractsVO.setState(actsPO.getState());
+		useractsVO.setDescription(actsPO.getDescription());
+
+		useractsVO.setActDate(actsPO.getActDate());
+		Group groupPO = groupDAO.findById(actsPO.getGroupId());
+		useractsVO.setGroup(groupPO.getGroupName());
+		
+		return useractsVO;
 	}
 	
 	public MessagesDAOInterface getMsgDAO() {
