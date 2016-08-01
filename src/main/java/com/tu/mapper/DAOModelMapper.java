@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.tu.dao.activities.Activity;
+import com.tu.dao.activities.ActivityDAOInterface;
 import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
 import com.tu.dao.messages.Message;
@@ -33,6 +34,7 @@ public class DAOModelMapper {
 	private GroupDAOInterface groupDAO;
 	private UserActDAOInterface userActDAO;
 	private UserloginDAOInterface userloginDAO;
+	private ActivityDAOInterface actDAO;
 	
 
 	public UserloginVO convertoToUserInfoVO(Userlogin userInfoPO) {
@@ -57,15 +59,16 @@ public class DAOModelMapper {
 			BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
 			oneUserMsgVO.setUserId(userMsg.getUserId());
 			oneUserMsgVO.setReadState(userMsg.getReadState());
-			Group group = groupDAO.findById(oneMessage.getGroupId());
-			oneUserMsgVO.setGroupName(group.getGroupName());
 			
 			MessageVO message = new MessageVO();
 			BeanUtils.copyProperties(message, oneMessage);
 			
-			ActivityVO activity = new ActivityVO();
-			BeanUtils.copyProperties(activity, oneMessage);
+			Activity act = actDAO.findById(oneMessage.getActId());
+			ActivityVO activity = convertActivityToActivityVO(act);
 			message.setActivity(activity);
+			
+			Group group = groupDAO.findById(activity.getGroupId());
+			oneUserMsgVO.setGroupName(group.getGroupName());
 			
 			oneUserMsgVO.setMessage(message);
 			
@@ -188,6 +191,14 @@ public class DAOModelMapper {
 
 	public void setUserloginDAO(UserloginDAOInterface userloginDAO) {
 		this.userloginDAO = userloginDAO;
+	}
+
+	public ActivityDAOInterface getActDAO() {
+		return actDAO;
+	}
+
+	public void setActDAO(ActivityDAOInterface actDAO) {
+		this.actDAO = actDAO;
 	}
 
 }

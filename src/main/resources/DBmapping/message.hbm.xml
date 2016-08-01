@@ -12,29 +12,5 @@
         <property name="actId" type="java.lang.Integer">
             <column name="act_id" not-null="true" />
         </property>
-         <property name="groupId" type="java.lang.Integer">
-            <column name="group_id" not-null="true" />
-        </property>
-        <property name="actName" type="java.lang.String">
-            <column name="act_name" not-null="true" />
-        </property>
-        <property name="actMoney" type="java.lang.Float">
-            <column name="act_money" length="45" />
-        </property>
-       <property name="description" type="java.lang.String">
-            <column name="description" length="1000" />
-        </property>
-        <property name="enrollStartDate" type="java.util.Date">
-            <column name="enroll_start_date"  />
-        </property>
-        <property name="enrollEndDate" type="java.util.Date">
-            <column name="enroll_end_date"  />
-        </property>
-        <property name="actDate" type="java.util.Date">
-            <column name="act_date"  />
-        </property>
-         <property name="state" type="java.lang.String">
-            <column name="state"  />
-        </property>
 	</class>
 </hibernate-mapping>

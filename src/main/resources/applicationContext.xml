@@ -155,6 +155,7 @@
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="userloginDAO" ref="UserloginDAO"/>
+		<property name="actDAO" ref="ActsDAO"/>
 	</bean>
 
 	<!-- 数据访问层Bean定义 -->
