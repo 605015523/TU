@@ -34,34 +34,13 @@ public class AccountingviewAction extends AbstractAction {
 	private GroupActVO groupAct;
 	private List<ActivityVO> acts;
 	private List<GroupActVO> groupActs;
+	private GroupVO group;
+	
+
 	private List<UserGroupCostVO> allUserGroupCost;
 
 	public AccountingviewAction() {
 		// do nothing
-	}
-
-	public ActivitiesInterface getActsBean() {
-		return this.actsBean;
-	}
-
-	public void setActsBean(ActivitiesInterface actsBean) {
-		this.actsBean = actsBean;
-	}
-
-	public AccountingviewInterface getAccountingviewBean() {
-		return this.accountingviewBean;
-	}
-
-	public void setAccountingviewBean(AccountingviewInterface accountingviewBean) {
-		this.accountingviewBean = accountingviewBean;
-	}
-
-	public GroupInterface getGroupBean() {
-		return this.groupBean;
-	}
-
-	public void setGroupBean(GroupInterface groupBean) {
-		this.groupBean = groupBean;
 	}
 
 	// To retrieve all the activities which are needed to be approval. 
@@ -167,7 +146,7 @@ public class AccountingviewAction extends AbstractAction {
 	public String doshowAllActsByGroup() {
 		initServletContextObject();
 		Integer groupId = Integer.valueOf(request.getParameter("groupId"));
-		GroupVO group = groupBean.doGetOneGroupById(groupId);
+		group = groupBean.doGetOneGroupById(groupId);
 		groupActs = accountingviewBean.doGetAllActsByGroupId(group
 				.getGroupId());
 
@@ -238,6 +217,38 @@ public class AccountingviewAction extends AbstractAction {
 
 	public void setActs(List<ActivityVO> acts) {
 		this.acts = acts;
+	}
+	
+	public GroupVO getGroup() {
+		return group;
+	}
+
+	public void setGroup(GroupVO group) {
+		this.group = group;
+	}
+	
+	public ActivitiesInterface getActsBean() {
+		return this.actsBean;
+	}
+
+	public void setActsBean(ActivitiesInterface actsBean) {
+		this.actsBean = actsBean;
+	}
+
+	public AccountingviewInterface getAccountingviewBean() {
+		return this.accountingviewBean;
+	}
+
+	public void setAccountingviewBean(AccountingviewInterface accountingviewBean) {
+		this.accountingviewBean = accountingviewBean;
+	}
+
+	public GroupInterface getGroupBean() {
+		return this.groupBean;
+	}
+
+	public void setGroupBean(GroupInterface groupBean) {
+		this.groupBean = groupBean;
 	}
 
 }
