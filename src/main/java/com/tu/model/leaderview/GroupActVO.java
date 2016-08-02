@@ -12,7 +12,7 @@ public class GroupActVO implements java.io.Serializable {
 	private ActivityVO activity;
 	private Float sum;
 	private Integer nbParticipants;
-	private List<UserActVO> memberInVO;
+	private List<UserActVO> members;
 	
 
 	// Constructors
@@ -30,11 +30,11 @@ public class GroupActVO implements java.io.Serializable {
 	}
 
 	public List<UserActVO> getMemberInVO() {
-		return memberInVO;
+		return members;
 	}
 
 	public void setMemberInVO(List<UserActVO> memberInVO) {
-		this.memberInVO = memberInVO;
+		this.members = memberInVO;
 	}
 
 	public Integer getNbParticipants() {

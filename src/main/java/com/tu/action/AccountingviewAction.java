@@ -120,9 +120,9 @@ public class AccountingviewAction extends AbstractAction {
 
 		// re-calculate user's spending
 		GroupActVO groupactVO = accountingviewBean.doGetGroupActivityByID(actId);
-		for (UserActVO memberInVO : groupactVO.getMemberInVO()) {
-			Integer userId = memberInVO.getUser().getUserId();
-			Float spending = memberInVO.getConsumption();
+		for (UserActVO userAct : groupactVO.getMemberInVO()) {
+			Integer userId = userAct.getUser().getUserId();
+			Float spending = userAct.getConsumption();
 			UserloginVO oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
 			oneUserVO.setSpending(oneUserVO.getSpending() + spending);
 			userloginManageBean.doUpdateOneUserInfo(oneUserVO);
