@@ -96,14 +96,12 @@
 						</div>
 					</div>
 					<div class="row form-group form-group-lg center-block">		
-
-							<div
-								class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
-								<a role="button" class="btn btn-primary  btn-block"
-									href='<c:url value="/doInActUserviewAction.action" />?msgId=${msgDetails.message.msgId}'>I'm
-									in</a>
-							</div>
-					
+						<div
+							class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
+							<a role="button" class="btn btn-primary  btn-block"
+								href='<c:url value="/doInActUserviewAction.action" />?msgId=${msgDetails.message.msgId}'>I'm
+								in</a>
+						</div>
 					</div>
 				</div>
 			</div>

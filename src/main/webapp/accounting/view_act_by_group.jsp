@@ -40,9 +40,7 @@
 					</h3>
 				</div>
 				<div class="panel-body">
-					<div class="row">
-					</div>
-					<table class="table table-hover "
+					<table class="table table-hover"
 						style="margin: 10px; padding: 10px 10px 10px 10px;">
 					<tr>
 					<td class="col-md-3 col-xs-3 text-center">ACTNAME</td>
@@ -67,7 +65,7 @@
 								<a href='<c:url value="/doshowActDetailsInGroupAccountingviewAction.action" />?actId=${grpAct.activity.actId}'>details</a></td>
 				                </tr>
 							</c:if>
-                      </s:iterator>
+						</s:iterator>
 					</table>
 				</div>
 			</div>

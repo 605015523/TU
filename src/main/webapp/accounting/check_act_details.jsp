@@ -52,73 +52,65 @@
 					<h3 class="panel-title">
 						details
 					</h3>
-
 				</div>
 
 				<div class="panel-body table-bordered">
-					<form action="doCheckActAccountingviewAction.action" method="post"
-						role="form" name="form" id="form"
-						onsubmit="return checkApproved();">
-						<input type="hidden" name="actId" value="${actId}"/>
-						<div class="row form-group form-group-lg">
+					<div class="row form-group form-group-lg">
 
-							<div class="col-xs-3 col-md-3">
-								<strong>ACTNAME:</strong>
-							</div>
-							<div class="col-xs-3  col-md-3">
-								${groupAct.activity.actName}
-							</div>
-							<div class="col-xs-3  col-md-3">
-								<strong>Registration Period:</strong>
-							</div>
-							<div class="col-xs-3 col-md-3">
-								<s:date name="groupAct.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="groupAct.activity.enrollEndDate" format="%{getText('format.date')}"/>
-							</div>
+						<div class="col-xs-3 col-md-3">
+							<strong>ACTNAME:</strong>
 						</div>
-						<div class="row form-group form-group-lg">
-							<div class="col-xs-3 col-md-3">
-								<strong>DATE:</strong>
-							</div>
-							<div class="col-xs-3 col-md-3">
-								<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
-							</div>
-							<div class="col-xs-3 col-md-3">
-								<strong>PRICE per PERSON:</strong>
-							</div>
-							<div class="col-xs-3 col-md-3">
-								<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
-							</div>
+						<div class="col-xs-3  col-md-3">
+							${groupAct.activity.actName}
 						</div>
+						<div class="col-xs-3  col-md-3">
+							<strong>Registration Period:</strong>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							<s:date name="groupAct.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="groupAct.activity.enrollEndDate" format="%{getText('format.date')}"/>
+						</div>
+					</div>
+					<div class="row form-group form-group-lg">
+						<div class="col-xs-3 col-md-3">
+							<strong>DATE:</strong>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							<strong>PRICE per PERSON:</strong>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
+						</div>
+					</div>
+					
+					<div class="row form-group form-group-lg">
+						<div class="col-xs-3 col-md-3 text-left">
+							<strong>DESCRIPTION:</strong>
+						</div>
+						<div class="col-xs-8 col-md-8 display: block">
 						
-						<div class="row form-group form-group-lg">
-							<div class="col-xs-3 col-md-3 text-left">
-								<strong>DESCRIPTION:</strong>
-							</div>
-							<div class="col-xs-8 col-md-8 display: block">
+							<textarea class="form-control" rows="6" id="description"
+								name="description" >${groupAct.activity.description}</textarea>
+						</div>
+					</div>
+
+
+					<div class="row form-group form-group-lg">
+						<form action="doCheckActAccountingviewAction.action" method="post"
+							role="form" name="form" id="form"
+							onsubmit="return checkApproved();">
+							<input type="hidden" name="actId" value="${actId}"/>
 							
-								<textarea class="form-control" rows="6" id="description"
-									name="description" >${groupAct.activity.description}</textarea>
-							</div>
-						</div>
-						<div class="row form-group form-group-lg">
-
-							<div class="col-xs-10 col-md-10 display: block">
-
-
-							</div>
-
-						</div>
-
-						<div class="row form-group form-group-lg">
-							<div
-								class="form-group col-xs-10 col-md-10 col-xs-offset-1 col-md-offset-1 text-left">
+							<div class="form-group col-xs-10 col-md-10 col-xs-offset-1 col-md-offset-1 text-left">
 								<textarea class="form-control" rows="6" id="comment"
 									name="comment" placeholder="less than 500 words"
 									onkeyup="wordStatic(this);"></textarea>
 
 							</div>
-							<div
-								class=" form-group col-xs-4 col-md-4 col-xs-offset-4 col-md-offset-4 ">
+						
+							<div class=" form-group col-xs-4 col-md-4 col-xs-offset-4 col-md-offset-4 ">
 								<label>
 									<input type="radio" name="checkState" id="approved"
 										value="approved">
@@ -136,17 +128,18 @@
 									<input type="submit" class="btn btn-primary  btn-block"
 										value="submit" <c:if test="${groupAct.activity.state!='draft'}">disabled</c:if>/>
 							</div>
-						</div>
-						<hr class="invisible" />
-						<div>
-							<button type="button"
-								class="btn btn-default navbar-btn navbar-left"
-								onclick=window.history.back();>
-								<span class="glyphicon glyphicon-chevron-left"
-									aria-hidden="true"></span> back
-							</button>
-						</div>
-					</form>
+							
+						</form>
+					</div>
+					<hr class="invisible" />
+					<div>
+						<button type="button"
+							class="btn btn-default navbar-btn navbar-left"
+							onclick=window.history.back();>
+							<span class="glyphicon glyphicon-chevron-left"
+								aria-hidden="true"></span> back
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
