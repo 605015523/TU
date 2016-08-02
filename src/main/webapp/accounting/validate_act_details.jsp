@@ -110,11 +110,11 @@
 										<td>consumption</td>
 										<td>remark</td>
 									</tr>
-									<s:iterator var="member" value="groupAct.memberInVO">
+									<s:iterator var="useract" value="groupAct.memberInVO">
 										<tr>
-											<td>${member.userName}</td>
-											<td>${member.userDept}</td>
-											<td>${member.nbParticipants}</td>
+											<td>${useract.user.userName}</td>
+											<td>${useract.user.userDept}</td>
+											<td>${useract.nbParticipants}</td>
 											<td><s:text name="format.money"><s:param value="consumption"/></s:text></td>
 											<td><s:property value="remark"/></td>
 										</tr>

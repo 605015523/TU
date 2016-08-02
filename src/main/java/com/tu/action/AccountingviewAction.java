@@ -64,7 +64,7 @@ public class AccountingviewAction extends AbstractAction {
 		
 		// To retrieve all the activities' details which are needed to be validated
 		List<String> inValidateStates = Arrays.asList("tobevalidate", "validate");
-		if (inCheckStates.contains(inValidateStates)) {
+		if (inValidateStates.contains(state)) {
 			return "ShowValidateDetails";
 		}
 		
