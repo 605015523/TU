@@ -46,39 +46,39 @@
 
 				<div class="panel-body">
 
-				<table class="table table-hover ">
-					<tr>
-						<td>ACTNAME</td>
-						<td>GROUP</td>
-						<td>CONSUMPTION</td>
-						<td>Date</td>
-						<td>Details</td>
-					</tr>
-					<s:iterator var="act" value="useracts">
+					<table class="table table-hover ">
 						<tr>
-							<td>${act.actName}</td>
-							<td>${act.group}</td>
-							    
-							<td>
-							<c:if test="${act.state=='validate'}">
-								<s:text name="format.money">
-									<s:param value="consumption"/>
-								</s:text>
-							</c:if>
-							</td>
-							<td>
-								<s:date name="actDate" format="%{getText('format.date')}"/>
-							</td>
-							<td>
-								<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
-							</td>
+							<td>ACTNAME</td>
+							<td>GROUP</td>
+							<td>CONSUMPTION</td>
+							<td>Date</td>
+							<td>Details</td>
 						</tr>
+						<s:iterator var="act" value="useracts">
+							<tr>
+								<td>${act.actName}</td>
+								<td>${act.group}</td>
+								    
+								<td>
+								<c:if test="${act.state=='validate'}">
+									<s:text name="format.money">
+										<s:param value="consumption"/>
+									</s:text>
+								</c:if>
+								</td>
+								<td>
+									<s:date name="actDate" format="%{getText('format.date')}"/>
+								</td>
+								<td>
+									<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
+								</td>
+							</tr>
+	
+						</s:iterator>
+	
+					</table>
 
-					</s:iterator>
-
-				</table>
-
-			</div>
+				</div>
 			</div>
 
 		</div>

@@ -119,7 +119,7 @@
 							</div>
 							<div class="form-group col-md-2 col-xs-2">
 								<input type="submit" class="btn btn-primary  btn-block"
-									onclick=deleteAct();; value="quit" disabled />
+									onclick="deleteAct();" value="quit" disabled />
 							</div>
 						</c:if>
 
