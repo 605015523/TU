@@ -101,7 +101,7 @@ public class UserActDAO extends HibernateDaoSupport implements
 	public void merge(UserAct detachedInstance) {
 		LOGGER.debug("merging UserAct instance");
 		try {
-			UserAct result = (UserAct) getHibernateTemplate().merge(
+			UserAct result = getHibernateTemplate().merge(
 					detachedInstance);
 			LOGGER.debug("merge successful");
 		} catch (RuntimeException re) {

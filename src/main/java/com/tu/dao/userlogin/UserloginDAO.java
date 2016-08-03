@@ -110,7 +110,7 @@ public class UserloginDAO extends HibernateDaoSupport implements
 	public Userlogin merge(Userlogin detachedInstance) {
 		LOG.debug("merging Userlogin instance");
 		try {
-			Userlogin result = (Userlogin) getHibernateTemplate().merge(
+			Userlogin result = getHibernateTemplate().merge(
 					detachedInstance);
 			LOG.debug("merge successful");
 			return result;

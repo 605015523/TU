@@ -175,8 +175,8 @@ public class UserviewAction extends AbstractAction {
 	public String doChangePwd() {
 		String updateMessage = null;
 		initServletContextObject();
-		String oldpassword = (String) request.getParameter("oldpassword");
-		String newpassword = (String) request.getParameter("newpassword");
+		String oldpassword = request.getParameter("oldpassword");
+		String newpassword = request.getParameter("newpassword");
 		UserloginVO userInfo = getCurrentUser();
 		LOGGER.info("the userName is:" + userInfo.getUserName());
 		String orgpassword = userInfo.getUserPassword();

@@ -17,14 +17,6 @@ public class UserGroupImple extends Observable implements UserGroupInterface {
 	private static final Log LOGGER = LogFactory.getLog(UserGroupImple.class);
 	private UserGroupDAOInterface userGroupDAO = null;
 
-	public UserGroupDAOInterface getUserGroupDAO() {
-		return userGroupDAO;
-	}
-
-	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
-		this.userGroupDAO = userGroupDAO;
-	}
-
 	public UserGroupImple() {
 		// Do nothing
 	}
@@ -72,5 +64,13 @@ public class UserGroupImple extends Observable implements UserGroupInterface {
 
 		return oneUserGroupVOs;
 
+	}
+	
+	public UserGroupDAOInterface getUserGroupDAO() {
+		return userGroupDAO;
+	}
+
+	public void setUserGroupDAO(UserGroupDAOInterface userGroupDAO) {
+		this.userGroupDAO = userGroupDAO;
 	}
 }

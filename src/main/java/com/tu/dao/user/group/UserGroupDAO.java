@@ -64,10 +64,8 @@ public class UserGroupDAO extends HibernateDaoSupport implements
 			String hql = " from com.tu.dao.user.group.UserGroup where user_id ="
 					+ memberId.toString() + " and group_id="
 					+ groupId.toString();
-			UserGroup userGroup = (UserGroup) this.getHibernateTemplate()
+			return (UserGroup) this.getHibernateTemplate()
 					.find(hql).get(0);
-
-			return userGroup;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by groupId and userId failed", re);
 			throw re;

@@ -55,7 +55,7 @@ public class TomcatFormFilter implements Filter {
 		 */
 		@Override
 		public String[] getParameterValues(String name) {
-			String values[] = getHttpServletRequest().getParameterValues(name);
+			String[] values = getHttpServletRequest().getParameterValues(name);
 			if (values != null) {
 				for (int i = 0; i < values.length; i++) {
 					values[i] = toChi(values[i]);
@@ -74,7 +74,7 @@ public class TomcatFormFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpreq = (HttpServletRequest) request;
-		if (httpreq.getMethod().equals("POST")) {
+		if ("POST".equals(httpreq.getMethod())) {
 			request.setCharacterEncoding("GBK");
 		} else {
 			request = new Request(httpreq);

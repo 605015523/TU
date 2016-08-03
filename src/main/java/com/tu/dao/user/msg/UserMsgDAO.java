@@ -36,10 +36,8 @@ public class UserMsgDAO extends HibernateDaoSupport implements
 		try {
 			String hql = " from com.tu.dao.user.msg.UserMsg where user_id="
 					+ userId.toString() + " and msg_id =" + msgId.toString();
-			UserMsg userMsg = (UserMsg) this.getHibernateTemplate()
+			return (UserMsg) this.getHibernateTemplate()
 					.find(hql).get(0);
-
-			return userMsg;
 		} catch (RuntimeException re) {
 			LOGGER.error("find by msgId and userId failed", re);
 			throw re;
