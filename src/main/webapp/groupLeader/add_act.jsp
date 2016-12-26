@@ -184,7 +184,7 @@
 					<div class="col-md-8 col-xs-8 ">
 						<div class="form-group">
 							<label for="actName">
-								Act Name
+								Activity name
 							</label>
 							<input type="text" class="form-control" id="actName" name="actName" value=""
 								placeholder="act name">
@@ -192,7 +192,7 @@
 
 						<div class="form-group">
 							<label for="description">
-								Act Description
+								Activity description
 							</label>
 						
 							<textarea class="form-control" rows="6" id="description" name="description" 

@@ -154,7 +154,7 @@
 
 							<div class="form-group">
 								<label for="actDate">
-									Act Date
+									Activity date
 								</label>
 								<c:if test="${groupAct.activity.state=='approved'}">
 									<input type="text" class="form-control" id="actDate"
@@ -171,7 +171,7 @@
 
 							<div class="form-group demo">
 								<label for="daterange">
-									Registration Date
+									Registration date
 								</label>
 								<c:if test="${groupAct.activity.state=='approved'}">
 									<input type="text" id="daterange" name="daterange" value=""
@@ -192,7 +192,7 @@
 									Price / person
 								</label>
 								<div class="input-group">
-									<span class="input-group-addon">￥</span>
+									<span class="input-group-addon"><s:text name="money"/></span>
 									<c:if test="${groupAct.activity.state=='approved'}">
 										<input type="number" step="0.1" class="form-control"
 											id="actMoney" name="actMoney" value="${groupAct.activity.actMoney}"
@@ -211,7 +211,7 @@
 						<div class="col-md-8 col-xs-8 ">
 							<div class="form-group">
 								<label for="actName">
-									Act Name
+									Activity name
 								</label>
 								<c:if test="${groupAct.activity.state=='approved'}">
 									<input type="text" class="form-control" id="actName"
@@ -225,7 +225,7 @@
 
 							<div class="form-group">
 								<label for="description">
-									Act Description
+									Activity description
 								</label>
 								
 								<c:if test="${groupAct.activity.state=='approved'}">
@@ -240,12 +240,6 @@
 
 							</div>
 							<hr class="invisible" />
-
-
-
-
-
-
 
 						</div>
 
