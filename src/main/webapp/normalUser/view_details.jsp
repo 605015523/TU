@@ -38,7 +38,7 @@
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">details</h3>
+					<h3 class="panel-title">Details</h3>
 				</div>
 
 
@@ -47,7 +47,7 @@
 					<div class="row form-group form-group-lg">
 
 						<div class="col-xs-3 col-md-3">
-							<strong>Act Name:</strong>
+							<strong>Activity name:</strong>
 						</div>
 						<div class="col-xs-3  col-md-3">
 							${act.actName}
@@ -67,7 +67,7 @@
 							<s:date name="act.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<strong>Price per Person</strong>
+							<strong>Price per person</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<s:text name="format.money">

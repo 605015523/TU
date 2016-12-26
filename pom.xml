@@ -186,7 +186,7 @@
 		
 	</build>
 
-	<profiles>
+	<!-- <profiles>
 	    <profile>
 	        <id>CI-WEB</id>
 	        <properties>
@@ -207,5 +207,5 @@
 	            <ci.build.testSourceDirectory>src/test/webapp</ci.build.testSourceDirectory>
 	        </properties>
 	    </profile>
-	</profiles>
+	</profiles> -->
 </project>

@@ -51,7 +51,7 @@
 						<thead>
 						<tr>
 							<td class="col-md-2 col-xs-2 text-center">
-								ACTNAME
+								Activity name
 							</td>
 							<td class="col-md-1 col-xs-1 text-center">
 								State
@@ -60,7 +60,7 @@
 								Registration Period
 							</td>
 							<td class="col-md-2 col-xs-2 text-center">
-								Act Date
+								Activity Date
 							</td>
 							<td class="col-md-2 col-xs-2 text-center">
 								Details

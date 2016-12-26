@@ -48,9 +48,9 @@
 
 					<table class="table table-hover ">
 						<tr>
-							<td>ACTNAME</td>
-							<td>GROUP</td>
-							<td>CONSUMPTION</td>
+							<td>Activity name</td>
+							<td>Group</td>
+							<td>Consumption</td>
 							<td>Date</td>
 							<td>Details</td>
 						</tr>

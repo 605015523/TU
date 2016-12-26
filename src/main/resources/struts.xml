@@ -43,7 +43,7 @@
 
 		<action name="*LeaderviewAction" class="LeaderviewActionBean"
 			method="{1}">
-			<result name="ShowAllGroupAct">/groupLeader/view_act.jsp</result>
+			<result name="ShowAllGroupAct">/groupLeader/view_group_acts.jsp</result>
 			<result name="ShowActDetails">/groupLeader/view_act_details.jsp</result>
 			<result name="EditAct">/groupLeader/edit_act.jsp</result>
 			<result name="EditActDetails">/groupLeader/edit_act_details.jsp</result>

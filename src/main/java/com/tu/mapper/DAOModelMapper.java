@@ -114,8 +114,8 @@ public class DAOModelMapper {
 		ActivityVO actVO = convertActivityToActivityVO(act);
 		actsPO.setActivity(actVO);
 
-		List<UserAct> useractPO = userActDAO.findByActId(act
-				.getActId());
+		Integer actId = act.getActId();
+		List<UserAct> useractPO = userActDAO.findByActId(actId);
 		List<UserActVO> memberInVO = new ArrayList<UserActVO>();
 		float sum = 0;
 		Integer nbParticipants = 0;
@@ -125,6 +125,7 @@ public class DAOModelMapper {
 			oneMemberIn.setNbParticipants(userAct.getNbParticipants());
 			oneMemberIn.setConsumption(userAct.getConsumption());
 			oneMemberIn.setRemark(userAct.getRemark());
+			oneMemberIn.setActId(actId);
 			sum += userAct.getConsumption();
 			nbParticipants += userAct.getNbParticipants();
 			Userlogin userPO = userloginDAO.findById(userAct.getUserId());
