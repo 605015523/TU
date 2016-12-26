@@ -4,7 +4,7 @@
 
 <div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3">
-		<strong>ACTNAME:</strong>
+		<strong>Activity name:</strong>
 	</div>
 	<div class="col-xs-3  col-md-3">
 		${groupAct.activity.actName}
@@ -18,13 +18,13 @@
 </div>
 <div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3">
-		<strong>DATE:</strong>
+		<strong>Date:</strong>
 	</div>
 	<div class="col-xs-3 col-md-3">
 		<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 	</div>
 	<div class="col-xs-3 col-md-3">
-		<strong>PRICE per PERSON</strong>
+		<strong>Price per person</strong>
 	</div>
 	<div class="col-xs-3 col-md-3">
 		<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
@@ -32,13 +32,13 @@
 </div>
 <div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3">
-		<strong>NUMBER OF PARTICIPANTS:</strong>
+		<strong>Number of participants:</strong>
 	</div>
 	<div class="col-xs-3 col-md-3">
 		${groupAct.nbParticipants}
 	</div>
 	<div class="col-xs-3 col-md-3">
-		<strong>CONSUMPTION:</strong>
+		<strong>Consumption:</strong>
 	</div>
 	<div class="col-xs-3 col-md-3">
 		<s:text name="format.money"><s:param value="groupAct.sum"/></s:text>
@@ -46,7 +46,7 @@
 </div>
 <div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3 text-left">
-		<strong>DESCRIPTION:</strong>
+		<strong>Description:</strong>
 	</div>
 	<div class="col-xs-8 col-md-8 display: block">
 		<p class="desc">
@@ -56,16 +56,16 @@
 </div>
 <div class="row form-group form-group-lg">
 	<div class="col-xs-2 col-md-2 text-left">
-		<strong>participants:</strong>
+		<strong>Participants:</strong>
 	</div>
 	<div class="col-xs-10 col-md-10 display: block">
 		<table class="table table-bordered">
 			<tr class="success">
 				<td>Name</td>
 				<td>Dept</td>
-				<td>number</td>
-				<td>consumption</td>
-				<td>remark</td>
+				<td>Number</td>
+				<td>Consumption</td>
+				<td>Remark</td>
 			</tr>
 			<s:iterator var="useract" value="groupAct.memberInVO">
 				<tr>

@@ -57,10 +57,7 @@
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						details
-					</h3>
-
+					<h3 class="panel-title">Details</h3>
 				</div>
 
 				<div class="panel-body table-bordered">
@@ -70,7 +67,7 @@
 						<div class="row form-group form-group-lg">
 
 							<div class="col-xs-3 col-md-3">
-								<strong>ACTNAME:</strong>
+								<strong>Activity name:</strong>
 							</div>
 							<div class="col-xs-3  col-md-3" name="actName">
 								${groupAct.activity.actName}
@@ -84,13 +81,13 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-3 col-md-3">
-								<strong>DATE:</strong>
+								<strong>Date:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<strong>PRICE per PERSON:</strong>
+								<strong>Price per person:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 							<input type="text" class="form-control" id="actMoney" name="actMoney" 
@@ -99,14 +96,14 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-3 col-md-3">
-								<strong>NUMBER OF PARTICIPANTS:</strong>
+								<strong>Number of participants:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<input type="text" class="form-control" id="nbParticipants"
 									name="nbParticipants" value='${groupAct.nbParticipants}'>
 							</div>
 							<div class="col-xs-3 col-md-3">
-								<strong>CONSUMPTION:</strong>
+								<strong>Consumption:</strong>
 							</div>
 							<div class="col-xs-3 col-md-3">
 								<input type="text" class="form-control" id="sum"
@@ -115,7 +112,7 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-3 col-md-3 text-left">
-								<strong>DESCRIPTION:</strong>
+								<strong>Description:</strong>
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								<p class="desc">
@@ -131,45 +128,35 @@
 						</div>
 						<div class="row form-group form-group-lg">
 							<div class="col-xs-2 col-md-2 text-left">
-								<strong>participants:</strong>
+								<strong>Participants:</strong>
 							</div>
 							<div class="col-xs-10 col-md-10 display: block">
 								<table class="table table-bordered" id="MyTable">
 
 									<tr class="success">
-										<td>
-											Name
-										</td>
-										<td>
-											Dept
-										</td>
-										<td>
-											number
-										</td>
-										<td>
-											consumption
-										</td>
-										<td>
-											remark
-										</td>
+										<td>Name</td>
+										<td>Dept</td>
+										<td>Number</td>
+										<td>Consumption</td>
+										<td>Remark</td>
 									</tr>
 									<c:set var="count" value="0"/>
-									<s:iterator var="member" value="groupAct.memberInVO">
+									<s:iterator var="userAct" value="groupAct.memberInVO">
 									<c:set var="count" value="${count+1}"/>
 										<tr>
 											<td>
-												${member.userName}
+												${userAct.user.userName}
 											</td>
 											<td>
-												${member.userDept}
+												${userAct.user.userDept}
 											</td>
 											<td>
 												<input type="number" class="form-control" id="nbParticipants"
-									name="perNbParticipants_${count}" value="${member.nbParticipants}">
+									name="perNbParticipants_${count}" value="${userAct.nbParticipants}">
 											</td>
 											<td>
 											    <input type="text" class="form-control" id="perconsumption"
-									name="perconsumption_${count}" value="${member.consumption}">
+									name="perconsumption_${count}" value="${userAct.consumption}">
 												
 											</td>
 											<td><s:property value="remark"/></td>
