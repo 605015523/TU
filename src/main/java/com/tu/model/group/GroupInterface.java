@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GroupInterface {
 
-	GroupVO doGetOneGroup(Integer userId);
+	GroupVO doGetOneGroupByLeaderId(Integer leaderId);
 
 	List<GroupVO> doGetAllGroup();
 

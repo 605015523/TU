@@ -63,10 +63,10 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 
 	// 通过leaderId获取一个group对象
 	@Override
-	public Group findByUserId(Integer userId) {
+	public Group findByUserId(Integer leaderId) {
 		try {
 			return (Group) getHibernateTemplate().find(
-					"from com.tu.dao.group.Group where group_leader_id = ?", userId)
+					"from com.tu.dao.group.Group where group_leader_id = ?", leaderId)
 					.get(0);
 		} catch (RuntimeException re) {
 			LOGGER.error("find by group_leader_id failed", re);
@@ -74,7 +74,9 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		}
 	}
 
-	// 通过groupname获取group对象
+	/**
+	 * Gets group by groupName
+	 */
 	@Override
 	public Group findByGroupName(String groupName) {
 		try {

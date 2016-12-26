@@ -152,7 +152,7 @@ public class UserloginManageAction extends AbstractAction {
 		if (userRole.equals(1)) {
 
 			// Get group info
-			GroupVO group = groupBean.doGetOneGroup(userId);
+			GroupVO group = groupBean.doGetOneGroupByLeaderId(userId);
 
 			// Save group info into session
 			session.setAttribute("group", group);
