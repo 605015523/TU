@@ -44,14 +44,14 @@
 
 				<div class="panel-body">
 
-					<table class="table table-hover row ">
+					<table class="table table-hover row">
 
 						<tr>
 							<th class="col-md-2 col-xs-3 text-center">
 								Group
 							</th>
 							<th class="col-md-3 col-xs-3 text-center">
-								Act Name
+								Activity name
 							</th>
 							<th class="col-md-2 col-xs-1 text-center">
 								Price / person

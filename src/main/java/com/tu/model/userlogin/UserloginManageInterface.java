@@ -12,6 +12,8 @@ public interface UserloginManageInterface {
 	
 	UserloginVO dogetOneUserInfoByUserName(String userName);
 
-	void doUpdateOneUserInfo(UserloginVO oneUserVO);
+	void doUpdateOneUserInfo(UserloginVO userVO);
+	
+	void doCreateUser(UserloginVO userVO);
 
 }

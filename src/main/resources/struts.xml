@@ -64,6 +64,9 @@
 		<action name="*ManageUsersAction" class="ManageUsersActionBean" method="{1}">
 			<result name="list">/admin/view_users_list.jsp</result>
 			<result name="addForm">/admin/add_user_form.jsp</result>
+			<result name="succcess" type="redirectAction">
+				<param name="actionName">listAllManageUsersAction</param>
+			</result>
 		</action>
 
 		<action name="*">

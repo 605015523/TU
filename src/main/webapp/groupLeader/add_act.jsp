@@ -45,7 +45,7 @@
 		<script type="text/javascript">
       $(document).ready(function() {     
        
-         $('#actDate').daterangepicker({
+        $('#actDate').daterangepicker({
           singleDatePicker: true,
           startDate: moment()
         });

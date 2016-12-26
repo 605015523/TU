@@ -48,23 +48,34 @@ public class UserloginManageImple extends Observable implements
 
 	// 更新用户spending
 	@Override
-	public void doUpdateOneUserInfo(UserloginVO oneUserVO) {
-		Integer userId = oneUserVO.getUserId();
-		Userlogin oneUserPO = userloginDAO.findById(userId);
-
+	public void doUpdateOneUserInfo(UserloginVO userVO) {
+		Integer userId = userVO.getUserId();
+		Userlogin userPO = userloginDAO.findById(userId);
+		copyUserLoginVOtoPO(userVO, userPO);
+		
+		try {
+			userloginDAO.merge(userPO);
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+	}
+	
+	@Override
+	public void doCreateUser(UserloginVO userVO) {
+		Userlogin userPO = new Userlogin();
+		copyUserLoginVOtoPO(userVO, userPO);
+		
+		userloginDAO.save(userPO);
+	}
+	
+	private void copyUserLoginVOtoPO(UserloginVO userVO, Userlogin userPO) {
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(oneUserPO, oneUserVO);
+			BeanUtils.copyProperties(userVO, userVO);
 		} catch (IllegalAccessException e) {
 			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
 		} catch (InvocationTargetException e) {
 			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact.");
 		}
-		try {
-			userloginDAO.merge(oneUserPO);
-		} catch (Exception e) {
-			LOG.error(e);
-		}
-
 	}
 
 	@Override

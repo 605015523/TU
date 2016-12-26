@@ -18,12 +18,29 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>Manage users</title>
+		<title>Create user</title>
 
-		<script src="js/jquery-2.2.0.min.js"></script>
+
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/signin.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css"
+			href="groupLeader/daterangepicker/daterangepicker.css" />
+
+		
+		<script src="js/jquery-2.2.0.min.js"></script>
+		<script src="groupLeader/daterangepicker/moment.min.js"></script>
+		<script src="groupLeader/daterangepicker/daterangepicker.js"></script>
 		<script src="js/bootstrap.min.js"></script>
+		
+		<script type="text/javascript">
+		$(document).ready(function() {     
+       
+	        $('#inDate').daterangepicker({
+	          singleDatePicker: true,
+	          startDate: moment()
+	        });
+		});
+         </script>
 	</head>
 	<body>
 
@@ -43,6 +60,94 @@
 					</h3>
 				</div>
 			</div>
+			
+			<form action="createUserManageUsersAction.action" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
+				<div class="row">
+
+					<div class="col-md-4 col-xs-4">
+						<div class="form-group">
+							<label for="userName">
+								Username
+							</label>
+							<input type="text" class="form-control" id="userName" name="userName" value=""
+								placeholder="Username for login"/>
+						</div>
+
+						<div class="form-group">
+							<label for="password">
+								Password
+							</label>
+						
+							<input type="password" class="form-control" id="password" name="password" value=""
+								placeholder="Password"/>
+						</div>
+
+						<div class="form-group">
+							<label for="repassword">
+								Repeat password
+							</label>
+						
+							<input type="password" class="form-control" id="repassword" name="repassword" value=""
+								placeholder="Retype password"/>
+						</div>
+						
+						<div class="form-group">
+							<label for="role">
+								Role
+							</label>
+						
+							<select class="form-control" name="role">
+								<option value="1">Group leader</option>
+								<option value="2">Accounting</option>
+								<option value="3" selected="selected">Normal member</option>
+								<option value="4">IT admin</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-md-8 col-xs-8 ">
+					
+						<div class="form-group">
+							<label for="dept">
+								Department
+							</label>
+							<input type="text" class="form-control" id="dept" name="dept" value=""
+								placeholder="Department"/>
+						</div>
+					
+						<div class="form-group">
+							<label for="inDate">
+								In date
+							</label>
+							<input type="text" class="form-control" id="inDate" name="inDate" value=""
+								placeholder="In date"/>
+							
+						</div>
+
+						<div class="form-group">
+							<label for="quota">
+								Quota
+							</label>
+							<div class="input-group">
+								<span class="input-group-addon"><s:text name="money"/></span>
+								<input type="number" step="0.1" class="form-control" id="quota" name="quota"
+									aria-label="..." value="2000"/>
+							</div>
+						</div>
+					
+						
+						<hr class="invisible" />
+
+
+						<div class="form-group col-md-3 col-xs-3  navbar-right">
+							<input type="submit" class="btn btn-primary   btn-block"
+								value="Create" />
+						</div>
+
+					</div>
+
+				</div>
+			</form>
 		</div>
 	</body>
 </html>
