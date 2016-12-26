@@ -65,6 +65,21 @@
 			</c:forEach>
 		</ul>
 	</li>
+	
+	<c:if test="${userRole==4}">
+	<li role="presentation" class="dropdown <c:if test="${param.active=='admin'}">active</c:if>"><a id="dLabel"
+		data-target="#" href="#" data-toggle="dropdown" role="button"
+		aria-haspopup="true" aria-expanded="false">Administration<span
+			class="caret"></span>
+		</a>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li><a
+				href='<c:url value="/listAllManageUsersAction.action" />'>Users</a>
+			</li>
+		</ul>
+	</li>
+	</c:if>
+	
 	<li role="presentation" class="navbar-right"><a role="button"
 		href="<c:url value="j_spring_security_logout" />">Log out</a></li>
 </ul>

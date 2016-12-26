@@ -18,7 +18,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>View my activities</title>
+		<title>Manage users</title>
 
 		<script src="js/jquery-2.2.0.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -27,61 +27,48 @@
 	</head>
 	<body>
 
-
 		<div class="container">
 			<div class="signin-head">
 				<img src="images/test/head.png" alt="">
 			</div>
 			<jsp:include page="../menu.jsp">
-		        <jsp:param name="active" value="activities"/>
+		        <jsp:param name="active" value="admin"/>
 		    </jsp:include>
+			
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						My activities in ${thisyear}
+						Manage users
 					</h3>
 				</div>
-
-
+				
 				<div class="panel-body">
-
+					<p class="navbar-text navbar-right">
+						<a href="<c:url value="/addUserFormManageUsersAction.action" />" class="navbar-link">Add user</a>
+					</p>
+				
 					<table class="table table-hover">
 						<tr>
-							<th>Activity name</th>
-							<th>Group</th>
-							<th>Consumption</th>
-							<th>Date</th>
-							<th>Details</th>
+							<th>User name</th>
+							<th>Role</th>
+							<th>Department</th>
+							<th>Action</th>
 						</tr>
-						<s:iterator var="act" value="useracts">
+					
+						<s:iterator var="user" value="users">
 							<tr>
-								<td>${act.actName}</td>
-								<td>${act.group}</td>
-								    
+								<td>${user.userName}</td>
+								<td>${user.userRole}</td>
+								<td>${user.userDept}</td>
 								<td>
-								<c:if test="${act.state=='validate'}">
-									<s:text name="format.money">
-										<s:param value="consumption"/>
-									</s:text>
-								</c:if>
-								</td>
-								<td>
-									<s:date name="actDate" format="%{getText('format.date')}"/>
-								</td>
-								<td>
-									<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
+									<a href='<c:url value="/editUserManageUsersAction.action" />?userId=${user.userId}'>edit</a>
 								</td>
 							</tr>
-	
-						</s:iterator>
-	
+						</s:iterator>				
 					</table>
-
 				</div>
 			</div>
-
 		</div>
-
 	</body>
 </html>

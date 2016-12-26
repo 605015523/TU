@@ -61,6 +61,10 @@
 			<result name="redirectDoGetAllAct" type="redirectAction">doGetAllCheckActAccountingviewAction</result>
 		</action>
 
+		<action name="*ManageUsersAction" class="ManageUsersActionBean" method="{1}">
+			<result name="list">/admin/view_users_list.jsp</result>
+			<result name="addForm">/admin/add_user_form.jsp</result>
+		</action>
 
 		<action name="*">
 			<result>/noaction.html</result>

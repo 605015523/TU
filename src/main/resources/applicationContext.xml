@@ -92,6 +92,11 @@
 		<property name="groupBean" ref="GroupBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 	</bean>
+	
+	<bean id="ManageUsersActionBean" scope="prototype"
+		class="com.tu.action.ManageUsersAction">
+		<property name="userloginManageBean" ref="UserloginManageBean"/>
+	</bean>
 
 	<!-- 服务层Bean定义 -->
 
