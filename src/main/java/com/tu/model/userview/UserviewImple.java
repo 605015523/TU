@@ -86,7 +86,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 		try {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
-			LOG.info("oneuserloginPO ID get success"
+			LOG.info("oneuserloginPO ID get success:"
 					+ oneuserloginPO.getUserId());
 			List<UserGroup> oneUserGroupPO = userGroupDAO.findByUserId(userId);
 

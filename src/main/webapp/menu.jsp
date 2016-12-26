@@ -46,7 +46,7 @@
 
 	</c:if>
 	<li role="presentation" <c:if test="${param.active=='messages'}">class="active"</c:if>><a
-		href="doshowMessagesUserviewAction.action">Message <c:if
+		href="doshowMessagesUserviewAction.action">Messages <c:if
 				test="${newMsg!=0}">
 				<span class="badge"> ${newMsg}</span>
 			</c:if>
