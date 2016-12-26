@@ -55,9 +55,9 @@ public class UserGroupImple extends Observable implements UserGroupInterface {
 				BeanUtils.copyProperties(oneUserGroupVO, oneUserGroupPO);
 				oneUserGroupVOs.add(oneUserGroupVO);
 			} catch (IllegalAccessException e) {
-				LOGGER.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
+				LOGGER.error(e);
 			} catch (InvocationTargetException e) {
-				LOGGER.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
+				LOGGER.error(e);
 			}
 
 		}
