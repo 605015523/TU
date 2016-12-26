@@ -75,7 +75,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 	}
 
 	/**
-	 * Gets group by groupName
+	 * Gets group by its groupName
 	 */
 	@Override
 	public Group findByGroupName(String groupName) {
