@@ -10,7 +10,7 @@ public interface GroupDAOInterface {
 
 	List<Group> findAll();
 
-	Group findByUserId(Integer userId);
+	Group findByLeaderId(Integer userId);
 
 	Group findByGroupName(String groupName);
 }

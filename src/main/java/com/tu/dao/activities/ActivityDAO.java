@@ -41,9 +41,9 @@ public class ActivityDAO extends HibernateDaoSupport implements
 		return null;
 	}
 
-	// 通过actId找到并返回这个Activities对象
+	// Get Activity by its ID
 	@Override
-	public Activity findById(java.lang.Integer actId) {
+	public Activity findById(Integer actId) {
 		LOG.debug("getting Activities instance with id: " + actId);
 		try {
 			return (Activity) getHibernateTemplate().get(
@@ -97,7 +97,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 		}
 	}
 
-	// 删除一个Activities对象
+	// Delete the given Activity object
 	@Override
 	public void delete(Activity oneActivityPO) {
 		// TODO Auto-generated method stub

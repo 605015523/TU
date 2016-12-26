@@ -13,6 +13,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAO;
 
+/**
+ * Class used for user authentication with Spring LDAP
+ * 
+ * @author Julien Nguyen
+ */
 public class MyUserDetailsService implements UserDetailsService {
 
 	private UserloginDAO userLoginDAO;

@@ -24,7 +24,7 @@ public class GroupImple extends Observable implements GroupInterface {
 	@Override
 	public GroupVO doGetOneGroupByLeaderId(Integer leaderId) {
 		GroupVO groupVO = new GroupVO();
-		Group groupPO = groupDAO.findByUserId(leaderId);
+		Group groupPO = groupDAO.findByLeaderId(leaderId);
 		try {
 			BeanUtils.copyProperties(groupVO, groupPO);
 

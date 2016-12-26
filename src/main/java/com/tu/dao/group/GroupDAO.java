@@ -20,7 +20,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 		// do nothing
 	}
 
-	// 获取所有 group对象
+	// Get all Group objects
 	@Override
 	public List<Group> findAll() {
 		LOGGER.debug("finding all Group instances");
@@ -63,7 +63,7 @@ public class GroupDAO extends HibernateDaoSupport implements GroupDAOInterface {
 
 	// 通过leaderId获取一个group对象
 	@Override
-	public Group findByUserId(Integer leaderId) {
+	public Group findByLeaderId(Integer leaderId) {
 		try {
 			return (Group) getHibernateTemplate().find(
 					"from com.tu.dao.group.Group where group_leader_id = ?", leaderId)
