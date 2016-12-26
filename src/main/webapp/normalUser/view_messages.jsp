@@ -47,21 +47,21 @@
 					<table class="table table-hover row ">
 
 						<tr>
-							<td class="col-md-2 col-xs-3 text-center">
+							<th class="col-md-2 col-xs-3 text-center">
 								Group
-							</td>
-							<td class="col-md-3 col-xs-3 text-center">
+							</th>
+							<th class="col-md-3 col-xs-3 text-center">
 								Act Name
-							</td>
-							<td class="col-md-2 col-xs-1 text-center">
+							</th>
+							<th class="col-md-2 col-xs-1 text-center">
 								Price / person
-							</td>
-							<td class="col-md-2 col-xs-2 text-center">
+							</th>
+							<th class="col-md-2 col-xs-2 text-center">
 								Date
-							</td>
-							<td class="col-md-3  col-xs-3 text-center">
+							</th>
+							<th class="col-md-3  col-xs-3 text-center">
 								Details
-							</td>
+							</th>
 						</tr>
 						<s:iterator var="usermsg" value="inmessages">
 							<tr>

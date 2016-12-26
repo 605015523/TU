@@ -174,7 +174,7 @@
 								Price / person
 							</label>
 							<div class="input-group">
-								<span class="input-group-addon">￥</span>
+								<span class="input-group-addon"><s:text name="money"/></span>
 								<input type="number" step="0.1" class="form-control" id="actMoney" name="actMoney"
 									aria-label="...">
 							</div>

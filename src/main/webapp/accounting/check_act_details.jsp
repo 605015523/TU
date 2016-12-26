@@ -49,16 +49,14 @@
 			<hr class="invisible" />
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h3 class="panel-title">
-						details
-					</h3>
+					<h3 class="panel-title">Details</h3>
 				</div>
 
 				<div class="panel-body table-bordered">
 					<div class="row form-group form-group-lg">
 
 						<div class="col-xs-3 col-md-3">
-							<strong>ACTNAME:</strong>
+							<strong>Activity name:</strong>
 						</div>
 						<div class="col-xs-3  col-md-3">
 							${groupAct.activity.actName}
@@ -72,13 +70,13 @@
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3">
-							<strong>DATE:</strong>
+							<strong>Date:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<strong>PRICE per PERSON:</strong>
+							<strong>Price per person:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
@@ -87,7 +85,7 @@
 					
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
-							<strong>DESCRIPTION:</strong>
+							<strong>Description:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 						

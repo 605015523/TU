@@ -43,15 +43,15 @@
 						style="margin: 10px; padding: 10px 10px 10px 10px;">
 
 						<tr  class="success">
-							<td class="text-center">
+							<th class="text-center">
 								userName
-							</td>
+							</th>
 						<c:forEach var="group" items="${groups}">
-							<td>${group.groupName}</td>
+							<th>${group.groupName}</th>
 						</c:forEach>
-						    <td class="text-center">quota</td>
-						    <td class="text-center">sum</td>
-						    <td class="text-center">different</td>
+						    <th class="text-center">quota</th>
+						    <th class="text-center">sum</th>
+						    <th class="text-center">different</th>
 						</tr>
 						
 						<s:iterator var="oneUserGroupCost" value="allUserGroupCost">

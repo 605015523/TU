@@ -47,11 +47,11 @@
 					<table class="table table-hover "
 						style="margin: 10px; padding: 10px 10px 10px 10px;">
 						<tr>
-							<td class="col-md-3 col-xs-3 text-center">ACTNAME</td>
-							<td class="col-md-2 col-xs-2 text-center">State</td>
-							<td class="col-md-3 col-xs-3 text-center">Price / person</td>
-							<td class="col-md-2 col-xs-2 text-center">Act Date</td>
-							<td class="col-md-2 col-xs-2 text-center">Details</td>
+							<th class="col-md-3 col-xs-3 text-center">Activity name</th>
+							<th class="col-md-2 col-xs-2 text-center">State</th>
+							<th class="col-md-3 col-xs-3 text-center">Price / person</th>
+							<th class="col-md-2 col-xs-2 text-center">Act date</th>
+							<th class="col-md-2 col-xs-2 text-center">Details</th>
 						</tr>
 						<s:iterator var="act" value="acts">
 						

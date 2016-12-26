@@ -50,24 +50,24 @@
 
 						<thead>
 						<tr>
-							<td class="col-md-2 col-xs-2 text-center">
+							<th class="col-md-2 col-xs-2 text-center">
 								Activity name
-							</td>
-							<td class="col-md-1 col-xs-1 text-center">
+							</th>
+							<th class="col-md-1 col-xs-1 text-center">
 								State
-							</td>
-							<td class="col-md-3 col-xs-3 text-center">
+							</th>
+							<th class="col-md-3 col-xs-3 text-center">
 								Registration Period
-							</td>
-							<td class="col-md-2 col-xs-2 text-center">
+							</th>
+							<th class="col-md-2 col-xs-2 text-center">
 								Activity Date
-							</td>
-							<td class="col-md-2 col-xs-2 text-center">
+							</th>
+							<th class="col-md-2 col-xs-2 text-center">
 								Details
-							</td>
-							<td class="col-md-2 col-xs-2 text-center">
+							</th>
+							<th class="col-md-2 col-xs-2 text-center">
 								Edit
-							</td>
+							</th>
 
 						</tr>
 						</thead>

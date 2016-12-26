@@ -51,7 +51,7 @@
 
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								NAME:
+								Name:
 							</td>
 
 							<td>
@@ -60,7 +60,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								DEPARTMENT:
+								Department:
 							</td>
 							<td>
 								<c:out value="${userview.userDept}" />
@@ -68,7 +68,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								GROUP:
+								Group:
 							</td>
 							<td>
 								<c:forEach var="groupName" items="${userview.groupName}">
@@ -78,7 +78,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								IN DATE:
+								In date:
 							</td>
 							<td>
 								<s:date name="userview.inDate" format="%{getText('format.date')}"/>
@@ -87,7 +87,7 @@
 						
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								QUOTA:
+								Quota:
 							</td>
 							<td>
 								<s:text name="format.money">
@@ -97,7 +97,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								SPENDING:
+								Spending:
 							</td>
 							<td>
 								<s:text name="format.money">
@@ -107,7 +107,7 @@
 						</tr>
 						<tr>
 							<td class="col-md-4 col-md-offset-4">
-								REMAINING:
+								Remaining:
 							</td>
 							<td>
 								<s:text name="format.money">

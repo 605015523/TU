@@ -61,11 +61,11 @@
 	<div class="col-xs-10 col-md-10 display: block">
 		<table class="table table-bordered">
 			<tr class="success">
-				<td>Name</td>
-				<td>Dept</td>
-				<td>Number</td>
-				<td>Consumption</td>
-				<td>Remark</td>
+				<th>Name</th>
+				<th>Dept</th>
+				<th>Number</th>
+				<th>Consumption</th>
+				<th>Remark</th>
 			</tr>
 			<s:iterator var="useract" value="groupAct.memberInVO">
 				<tr>

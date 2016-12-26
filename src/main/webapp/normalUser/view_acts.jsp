@@ -48,11 +48,11 @@
 
 					<table class="table table-hover ">
 						<tr>
-							<td>Activity name</td>
-							<td>Group</td>
-							<td>Consumption</td>
-							<td>Date</td>
-							<td>Details</td>
+							<th>Activity name</th>
+							<th>Group</th>
+							<th>Consumption</th>
+							<th>Date</th>
+							<th>Details</th>
 						</tr>
 						<s:iterator var="act" value="useracts">
 							<tr>

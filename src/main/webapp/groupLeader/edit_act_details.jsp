@@ -89,9 +89,10 @@
 							<div class="col-xs-3 col-md-3">
 								<strong>Price per person:</strong>
 							</div>
-							<div class="col-xs-3 col-md-3">
-							<input type="text" class="form-control" id="actMoney" name="actMoney" 
-							value="${groupAct.activity.actMoney}">
+							<div class="col-xs-3 col-md-3 input-group">
+								<span class="input-group-addon"><s:text name="money"/></span>
+								<input type="number" step="0.1" class="form-control" id="actMoney" name="actMoney"
+									aria-label="..." value="${groupAct.activity.actMoney}"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -105,9 +106,10 @@
 							<div class="col-xs-3 col-md-3">
 								<strong>Consumption:</strong>
 							</div>
-							<div class="col-xs-3 col-md-3">
-								<input type="text" class="form-control" id="sum"
-									name="sum" value="${groupAct.sum}">
+							<div class="col-xs-3 col-md-3 input-group">
+								<span class="input-group-addon"><s:text name="money"/></span>
+								<input type="number" step="0.1" class="form-control" id="sum" name="sum"
+									aria-label="..." value="${groupAct.sum}"/>
 							</div>
 						</div>
 						<div class="row form-group form-group-lg">
@@ -134,11 +136,11 @@
 								<table class="table table-bordered" id="MyTable">
 
 									<tr class="success">
-										<td>Name</td>
-										<td>Dept</td>
-										<td>Number</td>
-										<td>Consumption</td>
-										<td>Remark</td>
+										<th>Name</th>
+										<th>Dept</th>
+										<th>Number</th>
+										<th>Consumption (<s:text name="money"/>)</td>
+										<th>Remark</th>
 									</tr>
 									<c:set var="count" value="0"/>
 									<s:iterator var="userAct" value="groupAct.memberInVO">
