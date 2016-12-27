@@ -158,7 +158,7 @@
 							Quota:
 							<div class="text-success">
 								<s:text name="format.money">
-									<strong><s:param value="userview.quota"/></strong>
+									<strong><s:param value="userview.user.quota"/></strong>
 								</s:text>
 							</div>
 						</div>

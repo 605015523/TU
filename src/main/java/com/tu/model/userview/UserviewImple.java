@@ -81,28 +81,15 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	// 获取主界面所有用户信息
 	@Override
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
-		List<String> onegroupPO = new ArrayList<String>();
 		UserviewVO userviewPO = new UserviewVO();
 
 		try {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
 			LOG.info("oneuserloginPO ID get success:"
 					+ oneuserloginPO.getUserId());
-			List<UserGroup> userGroupsPO = userGroupDAO.findByUserId(userId);
 
-			for (UserGroup userGroup : userGroupsPO) {
-				onegroupPO.add(groupDAO.findById(
-						userGroup.getGroupId()).getGroupName());
-
-			}
-
-			userviewPO.setUserId(oneuserloginPO.getUserId());
-			userviewPO.setUserName(oneuserloginPO.getUserName());
-			userviewPO.setGroupName(onegroupPO);
-			userviewPO.setUserDept(oneuserloginPO.getUserDept());
-			userviewPO.setInDate(oneuserloginPO.getInDate());
-			userviewPO.setSpending(oneuserloginPO.getSpending());
-			userviewPO.setQuota(oneuserloginPO.getQuota());
+			UserloginVO userLoginVO = daoModelMapper.convertoToUserInfoVO(oneuserloginPO);
+			userviewPO.setUser(userLoginVO);
 			userviewPO.setRemaining(
 					oneuserloginPO.getQuota().subtract(oneuserloginPO.getSpending()));
 			
@@ -118,7 +105,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 		try { // 利用Bean拷贝类实现简单地拷贝
 			BeanUtils.copyProperties(oneuserviewVO, userviewPO);
 			LOG.info("服务层准备好传给控制层的userviewVO:"
-					+ oneuserviewVO.getUserId());
+					+ oneuserviewVO.getUser().getUserId());
 		} catch (IllegalAccessException e) {
 			LOG.error("在userviewImple类的doGetOneUserviewInfoByUserId方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
 		} catch (InvocationTargetException e) {
