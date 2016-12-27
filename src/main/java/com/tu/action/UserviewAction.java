@@ -13,8 +13,6 @@ import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
-import com.tu.model.user.msg.UserMsgConstants;
-import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UserActDetailedVO;
@@ -28,7 +26,6 @@ public class UserviewAction extends AbstractAction {
 	
 	private transient UserviewInterface userviewBean = null;
 	private transient UserActInterface userActBean = null;
-	private transient UserMsgInterface userMsgBean = null;
 	private transient ActivitiesInterface actsBean = null;
 
 	// Receive the caller page attributes and return parameters into "success" web page
@@ -46,6 +43,7 @@ public class UserviewAction extends AbstractAction {
 	private List<UserMsgVO> inmessages;
 	private UserMsgVO msgDetails;
 	private UserviewVO userview;
+	private ActivityVO activity;
 
 	public UserviewAction() {
 		// do nothing
@@ -65,14 +63,6 @@ public class UserviewAction extends AbstractAction {
 
 	public void setUserActBean(UserActInterface userActBean) {
 		this.userActBean = userActBean;
-	}
-
-	public UserMsgInterface getUserMsgBean() {
-		return this.userMsgBean;
-	}
-
-	public void setUserMsgBean(UserMsgInterface userMsgBean) {
-		this.userMsgBean = userMsgBean;
 	}
 
 	public ActivitiesInterface getActsBean() {
@@ -97,55 +87,17 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		act = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
-		LOGGER.info("the activity is " + act.getActName() + " - " + actId);
+		LOGGER.info("the activity is " + act.getActivity().getActName() + " - " + actId);
 		
 		return "showDetails";
-	}
-
-	// Display all the messages
-	public String doshowMessages() {
-		initServletContextObject();
-		Integer userId = getCurrentUser().getUserId();
-		List<UserMsgVO> messages = userMsgBean.doGetUserMsgs(userId);
-		overmessages = new ArrayList<UserMsgVO>();
-		inmessages = new ArrayList<UserMsgVO>();
-
-		for (UserMsgVO userMsg : messages) {
-			ActivityVO oneAct = actsBean.doGetOneActById(userMsg.getMessage().getActivity().getActId());
-
-			if (oneAct.getState().equals(ActivitiesConstant.STATE_PUBLISH)) {
-				inmessages.add(userMsg);
-			} else {
-				overmessages.add(userMsg);
-			}
-		}
-		return "showMessages";
-	}
-
-	// Display all the messages' details
-	public String doshowMsgDetails() {
-		initServletContextObject();
-		Integer userId = this.getCurrentUser().getUserId();
-		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
-
-		// Set the status of UserMsg as read.
-		if (msgDetails.getReadState().equals(UserMsgConstants.STATE_NEW)) {
-
-			msgDetails.setReadState(UserMsgConstants.STATE_READ);
-			userMsgBean.doUpdateOneUserMsg(msgDetails);
-			int newMsg = userMsgBean.countNewMsgs(userId);
-			session.setAttribute("newMsg", newMsg);
-
-		}
-
-		return "showMsgDetails";
 	}
 
 	// Go jump to one activity's page
 	public String doInAct() {
 		initServletContextObject();
 		Integer userId = this.getCurrentUser().getUserId();
-		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
+		activity = actsBean.doGetOneActById(actId);
+		
 		userview = userviewBean.doGetOneUserviewInfoByUserId(userId);
 		
 		return "doInAct";
@@ -312,5 +264,8 @@ public class UserviewAction extends AbstractAction {
 		this.userview = userview;
 	}
 
+	public ActivityVO getActivity() {
+		return activity;
+	}
 
 }

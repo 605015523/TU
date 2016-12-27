@@ -30,8 +30,6 @@
 		<mapping resource="DBmapping/Activities.hbm.xml" />
 		<mapping resource="DBmapping/User_act.hbm.xml" />
 		<mapping resource="DBmapping/Group.hbm.xml" />
-		<mapping resource="DBmapping/message.hbm.xml" />
-		<mapping resource="DBmapping/User_msg.hbm.xml" />
 
 	</session-factory>
 

@@ -104,7 +104,7 @@
 
 			<form action="doActRequestUserviewAction.action" method="post"
 				role="form" name="form" id="form" onsubmit="return checkinput();">
-				<input type="hidden" name="actId" value="${msgDetails.message.activity.actId}"/>
+				<input type="hidden" name="actId" value="${activity.actId}"/>
 				<div class="row">
 
 					<div class="col-md-4 col-xs-4 well">
@@ -112,26 +112,26 @@
 							<label>
 								Act Name:
 							</label>
-							${msgDetails.message.activity.actName}
+							${activity.actName}
 						</div>
 						<div class="form-group">
 							<label>
 								Group:
 							</label>
-							${msgDetails.groupName}
+							${activity.groupName}
 						</div>
 
 						<div class="form-group">
 							<label>
 								Act Date:
 							</label>
-							<s:date name="msgDetails.message.activity.actDate" format="%{getText('format.date')}"/>
+							<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="form-group">
 							<label>
 								Registration Date:
 							</label>
-							<s:date name="msgDetails.message.activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="msgDetails.message.activity.enrollEndDate" format="%{getText('format.date')}"/>
+							<s:date name="activity.enrollStartDate" format="%{getText('format.date')}"/> - <s:date name="activity.enrollEndDate" format="%{getText('format.date')}"/>
 						</div>
 
 						<div class="form-group">
@@ -140,7 +140,7 @@
 							</label>
 							<h5 id="actmoney">
 								<s:text name="format.money">
-									<s:param value="msgDetails.message.activity.actMoney"/>
+									<s:param value="activity.actMoney"/>
 								</s:text>
 							</h5>
 						</div>
@@ -148,7 +148,7 @@
 							<label>
 								Act Description:
 							</label>
-							${msgDetails.message.activity.description}
+							${activity.description}
 
 						</div>
 					</div>

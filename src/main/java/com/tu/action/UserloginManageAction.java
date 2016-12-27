@@ -8,10 +8,7 @@ import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
-import com.tu.model.user.msg.UserMsgConstants;
-import com.tu.model.user.msg.UserMsgInterface;
 import com.tu.model.userlogin.UserloginVO;
-import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
 import com.tu.util.ConfConstants;
@@ -22,7 +19,6 @@ public class UserloginManageAction extends AbstractAction {
 	private transient UserviewInterface userviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
 	private transient GroupInterface groupBean = null;
-	private transient UserMsgInterface userMsgBean = null;
 
 	private Integer userId;
 	private Integer userRole;
@@ -60,14 +56,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setGroupBean(GroupInterface groupBean) {
 		this.groupBean = groupBean;
-	}
-
-	public UserMsgInterface getUserMsgBean() {
-		return this.userMsgBean;
-	}
-
-	public void setUserMsgBean(UserMsgInterface userMsgBean) {
-		this.userMsgBean = userMsgBean;
 	}
 
 	// The action will be called as user login
@@ -127,26 +115,9 @@ public class UserloginManageAction extends AbstractAction {
 			}
 		}
 
-		int newMsg = 0;
-		List<UserMsgVO> userMsgVOs = userMsgBean.doGetUserMsgs(userId);
-		for (UserMsgVO userMsgVO : userMsgVOs) {
-			ActivityVO activity = userMsgVO.getMessage().getActivity();
-			if (activity.getState().equals(ActivitiesConstant.STATE_PENDING)
-					|| activity.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)
-					|| activity.getState().equals(ActivitiesConstant.STATE_VALIDATE)) {
-				userMsgVO.setReadState(UserMsgConstants.STATE_READ);
-				userMsgBean.doUpdateOneUserMsg(userMsgVO);
-
-			}
-			if (userMsgVO.getReadState().equals(UserMsgConstants.STATE_NEW)) {
-				newMsg += 1;
-			}
-		}
-
 		// Save the following values into session for further disposal
 		session.setAttribute("userRole", userRole);
 		session.setAttribute("years", years);
-		session.setAttribute("newMsg", newMsg);
 
 		// If the role is group leader
 		if (userRole.equals(1)) {

@@ -63,7 +63,6 @@
 		<property name="userviewBean" ref="UserviewBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="groupBean" ref="GroupBean"/>
-		<property name="userMsgBean" ref="UserMsgBean"/>
 	</bean>
 
 	<bean id="UserviewActionBean" scope="prototype"
@@ -72,15 +71,12 @@
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 		<property name="userActBean" ref="UserActBean"/>
 		<property name="actsBean" ref="ActsBean"/>
-		<property name="userMsgBean" ref="UserMsgBean"/>
 	</bean>
 
 	<bean id="LeaderviewActionBean" scope="prototype"
 		class="com.tu.action.LeaderviewAction">
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
 		<property name="actsBean" ref="ActsBean"/>
-		<property name="msgBean" ref="MsgBean"/>
-		<property name="userMsgBean" ref="UserMsgBean"/>
 		<property name="userActBean" ref="UserActBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 	</bean>
@@ -145,18 +141,7 @@
 		<property name="daoModelMapper" ref="DaoModelMapper"/>
 	</bean>
 	
-	<bean id="MsgBean" class="com.tu.model.messages.MessagesImple">
-		<property name="msgDAO" ref="MsgDAO"/>
-		<property name="daoModelMapper" ref="DaoModelMapper"/>
-	</bean>
-	
-	<bean id="UserMsgBean" class="com.tu.model.user.msg.UserMsgImple">
-		<property name="daoModelMapper" ref="DaoModelMapper"/>
-		<property name="userMsgDAO" ref="UserMsgDAO"/>
-	</bean>
-
 	<bean id="DaoModelMapper" class="com.tu.mapper.DAOModelMapper">
-		<property name="msgDAO" ref="MsgDAO"/>
 		<property name="groupDAO" ref="GroupDAO"/>
 		<property name="userActDAO" ref="UserActDAO"/>
 		<property name="userloginDAO" ref="UserloginDAO"/>
@@ -184,14 +169,6 @@
 	</bean>
 
 	<bean id="UserActDAO" class="com.tu.dao.user.act.UserActDAO">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	
-	<bean id="MsgDAO" class="com.tu.dao.messages.MessagesDAO">
-		<property name="sessionFactory" ref="sessionFactory"/>
-	</bean>
-	
-	<bean id="UserMsgDAO" class="com.tu.dao.user.msg.UserMsgDAO">
 		<property name="sessionFactory" ref="sessionFactory"/>
 	</bean>
 	

@@ -15,11 +15,8 @@ import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
 import com.tu.model.messages.MessagesInterface;
-import com.tu.model.messages.MessageVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
-import com.tu.model.user.msg.UserMsgInterface;
-import com.tu.model.userlogin.UserloginVO;
 import com.tu.util.ConfConstants;
 
 public class LeaderviewAction extends AbstractAction {
@@ -31,7 +28,6 @@ public class LeaderviewAction extends AbstractAction {
 	private transient ActivitiesInterface actsBean = null;
 	private transient MessagesInterface msgBean = null;
 	
-	private transient UserMsgInterface userMsgBean = null;
 	private transient UserActInterface userActBean = null;
 
 	// Receive the controls value from the caller page and return the parameters to the "success" web page 
@@ -76,14 +72,6 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setMsgBean(MessagesInterface msgBean) {
 		this.msgBean = msgBean;
-	}
-
-	public UserMsgInterface getUserMsgBean() {
-		return this.userMsgBean;
-	}
-
-	public void setUserMsgBean(UserMsgInterface userMsgBean) {
-		this.userMsgBean = userMsgBean;
 	}
 
 	public UserActInterface getUserActBean() {
@@ -233,23 +221,6 @@ public class LeaderviewAction extends AbstractAction {
 		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		String updateMessage = actsBean.doUpdateOneAct(oneActVO);
 		LOGGER.info(updateMessage);
-
-		// Copy all properties from activity to message
-		MessageVO oneMsgVO = new MessageVO();
-		oneMsgVO.setActivity(oneActVO);
-
-		// Write message into database and send to everyone
-		List<UserloginVO> allUserLogins = userloginManageBean.doGetAllUserlogin();
-				
-		// Retrieve all the user IDs for new message sending 
-		List<Integer> allMemberId = new ArrayList<Integer>();
-		for (int m = 0; m < allUserLogins.size(); m++) {
-			Integer userId = allUserLogins.get(m).getUserId();
-			allMemberId.add(userId);
-		}
-		Integer msgId = msgBean.doAddOneMsg(oneMsgVO);
-		String sendMessage = userMsgBean.doSendMsg(msgId, allMemberId);
-		LOGGER.info(sendMessage);
 
 		// Update variable year in session. If the year exists, ignore, or append year into attribute years
 		List<Integer> years = (List<Integer>) session.getAttribute("years");

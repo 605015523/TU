@@ -54,23 +54,23 @@
 							<th>Date</th>
 							<th>Details</th>
 						</tr>
-						<s:iterator var="act" value="useracts">
+						<s:iterator var="useract" value="useracts">
 							<tr>
-								<td>${act.actName}</td>
-								<td>${act.group}</td>
+								<td>${useract.activity.actName}</td>
+								<td>${useract.activity.groupName}</td>
 								    
 								<td>
-								<c:if test="${act.state=='validate'}">
+								<c:if test="${useract.activity.state=='validate'}">
 									<s:text name="format.money">
-										<s:param value="consumption"/>
+										<s:param value="activity.consumption"/>
 									</s:text>
 								</c:if>
 								</td>
 								<td>
-									<s:date name="actDate" format="%{getText('format.date')}"/>
+									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td>
-									<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${act.actId}'>details</a>
+									<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${useract.activity.actId}'>details</a>
 								</td>
 							</tr>
 	

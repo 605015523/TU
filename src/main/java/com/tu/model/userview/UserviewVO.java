@@ -12,8 +12,7 @@ public class UserviewVO implements java.io.Serializable {
 	private BigDecimal remaining;
 
 	public UserviewVO() {
-
-		setUser(null);
+		user = null;
 		remaining = null;
 	}
 

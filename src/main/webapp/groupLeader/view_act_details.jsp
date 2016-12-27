@@ -49,19 +49,26 @@
 					<input type="hidden" name="actId" value="${actId}"/>
 					<div class="row form-group form-group-lg">
 						<div
-							class="col-xs-6  col-md-6 col-xs-offset-2 col-md-offset-2 text-right ">
+							class="col-xs-6  col-md-6 text-right ">
 							<h5>
 								●Click <strong>submit</strong> you will send it to accounting.
 							</h5>
 						</div>
+						<div class="col-xs-2  col-md-2">
+								<a role="button" class="btn btn-primary btn-block"
+									href='<c:url value="/doInActUserviewAction.action" />?actId=${actId}'>I'm
+									in</a>
+						</div>
+							
 						<div class="col-xs-2  col-md-2 navbar-right ">
+						
 							<s:if test="%{groupAct.activity.state=='disapproved'}">
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
 
 							</s:if>
 							<s:else>
-								<input type="submit" class="btn btn-primary   btn-block"
+								<input type="submit" class="btn btn-primary btn-block"
 									value="submit" disabled />
 							</s:else>
 

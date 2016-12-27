@@ -19,7 +19,6 @@ public class UserMsgVO implements java.io.Serializable {
 	}
 
 	/** full constructor */
-
 	public UserMsgVO(MessageVO message, Integer userId, String groupName, String readState) {
 		this.message = message;
 		this.userId = userId;

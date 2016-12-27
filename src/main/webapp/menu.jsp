@@ -45,12 +45,6 @@
 		</ul></li>
 
 	</c:if>
-	<li role="presentation" <c:if test="${param.active=='messages'}">class="active"</c:if>><a
-		href="doshowMessagesUserviewAction.action">Messages <c:if
-				test="${newMsg!=0}">
-				<span class="badge"> ${newMsg}</span>
-			</c:if>
-	</a></li>
 
 	<li role="presentation" class="dropdown <c:if test="${param.active=='activities'}">active</c:if>"><a id="dLabel"
 		data-target="#" href="#" data-toggle="dropdown" role="button"

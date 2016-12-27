@@ -9,6 +9,7 @@ public class ActivityVO implements java.io.Serializable {
 	
 	private Integer actId;
 	private Integer groupId;
+	private String groupName;
 	private String actName;
 	private BigDecimal actMoney;
 	private String description;
@@ -102,6 +103,14 @@ public class ActivityVO implements java.io.Serializable {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
 
 }

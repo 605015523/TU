@@ -18,7 +18,6 @@ import com.tu.dao.messages.Message;
 import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
-import com.tu.dao.user.msg.UserMsg;
 import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivityVO;
@@ -52,36 +51,6 @@ public class DAOModelMapper {
 		return userInfoVO;
 	}
 	
-	public UserMsgVO convertoUserMsgToUserMsgVO(UserMsg userMsg) {
-		UserMsgVO oneUserMsgVO = new UserMsgVO();
-		Integer oneMsgId = userMsg.getMsgId();
-		Message oneMessage = msgDAO.findById(oneMsgId);
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(oneUserMsgVO, oneMessage);
-			oneUserMsgVO.setUserId(userMsg.getUserId());
-			oneUserMsgVO.setReadState(userMsg.getReadState());
-			
-			MessageVO message = new MessageVO();
-			BeanUtils.copyProperties(message, oneMessage);
-			
-			Activity act = actDAO.findById(oneMessage.getActId());
-			ActivityVO activity = convertActivityToActivityVO(act);
-			message.setActivity(activity);
-			
-			Group group = groupDAO.findById(activity.getGroupId());
-			oneUserMsgVO.setGroupName(group.getGroupName());
-			
-			oneUserMsgVO.setMessage(message);
-			
-		} catch (IllegalAccessException e) {
-			LOGGER.error("there is a IllegalAccessException while copy oneMessage to oneUserMsgVO: ", e);
-		} catch (InvocationTargetException e) {
-			LOGGER.error("there is a InvocationTargetException while copy oneMessage to oneUserMsgVO: ", e);
-		}
-		
-		return oneUserMsgVO;
-	}
-	
 	public Message convertMesssageVOTOMessage(MessageVO oneMessagesVO) {
 		Message onemsgPO = new Message();
 		try { // 利用Bean拷贝类实现简单地拷贝
@@ -99,6 +68,9 @@ public class DAOModelMapper {
 		ActivityVO actVO = new ActivityVO();
 		try {
 			BeanUtils.copyProperties(actVO, actPO);
+			
+			Group groupPO = groupDAO.findById(actPO.getGroupId());
+			actVO.setGroupName(groupPO.getGroupName());
 
 		} catch (IllegalAccessException e) {
 			LOGGER.error(e);
@@ -140,7 +112,7 @@ public class DAOModelMapper {
 		return actsPO;
 	}
 	
-	public UserActDetailedVO createUserActDetailed(UserAct userAct, Activity actsPO) {
+	public UserActDetailedVO createUserActDetailed(UserAct userAct, Activity actPO) {
 		UserActDetailedVO useractsVO = new UserActDetailedVO();
 		
 		Userlogin userPO = userloginDAO.findById(userAct.getUserId());
@@ -151,14 +123,9 @@ public class DAOModelMapper {
 		useractsVO.setConsumption(userAct.getConsumption());
 		useractsVO.setRemark(userAct.getRemark());
 
-		useractsVO.setActName(actsPO.getActName());
-		useractsVO.setActMoney(actsPO.getActMoney());
-		useractsVO.setState(actsPO.getState());
-		useractsVO.setDescription(actsPO.getDescription());
-
-		useractsVO.setActDate(actsPO.getActDate());
-		Group groupPO = groupDAO.findById(actsPO.getGroupId());
-		useractsVO.setGroup(groupPO.getGroupName());
+		useractsVO.setActivity(convertActivityToActivityVO(actPO));
+		
+		
 		
 		return useractsVO;
 	}

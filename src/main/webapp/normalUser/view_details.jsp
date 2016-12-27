@@ -50,13 +50,13 @@
 							<strong>Activity name:</strong>
 						</div>
 						<div class="col-xs-3  col-md-3">
-							${act.actName}
+							${act.activity.actName}
 						</div>
 						<div class="col-xs-3  col-md-3">
 							<strong>Group:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${act.group}
+							${act.activity.groupName}
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -64,7 +64,7 @@
 							<strong>Date:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<s:date name="act.actDate" format="%{getText('format.date')}"/>
+							<s:date name="act.activity.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>Price per person</strong>
@@ -81,7 +81,7 @@
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
-								<s:property value="act.description"/>
+								<s:property value="act.activity.description"/>
 							</p>
 						</div>
 
@@ -110,7 +110,7 @@
 					}
 </script>
 						<c:if
-							test="${act.state=='pending'||act.state=='tobevalidate'||act.state=='validate'}">
+							test="${act.activity.state=='pending'||act.activity.state=='tobevalidate'||act.activity.state=='validate'}">
 
 							<div
 								class="form-group col-xs-offset-4 col-md-offset-4 col-md-2 col-xs-2">
@@ -123,7 +123,7 @@
 							</div>
 						</c:if>
 
-						<c:if test="${act.state=='publish'}">
+						<c:if test="${act.activity.state=='publish'}">
 
 							<div class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
 								<input type="submit" class="btn btn-primary  btn-block"
