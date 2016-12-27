@@ -32,8 +32,14 @@ public abstract class AbstractAction extends ActionSupport {
 	
 	public UserloginVO getCurrentUser() {
 		User user = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		UserloginVO userVO = (UserloginVO) session.getAttribute("user");
+		if (userVO == null) {
+			userVO = userloginManageBean.dogetOneUserInfoByUserName(user.getUsername());
+			session.setAttribute("user", userVO);
+		}
 		
-		return userloginManageBean.dogetOneUserInfoByUserName(user.getUsername());
+		return userVO;
+		
 	}
 	
 	public UserloginManageInterface getUserloginManageBean() {

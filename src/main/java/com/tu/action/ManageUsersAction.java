@@ -26,18 +26,21 @@ public class ManageUsersAction extends AbstractAction {
 	private Integer role;
 	
 	public String listAll() {
+		initServletContextObject();
 		users = userloginManageBean.doGetAllUserlogin();
 		
 		return "list";
 	}
 	
 	public String editUserForm() {
+		initServletContextObject();
 		user = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		
 		return "editForm";
 	}
 	
 	public String createUser() {
+		initServletContextObject();
 		if (!password.equals(repassword)) {
 			return "error";
 		}
@@ -56,6 +59,8 @@ public class ManageUsersAction extends AbstractAction {
 	}
 	
 	public String updateUser() {
+		initServletContextObject();
+		
 		UserloginVO userVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
 		userVO.setUserDept(dept);
 		userVO.setInDate(inDate);

@@ -59,7 +59,7 @@
 						id="exampleInputPassword1" placeholder="Password">
 				</div>
 				<label>
-					LOGIN IN
+					LOG IN
 				</label>
 				<button type="submit" class="btn btn-primary form-control">
 					Submit

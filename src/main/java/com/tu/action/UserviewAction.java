@@ -93,16 +93,17 @@ public class UserviewAction extends AbstractAction {
 
 	// Display the specific activity's detail
 	public String doshowDetails() {
+		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		act = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
-		LOGGER.info("the actId is " + actId);
-		LOGGER.info("the actName is " + act.getActName());
+		LOGGER.info("the activity is " + act.getActName() + " - " + actId);
 		
 		return "showDetails";
 	}
 
 	// Display all the messages
 	public String doshowMessages() {
+		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		List<UserMsgVO> messages = userMsgBean.doGetUserMsgs(userId);
 		overmessages = new ArrayList<UserMsgVO>();

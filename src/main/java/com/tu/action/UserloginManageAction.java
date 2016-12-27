@@ -175,6 +175,7 @@ public class UserloginManageAction extends AbstractAction {
 	}
 	
 	public String displayHomePage() {
+		initServletContextObject();
 		setRemaining(getCurrentUser().getQuota() - getCurrentUser().getSpending());
 		return "homePage";
 	}
