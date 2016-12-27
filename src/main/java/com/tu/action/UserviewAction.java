@@ -1,20 +1,17 @@
 package com.tu.action;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.userlogin.UserloginVO;
-import com.tu.model.userview.UserMsgVO;
 import com.tu.model.userview.UserActDetailedVO;
 import com.tu.model.userview.UserviewInterface;
 import com.tu.model.userview.UserviewVO;
@@ -39,9 +36,6 @@ public class UserviewAction extends AbstractAction {
 	// To display
 	private List<UserActDetailedVO> useracts;
 	private UserActDetailedVO act;
-	private List<UserMsgVO> overmessages;
-	private List<UserMsgVO> inmessages;
-	private UserMsgVO msgDetails;
 	private UserviewVO userview;
 	private ActivityVO activity;
 
@@ -230,30 +224,6 @@ public class UserviewAction extends AbstractAction {
 
 	public void setYear(Integer year) {
 		this.year = year;
-	}
-
-	public List<UserMsgVO> getOvermessages() {
-		return overmessages;
-	}
-
-	public void setOvermessages(List<UserMsgVO> overmessages) {
-		this.overmessages = overmessages;
-	}
-
-	public List<UserMsgVO> getInmessages() {
-		return inmessages;
-	}
-
-	public void setInmessages(List<UserMsgVO> inmessages) {
-		this.inmessages = inmessages;
-	}
-
-	public UserMsgVO getMsgDetails() {
-		return msgDetails;
-	}
-
-	public void setMsgDetails(UserMsgVO msgDetails) {
-		this.msgDetails = msgDetails;
 	}
 
 	public UserviewVO getUserview() {

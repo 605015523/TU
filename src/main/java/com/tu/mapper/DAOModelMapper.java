@@ -22,11 +22,9 @@ import com.tu.dao.userlogin.Userlogin;
 import com.tu.dao.userlogin.UserloginDAOInterface;
 import com.tu.model.activities.ActivityVO;
 import com.tu.model.leaderview.GroupActVO;
-import com.tu.model.messages.MessageVO;
 import com.tu.model.user.act.UserActVO;
 import com.tu.model.userlogin.UserloginVO;
 import com.tu.model.userview.UserActDetailedVO;
-import com.tu.model.userview.UserMsgVO;
 
 public class DAOModelMapper {
 	private static final Log LOGGER = LogFactory.getLog(DAOModelMapper.class);
@@ -49,19 +47,6 @@ public class DAOModelMapper {
 			LOGGER.error("Method not found" + e.getMessage());
 		}
 		return userInfoVO;
-	}
-	
-	public Message convertMesssageVOTOMessage(MessageVO oneMessagesVO) {
-		Message onemsgPO = new Message();
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(onemsgPO, oneMessagesVO);
-			BeanUtils.copyProperties(onemsgPO, oneMessagesVO.getActivity());
-		} catch (IllegalAccessException e) {
-			LOGGER.error(e);
-		} catch (InvocationTargetException e) {
-			LOGGER.error(e);
-		}
-		return onemsgPO;
 	}
 	
 	public ActivityVO convertActivityToActivityVO(Activity actPO) {

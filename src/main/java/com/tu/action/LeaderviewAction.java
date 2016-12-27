@@ -14,7 +14,6 @@ import com.tu.model.activities.ActivityVO;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
-import com.tu.model.messages.MessagesInterface;
 import com.tu.model.user.act.UserActInterface;
 import com.tu.model.user.act.UserActVO;
 import com.tu.util.ConfConstants;
@@ -26,7 +25,6 @@ public class LeaderviewAction extends AbstractAction {
 	
 	private transient LeaderviewInterface leaderviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
-	private transient MessagesInterface msgBean = null;
 	
 	private transient UserActInterface userActBean = null;
 
@@ -64,14 +62,6 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setLeaderviewBean(LeaderviewInterface leaderviewBean) {
 		this.leaderviewBean = leaderviewBean;
-	}
-
-	public MessagesInterface getMsgBean() {
-		return this.msgBean;
-	}
-
-	public void setMsgBean(MessagesInterface msgBean) {
-		this.msgBean = msgBean;
 	}
 
 	public UserActInterface getUserActBean() {
