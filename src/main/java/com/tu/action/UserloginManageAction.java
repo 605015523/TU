@@ -27,6 +27,7 @@ public class UserloginManageAction extends AbstractAction {
 	private Integer userRole;
 	private String loginMessage;
 	private Float remaining;
+	private List<ActivityVO> upcomingActs;
 	
 	// To display
 	private UserviewVO userview;
@@ -176,6 +177,8 @@ public class UserloginManageAction extends AbstractAction {
 	
 	public String displayHomePage() {
 		initServletContextObject();
+		upcomingActs = actsBean.doGetUpcomingActivity();
+		
 		setRemaining(getCurrentUser().getQuota() - getCurrentUser().getSpending());
 		return "homePage";
 	}
@@ -228,6 +231,10 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setRemaining(Float remaining) {
 		this.remaining = remaining;
+	}
+
+	public List<ActivityVO> getUpcomingActs() {
+		return upcomingActs;
 	}
 
 }

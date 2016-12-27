@@ -9,6 +9,8 @@ public interface ActivityDAOInterface {
 	void delete(Activity oneActivityPO);
 
 	List<Activity> findAll();
+	
+	List<Activity> findUpcoming();
 
 	Activity findById(Integer actId);
 

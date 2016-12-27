@@ -85,3 +85,9 @@
 .important {
   font-weight:bold;
 }
+
+.doublecolumn {
+  float:left;
+  width:48%;
+  margin:10px 10px 10px 10px;
+}

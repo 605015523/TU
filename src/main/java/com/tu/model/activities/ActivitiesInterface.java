@@ -11,6 +11,8 @@ public interface ActivitiesInterface {
 	ActivityVO doGetOneActById(Integer actId);
 
 	List<ActivityVO> doGetAllActivity();
+	
+	List<ActivityVO> doGetUpcomingActivity();
 
 	String doUpdateOneAct(ActivityVO oneActVO);
 

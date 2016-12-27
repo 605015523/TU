@@ -35,7 +35,33 @@
 		        <jsp:param name="active" value="home"/>
 		    </jsp:include>
 			<hr class="invisible" />
-			<div class="panel panel-primary">
+			<div class="panel panel-primary doublecolumn">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Upcoming Activities
+					</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover">
+						<tr>
+							<th>Activity name</th>
+							<th>Date</th>
+						</tr>
+						
+						<s:iterator var="act" value="upcomingActs">
+							<tr>
+								<td>
+									${act.actName}
+								</td>
+								<td>
+									<s:date name="actDate" format="%{getText('format.date')}"/>
+								</td>
+							</tr>
+						</s:iterator>
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-primary doublecolumn">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						User Information

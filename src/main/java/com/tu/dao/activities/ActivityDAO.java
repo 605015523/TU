@@ -5,6 +5,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import com.tu.model.activities.ActivitiesConstant;
+
 public class ActivityDAO extends HibernateDaoSupport implements
 		ActivityDAOInterface {
 
@@ -30,6 +32,18 @@ public class ActivityDAO extends HibernateDaoSupport implements
 		try {
 			String queryString = "from Activity";
 			return getHibernateTemplate().find(queryString);
+		} catch (RuntimeException re) {
+			LOG.error("find all failed", re);
+			throw re;
+		}
+	}
+	
+	@Override
+	public List<Activity> findUpcoming() {
+		LOG.debug("finding all activities instances");
+		try {
+			String queryString = "from Activity where state = ? and act_date > current_date()";
+			return getHibernateTemplate().find(queryString, ActivitiesConstant.STATE_PUBLISH);
 		} catch (RuntimeException re) {
 			LOG.error("find all failed", re);
 			throw re;

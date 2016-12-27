@@ -35,6 +35,17 @@ public class ActivitiesImple extends Observable implements ActivitiesInterface {
 		}
 		return activitiesVOs;
 	}
+	
+	@Override
+	public List<ActivityVO> doGetUpcomingActivity() {
+		List<ActivityVO> activitiesVOs = new ArrayList<ActivityVO>();
+		List<Activity> activitiesPOs = actsDAO.findUpcoming();
+		
+		for (Activity oneactivitiesPO : activitiesPOs) {
+			activitiesVOs.add(daoModelMapper.convertActivityToActivityVO(oneactivitiesPO));
+		}
+		return activitiesVOs;
+	}
 
 	// 通过actId获取一个活动
 	@Override

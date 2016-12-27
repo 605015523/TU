@@ -74,9 +74,11 @@
 										<strong>${usermsg.message.activity.actName}</strong>
 									</td>
 									<td class="col-md-2 col-xs-1 text-center">
-										<div class="text-success text-center">
-											<strong><s:property value="message.activity.actMoney"/></strong>
-										</div>
+										<strong class="text-success">
+											<s:text name="format.money">
+											    <s:param value="message.activity.actMoney"/>
+											</s:text>
+										</strong>
 									</td>
 									<td class="col-md-2 col-xs-2 text-center">
 										<strong><s:date name="message.activity.actDate" format="%{getText('format.date')}"/></strong>
