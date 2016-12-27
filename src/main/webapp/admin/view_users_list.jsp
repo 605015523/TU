@@ -62,7 +62,7 @@
 								<td>${user.userRole}</td>
 								<td>${user.userDept}</td>
 								<td>
-									<a href='<c:url value="/editUserManageUsersAction.action" />?userId=${user.userId}'>edit</a>
+									<a href='<c:url value="/editUserFormManageUsersAction.action" />?userId=${user.userId}'>edit</a>
 								</td>
 							</tr>
 						</s:iterator>				

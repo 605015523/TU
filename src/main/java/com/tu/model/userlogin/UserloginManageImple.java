@@ -70,7 +70,7 @@ public class UserloginManageImple extends Observable implements
 	
 	private void copyUserLoginVOtoPO(UserloginVO userVO, Userlogin userPO) {
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(userVO, userVO);
+			BeanUtils.copyProperties(userPO, userVO);
 		} catch (IllegalAccessException e) {
 			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact.");
 		} catch (InvocationTargetException e) {

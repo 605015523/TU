@@ -18,7 +18,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>Create user</title>
+		<title>Edit user</title>
 
 
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -36,8 +36,18 @@
 		$(document).ready(function() {     
        
 	        $('#inDate').daterangepicker({
+	          singleDatePicker: true
+	        });
+		});
+		
+		$(document).ready(function() {     
+		       
+	        $('#outDate').daterangepicker({
 	          singleDatePicker: true,
-	          startDate: moment()
+	          autoUpdateInput: false,
+	          locale: {
+		          cancelLabel: 'Clear'
+			  }
 	        });
 		});
          </script>
@@ -56,12 +66,12 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h3 class="panel-title">
-						Create user
+						Edit user
 					</h3>
 				</div>
 			
 			
-				<form class="panel-body" action="createUserManageUsersAction.action" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
+				<form class="panel-body" action="updateUserManageUsersAction.action" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
 					<div class="row">
 	
 						<div class="col-md-4 col-xs-4">
@@ -69,28 +79,10 @@
 								<label for="userName">
 									Username
 								</label>
-								<input type="text" class="form-control" id="userName" name="userName" value=""
-									placeholder="Username for login"/>
+								<input type="text" class="form-control" id="userName" name="userName" value="${user.userName}"
+									placeholder="Username for login" disabled/>
 							</div>
 	
-							<div class="form-group">
-								<label for="password">
-									Password
-								</label>
-							
-								<input type="password" class="form-control" id="password" name="password" value=""
-									placeholder="Password"/>
-							</div>
-	
-							<div class="form-group">
-								<label for="repassword">
-									Repeat password
-								</label>
-							
-								<input type="password" class="form-control" id="repassword" name="repassword" value=""
-									placeholder="Retype password"/>
-							</div>
-							
 							<div class="form-group">
 								<label for="role">
 									Role
@@ -111,7 +103,7 @@
 								<label for="dept">
 									Department
 								</label>
-								<input type="text" class="form-control" id="dept" name="dept" value=""
+								<input type="text" class="form-control" id="dept" name="dept" value="${user.userDept}"
 									placeholder="Department"/>
 							</div>
 						
@@ -119,9 +111,14 @@
 								<label for="inDate">
 									In date
 								</label>
-								<input type="text" class="form-control" id="inDate" name="inDate" value=""
-									placeholder="In date"/>
-								
+								<input type="text" class="form-control" id="inDate" name="inDate" value="<s:date name='user.inDate' format="MM/dd/yyyy"/>"/>
+							</div>
+							
+							<div class="form-group">
+								<label for="outDate">
+									Out date
+								</label>
+								<input type="text" class="form-control" id="outDate" name="outDate" value="${user.outDate}"/>
 							</div>
 	
 							<div class="form-group">
@@ -131,7 +128,7 @@
 								<div class="input-group">
 									<span class="input-group-addon"><s:text name="money"/></span>
 									<input type="number" step="0.1" class="form-control" id="quota" name="quota"
-										aria-label="..." value="2000"/>
+										aria-label="..." value="${user.quota}"/>
 								</div>
 							</div>
 						
@@ -141,7 +138,7 @@
 	
 							<div class="form-group col-md-3 col-xs-3  navbar-right">
 								<input type="submit" class="btn btn-primary   btn-block"
-									value="Create" />
+									value="Update" />
 							</div>
 	
 						</div>
