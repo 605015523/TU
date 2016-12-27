@@ -1,5 +1,7 @@
 package com.tu.model.user.act;
 
+import java.math.BigDecimal;
+
 import com.tu.model.userlogin.UserloginVO;
 
 public class UserActVO implements java.io.Serializable {
@@ -10,7 +12,7 @@ public class UserActVO implements java.io.Serializable {
 	private Integer actId;
 	private UserloginVO user;
 	private Integer nbParticipants;
-	private Float consumption;
+	private BigDecimal consumption;
 	private String remark;
 
 	public UserActVO() {
@@ -45,11 +47,11 @@ public class UserActVO implements java.io.Serializable {
 		this.nbParticipants = nbParticipants;
 	}
 
-	public Float getConsumption() {
+	public BigDecimal getConsumption() {
 		return this.consumption;
 	}
 
-	public void setConsumption(Float consumption) {
+	public void setConsumption(BigDecimal consumption) {
 		this.consumption = consumption;
 	}
 

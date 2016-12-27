@@ -1,5 +1,6 @@
 package com.tu.action;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,12 +37,12 @@ public class LeaderviewAction extends AbstractAction {
 	// Receive the controls value from the caller page and return the parameters to the "success" web page 
 	private Integer actId;
 	private String actName;
-	private Float actMoney;
+	private BigDecimal actMoney;
 	private String description;
 	private Date actDate;
 	private String daterange;
 	private Integer nbParticipants;
-	private Float sum;
+	private BigDecimal sum;
 	
 	// To display one group activity
 	private GroupActVO groupAct;
@@ -177,7 +178,7 @@ public class LeaderviewAction extends AbstractAction {
 		for (int j = 1; j < (groupAct.getMemberInVO().size() + 1); j++) {
 			UserActVO oneMemberInVO = groupAct.getMemberInVO().get(j - 1);
 			
-			Float consumption = Float.parseFloat(request.getParameter("perconsumption_" + j));
+			BigDecimal consumption = new BigDecimal(request.getParameter("perconsumption_" + j));
 			oneMemberInVO.setConsumption(consumption);
 			
 			Integer nbParticipantsGrpAct = Integer.parseInt(request.getParameter("perNbParticipants_" + j));
@@ -299,11 +300,11 @@ public class LeaderviewAction extends AbstractAction {
 		this.actName = actName;
 	}
 
-	public Float getActMoney() {
+	public BigDecimal getActMoney() {
 		return this.actMoney;
 	}
 
-	public void setActMoney(Float actMoney) {
+	public void setActMoney(BigDecimal actMoney) {
 		this.actMoney = actMoney;
 	}
 
@@ -339,11 +340,11 @@ public class LeaderviewAction extends AbstractAction {
 		this.nbParticipants = nbParticipants;
 	}
 
-	public Float getSum() {
+	public BigDecimal getSum() {
 		return sum;
 	}
 
-	public void setSum(Float sum) {
+	public void setSum(BigDecimal sum) {
 		this.sum = sum;
 	}
 

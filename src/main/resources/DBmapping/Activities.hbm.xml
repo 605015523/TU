@@ -15,10 +15,10 @@
         <property name="actName" type="java.lang.String">
             <column name="act_name" not-null="true" />
         </property>
-        <property name="actMoney" type="java.lang.Float">
+        <property name="actMoney" type="java.math.BigDecimal">
             <column name="act_money" length="45" />
         </property>
-       <property name="description" type="java.lang.String">
+        <property name="description" type="java.lang.String">
             <column name="description" length="1000" />
         </property>
         <property name="enrollStartDate" type="java.util.Date">

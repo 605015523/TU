@@ -1,5 +1,6 @@
 package com.tu.dao.activities;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Activity implements java.io.Serializable {
@@ -10,7 +11,7 @@ public class Activity implements java.io.Serializable {
 	private Integer actId;
 	private Integer groupId;
 	private String actName;
-	private Float actMoney;
+	private BigDecimal actMoney;
 	private String description;
 	private Date enrollStartDate;
 	private Date enrollEndDate;
@@ -25,7 +26,7 @@ public class Activity implements java.io.Serializable {
 
 	/** full constructor */
 	public Activity(Integer actId, Integer groupId, String actName,
-			Float actMoney, String description, Date enrollStartDate,
+			BigDecimal actMoney, String description, Date enrollStartDate,
 			Date enrollEndDate, Date actDate, String state, String comment) {
 		this.actId = actId;
 		this.groupId = groupId;
@@ -63,11 +64,11 @@ public class Activity implements java.io.Serializable {
 		this.actName = actName;
 	}
 
-	public Float getActMoney() {
+	public BigDecimal getActMoney() {
 		return this.actMoney;
 	}
 
-	public void setActMoney(Float actMoney) {
+	public void setActMoney(BigDecimal actMoney) {
 		this.actMoney = actMoney;
 	}
 

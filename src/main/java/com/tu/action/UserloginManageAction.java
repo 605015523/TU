@@ -1,5 +1,6 @@
 package com.tu.action;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.tu.model.activities.ActivitiesConstant;
@@ -26,7 +27,7 @@ public class UserloginManageAction extends AbstractAction {
 	private Integer userId;
 	private Integer userRole;
 	private String loginMessage;
-	private Float remaining;
+	private BigDecimal remaining;
 	private List<ActivityVO> upcomingActs;
 	
 	// To display
@@ -104,11 +105,11 @@ public class UserloginManageAction extends AbstractAction {
 		cal.setTime(date);
 		cal.set(cal.get(Calendar.YEAR), ConfConstants.BUDGET_MONTH-1, ConfConstants.BUDGET_DAY, 0, 0);
 		Date updatedate = cal.getTime();
-		// FIXME float comparison??
+
 		if ((thisuser.getInDate().getTime() - updatedate.getTime() < 0)
 				&& updatedate.before(date)
-				&& thisuser.getQuota() == ConfConstants.BUDGET_PER_YEAR) {
-			thisuser.setQuota(thisuser.getQuota() + ConfConstants.BUDGET_PER_YEAR);
+				&& thisuser.getQuota().equals(ConfConstants.BUDGET_PER_YEAR)) {
+			thisuser.setQuota(thisuser.getQuota().add(ConfConstants.BUDGET_PER_YEAR));
 			userloginManageBean.doUpdateOneUserInfo(thisuser);
 		}
 
@@ -179,7 +180,7 @@ public class UserloginManageAction extends AbstractAction {
 		initServletContextObject();
 		upcomingActs = actsBean.doGetUpcomingActivity();
 		
-		setRemaining(getCurrentUser().getQuota() - getCurrentUser().getSpending());
+		remaining = getCurrentUser().getQuota().subtract(getCurrentUser().getSpending());
 		return "homePage";
 	}
 	
@@ -225,12 +226,8 @@ public class UserloginManageAction extends AbstractAction {
 		this.userview = userview;
 	}
 
-	public Float getRemaining() {
+	public BigDecimal getRemaining() {
 		return remaining;
-	}
-
-	public void setRemaining(Float remaining) {
-		this.remaining = remaining;
 	}
 
 	public List<ActivityVO> getUpcomingActs() {

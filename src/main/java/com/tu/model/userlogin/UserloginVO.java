@@ -1,5 +1,6 @@
 package com.tu.model.userlogin;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -13,8 +14,8 @@ public class UserloginVO implements java.io.Serializable {
 	private String userDept;
 	private Date inDate;
 	private Date outDate;
-	private Float spending;
-	private Float quota;
+	private BigDecimal spending;
+	private BigDecimal quota;
 
 	public UserloginVO() {
 		userId = 0;
@@ -84,19 +85,19 @@ public class UserloginVO implements java.io.Serializable {
 		this.outDate = outDate;
 	}
 
-	public Float getSpending() {
+	public BigDecimal getSpending() {
 		return spending;
 	}
 
-	public void setSpending(Float spending) {
+	public void setSpending(BigDecimal spending) {
 		this.spending = spending;
 	}
 
-	public Float getQuota() {
+	public BigDecimal getQuota() {
 		return this.quota;
 	}
 
-	public void setQuota(Float quota) {
+	public void setQuota(BigDecimal quota) {
 		this.quota = quota;
 	}
 

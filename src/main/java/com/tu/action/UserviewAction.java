@@ -1,5 +1,6 @@
 package com.tu.action;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -161,7 +162,7 @@ public class UserviewAction extends AbstractAction {
 		userActVO.setNbParticipants(nbParticipants);
 		
 		// FIXME: know why consumption is actually not given
-		userActVO.setConsumption(oneAct.getActMoney()*nbParticipants);
+		userActVO.setConsumption(oneAct.getActMoney().multiply(BigDecimal.valueOf(nbParticipants)));
 		//oneUserActVO.setConsumption(consumption != null ? consumption : 0);
 		userActVO.setRemark(remark);
 		

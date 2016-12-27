@@ -1,5 +1,6 @@
 package com.tu.model.accountingview;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class UserGroupCostVO implements java.io.Serializable {
@@ -8,9 +9,9 @@ public class UserGroupCostVO implements java.io.Serializable {
 	
 	private Integer userId;
 	private String userName;
-	private Float sum;
-	private Float different;
-	private Float quota;
+	private BigDecimal sum;
+	private BigDecimal different;
+	private BigDecimal quota;
 	private Map<Integer, GroupCostVO> groupCostVO;
 
 	// Constructors
@@ -40,19 +41,19 @@ public class UserGroupCostVO implements java.io.Serializable {
 		this.userName = userName;
 	}
 
-	public Float getSum() {
+	public BigDecimal getSum() {
 		return this.sum;
 	}
 
-	public void setSum(Float sum) {
+	public void setSum(BigDecimal sum) {
 		this.sum = sum;
 	}
 
-	public Float getDifferent() {
+	public BigDecimal getDifferent() {
 		return this.different;
 	}
 
-	public void setDifferent(Float different) {
+	public void setDifferent(BigDecimal different) {
 		this.different = different;
 	}
 
@@ -64,11 +65,11 @@ public class UserGroupCostVO implements java.io.Serializable {
 		this.groupCostVO = groupCostVO;
 	}
 
-	public Float getQuota() {
+	public BigDecimal getQuota() {
 		return quota;
 	}
 
-	public void setQuota(Float quota) {
+	public void setQuota(BigDecimal quota) {
 		this.quota = quota;
 	}
 

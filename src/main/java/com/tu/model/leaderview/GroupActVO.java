@@ -1,5 +1,6 @@
 package com.tu.model.leaderview;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import com.tu.model.activities.ActivityVO;
@@ -10,7 +11,7 @@ public class GroupActVO implements java.io.Serializable {
 	private static final long serialVersionUID = 5165359653259615392L;
 	
 	private ActivityVO activity;
-	private Float sum;
+	private BigDecimal sum;
 	private Integer nbParticipants;
 	private List<UserActVO> members;
 	
@@ -21,11 +22,11 @@ public class GroupActVO implements java.io.Serializable {
 		// do nothing
 	}
 
-	public Float getSum() {
+	public BigDecimal getSum() {
 		return this.sum;
 	}
 
-	public void setSum(Float sum) {
+	public void setSum(BigDecimal sum) {
 		this.sum = sum;
 	}
 

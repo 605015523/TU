@@ -1,5 +1,6 @@
 package com.tu.dao.userlogin;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -19,8 +20,8 @@ public class Userlogin implements java.io.Serializable {
 	private String userDept;
 	private Date inDate;
 	private Date outDate;
-	private Float spending;
-	private Float quota;
+	private BigDecimal spending;
+	private BigDecimal quota;
 
 	// Constructors
 
@@ -101,19 +102,19 @@ public class Userlogin implements java.io.Serializable {
 		this.outDate = outDate;
 	}
 
-	public Float getSpending() {
+	public BigDecimal getSpending() {
 		return spending;
 	}
 
-	public void setSpending(Float spending) {
+	public void setSpending(BigDecimal spending) {
 		this.spending = spending;
 	}
 
-	public Float getQuota() {
+	public BigDecimal getQuota() {
 		return this.quota;
 	}
 
-	public void setQuota(Float quota) {
+	public void setQuota(BigDecimal quota) {
 		this.quota = quota;
 	}
 

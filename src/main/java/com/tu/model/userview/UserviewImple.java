@@ -82,7 +82,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	@Override
 	public UserviewVO doGetOneUserviewInfoByUserId(Integer userId) {
 		List<String> onegroupPO = new ArrayList<String>();
-		UserviewVO oneuserviewPO = new UserviewVO();
+		UserviewVO userviewPO = new UserviewVO();
 
 		try {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
@@ -96,15 +96,15 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 			}
 
-			oneuserviewPO.setUserId(oneuserloginPO.getUserId());
-			oneuserviewPO.setUserName(oneuserloginPO.getUserName());
-			oneuserviewPO.setGroupName(onegroupPO);
-			oneuserviewPO.setUserDept(oneuserloginPO.getUserDept());
-			oneuserviewPO.setInDate(oneuserloginPO.getInDate());
-			oneuserviewPO.setSpending(oneuserloginPO.getSpending());
-			oneuserviewPO.setQuota(oneuserloginPO.getQuota());
-			oneuserviewPO.setRemaining(oneuserloginPO.getQuota()
-					- oneuserloginPO.getSpending());
+			userviewPO.setUserId(oneuserloginPO.getUserId());
+			userviewPO.setUserName(oneuserloginPO.getUserName());
+			userviewPO.setGroupName(onegroupPO);
+			userviewPO.setUserDept(oneuserloginPO.getUserDept());
+			userviewPO.setInDate(oneuserloginPO.getInDate());
+			userviewPO.setSpending(oneuserloginPO.getSpending());
+			userviewPO.setQuota(oneuserloginPO.getQuota());
+			userviewPO.setRemaining(
+					oneuserloginPO.getQuota().subtract(oneuserloginPO.getSpending()));
 			
 			LOG.info("服务层从数据访问层获得AuthorPO:"
 					+ oneuserloginPO.getUserName());
@@ -116,7 +116,7 @@ public class UserviewImple extends Observable implements UserviewInterface {
 
 		UserviewVO oneuserviewVO = new UserviewVO();
 		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(oneuserviewVO, oneuserviewPO);
+			BeanUtils.copyProperties(oneuserviewVO, userviewPO);
 			LOG.info("服务层准备好传给控制层的userviewVO:"
 					+ oneuserviewVO.getUserId());
 		} catch (IllegalAccessException e) {

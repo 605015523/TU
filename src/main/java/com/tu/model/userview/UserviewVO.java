@@ -1,5 +1,6 @@
 package com.tu.model.userview;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -12,9 +13,9 @@ public class UserviewVO implements java.io.Serializable {
 	private List<String> groupName;
 	private String userDept;
 	private Date inDate;
-	private Float spending;
-	private Float quota;
-	private Float remaining;
+	private BigDecimal spending;
+	private BigDecimal quota;
+	private BigDecimal remaining;
 	private List<String> actName;
 
 	public UserviewVO() {
@@ -69,11 +70,11 @@ public class UserviewVO implements java.io.Serializable {
 		this.inDate = inDate;
 	}
 
-	public Float getSpending() {
+	public BigDecimal getSpending() {
 		return spending;
 	}
 
-	public void setSpending(Float spending) {
+	public void setSpending(BigDecimal spending) {
 		this.spending = spending;
 	}
 
@@ -85,19 +86,19 @@ public class UserviewVO implements java.io.Serializable {
 		this.actName = actName;
 	}
 
-	public Float getQuota() {
+	public BigDecimal getQuota() {
 		return this.quota;
 	}
 
-	public void setQuota(Float quota) {
+	public void setQuota(BigDecimal quota) {
 		this.quota = quota;
 	}
 
-	public Float getRemaining() {
+	public BigDecimal getRemaining() {
 		return this.remaining;
 	}
 
-	public void setRemaining(Float remaining) {
+	public void setRemaining(BigDecimal remaining) {
 		this.remaining = remaining;
 	}
 

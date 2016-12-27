@@ -1,6 +1,7 @@
 package com.tu.mapper;
 
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +118,7 @@ public class DAOModelMapper {
 		Integer actId = act.getActId();
 		List<UserAct> useractPO = userActDAO.findByActId(actId);
 		List<UserActVO> memberInVO = new ArrayList<UserActVO>();
-		float sum = 0;
+		BigDecimal sum = new BigDecimal(0);
 		Integer nbParticipants = 0;
 		for (UserAct userAct : useractPO) {
 			UserActVO oneMemberIn = new UserActVO();
@@ -126,7 +127,7 @@ public class DAOModelMapper {
 			oneMemberIn.setConsumption(userAct.getConsumption());
 			oneMemberIn.setRemark(userAct.getRemark());
 			oneMemberIn.setActId(actId);
-			sum += userAct.getConsumption();
+			sum.add(userAct.getConsumption());
 			nbParticipants += userAct.getNbParticipants();
 			Userlogin userPO = userloginDAO.findById(userAct.getUserId());
 			oneMemberIn.setUser(convertoToUserInfoVO(userPO));

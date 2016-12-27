@@ -1,5 +1,6 @@
 package com.tu.model.accountingview;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import org.apache.commons.logging.Log;
@@ -109,20 +110,20 @@ public class AccountingviewImple extends Observable implements
 					groupCostVO.setCost(oneuserAct.getConsumption());
 					allGroupCost.put(groupId, groupCostVO);
 				} else {
-					groupCostVO.setCost(groupCostVO.getCost() + oneuserAct.getConsumption());
+					groupCostVO.setCost(groupCostVO.getCost().add(oneuserAct.getConsumption()));
 				}
 			}
 		}
 		
 		// Sum of all costs
-		float sum = 0;
+		BigDecimal sum = new BigDecimal(0);
 		for (GroupCostVO groupCost : allGroupCost.values()) {
-			sum += groupCost.getCost();
+			sum.add(groupCost.getCost());
 		}
 		
 		oneUserGroupCostVO.setSum(sum);
 		oneUserGroupCostVO.setQuota(oneuser.getQuota());
-		oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota() - sum);
+		oneUserGroupCostVO.setDifferent(oneUserGroupCostVO.getQuota().subtract(sum));
 		oneUserGroupCostVO.setGroupCostVO(allGroupCost);
 		
 		return oneUserGroupCostVO;

@@ -1,5 +1,7 @@
 package com.tu.dao.user.act;
 
+import java.math.BigDecimal;
+
 public class UserAct implements java.io.Serializable {
 
 	private static final long serialVersionUID = -3072989564300722466L;
@@ -8,14 +10,14 @@ public class UserAct implements java.io.Serializable {
 	private Integer actId;
 	private Integer userId;
 	private Integer nbParticipants;
-	private Float consumption;
+	private BigDecimal consumption;
 	private String remark;
 
 	public UserAct() {
 	}
 
 	public UserAct(Integer actId, Integer userId, Integer nbParticipants,
-			Float consumption, String remark) {
+			BigDecimal consumption, String remark) {
 		this.actId = actId;
 		this.userId = userId;
 		this.nbParticipants = nbParticipants;
@@ -47,11 +49,11 @@ public class UserAct implements java.io.Serializable {
 		this.nbParticipants = nbParticipants;
 	}
 
-	public Float getConsumption() {
+	public BigDecimal getConsumption() {
 		return this.consumption;
 	}
 
-	public void setConsumption(Float consumption) {
+	public void setConsumption(BigDecimal consumption) {
 		this.consumption = consumption;
 	}
 

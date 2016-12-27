@@ -45,6 +45,14 @@
 	</div>
 </div>
 <div class="row form-group form-group-lg">
+	<div class="col-xs-3 col-md-3">
+		<strong>Status:</strong>
+	</div>
+	<div class="col-xs-3 col-md-3">
+		${groupAct.activity.state}
+	</div>
+</div>
+<div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3 text-left">
 		<strong>Description:</strong>
 	</div>

@@ -1,5 +1,6 @@
 package com.tu.action;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class ManageUsersAction extends AbstractAction {
 	private String dept;
 	private Date inDate;
 	private Date outDate;
-	private Float quota;
+	private BigDecimal quota;
 	private Integer role;
 	
 	public String listAll() {
@@ -125,7 +126,7 @@ public class ManageUsersAction extends AbstractAction {
 		this.outDate = outDate;
 	}
 	
-	public void setQuota(Float quota) {
+	public void setQuota(BigDecimal quota) {
 		this.quota = quota;
 	}
 

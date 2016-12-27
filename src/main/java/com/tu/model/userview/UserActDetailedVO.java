@@ -1,5 +1,6 @@
 package com.tu.model.userview;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import com.tu.model.user.act.UserActVO;
@@ -9,7 +10,7 @@ public class UserActDetailedVO extends UserActVO {
 	
 	private String actName;
 	private String group;
-	private Float actMoney;
+	private BigDecimal actMoney;
 	private Date actDate;
 	private String state;
 	private String description;
@@ -40,11 +41,11 @@ public class UserActDetailedVO extends UserActVO {
 		this.group = group;
 	}
 
-	public Float getActMoney() {
+	public BigDecimal getActMoney() {
 		return actMoney;
 	}
 
-	public void setActMoney(Float actMoney) {
+	public void setActMoney(BigDecimal actMoney) {
 		this.actMoney = actMoney;
 	}
 

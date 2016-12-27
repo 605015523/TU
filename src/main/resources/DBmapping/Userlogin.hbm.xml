@@ -26,10 +26,10 @@
         <property name="outDate" type="java.sql.Date">
             <column name="out_date" />
         </property> 
-        <property name="spending" type="java.lang.Float">
+        <property name="spending" type="java.math.BigDecimal">
             <column name="spending" length="45" />
         </property> 
-        <property name="quota" type="java.lang.Float">
+        <property name="quota" type="java.math.BigDecimal">
             <column name="quota" length="45" />
         </property>
         

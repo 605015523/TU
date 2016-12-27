@@ -15,7 +15,7 @@
 		<property name="nbParticipants" type="java.lang.Integer">
 			<column name="participator_number"/>
 		</property>
-		<property name="consumption" type="java.lang.Float">
+		<property name="consumption" type="java.math.BigDecimal">
 			<column name="consumption"  />
 		</property>
 		<property name="remark" type="java.lang.String">

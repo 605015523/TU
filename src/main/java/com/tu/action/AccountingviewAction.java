@@ -1,5 +1,6 @@
 package com.tu.action;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 import org.apache.commons.logging.Log;
@@ -123,9 +124,9 @@ public class AccountingviewAction extends AbstractAction {
 		GroupActVO groupactVO = accountingviewBean.doGetGroupActivityByID(actId);
 		for (UserActVO userAct : groupactVO.getMemberInVO()) {
 			Integer userId = userAct.getUser().getUserId();
-			Float spending = userAct.getConsumption();
+			BigDecimal spending = userAct.getConsumption();
 			UserloginVO oneUserVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
-			oneUserVO.setSpending(oneUserVO.getSpending() + spending);
+			oneUserVO.setSpending(oneUserVO.getSpending().add(spending));
 			userloginManageBean.doUpdateOneUserInfo(oneUserVO);
 		}
 
