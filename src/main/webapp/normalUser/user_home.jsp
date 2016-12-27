@@ -46,6 +46,7 @@
 						<tr>
 							<th>Activity name</th>
 							<th>Date</th>
+							<th>Details</th>
 						</tr>
 						
 						<s:iterator var="act" value="upcomingActs">
@@ -55,6 +56,9 @@
 								</td>
 								<td>
 									<s:date name="actDate" format="%{getText('format.date')}"/>
+								</td>
+								<td>
+									Details
 								</td>
 							</tr>
 						</s:iterator>

@@ -45,6 +45,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To retrieve all the activities which are needed to be approval. 
 	public String doGetAllCheckAct() {
+		initServletContextObject();
 		acts = accountingviewBean.doGetAllCheckValidateActs();
 		LOGGER.info("the doGetAllGroupAct get success");
 	
@@ -137,6 +138,7 @@ public class AccountingviewAction extends AbstractAction {
 
 	// Display all users' activities by year ( activity shall be in validated status)
 	public String doshowAllActsByYear() {
+		initServletContextObject();
 		allUserGroupCost = accountingviewBean.doGetUserGroupCostsForValidatedActsByYear(year);
 
 		return "doShowActByYear";
