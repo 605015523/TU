@@ -88,11 +88,11 @@ public class UserviewImple extends Observable implements UserviewInterface {
 			Userlogin oneuserloginPO = userloginDAO.findById(userId);
 			LOG.info("oneuserloginPO ID get success:"
 					+ oneuserloginPO.getUserId());
-			List<UserGroup> oneUserGroupPO = userGroupDAO.findByUserId(userId);
+			List<UserGroup> userGroupsPO = userGroupDAO.findByUserId(userId);
 
-			for (int i = 0; i < oneUserGroupPO.size(); i++) {
+			for (UserGroup userGroup : userGroupsPO) {
 				onegroupPO.add(groupDAO.findById(
-						oneUserGroupPO.get(i).getGroupId()).getGroupName());
+						userGroup.getGroupId()).getGroupName());
 
 			}
 
