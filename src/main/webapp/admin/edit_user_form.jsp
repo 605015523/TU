@@ -72,6 +72,8 @@
 			
 			
 				<form class="panel-body" action="updateUserManageUsersAction.action" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
+					<input type="hidden" name="userId" value="${userId}"/>
+					
 					<div class="row">
 	
 						<div class="col-md-4 col-xs-4">
@@ -89,10 +91,11 @@
 								</label>
 							
 								<select class="form-control" name="role">
-									<option value="1">Group leader</option>
-									<option value="2">Accounting</option>
-									<option value="3" selected="selected">Normal member</option>
-									<option value="4">IT admin</option>
+									<s:iterator value = "roles" >
+									    <option value="<s:property value="key"/>" <c:if test="${user.userRole==key}">selected</c:if>>
+									    	<s:property value="value.name"/>
+									    </option>
+									</s:iterator>
 								</select>
 							</div>
 						</div>

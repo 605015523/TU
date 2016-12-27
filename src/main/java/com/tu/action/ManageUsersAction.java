@@ -21,6 +21,7 @@ public class ManageUsersAction extends AbstractAction {
 	private String repassword;
 	private String dept;
 	private Date inDate;
+	private Date outDate;
 	private Float quota;
 	private Integer role;
 	
@@ -41,15 +42,31 @@ public class ManageUsersAction extends AbstractAction {
 			return "error";
 		}
 			
-		UserloginVO oneUserVO = new UserloginVO();
-		oneUserVO.setUserName(userName);
-		oneUserVO.setUserPassword(password);
-		oneUserVO.setUserDept(dept);
-		oneUserVO.setInDate(inDate);
-		oneUserVO.setQuota(quota);
-		oneUserVO.setUserRole(role);
+		UserloginVO userVO = new UserloginVO();
+		userVO.setUserId(userId);
+		userVO.setUserName(userName);
+		userVO.setUserPassword(password);
+		userVO.setUserDept(dept);
+		userVO.setInDate(inDate);
+		userVO.setQuota(quota);
+		userVO.setUserRole(role);
 		
-		userloginManageBean.doCreateUser(oneUserVO);
+		userloginManageBean.doCreateUser(userVO);
+		return "succcess";
+	}
+	
+	public String updateUser() {
+		UserloginVO userVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
+		//userVO.setUserName(userName);
+		//userVO.setUserPassword(password);
+		userVO.setUserDept(dept);
+		userVO.setInDate(inDate);
+		userVO.setOutDate(outDate);
+		userVO.setQuota(quota);
+		userVO.setUserRole(role);
+		
+		userloginManageBean.doUpdateOneUserInfo(userVO);
+		
 		return "succcess";
 	}
 	
@@ -67,6 +84,10 @@ public class ManageUsersAction extends AbstractAction {
 
 	public List<UserloginVO> getUsers() {
 		return users;
+	}
+	
+	public Integer getUserId() {
+		return userId;
 	}
 
 	public void setUserId(Integer userId) {
@@ -95,6 +116,10 @@ public class ManageUsersAction extends AbstractAction {
 
 	public void setInDate(Date inDate) {
 		this.inDate = inDate;
+	}
+	
+	public void setOutDate(Date outDate) {
+		this.outDate = outDate;
 	}
 	
 	public void setQuota(Float quota) {

@@ -1,5 +1,7 @@
 package com.tu.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -41,5 +43,9 @@ public abstract class AbstractAction extends ActionSupport {
 	public void setUserloginManageBean(
 			UserloginManageInterface userloginManageBean) {
 		this.userloginManageBean = userloginManageBean;
+	}
+	
+	public Map<Integer, Role> getRoles() {
+		return Role.ROLES;
 	}
 }

@@ -97,10 +97,9 @@
 								</label>
 							
 								<select class="form-control" name="role">
-									<option value="1">Group leader</option>
-									<option value="2">Accounting</option>
-									<option value="3" selected="selected">Normal member</option>
-									<option value="4">IT admin</option>
+									<s:iterator value = "roles" >
+									    <option value="<s:property value="key"/>"><s:property value="value.name"/></option>
+									</s:iterator>
 								</select>
 							</div>
 						</div>
