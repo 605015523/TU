@@ -99,12 +99,12 @@
 
 					</form>
 					
-					<div>
-						<a href="<c:url value='/displayHomePageUserloginManageAction'/>" type="button"
-							class="btn btn-default navbar-btn"><span
-							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-							back</a>
-					</div>
+				
+					<button type="button" class="btn btn-default navbar-btn"
+						onclick="window.history.back();">
+						<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+						back
+					</button>
 
 				</div>
 			</div>

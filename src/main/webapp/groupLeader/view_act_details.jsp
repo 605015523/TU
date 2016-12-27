@@ -81,7 +81,7 @@
 					</div>
 					<div>
 						<button type="button" class="btn btn-default navbar-btn"
-							onclick=window.history.back();>
+							onclick="window.history.back();">
 							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							back
 						</button>

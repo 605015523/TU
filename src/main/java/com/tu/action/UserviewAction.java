@@ -142,6 +142,7 @@ public class UserviewAction extends AbstractAction {
 
 	// Go jump to one activity's page
 	public String doInAct() {
+		initServletContextObject();
 		Integer userId = this.getCurrentUser().getUserId();
 		msgDetails = userMsgBean.doGetOneByUserIdAndMsgId(userId, msgId);
 		userview = userviewBean.doGetOneUserviewInfoByUserId(userId);
@@ -151,19 +152,20 @@ public class UserviewAction extends AbstractAction {
 
 	// Request to join one activity
 	public String doActRequest() {
-		UserActVO oneUserActVO = new UserActVO();
+		initServletContextObject();
+		UserActVO userActVO = new UserActVO();
 		LOGGER.info("the actid is: " + actId);
 		ActivityVO oneAct = actsBean.doGetOneActById(actId);
-		oneUserActVO.setActId(actId);
-		oneUserActVO.setUser(getCurrentUser());
-		oneUserActVO.setNbParticipants(nbParticipants);
+		userActVO.setActId(actId);
+		userActVO.setUser(getCurrentUser());
+		userActVO.setNbParticipants(nbParticipants);
 		
 		// FIXME: know why consumption is actually not given
-		oneUserActVO.setConsumption(oneAct.getActMoney()*nbParticipants);
+		userActVO.setConsumption(oneAct.getActMoney()*nbParticipants);
 		//oneUserActVO.setConsumption(consumption != null ? consumption : 0);
-		oneUserActVO.setRemark(remark);
+		userActVO.setRemark(remark);
 		
-		userActBean.doAddOneUserAct(oneUserActVO);
+		userActBean.doAddOneUserAct(userActVO);
 
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(oneAct.getActDate());

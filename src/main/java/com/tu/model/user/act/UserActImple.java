@@ -49,14 +49,9 @@ public class UserActImple extends Observable implements UserActInterface {
 	public String doAddOneUserAct(UserActVO oneUserActVO) {
 		String addMessage = null;
 		UserAct userActPO = new UserAct();
+		
+		copyPropertiesVOtoPO(oneUserActVO, userActPO);
 
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(userActPO, oneUserActVO);
-		} catch (IllegalAccessException e) {
-			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了IllegalAccessException异常");
-		} catch (InvocationTargetException e) {
-			LOG.error("在MaterialImple类的doAddOneMaterial方法中利用BeanUtils类进行对象拷贝时出现了InvocationTargetException异常");
-		}
 		try {
 			userActDAO.save(userActPO);
 			addMessage = "add UserAct success!";
@@ -70,20 +65,20 @@ public class UserActImple extends Observable implements UserActInterface {
 	// 删除一个userAct对象
 	@Override
 	public String doDeleteOneUserAct(Integer userId, Integer actId) {
-		String okOrNot = null;
+		String result = null;
 		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
 		try {
 			if (userActPO != null) {
 				userActDAO.delete(userActPO);
-				okOrNot = "delete success!";
+				result = "delete success!";
 			} else {
-				okOrNot = "delete fail!";
+				result = "delete fail!";
 			}
 
 		} catch (Exception e) {
-			okOrNot = e.toString();
+			result = e.toString();
 		}
-		return okOrNot;
+		return result;
 
 	}
 
@@ -93,23 +88,28 @@ public class UserActImple extends Observable implements UserActInterface {
 		Integer actId = userActVO.getActId();
 		Integer userId = userActVO.getUser().getUserId();
 		UserAct userActPO = userActDAO.findByUserIdAndActId(userId, actId);
-		String okOrNot = null;
-		try { // 利用Bean拷贝类实现简单地拷贝
-			BeanUtils.copyProperties(userActPO, userActVO);
-
-		} catch (IllegalAccessException e) {
-			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact: " + e.toString());
-		} catch (InvocationTargetException e) {
-			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact: " + e.toString());
-		}
+		String result = null;
+		copyPropertiesVOtoPO(userActVO, userActPO);
+		
 		try {
 			userActDAO.merge(userActPO);
-			okOrNot = "merge success!";
+			result = "merge success!";
 		} catch (Exception e) {
-			okOrNot = e.toString();
+			result = e.toString();
 		}
 		
-		return okOrNot;
+		return result;
+	}
+	
+	private void copyPropertiesVOtoPO(UserActVO userActVO, UserAct userActPO) {
+		try { // 利用Bean拷贝类实现简单地拷贝
+			BeanUtils.copyProperties(userActPO, userActVO);
+			userActPO.setUserId(userActVO.getUser().getUserId());
+		} catch (IllegalAccessException e) {
+			LOG.error("there is a IllegalAccessException while copy act in doUpdateOneact: ", e);
+		} catch (InvocationTargetException e) {
+			LOG.error("there is a InvocationTargetException while copy act in doUpdateOneact: ", e);
+		}
 	}
 
 }

@@ -133,6 +133,7 @@ public class LeaderviewAction extends AbstractAction {
 
 	// Get and put all the detail of one activity in view_act_details.jsp
 	public String doshowActDetails() {
+		initServletContextObject();
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		
 		return "ShowActDetails";
@@ -141,6 +142,7 @@ public class LeaderviewAction extends AbstractAction {
 
 	// Go into activity modification web page
 	public String doEditAct() {
+		initServletContextObject();
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		String state = groupAct.getActivity().getState();
 
