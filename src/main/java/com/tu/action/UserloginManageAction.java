@@ -24,9 +24,9 @@ public class UserloginManageAction extends AbstractAction {
 	private transient UserMsgInterface userMsgBean = null;
 
 	private Integer userId;
-	private String userName;
 	private Integer userRole;
 	private String loginMessage;
+	private Float remaining;
 	
 	// To display
 	private UserviewVO userview;
@@ -37,7 +37,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void initUserlogin() {
 		userId = null;
-		userName = null;
 		userRole = null;
 	}
 
@@ -76,7 +75,6 @@ public class UserloginManageAction extends AbstractAction {
 		initServletContextObject();
 		UserloginVO userLogin = getCurrentUser();
 		
-		userName = userLogin.getUserName();
 		userId = userLogin.getUserId();
 		userRole = userLogin.getUserRole();
 
@@ -177,9 +175,7 @@ public class UserloginManageAction extends AbstractAction {
 	}
 	
 	public String displayHomePage() {
-		userview = userviewBean.doGetOneUserviewInfoByUserId(getCurrentUser()
-				.getUserId());
-		
+		setRemaining(getCurrentUser().getQuota() - getCurrentUser().getSpending());
 		return "homePage";
 	}
 	
@@ -199,14 +195,6 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
-	}
-
-	public String getUserName() {
-		return this.userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public Integer getUserRole() {
@@ -231,6 +219,14 @@ public class UserloginManageAction extends AbstractAction {
 
 	public void setUserview(UserviewVO userview) {
 		this.userview = userview;
+	}
+
+	public Float getRemaining() {
+		return remaining;
+	}
+
+	public void setRemaining(Float remaining) {
+		this.remaining = remaining;
 	}
 
 }

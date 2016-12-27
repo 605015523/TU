@@ -100,7 +100,7 @@
 					</form>
 					
 					<div>
-						<a href="normalUser/user_home.jsp" type="button"
+						<a href="<c:url value='/displayHomePageUserloginManageAction'/>" type="button"
 							class="btn btn-default navbar-btn"><span
 							class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 							back</a>

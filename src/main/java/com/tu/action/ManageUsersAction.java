@@ -57,8 +57,6 @@ public class ManageUsersAction extends AbstractAction {
 	
 	public String updateUser() {
 		UserloginVO userVO = userloginManageBean.dogetOneUserInfoByUserId(userId);
-		//userVO.setUserName(userName);
-		//userVO.setUserPassword(password);
 		userVO.setUserDept(dept);
 		userVO.setInDate(inDate);
 		userVO.setOutDate(outDate);

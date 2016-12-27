@@ -80,6 +80,20 @@
 	</li>
 	</c:if>
 	
-	<li role="presentation" class="navbar-right"><a role="button"
-		href="<c:url value="j_spring_security_logout" />">Log out</a></li>
+	<li role="presentation" class="dropdown navbar-right"><a id="dLabel"
+		data-target="#" href="#" data-toggle="dropdown" role="button"
+		aria-haspopup="true" aria-expanded="false"><c:out value="${currentUser.userName}" /><span
+			class="caret"></span>
+		</a>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+			<li class="dropdown-header"><c:out value="${currentUser.userDept}" /></li>
+			<li>
+				<a href="normalUser/change_pwd.jsp" class="navbar-link">Change
+							Password</a>
+			</li>
+			<li><a role="button"
+				href="<c:url value="j_spring_security_logout" />">Log out</a>
+			</li>
+		</ul>
+	</li>
 </ul>

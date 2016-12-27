@@ -71,7 +71,7 @@
 				</div>
 			
 			
-				<form class="panel-body" action="updateUserManageUsersAction.action" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
+				<form class="panel-body" action="updateUserManageUsersAction" method="post" role="form" name="form" id="form" onsubmit="return checkinput();">
 					<input type="hidden" name="userId" value="${userId}"/>
 					
 					<div class="row">
@@ -98,9 +98,10 @@
 									</s:iterator>
 								</select>
 							</div>
+							
 						</div>
 	
-						<div class="col-md-8 col-xs-8 ">
+						<div class="col-md-8 col-xs-8">
 						
 							<div class="form-group">
 								<label for="dept">
@@ -138,16 +139,23 @@
 							
 							<hr class="invisible" />
 	
-	
-							<div class="form-group col-md-3 col-xs-3  navbar-right">
-								<input type="submit" class="btn btn-primary   btn-block"
+							
+							<div class="form-group col-md-3 col-xs-3 navbar-right">
+								<input type="submit" class="btn btn-primary btn-block"
 									value="Update" />
 							</div>
 	
 						</div>
-	
+
 					</div>
 				</form>
+				
+				<div>
+					<a href="<c:url value='/listAllManageUsersAction'/>" type="button"
+									class="btn btn-default navbar-btn"><span
+									class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+									back</a>
+				</div>
 			</div>
 		</div>
 	</body>

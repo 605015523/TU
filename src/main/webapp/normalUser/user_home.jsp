@@ -40,10 +40,6 @@
 					<h3 class="panel-title">
 						User Information
 					</h3>
-					<p class="navbar-text navbar-right">
-						<a href="normalUser/change_pwd.jsp" class="navbar-link">Change
-							Password</a>
-					</p>
 				</div>
 				<div class="panel-body">
 
@@ -55,7 +51,7 @@
 							</td>
 
 							<td>
-								<c:out value="${userview.userName}" />
+								<c:out value="${currentUser.userName}" />
 							</td>
 						</tr>
 						<tr>
@@ -63,17 +59,7 @@
 								Department:
 							</td>
 							<td>
-								<c:out value="${userview.userDept}" />
-							</td>
-						</tr>
-						<tr>
-							<td class="col-md-4 col-md-offset-4">
-								Group:
-							</td>
-							<td>
-								<c:forEach var="groupName" items="${userview.groupName}">
-									<span class="label label-primary">${groupName}</span>
-								</c:forEach>
+								<c:out value="${currentUser.userDept}" />
 							</td>
 						</tr>
 						<tr>
@@ -81,7 +67,7 @@
 								In date:
 							</td>
 							<td>
-								<s:date name="userview.inDate" format="%{getText('format.date')}"/>
+								<s:date name="currentUser.inDate" format="%{getText('format.date')}"/>
 							</td>
 						</tr>
 						
@@ -91,7 +77,7 @@
 							</td>
 							<td>
 								<s:text name="format.money">
-									<s:param value="userview.quota"/>
+									<s:param value="currentUser.quota"/>
 								</s:text>
 							</td>
 						</tr>
@@ -101,7 +87,7 @@
 							</td>
 							<td>
 								<s:text name="format.money">
-									<s:param value="userview.spending"/>
+									<s:param value="currentUser.spending"/>
 								</s:text>
 							</td>
 						</tr>
@@ -111,7 +97,7 @@
 							</td>
 							<td>
 								<s:text name="format.money">
-									<s:param value="userview.remaining" />
+									<s:param value="remaining" />
 								</s:text>
 							</td>
 						</tr>
