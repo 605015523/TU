@@ -55,12 +55,12 @@
 						</tr>
 						<s:iterator var="act" value="acts">
 						
-							<tr <s:if test="%{state=='tobevalidate'}">class="important"</s:if>>
+							<tr <s:if test="%{state=='tobevalidate'||state=='tobeapproved'}">class="important"</s:if>>
 								<td class="col-md-3 col-xs-3 text-center">
 									${act.actName}
 								</td>
 								
-								<s:if test="%{state=='tobevalidate'||state=='disapproved'}">
+								<s:if test="%{state=='tobevalidate'||state=='tobeapproved'}">
 									<td class="col-md-2 col-xs-2 text-danger text-center">
 										${act.state}
 									</td>

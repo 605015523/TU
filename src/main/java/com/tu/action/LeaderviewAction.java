@@ -128,7 +128,7 @@ public class LeaderviewAction extends AbstractAction {
 		groupAct = leaderviewBean.doGetUserActById(actId);
 		String state = groupAct.getActivity().getState();
 
-		List<String> finishedStates = Arrays.asList("pending", "validate", "publish", "tobevalidate");
+		List<String> finishedStates = Arrays.asList("pending", "validate", "publish", "tobevalidate", "tobeapproved");
 		
 		if (!finishedStates.contains(state)) {
 			return "EditAct";
@@ -223,7 +223,7 @@ public class LeaderviewAction extends AbstractAction {
 
 		// oneActVO stores all the updated activity messages
 		initServletContextObject();
-		ActivityVO oneActVO = createActivityFromForm(ActivitiesConstant.STATE_TOBEVALIDATE);
+		ActivityVO oneActVO = createActivityFromForm(ActivitiesConstant.STATE_TOBEAPPROVED);
 
 		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		updateMessage = actsBean.doUpdateOneAct(oneActVO);

@@ -24,15 +24,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/signin.css" rel="stylesheet">
 <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-	function deleteAct(actId){
-		var truthBeTold = window.confirm("quit this activity?");
-		if (truthBeTold){
-			window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
-			window.alert("quit success!");
-		}
-	}
-</script>
+
 		
 </head>
 <body>
@@ -55,23 +47,7 @@
 				</s:include>
 					
 				<div class="row form-group form-group-lg ">
-					<div class="col-xs-offset-5 col-md-offset-5 col-xs-2  col-md-2">
-						<a role="button" class="btn btn-primary btn-block"
-							href='<c:url value="/doInActUserviewAction" />?actId=${actId}'>I'm
-							in</a>
-					</div>
 					
-					<div class="form-group col-md-2 col-xs-2">
-						<a role="button" class="btn btn-primary btn-block"
-								href='#' onclick="deleteAct(${actId});">quit</a>
-					</div>
-					
-					<s:if test="%{groupAct.activity.state=='disapproved'}">
-						<div class="col-xs-2 col-md-2">
-							<a role="button" class="btn btn-primary btn-block"
-								href='<c:url value="doToValidateActLeaderviewAction" />?actId=${actId}'>Submit</a>
-						</div>
-					</s:if>
 					
 					<s:if test="%{groupAct.activity.state=='pending'}">
 						<div class="col-xs-2  col-md-2">

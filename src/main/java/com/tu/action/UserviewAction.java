@@ -81,6 +81,10 @@ public class UserviewAction extends AbstractAction {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
 		userAct = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
+		
+		if (userAct == null) {
+			return "goToDoInAct";
+		}
 		LOGGER.info("the activity is " + userAct.getActivity().getActName() + " - " + actId);
 		
 		return "showDetails";

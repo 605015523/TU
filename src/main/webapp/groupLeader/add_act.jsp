@@ -155,7 +155,6 @@
 							</label>
 							<input type="text" class="form-control" id="actDate" name="actDate" value=""
 								placeholder="Act Date">
-							
 						</div>
 
 

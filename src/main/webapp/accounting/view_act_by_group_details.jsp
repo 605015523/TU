@@ -44,17 +44,13 @@
 						<s:param name="groupAct" value="groupAct"/>
 					</s:include>
 
-					<form action="doToValidateActLeaderviewAction.action" method="post"
-						role="form" name="form" id="form">
-						<input type="hidden" name="actId" value="${actId}"/>
-						<div>
-							<button type="button" class="btn btn-default navbar-btn"
-								onclick=window.history.back();>
-								<span class="glyphicon glyphicon-chevron-left"
-									aria-hidden="true"></span> back
-							</button>
-						</div>
-					</form>
+					<div>
+						<button type="button" class="btn btn-default navbar-btn"
+							onclick=window.history.back();>
+							<span class="glyphicon glyphicon-chevron-left"
+								aria-hidden="true"></span> back
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>

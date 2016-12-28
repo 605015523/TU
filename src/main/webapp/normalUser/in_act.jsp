@@ -97,7 +97,7 @@
 				<img src="images/test/head.png" alt="">
 			</div>
 			<jsp:include page="../menu.jsp">
-		        <jsp:param name="active" value="act"/>
+		        <jsp:param name="active" value="activities"/>
 		    </jsp:include>
 			<hr class="invisible" />
 

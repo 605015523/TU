@@ -60,13 +60,13 @@ public class AccountingviewAction extends AbstractAction {
 		String state = groupAct.getActivity().getState();
 		
 		// To retrieve all the detail of one specific activity which is in check.  
-		List<String> inCheckStates = Arrays.asList("draft", "approved", "publish", "disapproved", "pending", "validate");
+		List<String> inCheckStates = Arrays.asList("draft", "approved", "publish", "pending", "validate");
 		if (inCheckStates.contains(state)) {
 			return "ShowCheckDetails";
 		}
 		
 		// To retrieve all the activities' details which are needed to be validated
-		List<String> inValidateStates = Arrays.asList("tobevalidate");
+		List<String> inValidateStates = Arrays.asList("tobevalidate", ActivitiesConstant.STATE_TOBEAPPROVED);
 		if (inValidateStates.contains(state)) {
 			return "ShowValidateDetails";
 		}
@@ -101,7 +101,8 @@ public class AccountingviewAction extends AbstractAction {
 		Integer newCheck = 0;
 		List<ActivityVO> allActs = actsBean.doGetAllActivity();
 		for (ActivityVO act : allActs) {
-			if (act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
+			if (act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE) ||
+					act.getState().equals(ActivitiesConstant.STATE_TOBEAPPROVED)) {
 				newCheck++;
 			}
 		}

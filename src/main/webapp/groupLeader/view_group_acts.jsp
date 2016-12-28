@@ -78,7 +78,7 @@
 								</td>
 
 								<td class="col-md-1 col-xs-1">
-									<s:if test="%{activity.state=='draft'||activity.state=='disapproved'}">
+									<s:if test="%{activity.state=='draft'}">
 										<div class="text-danger text-center">
 											<strong> ${groupAct.activity.state}</strong>
 										</div>
@@ -97,7 +97,7 @@
 									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td class="col-md-2 col-xs-2 text-center">
-									<s:if test="%{activity.state=='draft'||activity.state=='disapproved'||activity.state=='approved'}">
+									<s:if test="%{activity.state=='draft'||activity.state=='approved'}">
                      					details
                      				</s:if>
 									<s:else>
@@ -107,7 +107,7 @@
 								</td>
 
 								<td class="col-md-2 col-xs-2 text-center">
-									<s:if test="%{activity.state=='validate'||activity.state=='publish'||activity.state=='tobevalidate'}">
+									<s:if test="%{activity.state=='validate'||activity.state=='publish'||activity.state=='tobevalidate'||state=='tobeapproved'}">
                        					edit
                       				</s:if>
 									<s:else>

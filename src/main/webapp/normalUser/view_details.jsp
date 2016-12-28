@@ -26,8 +26,7 @@
 		<script src="js/bootstrap.min.js"></script>
 	
 		<script type="text/javascript">
-			function deleteAct(){
-				var actId=${act.actId};
+			function deleteAct(actId){
 				var truthBeTold = window.confirm("quit this activity?");
 				if (truthBeTold){
 					window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
@@ -124,22 +123,19 @@
 							userAct.activity.state=='tobevalidate'||
 							userAct.activity.state=='validate'}">
 
-							<div
-								class="form-group col-xs-offset-4 col-md-offset-4 col-md-2 col-xs-2">
-								<input type="submit" class="btn btn-primary  btn-block"
-									value="edit" disabled />
+							<div class="col-xs-offset-5 col-md-offset-5 col-xs-2  col-md-2">
+								<a role="button" class="btn btn-primary btn-block"
+									href='<c:url value="/doInActUserviewAction" />?actId=${userAct.activity.actId}'>I'm
+									in</a>
 							</div>
-							<div class="form-group col-md-2 col-xs-2">
-								<input type="submit" class="btn btn-primary  btn-block"
-									onclick="deleteAct();" value="quit" disabled />
-							</div>
+							
 						</c:if>
 
 						<c:if test="${userAct.activity.state=='publish'}">
 
-							<div class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
-								<input type="submit" class="btn btn-primary  btn-block"
-									onclick="deleteAct();" value="quit" />
+							<div class="col-xs-offset-5 col-md-offset-5 form-group col-md-2 col-xs-2">
+								<a role="button" class="btn btn-primary btn-block"
+										href='#' onclick="deleteAct(${userAct.activity.actId});">quit</a>
 							</div>
 						
 						</c:if>

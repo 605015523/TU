@@ -95,50 +95,14 @@
 
 					
 					<div class="row form-group form-group-lg">
-						<c:if test="${groupAct.activity.state=='draft'}">
-							<form action="doCheckActAccountingviewAction.action" method="post"
-								role="form" name="form" id="form"
-								onsubmit="return checkApproved();">
-								<input type="hidden" name="actId" value="${actId}"/>
-								
-								<div class="form-group col-xs-10 col-md-10 col-xs-offset-1 col-md-offset-1 text-left">
-									<textarea class="form-control" rows="6" id="comment"
-										name="comment" placeholder="less than 500 words"
-										onkeyup="wordStatic(this);"></textarea>
-								</div>
-							
-								<div class=" form-group col-xs-4 col-md-4 col-xs-offset-4 col-md-offset-4 ">
-									<label>
-										<input type="radio" name="checkState" id="approved"
-											value="approved">
-										approved
-									</label>
-									<label>
-										<input type="radio" name="checkState" id="disapproved"
-											value="disapproved">
-										disapproved
-									</label>
-								</div>
-								<!-- /input-group -->
 	
-								<div class="col-xs-2  col-md-2 col-xs-offset-5 col-md-offset-5 ">
-										<input type="submit" class="btn btn-primary  btn-block"
-											value="submit"/>
-								</div>
-								
-							</form>
-						</c:if>
-						<c:if test="${groupAct.activity.state!='draft'}">
 							<div class="col-xs-3 col-md-3 text-left">
 								<strong>Comment:</strong>
 							</div>
 							<div class="col-xs-8 col-md-8 display: block">
 								${groupAct.activity.comment}
 							</div>
-						</c:if>
 					</div>
-					
-					
 					
 					
 					<hr class="invisible" />

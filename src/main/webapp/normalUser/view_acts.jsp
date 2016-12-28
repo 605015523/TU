@@ -70,7 +70,7 @@
 									<s:date name="activity.actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td>
-									<a href='<c:url value="/doshowDetailsUserviewAction.action" />?actId=${useract.activity.actId}'>details</a>
+									<a href='<c:url value="/doshowDetailsUserviewAction" />?actId=${useract.activity.actId}'>details</a>
 								</td>
 							</tr>
 	

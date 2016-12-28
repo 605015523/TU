@@ -61,7 +61,7 @@
 				</div>
 
 				<div class="panel-body table-bordered">
-					<form action="doUpdateActDetailsLeaderviewAction.action" method="post"
+					<form action="doUpdateActDetailsLeaderviewAction" method="post"
 						role="form" name="form" id="form">
 						<input type="hidden" name="actId" value="${actId}"/>
 						<div class="row form-group form-group-lg">
@@ -174,25 +174,21 @@
 
 						<div class="row form-group form-group-lg">
 							<div
-								class="col-xs-6  col-md-6 col-xs-offset-2 col-md-offset-2 text-right ">
+								class="col-xs-6 col-md-6 col-xs-offset-2 col-md-offset-2 text-right ">
 								<h5>
 									●Click <strong>submit</strong> to finish edit.
 								</h5>
 							</div>
-							<div class="col-xs-2  col-md-2 navbar-right ">
-								<c:if test="${groupAct.activity.state=='pending'}">
-
-									<input type="submit" class="btn btn-primary   btn-block"
-										value="submit" />
-								</c:if>
-								<c:if test="${groupAct.activity.state!='pending'}">
-
-									<input type="submit" class="btn btn-primary   btn-block"
-										value="submit" disabled />
-
-								</c:if>
-
-							</div>
+							
+							<c:if test="${groupAct.activity.state=='pending'}">
+								<div class="col-xs-2 col-md-2">
+									<input type="submit" class="btn btn-primary btn-block"
+											value="Save" />
+								</div>
+								<div class="col-xs-2 col-md-2">
+									<s:submit action="doToValidateActLeaderviewAction" value="Save and submit" class="btn btn-primary btn-block"/>
+								</div>
+							</c:if>
 
 						</div>
 						<div>

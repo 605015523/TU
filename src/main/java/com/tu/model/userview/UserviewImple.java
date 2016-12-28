@@ -174,6 +174,9 @@ public class UserviewImple extends Observable implements UserviewInterface {
 	public UserActDetailedVO doGetUserActsByUserIdAndActId(Integer userId,
 			Integer actId) {
 		UserAct userAct = userActDAO.findByUserIdAndActId(userId, actId);
+		if (userAct == null) {
+			return null;
+		}
 		Activity actsPO = actsDAO.findById(userAct.getActId());
 		
 		return daoModelMapper.createUserActDetailed(userAct, actsPO);

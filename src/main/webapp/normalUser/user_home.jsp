@@ -58,7 +58,7 @@
 									<s:date name="actDate" format="%{getText('format.date')}"/>
 								</td>
 								<td>
-									<a href='<c:url value="/doshowActDetailsLeaderviewAction.action" />?actId=${act.actId}'>details</a>
+									<a href='<c:url value="/doshowDetailsUserviewAction" />?actId=${act.actId}'>details</a>
 								</td>
 							</tr>
 						</s:iterator>

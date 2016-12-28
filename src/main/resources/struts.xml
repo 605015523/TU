@@ -36,6 +36,10 @@
 			<result name="showDetails">/normalUser/view_details.jsp</result>
 			<result name="pwdUpdateSuccess">/normalUser/pwdUpdateState.jsp</result>
 			<result name="pwdUpdateFail">/normalUser/change_pwd.jsp</result>
+			<result name="goToDoInAct" type="redirectAction">
+				<param name="actionName">doInActUserviewAction</param>
+				<param name="actId">${actId}</param>
+			</result>
 			<result name="redirectToShowActs" type="redirectAction">
 				<param name="actionName">doshowActsUserviewAction</param>
 				<param name="year">${year}</param>

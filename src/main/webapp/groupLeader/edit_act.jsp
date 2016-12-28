@@ -161,7 +161,7 @@
 										name="actDate" value="<s:date name='groupAct.activity.actDate' format='MM/dd/yyyy'/>"
 										disabled>
 								</c:if>
-								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+								<c:if test="${groupAct.activity.state=='draft'}">
 									<input type="text" class="form-control" id="actDate"
 										name="actDate" value="<s:date name='groupAct.activity.actDate' format='MM/dd/yyyy'/>" placeholder="ActDate"/>
 								</c:if>
@@ -178,7 +178,7 @@
 										placeholder="<s:date name='groupAct.activity.enrollStartDate' format="MM/dd/yyyy"/> - <s:date name='groupAct.activity.enrollEndDate' format="MM/dd/yyyy"/>" class="form-control" disabled>
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
 								</c:if>
-								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+								<c:if test="${groupAct.activity.state=='draft'}">
 									<input type="text" id="daterange" name="daterange"
 										value="<s:date name='groupAct.activity.enrollStartDate' format="MM/dd/yyyy"/> - <s:date name='groupAct.activity.enrollEndDate' format="MM/dd/yyyy"/>" class="form-control">
 									<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
@@ -198,7 +198,7 @@
 											id="actMoney" name="actMoney" value="${groupAct.activity.actMoney}"
 											placeholder="${groupAct.activity.actMoney}" aria-label="..." disabled>
 									</c:if>
-									<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+									<c:if test="${groupAct.activity.state=='draft'}">
 										<input type="number" step="0.1" class="form-control"
 											id="actMoney" name="actMoney" value="${groupAct.activity.actMoney}"
 											aria-label="...">
@@ -217,7 +217,7 @@
 									<input type="text" class="form-control" id="actName"
 										name="actName" value="" placeholder="${groupAct.activity.actName}" disabled>
 								</c:if>
-								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+								<c:if test="${groupAct.activity.state=='draft'}">
 									<input type="text" class="form-control" id="actName"
 										name="actName" value="${groupAct.activity.actName}" placeholder="act name">
 								</c:if>
@@ -233,7 +233,7 @@
 										name="description" onkeyup="wordStatic(this);" disabled>${groupAct.activity.description}</textarea>
 
 								</c:if>
-								<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+								<c:if test="${groupAct.activity.state=='draft'}">
 									<textarea class="form-control" rows="6" id="description"
 										name="description" onkeyup="wordStatic(this);">${groupAct.activity.description}</textarea>
 								</c:if>
@@ -245,12 +245,12 @@
 
 					</div>
 					<div class="row form-group">
-					<c:if test="${groupAct.activity.state=='disapproved'}">
+					<c:if test="${groupAct.activity.state=='draft'}">
 						<div class="form-group col-md-12 col-xs-12">
 							<label for="comment">
 								Comment:
 							</label>				
-							<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+							<c:if test="${groupAct.activity.state=='draft'}">
 								<textarea class="form-control" rows="6" id="comment"
 									name="comment" disabled>${groupAct.activity.comment}</textarea>
 							</c:if>
@@ -268,7 +268,7 @@
 								<br />
 							</h5>
 						</div>
-						<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+						<c:if test="${groupAct.activity.state=='draft'}">
 							<div class="form-group col-md-2 col-xs-3">
 								<input type="submit" class="btn btn-primary btn-block"
 									value="Save as draft" />
@@ -289,7 +289,6 @@
 									disabled>publish</a>
 							</c:if>
 						</div>
-
 
 					</div>
 				</form>
