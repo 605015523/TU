@@ -24,10 +24,10 @@
 		<s:date name="groupAct.activity.actDate" format="%{getText('format.date')}"/>
 	</div>
 	<div class="col-xs-3 col-md-3">
-		<strong>Price per person</strong>
+		<strong>Group</strong>
 	</div>
 	<div class="col-xs-3 col-md-3">
-		<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
+		${groupAct.activity.groupName}
 	</div>
 </div>
 <div class="row form-group form-group-lg">
@@ -37,7 +37,12 @@
 	<div class="col-xs-3 col-md-3">
 		${groupAct.nbParticipants}
 	</div>
-	
+	<div class="col-xs-3 col-md-3">
+		<strong>Price per person</strong>
+	</div>
+	<div class="col-xs-3 col-md-3">
+		<s:text name="format.money"><s:param value="groupAct.activity.actMoney"/></s:text>
+	</div>
 </div>
 
 <div class="row form-group form-group-lg">
@@ -62,7 +67,7 @@
 			${groupAct.activity.state}
 		</div>
 		<div class="col-xs-3 col-md-3">
-			<strong>Consumption:</strong>
+			<strong>Total consumption:</strong>
 		</div>
 		<div class="col-xs-3 col-md-3">
 			<s:text name="format.money"><s:param value="groupAct.sum"/></s:text>

@@ -14,8 +14,6 @@ import com.tu.dao.activities.Activity;
 import com.tu.dao.activities.ActivityDAOInterface;
 import com.tu.dao.group.Group;
 import com.tu.dao.group.GroupDAOInterface;
-import com.tu.dao.messages.Message;
-import com.tu.dao.messages.MessagesDAOInterface;
 import com.tu.dao.user.act.UserAct;
 import com.tu.dao.user.act.UserActDAOInterface;
 import com.tu.dao.userlogin.Userlogin;
@@ -28,7 +26,6 @@ import com.tu.model.userview.UserActDetailedVO;
 
 public class DAOModelMapper {
 	private static final Log LOGGER = LogFactory.getLog(DAOModelMapper.class);
-	private MessagesDAOInterface msgDAO;
 	private GroupDAOInterface groupDAO;
 	private UserActDAOInterface userActDAO;
 	private UserloginDAOInterface userloginDAO;
@@ -113,14 +110,6 @@ public class DAOModelMapper {
 		
 		
 		return useractsVO;
-	}
-	
-	public MessagesDAOInterface getMsgDAO() {
-		return msgDAO;
-	}
-
-	public void setMsgDAO(MessagesDAOInterface msgDAO) {
-		this.msgDAO = msgDAO;
 	}
 	
 	public GroupDAOInterface getGroupDAO() {

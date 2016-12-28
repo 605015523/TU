@@ -42,7 +42,7 @@ public class ActivityDAO extends HibernateDaoSupport implements
 	public List<Activity> findUpcoming() {
 		LOG.debug("finding all activities instances");
 		try {
-			String queryString = "from Activity where state = ? and act_date > current_date()";
+			String queryString = "from Activity where state = ? and act_date >= current_date()";
 			return getHibernateTemplate().find(queryString, ActivitiesConstant.STATE_PUBLISH);
 		} catch (RuntimeException re) {
 			LOG.error("find all failed", re);
