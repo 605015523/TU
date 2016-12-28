@@ -1,28 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-
-		<title>Change password</title>
-
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/signin.css" rel="stylesheet">
+		<jsp:include page="../common_header.inc.jsp">
+			<jsp:param name="subtitle" value="Change password"/>
+		</jsp:include>
 		<script language="JavaScript" type="text/javascript">
   function checkpassword() {
     var orgPwd;
@@ -34,14 +19,14 @@
     conPwd = document.getElementById("conPassword").value;
 
     if (oldPwd == ""|| newPwd == "" || conPwd == "") {
-      alert("the input box can not empty!");
+      alert("the input box cannot be empty!");
       return false;
     }
  
     if(newPwd!=conPwd){
           alert("The new passwords you entered must be the same");
           return false;
-        }
+    }
            
     if(newPwd.length<6||newPwd.length>12) {
            alert("the new password should between 6-12 characters!");
