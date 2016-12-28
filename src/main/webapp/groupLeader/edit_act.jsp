@@ -138,7 +138,7 @@
 
 			<div class="well configurator">
 
-				<form action="doUpdateActLeaderviewAction.action" method="post"
+				<form action="doUpdateActLeaderviewAction" method="post"
 					role="form" name="form" id="form" onsubmit="return checkinput();">
 					<input type="hidden" name="actId" value="${actId}"/>
 					<div class="row">
@@ -148,7 +148,7 @@
 									Group
 								</label>
 								<input type="text" class="form-control" id="groupName"
-									name="groupName" value="" placeholder="${group.groupName}"
+									name="groupName" value="" placeholder="${groupAct.activity.groupName}"
 									disabled>
 							</div>
 
@@ -247,16 +247,16 @@
 					<div class="row form-group">
 					<c:if test="${groupAct.activity.state=='disapproved'}">
 						<div class="form-group col-md-12 col-xs-12">
-						<label for="comment">
-									Comment:
-								</label>						
+							<label for="comment">
+								Comment:
+							</label>				
 							<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
 								<textarea class="form-control" rows="6" id="comment"
 									name="comment" disabled>${groupAct.activity.comment}</textarea>
 							</c:if>
 						</div>
 					</c:if>
-						<div class="form-group col-md-8 col-xs-8">
+						<div class="form-group col-md-6 col-xs-6">
 							<h5>
 								●Click
 								<strong>submit</strong>,you will send an act to approval group
@@ -268,17 +268,17 @@
 								<br />
 							</h5>
 						</div>
-						<div class="form-group col-md-2 col-xs-3  ">
-							<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
-								<input type="submit" class="btn btn-primary   btn-block"
-									value="submit" />
-							</c:if>
-							<c:if test="${groupAct.activity.state!='draft'&&groupAct.activity.state!='disapproved'}">
-								<input type="submit" class="btn btn-primary   btn-block"
-									value="submit" disabled />
-							</c:if>
-						</div>
-						<div class="form-group col-md-2 col-xs-3 ">
+						<c:if test="${groupAct.activity.state=='draft'||groupAct.activity.state=='disapproved'}">
+							<div class="form-group col-md-2 col-xs-3">
+								<input type="submit" class="btn btn-primary btn-block"
+									value="Save as draft" />
+							</div>
+							<div class="form-group col-md-2 col-xs-3">
+								<s:submit class="btn btn-primary btn-block" value="Save and submit" action="doUpdateAndSubmitActLeaderviewAction"/>
+							</div>
+						</c:if>
+						
+						<div class="form-group col-md-2 col-xs-3">
 							<c:if test="${groupAct.activity.state=='approved' || groupAct.activity.state=='modified'}">
 								<a role="button" class="btn btn-primary   btn-block"
 									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>publish</a>

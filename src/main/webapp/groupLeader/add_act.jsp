@@ -105,7 +105,7 @@
         actdaterange=document.getElementById("daterange").value;
     
         if (actname== "") {
-            alert("the act name can not empty!");
+            alert("the activity name cannot be empty!");
             return false;
         }
     
@@ -120,7 +120,7 @@
         }
     
         if (actdaterange== "") {
-            alert("the registration date range can not empty!");
+            alert("the registration date range cannot be empty!");
             return false;
         }
     }
@@ -136,7 +136,6 @@
 		        <jsp:param name="active" value="act"/>
 		    </jsp:include>
 			<hr class="invisible" />
-
 
 			<form action="doAddActLeaderviewAction.action" method="post"  role="form" name="form" id="form" onsubmit="return checkinput();">
 				<div class="row">

@@ -12,6 +12,8 @@
 	<constant name="struts.objectFactory" value="spring" />
 	
 	<constant name="struts.custom.i18n.resources" value="global" />
+	
+	<constant name="struts.mapper.action.prefix.enabled" value="true" />
 
 	<package name="default" extends="struts-default">
 

@@ -24,7 +24,17 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/signin.css" rel="stylesheet">
 		<script src="js/bootstrap.min.js"></script>
-
+	
+		<script type="text/javascript">
+			function deleteAct(){
+				var actId=${act.actId};
+				var truthBeTold = window.confirm("quit this activity?");
+				if (truthBeTold){
+					window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
+					window.alert("quit success!");
+				}
+			}
+		</script>
 
 	</head>
 	<body>
@@ -108,16 +118,7 @@
 
 					</div>
 					<div class="row form-group form-group-lg center-block">
-						<script type="text/javascript">
-					function deleteAct(){
-						var actId=${act.actId};
-						var truthBeTold = window.confirm("quit this activity?");
-						if (truthBeTold){
-							window.location.href="<c:url value='/doDeleteOneActUserviewAction.action?actId="+actId+"' />";
-							window.alert("quit success!");
-						}
-					}
-</script>
+						
 						<c:if
 							test="${userAct.activity.state=='pending'||
 							userAct.activity.state=='tobevalidate'||

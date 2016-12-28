@@ -133,8 +133,7 @@ public class UserloginManageAction extends AbstractAction {
 		if (userRole.equals(2)) {
 			int newCheck = 0;
 			for (int k = 0; k < actVOs.size(); k++) {
-				if (actVOs.get(k).getState().equals(ActivitiesConstant.STATE_DRAFT)
-						|| actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
+				if (actVOs.get(k).getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 					newCheck += 1;
 				}
 			}

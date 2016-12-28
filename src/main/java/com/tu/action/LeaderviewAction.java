@@ -174,6 +174,7 @@ public class LeaderviewAction extends AbstractAction {
 		return "ShowActDetails";
 	}
 	
+	
 	public String addActForm() {
 		initServletContextObject();
 		Integer groupId = (Integer) session.getAttribute("groupId");
@@ -188,6 +189,17 @@ public class LeaderviewAction extends AbstractAction {
 
 		// oneActVO stores all the updated activity messages
 		initServletContextObject();
+		ActivityVO oneActVO = createActivityFromForm(ActivitiesConstant.STATE_DRAFT);
+
+		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
+		updateMessage = actsBean.doUpdateOneAct(oneActVO);
+		LOGGER.info(updateMessage);
+		LOGGER.info("the doUpdateAct get success");
+		
+		return "redirectToDoGetAllGroupAct";
+	}
+	
+	private ActivityVO createActivityFromForm(String state) throws ParseException {
 		ActivityVO oneActVO = new ActivityVO();
 		oneActVO.setActId(actId);
 		Integer groupId = (Integer) session.getAttribute("groupId");
@@ -201,7 +213,17 @@ public class LeaderviewAction extends AbstractAction {
 		Date endDate = act.parse(daterange.substring(13, 23));
 		oneActVO.setEnrollStartDate(startDate);
 		oneActVO.setEnrollEndDate(endDate);
-		oneActVO.setState(ActivitiesConstant.STATE_DRAFT);
+		oneActVO.setState(state);
+		
+		return oneActVO;
+	}
+	
+	public String doUpdateAndSubmitAct() throws ParseException {
+		String updateMessage = null;
+
+		// oneActVO stores all the updated activity messages
+		initServletContextObject();
+		ActivityVO oneActVO = createActivityFromForm(ActivitiesConstant.STATE_TOBEVALIDATE);
 
 		// Write updated activity into database by call method doUpdateOneAct of class activitiesImple
 		updateMessage = actsBean.doUpdateOneAct(oneActVO);

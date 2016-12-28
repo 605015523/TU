@@ -158,7 +158,9 @@ public class UserviewAction extends AbstractAction {
 			LOGGER.error(actionReturnMessage);
 		}
 
-		year = (Integer) session.getAttribute("thisyear");
+		Calendar cal = Calendar.getInstance();
+		year = cal.get(Calendar.YEAR);
+		
 		return "redirectToShowActs";
 	}
 

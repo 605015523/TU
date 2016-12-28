@@ -101,8 +101,7 @@ public class AccountingviewAction extends AbstractAction {
 		Integer newCheck = 0;
 		List<ActivityVO> allActs = actsBean.doGetAllActivity();
 		for (ActivityVO act : allActs) {
-			if (act.getState().equals(ActivitiesConstant.STATE_DRAFT)
-					|| act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
+			if (act.getState().equals(ActivitiesConstant.STATE_TOBEVALIDATE)) {
 				newCheck++;
 			}
 		}
