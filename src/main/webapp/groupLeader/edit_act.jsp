@@ -279,11 +279,11 @@
 						</c:if>
 						
 						<div class="form-group col-md-2 col-xs-3">
-							<c:if test="${groupAct.activity.state=='approved' || groupAct.activity.state=='modified'}">
+							<c:if test="${groupAct.activity.state=='approved'}">
 								<a role="button" class="btn btn-primary   btn-block"
 									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>publish</a>
 							</c:if>
-							<c:if test="${groupAct.activity.state!='approved' && groupAct.activity.state!='modified'}">
+							<c:if test="${groupAct.activity.state!='approved'}">
 								<a role="button" class="btn btn-primary   btn-block"
 									href='<c:url value="/doPublishActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'
 									disabled>publish</a>
