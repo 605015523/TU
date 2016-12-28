@@ -78,6 +78,7 @@
 		<property name="leaderviewBean" ref="LeaderviewBean"/>
 		<property name="actsBean" ref="ActsBean"/>
 		<property name="userActBean" ref="UserActBean"/>
+		<property name="groupBean" ref="GroupBean"/>
 		<property name="userloginManageBean" ref="UserloginManageBean"/>
 	</bean>
 	

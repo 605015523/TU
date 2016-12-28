@@ -126,7 +126,7 @@ public class UserloginManageAction extends AbstractAction {
 			GroupVO group = groupBean.doGetOneGroupByLeaderId(userId);
 
 			// Save group info into session
-			session.setAttribute("group", group);
+			session.setAttribute("groupId", group.getGroupId());
 		}
 
 		// If the role is approval 

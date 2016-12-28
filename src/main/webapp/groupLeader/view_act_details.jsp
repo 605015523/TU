@@ -48,42 +48,25 @@
 					role="form" name="form" id="form">
 					<input type="hidden" name="actId" value="${actId}"/>
 					<div class="row form-group form-group-lg">
-						<div
-							class="col-xs-6  col-md-6 text-right ">
-							<h5>
-								●Click <strong>submit</strong> you will send it to accounting.
-							</h5>
+						<div class="col-xs-2  col-md-2 navbar-right">
+							<a role="button" class="btn btn-primary btn-block"
+								href='<c:url value="/doInActUserviewAction.action" />?actId=${actId}'>I'm
+								in</a>
 						</div>
-						<div class="col-xs-2  col-md-2">
-								<a role="button" class="btn btn-primary btn-block"
-									href='<c:url value="/doInActUserviewAction.action" />?actId=${actId}'>I'm
-									in</a>
-						</div>
-							
-						<div class="col-xs-2  col-md-2 navbar-right ">
 						
-							<s:if test="%{groupAct.activity.state=='disapproved'}">
+						<s:if test="%{groupAct.activity.state=='disapproved'}">
+							<div class="col-xs-2 col-md-2 navbar-right">
 								<input type="submit" class="btn btn-primary   btn-block"
 									value="submit" />
-
-							</s:if>
-							<s:else>
-								<input type="submit" class="btn btn-primary btn-block"
-									value="submit" disabled />
-							</s:else>
-
-						</div>
-						<div class="col-xs-2  col-md-2 navbar-right ">
-							<s:if test="%{groupAct.activity.state=='pending'}">
+							</div>
+						</s:if>
+						
+						<s:if test="%{groupAct.activity.state=='pending'}">
+							<div class="col-xs-2  col-md-2 navbar-right ">
 								<a role="button" class="btn btn-primary   btn-block"
 									href='<c:url value="/doEditActLeaderviewAction.action" />?actId=${groupAct.activity.actId}'>edit</a>
-							</s:if>
-							<s:else>
-								<input type="submit" class="btn btn-primary   btn-block"
-									value="edit" disabled />
-							</s:else>
-
-						</div>
+							</div>
+						</s:if>
 
 					</div>
 					<div>

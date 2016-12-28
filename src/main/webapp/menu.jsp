@@ -12,8 +12,8 @@
 				class="caret"></span>
 		</a>
 			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-				<li><a href="groupLeader/add_act.jsp">Add activity</a></li>
-				<li><a href="doGetAllGroupActLeaderviewAction.action">View activities</a></li>
+				<li><a href="addActFormLeaderviewAction">Add activity</a></li>
+				<li><a href="doGetAllGroupActLeaderviewAction">View activities</a></li>
 			</ul></li>
 	</c:if>
 	<c:if test="${userRole==2}">

@@ -50,13 +50,13 @@
 							<strong>Activity name:</strong>
 						</div>
 						<div class="col-xs-3  col-md-3">
-							${act.activity.actName}
+							${userAct.activity.actName}
 						</div>
 						<div class="col-xs-3  col-md-3">
 							<strong>Group:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							${act.activity.groupName}
+							${userAct.activity.groupName}
 						</div>
 					</div>
 					<div class="row form-group form-group-lg">
@@ -64,27 +64,36 @@
 							<strong>Date:</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
-							<s:date name="act.activity.actDate" format="%{getText('format.date')}"/>
+							<s:date name="userAct.activity.actDate" format="%{getText('format.date')}"/>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<strong>Price per person</strong>
 						</div>
 						<div class="col-xs-3 col-md-3">
 							<s:text name="format.money">
-								<s:param value="act.consumption"/>
+								<s:param value="userAct.consumption"/>
 							</s:text>
 						</div>
 					</div>
+					
+					<div class="row form-group form-group-lg">
+						<div class="col-xs-3 col-md-3">
+							<strong>Nb participants</strong>
+						</div>
+						<div class="col-xs-3 col-md-3">
+							${userAct.nbParticipants}
+						</div>
+					</div>
+					
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
 							<strong>Description:</strong>
 						</div>
 						<div class="col-xs-8 col-md-8 display: block">
 							<p class="desc">
-								<s:property value="act.activity.description"/>
+								<s:property value="userAct.activity.description"/>
 							</p>
 						</div>
-
 					</div>
 					<div class="row form-group form-group-lg">
 						<div class="col-xs-3 col-md-3 text-left">
@@ -93,7 +102,7 @@
 						<div class="col-xs-8 col-md-8 display: block">
 							<p
 								style="background-color: #eaeaea; height: 200px; border-radius: 5px; padding: 10px;">
-								<s:property value="act.remark"/>
+								<s:property value="userAct.remark"/>
 							</p>
 						</div>
 
@@ -110,7 +119,9 @@
 					}
 </script>
 						<c:if
-							test="${act.activity.state=='pending'||act.activity.state=='tobevalidate'||act.activity.state=='validate'}">
+							test="${userAct.activity.state=='pending'||
+							userAct.activity.state=='tobevalidate'||
+							userAct.activity.state=='validate'}">
 
 							<div
 								class="form-group col-xs-offset-4 col-md-offset-4 col-md-2 col-xs-2">
@@ -123,7 +134,7 @@
 							</div>
 						</c:if>
 
-						<c:if test="${act.activity.state=='publish'}">
+						<c:if test="${userAct.activity.state=='publish'}">
 
 							<div class="form-group col-xs-offset-5 col-md-offset-5 col-md-2 col-xs-2">
 								<input type="submit" class="btn btn-primary  btn-block"

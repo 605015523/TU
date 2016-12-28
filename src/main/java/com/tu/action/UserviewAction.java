@@ -35,7 +35,7 @@ public class UserviewAction extends AbstractAction {
 	
 	// To display
 	private List<UserActDetailedVO> useracts;
-	private UserActDetailedVO act;
+	private UserActDetailedVO userAct;
 	private UserviewVO userview;
 	private ActivityVO activity;
 
@@ -80,8 +80,8 @@ public class UserviewAction extends AbstractAction {
 	public String doshowDetails() {
 		initServletContextObject();
 		Integer userId = getCurrentUser().getUserId();
-		act = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
-		LOGGER.info("the activity is " + act.getActivity().getActName() + " - " + actId);
+		userAct = userviewBean.doGetUserActsByUserIdAndActId(userId, actId);
+		LOGGER.info("the activity is " + userAct.getActivity().getActName() + " - " + actId);
 		
 		return "showDetails";
 	}
@@ -210,12 +210,12 @@ public class UserviewAction extends AbstractAction {
 		this.msgId = msgId;
 	}
 
-	public UserActDetailedVO getAct() {
-		return act;
+	public UserActDetailedVO getUserAct() {
+		return userAct;
 	}
 
-	public void setAct(UserActDetailedVO act) {
-		this.act = act;
+	public void setUserAct(UserActDetailedVO userAct) {
+		this.userAct = userAct;
 	}
 
 	public Integer getYear() {

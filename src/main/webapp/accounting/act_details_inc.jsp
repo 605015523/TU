@@ -37,21 +37,9 @@
 	<div class="col-xs-3 col-md-3">
 		${groupAct.nbParticipants}
 	</div>
-	<div class="col-xs-3 col-md-3">
-		<strong>Consumption:</strong>
-	</div>
-	<div class="col-xs-3 col-md-3">
-		<s:text name="format.money"><s:param value="groupAct.sum"/></s:text>
-	</div>
+	
 </div>
-<div class="row form-group form-group-lg">
-	<div class="col-xs-3 col-md-3">
-		<strong>Status:</strong>
-	</div>
-	<div class="col-xs-3 col-md-3">
-		${groupAct.activity.state}
-	</div>
-</div>
+
 <div class="row form-group form-group-lg">
 	<div class="col-xs-3 col-md-3 text-left">
 		<strong>Description:</strong>
@@ -62,28 +50,47 @@
 		</p>
 	</div>
 </div>
-<div class="row form-group form-group-lg">
-	<div class="col-xs-2 col-md-2 text-left">
-		<strong>Participants:</strong>
+
+
+<c:if test="${userRole==1 || userRole==2}">
+	<!-- For group leader and accounting -->
+	<div class="row form-group form-group-lg">
+		<div class="col-xs-3 col-md-3">
+			<strong>Status:</strong>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			${groupAct.activity.state}
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<strong>Consumption:</strong>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<s:text name="format.money"><s:param value="groupAct.sum"/></s:text>
+		</div>
 	</div>
-	<div class="col-xs-10 col-md-10 display: block">
-		<table class="table table-bordered">
-			<tr class="success">
-				<th>Name</th>
-				<th>Dept</th>
-				<th>Number</th>
-				<th>Consumption</th>
-				<th>Remark</th>
-			</tr>
-			<s:iterator var="useract" value="groupAct.memberInVO">
-				<tr>
-					<td>${useract.user.userName}</td>
-					<td>${useract.user.userDept}</td>
-					<td>${useract.nbParticipants}</td>
-					<td><s:text name="format.money"><s:param value="consumption"/></s:text></td>
-					<td><s:property value="remark"/></td>
+	<div class="row form-group form-group-lg">
+		<div class="col-xs-2 col-md-2 text-left">
+			<strong>Participants:</strong>
+		</div>
+		<div class="col-xs-10 col-md-10 display: block">
+			<table class="table table-bordered">
+				<tr class="success">
+					<th>Name</th>
+					<th>Dept</th>
+					<th>Number</th>
+					<th>Consumption</th>
+					<th>Remark</th>
 				</tr>
-			</s:iterator>
-		</table>
+				<s:iterator var="useract" value="groupAct.memberInVO">
+					<tr>
+						<td>${useract.user.userName}</td>
+						<td>${useract.user.userDept}</td>
+						<td>${useract.nbParticipants}</td>
+						<td><s:text name="format.money"><s:param value="consumption"/></s:text></td>
+						<td><s:property value="remark"/></td>
+					</tr>
+				</s:iterator>
+			</table>
+		</div>
 	</div>
-</div>
+</c:if>

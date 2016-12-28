@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 import com.tu.model.activities.ActivitiesConstant;
 import com.tu.model.activities.ActivitiesInterface;
 import com.tu.model.activities.ActivityVO;
+import com.tu.model.group.GroupInterface;
 import com.tu.model.group.GroupVO;
 import com.tu.model.leaderview.GroupActVO;
 import com.tu.model.leaderview.LeaderviewInterface;
@@ -25,7 +26,7 @@ public class LeaderviewAction extends AbstractAction {
 	
 	private transient LeaderviewInterface leaderviewBean = null;
 	private transient ActivitiesInterface actsBean = null;
-	
+	private transient GroupInterface groupBean = null;
 	private transient UserActInterface userActBean = null;
 
 	// Receive the controls value from the caller page and return the parameters to the "success" web page 
@@ -40,6 +41,7 @@ public class LeaderviewAction extends AbstractAction {
 	
 	// To display one group activity
 	private GroupActVO groupAct;
+	private GroupVO group;
 	
 	// To display table of group activities
 	private List<GroupActVO> groupActs;
@@ -82,8 +84,8 @@ public class LeaderviewAction extends AbstractAction {
 		oneActVO.setActMoney(actMoney);
 		oneActVO.setDescription(description);
 		oneActVO.setActDate(actDate);
-		GroupVO group = (GroupVO) session.getAttribute("group");
-		oneActVO.setGroupId(group.getGroupId());
+		Integer groupId = (Integer) session.getAttribute("groupId");
+		oneActVO.setGroupId(groupId);
 
 		// Convert date format since starting date and ending date stored in the same string variable (daterange)
 		SimpleDateFormat act = new SimpleDateFormat(ConfConstants.DATE_FORMAT);
@@ -103,8 +105,9 @@ public class LeaderviewAction extends AbstractAction {
 	// Get the specific group's activities and put them in view_act.jsp
 	public String doGetAllGroupAct() {
 		initServletContextObject();
-		GroupVO group = (GroupVO) session.getAttribute("group");
-		groupActs = leaderviewBean.doGetAllUserActsByGroupId(group.getGroupId());
+		Integer groupId = (Integer) session.getAttribute("groupId");
+		groupActs = leaderviewBean.doGetAllUserActsByGroupId(groupId);
+		group = groupBean.doGetOneGroupById(groupId);
 		LOGGER.info("the doGetAllGroupAct get success");
 
 		return "ShowAllGroupAct";
@@ -170,6 +173,14 @@ public class LeaderviewAction extends AbstractAction {
 
 		return "ShowActDetails";
 	}
+	
+	public String addActForm() {
+		initServletContextObject();
+		Integer groupId = (Integer) session.getAttribute("groupId");
+		group = groupBean.doGetOneGroupById(groupId);
+		
+		return "addActForm";
+	}
 
 	// Update the activity message and send it to everyone
 	public String doUpdateAct() throws ParseException {
@@ -179,9 +190,8 @@ public class LeaderviewAction extends AbstractAction {
 		initServletContextObject();
 		ActivityVO oneActVO = new ActivityVO();
 		oneActVO.setActId(actId);
-		GroupVO group = (GroupVO) session.getAttribute("group");
-		Integer onegroupId = group.getGroupId();
-		oneActVO.setGroupId(onegroupId);
+		Integer groupId = (Integer) session.getAttribute("groupId");
+		oneActVO.setGroupId(groupId);
 		oneActVO.setActName(actName);
 		oneActVO.setActMoney(actMoney);
 		oneActVO.setActDate(actDate);
@@ -220,10 +230,6 @@ public class LeaderviewAction extends AbstractAction {
 		if (!years.isEmpty() && !thisyear.equals(years.get(years.size() - 1))) {
 			years.add(thisyear);
 		}
-
-		Integer newMsg = (Integer) session.getAttribute("newMsg");
-		newMsg += 1;
-		session.setAttribute("newMsg", newMsg);
 
 		LOGGER.info("the doPublishAct get success");
 		
@@ -323,6 +329,18 @@ public class LeaderviewAction extends AbstractAction {
 
 	public void setGroupActs(List<GroupActVO> groupActs) {
 		this.groupActs = groupActs;
+	}
+	
+	public GroupInterface getGroupBean() {
+		return groupBean;
+	}
+
+	public void setGroupBean(GroupInterface groupBean) {
+		this.groupBean = groupBean;
+	}
+
+	public GroupVO getGroup() {
+		return group;
 	}
 
 }

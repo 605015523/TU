@@ -55,17 +55,18 @@ public class AccountingviewAction extends AbstractAction {
 
 	// To retrieve all the details of one specific activity  
 	public String doshowCheckValidateDetails() {
+		initServletContextObject();
 		groupAct = accountingviewBean.doGetGroupActivityByID(actId);
 		String state = groupAct.getActivity().getState();
 		
 		// To retrieve all the detail of one specific activity which is in check.  
-		List<String> inCheckStates = Arrays.asList("draft", "approved", "publish", "disapproved", "pending");
+		List<String> inCheckStates = Arrays.asList("draft", "approved", "publish", "disapproved", "pending", "validate");
 		if (inCheckStates.contains(state)) {
 			return "ShowCheckDetails";
 		}
 		
 		// To retrieve all the activities' details which are needed to be validated
-		List<String> inValidateStates = Arrays.asList("tobevalidate", "validate");
+		List<String> inValidateStates = Arrays.asList("tobevalidate");
 		if (inValidateStates.contains(state)) {
 			return "ShowValidateDetails";
 		}
