@@ -18,7 +18,7 @@
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
-		<title>Check activity details</title>
+		<title><s:text name="website.name"/> - Check activity details</title>
 
 		<script src="js/jquery-2.2.0.min.js"></script>
 		<link href="css/bootstrap.min.css" rel="stylesheet">

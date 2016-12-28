@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Role {
-	public static final Role ROLE_GROUP_LEADER = new Role(1, "Group leader");
 	public static final Role ROLE_ACCOUNTING = new Role(2, "Accounting");
+	public static final Role ROLE_GROUP_LEADER = new Role(1, "Group leader");
 	public static final Role ROLE_NORMAL_MEMBER = new Role(3, "Normal member");
 	public static final Role ROLE_IT_ADMIN = new Role(4, "IT Admin");
 	public static final Map<Integer, Role> ROLES;

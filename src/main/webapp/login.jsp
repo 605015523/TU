@@ -1,28 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="gb2312"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+
 
 <!DOCTYPE html>
 <html>
 	<head>
-		<base href="<%=basePath%>">
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-
-		<title>SIGN IN</title>
-
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/signin.css" rel="stylesheet">
+		<jsp:include page="common_header.inc.jsp">
+	        <jsp:param name="subtitle" value="Sign in"/>
+	    </jsp:include>
 	</head>
 
 	<body background="images/login_bg_0.jpg">
